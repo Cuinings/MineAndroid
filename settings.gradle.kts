@@ -23,4 +23,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "MineAndroid"
 include(":app")
- 
+include(":Library:Common:Debounce")
+include(":Library:Common:Throttle")

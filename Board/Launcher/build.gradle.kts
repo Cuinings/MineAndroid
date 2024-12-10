@@ -1,18 +1,20 @@
 plugins {
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("maven-publish")
 }
 
 android {
-    namespace = "com.cn.library.common.activity"
+    namespace = "com.cn.board.launcher"
     compileSdk = 34
 
     defaultConfig {
+        applicationId = "com.cn.board.launcher"
         minSdk = 24
+        targetSdk = 34
+        versionCode = 1
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -28,10 +30,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    buildFeatures {
-        dataBinding = true
-        viewBinding = true
-    }
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -42,21 +40,9 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-}
-
-publishing {
-    publications {
-        register<MavenPublication>(name) {
-            groupId = "com.tp.library.common"
-            artifactId = "activity"
-            version = "1.0.0-SNAPSHOT"
-            afterEvaluate{ from(components["release"]) }
-        }
-    }
-    repositories {
-        maven(url = uri("$rootDir\\local_maven"))
-    }
 }

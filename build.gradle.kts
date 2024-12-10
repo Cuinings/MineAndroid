@@ -7,3 +7,15 @@ plugins {
     alias(libs.plugins.kotlin.parcelize) apply false
     alias(libs.plugins.google.devtools.ksp) apply false
 }
+
+tasks {
+    val clean by registering(Delete::class) {
+        delete("$projectDir\\build")
+    }
+}
+
+configurations.all {
+    resolutionStrategy {
+        cacheChangingModulesFor(0, "seconds")
+    }
+}

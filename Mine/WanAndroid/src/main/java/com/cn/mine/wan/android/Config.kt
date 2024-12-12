@@ -11,7 +11,7 @@ import com.cn.mine.wan.android.data.entity.CommonPageData
  * @Description:
  */
 object Config {
-    const val BASE_URL = "https://www.wanandroid.com"
+    const val BASE_URL = "https://www.wanandroid.com/"
 
     fun test() {
         //文章数据参考 页码，拼接在连接中，从0开始。

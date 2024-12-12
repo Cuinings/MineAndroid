@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <option name="testRunner" value="CHOOSE_PER_TEST" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Library" />
+            <option value="$PROJECT_DIR$/Library/Common" />
+            <option value="$PROJECT_DIR$/Library/Common/Activity" />
+            <option value="$PROJECT_DIR$/Library/Common/Application" />
+            <option value="$PROJECT_DIR$/Library/Common/Color" />
+            <option value="$PROJECT_DIR$/Library/Common/Debounce" />
+            <option value="$PROJECT_DIR$/Library/Common/Dpi" />
+            <option value="$PROJECT_DIR$/Library/Common/Popupwindow" />
+            <option value="$PROJECT_DIR$/Library/Common/Throttle" />
+            <option value="$PROJECT_DIR$/Mine" />
+            <option value="$PROJECT_DIR$/Mine/Hilt-Sample" />
+            <option value="$PROJECT_DIR$/Mine/Sample" />
+            <option value="$PROJECT_DIR$/Mine/WanAndroid" />
+          </set>
+        </option>
         <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
     </option>

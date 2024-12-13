@@ -60,6 +60,8 @@ dependencies {
 
     implementation(libs.squareup.retrofit)
     implementation(libs.squareup.retrofit.converter.gson)
+    implementation(libs.squareup.okhttp3)
+    implementation(libs.squareup.okhttp3.logging.interceptor)
 
     implementation(libs.androidx.lifecycle.viewmodel)
 
@@ -69,6 +71,8 @@ dependencies {
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+
+    implementation(libs.androidx.cardview)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

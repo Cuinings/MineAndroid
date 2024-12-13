@@ -7,7 +7,7 @@ package com.cn.mine.wan.android.data.entity
  */
 data class CommonPageData<T>(
     var curPage: Int,
-    var datas: T? = null,
+    var datas: List<T>,
     var offset: Int = 0,
     var over: Boolean = false,
     var pageCount: Int = 0,

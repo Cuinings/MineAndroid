@@ -1,4 +1,4 @@
-package com.cn.mine.wan.android
+package com.cn.mine.wan.android.net
 
 import com.cn.mine.wan.android.data.entity.ArticleEntity
 import com.cn.mine.wan.android.data.entity.BannerEntity

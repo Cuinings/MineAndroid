@@ -1,4 +1,4 @@
-package com.cn.mine.hilt.sample
+package com.cn.sample.hilt
 
 import android.app.Application
 import com.cn.sample.hilt.test.HiltTest

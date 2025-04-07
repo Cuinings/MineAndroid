@@ -15,7 +15,7 @@ import android.widget.PopupWindow
 /**
  * @Author: CuiNing
  * @Time: 2024/11/21 9:38
- * @Description:
+ * @Description: Basic PopupWindow
  */
 @SuppressLint("ObsoleteSdkInt", "ClickableViewAccessibility")
 open class BasicPopupWindow: PopupWindow {
@@ -35,7 +35,7 @@ open class BasicPopupWindow: PopupWindow {
         isTouchable = true
         isOutsideTouchable = true
         windowLayoutType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
-        this.setBackgroundDrawable(ColorDrawable(Color.parseColor("#00000000")))
+        this.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         (if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN else WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE).let {
             softInputMode = it
         }
@@ -134,6 +134,14 @@ open class BasicPopupWindow: PopupWindow {
             super.showAtLocation(parent, gravity, x, y)
         }
     }
+
+    override fun dismiss() { dismissAction { super.dismiss() } }
+
+    private fun dismissAction(action: () -> Unit) {
+        if (allowDismiss) action.invoke()
+    }
+
+    open var allowDismiss = true
 
     companion object {
         lateinit var TAG: String

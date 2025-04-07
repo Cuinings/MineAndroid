@@ -8,7 +8,7 @@ import androidx.viewbinding.ViewBinding
 /**
  * @Author: CuiNing
  * @Time: 2024/11/21 11:00
- * @Description:
+ * @Description: DataBinding PopupWindow
  */
 abstract class BasicDBPopupWindow<VB: ViewDataBinding>(
     private val context: Context,

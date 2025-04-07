@@ -1,0 +1,24 @@
+<changelist name="Uncommitted_changes_before_Update_at_2025_4_7_9_33_[Changes]" date="1743989595592" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2025_4_7_9_33_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2025/4/7 9:33 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.aar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2025_4_7_9_33_[Changes]/activity-1.0.0-20241212.092814-2.aar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2-sources.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2025_4_7_9_33_[Changes]/activity-1.0.0-20241212.092814-2-sources.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.aar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2025_4_7_9_33_[Changes]/activity-1.0.0-20241210.035651-1.aar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1-sources.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2025_4_7_9_33_[Changes]/activity-1.0.0-20241210.035651-1-sources.jar" />
+  </binary>
+</changelist>

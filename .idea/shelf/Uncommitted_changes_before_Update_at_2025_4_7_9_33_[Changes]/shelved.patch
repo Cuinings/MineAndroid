@@ -1,0 +1,1171 @@
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.module.md5
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.module.md5 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.module.md5
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.module.md5	(date 1733995756000)
+@@ -0,0 +1,1 @@
++67ea8645646ddfd06ec69185ad2822b7
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2-sources.jar.sha1
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2-sources.jar.sha1 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2-sources.jar.sha1
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2-sources.jar.sha1	(date 1733995756000)
+@@ -0,0 +1,1 @@
++02b00771531a9b4407cd17b308c33c8f506509c2
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.pom.md5
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.pom.md5 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.pom.md5
+new file mode 100644
+--- /dev/null	(date 1733803160000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.pom.md5	(date 1733803160000)
+@@ -0,0 +1,1 @@
++f94d2cc1ee55deff1cc8ea1bf00904fc
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.pom.sha512
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.pom.sha512 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.pom.sha512
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.pom.sha512	(date 1733995756000)
+@@ -0,0 +1,1 @@
++d9725e03a21600b27f757be989d66360a89a60f51bd5ae97829e8b21914c68dcece0a335947a692c5b1352a853bbe851de9d35beab785c9a501793cdb2cf6235
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.pom
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.pom b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.pom
+new file mode 100644
+--- /dev/null	(date 1733803160000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.pom	(date 1733803160000)
+@@ -0,0 +1,70 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
++    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
++  <!-- This module was also published with a richer model, Gradle metadata,  -->
++  <!-- which should be used instead. Do not delete the following line which  -->
++  <!-- is to indicate to Gradle or any Gradle module metadata file consumer  -->
++  <!-- that they should prefer consuming it instead. -->
++  <!-- do_not_remove: published-with-gradle-metadata -->
++  <modelVersion>4.0.0</modelVersion>
++  <groupId>com.tp.library.common</groupId>
++  <artifactId>activity</artifactId>
++  <version>1.0.0-SNAPSHOT</version>
++  <packaging>aar</packaging>
++  <dependencies>
++    <dependency>
++      <groupId>androidx.databinding</groupId>
++      <artifactId>viewbinding</artifactId>
++      <version>8.6.0</version>
++      <scope>compile</scope>
++    </dependency>
++    <dependency>
++      <groupId>androidx.databinding</groupId>
++      <artifactId>databinding-common</artifactId>
++      <version>8.6.0</version>
++      <scope>compile</scope>
++    </dependency>
++    <dependency>
++      <groupId>androidx.databinding</groupId>
++      <artifactId>databinding-runtime</artifactId>
++      <version>8.6.0</version>
++      <scope>compile</scope>
++    </dependency>
++    <dependency>
++      <groupId>androidx.databinding</groupId>
++      <artifactId>databinding-adapters</artifactId>
++      <version>8.6.0</version>
++      <scope>compile</scope>
++    </dependency>
++    <dependency>
++      <groupId>androidx.databinding</groupId>
++      <artifactId>databinding-ktx</artifactId>
++      <version>8.6.0</version>
++      <scope>compile</scope>
++    </dependency>
++    <dependency>
++      <groupId>org.jetbrains.kotlin</groupId>
++      <artifactId>kotlin-stdlib</artifactId>
++      <version>2.0.21</version>
++      <scope>compile</scope>
++    </dependency>
++    <dependency>
++      <groupId>androidx.core</groupId>
++      <artifactId>core-ktx</artifactId>
++      <version>1.10.1</version>
++      <scope>runtime</scope>
++    </dependency>
++    <dependency>
++      <groupId>androidx.appcompat</groupId>
++      <artifactId>appcompat</artifactId>
++      <version>1.6.1</version>
++      <scope>runtime</scope>
++    </dependency>
++    <dependency>
++      <groupId>com.google.android.material</groupId>
++      <artifactId>material</artifactId>
++      <version>1.10.0</version>
++      <scope>runtime</scope>
++    </dependency>
++  </dependencies>
++</project>
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.aar.sha1
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.aar.sha1 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.aar.sha1
+new file mode 100644
+--- /dev/null	(date 1733803160000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.aar.sha1	(date 1733803160000)
+@@ -0,0 +1,1 @@
++37f70e5bc6d4ced748b32c0380b9f1912c4769d7
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.pom.sha1
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.pom.sha1 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.pom.sha1
+new file mode 100644
+--- /dev/null	(date 1733803160000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.pom.sha1	(date 1733803160000)
+@@ -0,0 +1,1 @@
++3a9940d8e2f2fb6c71cbb59e45d54473aaf2964e
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1-sources.jar.md5
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1-sources.jar.md5 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1-sources.jar.md5
+new file mode 100644
+--- /dev/null	(date 1733803160000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1-sources.jar.md5	(date 1733803160000)
+@@ -0,0 +1,1 @@
++0054fe338609d64ecd9b51ff90ba0505
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.module.sha512
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.module.sha512 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.module.sha512
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.module.sha512	(date 1733995756000)
+@@ -0,0 +1,1 @@
++9e8d3769d2ff0fb623f9294e8c20e20e72f2abce48225e3f44f1243bc4058daead3bee9d278c0dd25443799ebe1acea767c1c735da880a221881286308b5debf
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/maven-metadata.xml.md5
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/maven-metadata.xml.md5 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/maven-metadata.xml.md5
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/maven-metadata.xml.md5	(date 1733995756000)
+@@ -0,0 +1,1 @@
++751e941b112599545cd1f15ef03dabcd
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/maven-metadata.xml.sha1
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/maven-metadata.xml.sha1 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/maven-metadata.xml.sha1
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/maven-metadata.xml.sha1	(date 1733995756000)
+@@ -0,0 +1,1 @@
++3e6df9bd1d1f78b079e44e907043156b7e92e931
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.aar.sha256
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.aar.sha256 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.aar.sha256
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.aar.sha256	(date 1733995756000)
+@@ -0,0 +1,1 @@
++c58420e3e0448e00427cb648a74b0e254fe8423eb3b6187c7d5c11e0d4b1501d
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2-sources.jar.sha512
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2-sources.jar.sha512 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2-sources.jar.sha512
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2-sources.jar.sha512	(date 1733995756000)
+@@ -0,0 +1,1 @@
++7d9d38a78a9ed4543760c3b1f89219df1bc45f641103c055d2be825f4cce93eb42115dcf6c11e6500afbffb111f9930345b6be39667d7081532ce681a16ac01e
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/maven-metadata.xml.sha512
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/maven-metadata.xml.sha512 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/maven-metadata.xml.sha512
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/maven-metadata.xml.sha512	(date 1733995756000)
+@@ -0,0 +1,1 @@
++a812152b11341eb9f14f6aae52fa1ea46963b20e14f36cd499a77bed9231bd38b655a0fed8d9b0bc33d62aacdecd53a63ce3514569c153bf7fc8a08ac9cda14b
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.pom.sha1
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.pom.sha1 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.pom.sha1
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.pom.sha1	(date 1733995756000)
+@@ -0,0 +1,1 @@
++70781fd2f8fb44efa99bca65b94be8e9e4bb2a38
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.pom.md5
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.pom.md5 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.pom.md5
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.pom.md5	(date 1733995756000)
+@@ -0,0 +1,1 @@
++4137d10e4c8d5b3b1d81fa3e8297bfc2
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.aar.sha512
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.aar.sha512 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.aar.sha512
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.aar.sha512	(date 1733995756000)
+@@ -0,0 +1,1 @@
++61b3930831ea9c878d990d1010384b2a11fc87734da80a3801f50ad9bd9cc21a4835ca4dd7f8152696b0a09cf063b4d3d6bcd39b233aa3ae3e1d882688e71c14
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2-sources.jar.sha256
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2-sources.jar.sha256 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2-sources.jar.sha256
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2-sources.jar.sha256	(date 1733995756000)
+@@ -0,0 +1,1 @@
++5b1126ff7fe32934de272d43a3d0ccb150c68356de6bf2e62c2432f0d8931d45
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1-sources.jar.sha1
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1-sources.jar.sha1 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1-sources.jar.sha1
+new file mode 100644
+--- /dev/null	(date 1733803160000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1-sources.jar.sha1	(date 1733803160000)
+@@ -0,0 +1,1 @@
++7faec5cfe8668fb834c8028caa2fcd9ea062737a
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2-sources.jar.md5
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2-sources.jar.md5 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2-sources.jar.md5
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2-sources.jar.md5	(date 1733995756000)
+@@ -0,0 +1,1 @@
++ea2bf88cd9bdbc2db3a7e720bca23887
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.module.sha1
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.module.sha1 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.module.sha1
+new file mode 100644
+--- /dev/null	(date 1733803160000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.module.sha1	(date 1733803160000)
+@@ -0,0 +1,1 @@
++b68ce989e7079512988acbabdfba500e4fdf6880
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1-sources.jar.sha512
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1-sources.jar.sha512 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1-sources.jar.sha512
+new file mode 100644
+--- /dev/null	(date 1733803160000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1-sources.jar.sha512	(date 1733803160000)
+@@ -0,0 +1,1 @@
++575aabbc637ebd05425fe6d1355e88ba8efd432ed39e887ecabb7104a60f13f515264b37d9f15265da980cd3742de69691c8f3699e02294b94d167142e24b9f3
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/maven-metadata.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/maven-metadata.xml b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/maven-metadata.xml
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/maven-metadata.xml	(date 1733995756000)
+@@ -0,0 +1,36 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<metadata modelVersion="1.1.0">
++  <groupId>com.tp.library.common</groupId>
++  <artifactId>activity</artifactId>
++  <versioning>
++    <lastUpdated>20241212092814</lastUpdated>
++    <snapshot>
++      <timestamp>20241212.092814</timestamp>
++      <buildNumber>2</buildNumber>
++    </snapshot>
++    <snapshotVersions>
++      <snapshotVersion>
++        <extension>pom</extension>
++        <value>1.0.0-20241212.092814-2</value>
++        <updated>20241212092814</updated>
++      </snapshotVersion>
++      <snapshotVersion>
++        <classifier>sources</classifier>
++        <extension>jar</extension>
++        <value>1.0.0-20241212.092814-2</value>
++        <updated>20241212092814</updated>
++      </snapshotVersion>
++      <snapshotVersion>
++        <extension>module</extension>
++        <value>1.0.0-20241212.092814-2</value>
++        <updated>20241212092814</updated>
++      </snapshotVersion>
++      <snapshotVersion>
++        <extension>aar</extension>
++        <value>1.0.0-20241212.092814-2</value>
++        <updated>20241212092814</updated>
++      </snapshotVersion>
++    </snapshotVersions>
++  </versioning>
++  <version>1.0.0-SNAPSHOT</version>
++</metadata>
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.module.md5
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.module.md5 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.module.md5
+new file mode 100644
+--- /dev/null	(date 1733803160000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.module.md5	(date 1733803160000)
+@@ -0,0 +1,1 @@
++d0eddf67ad8fc17f8f071b4969c5728c
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.pom.sha512
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.pom.sha512 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.pom.sha512
+new file mode 100644
+--- /dev/null	(date 1733803160000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.pom.sha512	(date 1733803160000)
+@@ -0,0 +1,1 @@
++dd14decee58bfb66d642c4dbbf3d78a3e9dd77dd793d4f3a628fd3eecb998baa26646a97d47a1b3deaeb225cec19b192f7e8a8c6f3392d6a806d8a0902670b0f
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.pom
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.pom b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.pom
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.pom	(date 1733995756000)
+@@ -0,0 +1,70 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
++    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
++  <!-- This module was also published with a richer model, Gradle metadata,  -->
++  <!-- which should be used instead. Do not delete the following line which  -->
++  <!-- is to indicate to Gradle or any Gradle module metadata file consumer  -->
++  <!-- that they should prefer consuming it instead. -->
++  <!-- do_not_remove: published-with-gradle-metadata -->
++  <modelVersion>4.0.0</modelVersion>
++  <groupId>com.tp.library.common</groupId>
++  <artifactId>activity</artifactId>
++  <version>1.0.0-SNAPSHOT</version>
++  <packaging>aar</packaging>
++  <dependencies>
++    <dependency>
++      <groupId>androidx.databinding</groupId>
++      <artifactId>viewbinding</artifactId>
++      <version>8.6.1</version>
++      <scope>compile</scope>
++    </dependency>
++    <dependency>
++      <groupId>androidx.databinding</groupId>
++      <artifactId>databinding-common</artifactId>
++      <version>8.6.1</version>
++      <scope>compile</scope>
++    </dependency>
++    <dependency>
++      <groupId>androidx.databinding</groupId>
++      <artifactId>databinding-runtime</artifactId>
++      <version>8.6.1</version>
++      <scope>compile</scope>
++    </dependency>
++    <dependency>
++      <groupId>androidx.databinding</groupId>
++      <artifactId>databinding-adapters</artifactId>
++      <version>8.6.1</version>
++      <scope>compile</scope>
++    </dependency>
++    <dependency>
++      <groupId>androidx.databinding</groupId>
++      <artifactId>databinding-ktx</artifactId>
++      <version>8.6.1</version>
++      <scope>compile</scope>
++    </dependency>
++    <dependency>
++      <groupId>org.jetbrains.kotlin</groupId>
++      <artifactId>kotlin-stdlib</artifactId>
++      <version>2.0.21</version>
++      <scope>compile</scope>
++    </dependency>
++    <dependency>
++      <groupId>androidx.core</groupId>
++      <artifactId>core-ktx</artifactId>
++      <version>1.13.1</version>
++      <scope>runtime</scope>
++    </dependency>
++    <dependency>
++      <groupId>androidx.appcompat</groupId>
++      <artifactId>appcompat</artifactId>
++      <version>1.7.0</version>
++      <scope>runtime</scope>
++    </dependency>
++    <dependency>
++      <groupId>com.google.android.material</groupId>
++      <artifactId>material</artifactId>
++      <version>1.10.0</version>
++      <scope>runtime</scope>
++    </dependency>
++  </dependencies>
++</project>
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.module.sha1
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.module.sha1 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.module.sha1
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.module.sha1	(date 1733995756000)
+@@ -0,0 +1,1 @@
++36326045d812640a66d8d378b6a4a631e44faa2e
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.module.sha256
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.module.sha256 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.module.sha256
+new file mode 100644
+--- /dev/null	(date 1733803160000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.module.sha256	(date 1733803160000)
+@@ -0,0 +1,1 @@
++4f35060ce47a2e1dcc35d9096e2927e8f2daae99adc09f3e9f2d8c9c02693d11
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.module
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.module b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.module
+new file mode 100644
+--- /dev/null	(date 1733803160000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.module	(date 1733803160000)
+@@ -0,0 +1,190 @@
++{
++  "formatVersion": "1.1",
++  "component": {
++    "group": "com.tp.library.common",
++    "module": "activity",
++    "version": "1.0.0-SNAPSHOT",
++    "attributes": {
++      "org.gradle.status": "integration"
++    }
++  },
++  "createdBy": {
++    "gradle": {
++      "version": "8.7"
++    }
++  },
++  "variants": [
++    {
++      "name": "releaseApiElements-published",
++      "attributes": {
++        "org.gradle.category": "library",
++        "org.gradle.jvm.environment": "android",
++        "org.gradle.usage": "java-api",
++        "org.jetbrains.kotlin.platform.type": "androidJvm"
++      },
++      "dependencies": [
++        {
++          "group": "androidx.databinding",
++          "module": "viewbinding",
++          "version": {
++            "requires": "8.6.0"
++          }
++        },
++        {
++          "group": "androidx.databinding",
++          "module": "databinding-common",
++          "version": {
++            "requires": "8.6.0"
++          }
++        },
++        {
++          "group": "androidx.databinding",
++          "module": "databinding-runtime",
++          "version": {
++            "requires": "8.6.0"
++          }
++        },
++        {
++          "group": "androidx.databinding",
++          "module": "databinding-adapters",
++          "version": {
++            "requires": "8.6.0"
++          }
++        },
++        {
++          "group": "androidx.databinding",
++          "module": "databinding-ktx",
++          "version": {
++            "requires": "8.6.0"
++          }
++        },
++        {
++          "group": "org.jetbrains.kotlin",
++          "module": "kotlin-stdlib",
++          "version": {
++            "requires": "2.0.21"
++          }
++        }
++      ],
++      "files": [
++        {
++          "name": "activity-1.0.0-SNAPSHOT.aar",
++          "url": "activity-1.0.0-SNAPSHOT.aar",
++          "size": 12043,
++          "sha512": "067c57870ed9d0dcf4f090bb711dd8b1277e40d73da56128df79476a8e3152cbaf5aa3c264693871d1efdbe6b1963665c257a586070445204715d754e010b61a",
++          "sha256": "586c8266f63b1b314967ed726e47f4a27b2d840cbe95634fb6fb5a0d8d506cf8",
++          "sha1": "37f70e5bc6d4ced748b32c0380b9f1912c4769d7",
++          "md5": "3bbd8ae930cdf03c1e4a656d4ddeaca4"
++        }
++      ]
++    },
++    {
++      "name": "releaseRuntimeElements-published",
++      "attributes": {
++        "org.gradle.category": "library",
++        "org.gradle.jvm.environment": "android",
++        "org.gradle.usage": "java-runtime",
++        "org.jetbrains.kotlin.platform.type": "androidJvm"
++      },
++      "dependencies": [
++        {
++          "group": "androidx.core",
++          "module": "core-ktx",
++          "version": {
++            "requires": "1.10.1"
++          }
++        },
++        {
++          "group": "androidx.appcompat",
++          "module": "appcompat",
++          "version": {
++            "requires": "1.6.1"
++          }
++        },
++        {
++          "group": "com.google.android.material",
++          "module": "material",
++          "version": {
++            "requires": "1.10.0"
++          }
++        },
++        {
++          "group": "androidx.databinding",
++          "module": "viewbinding",
++          "version": {
++            "requires": "8.6.0"
++          }
++        },
++        {
++          "group": "androidx.databinding",
++          "module": "databinding-common",
++          "version": {
++            "requires": "8.6.0"
++          }
++        },
++        {
++          "group": "androidx.databinding",
++          "module": "databinding-runtime",
++          "version": {
++            "requires": "8.6.0"
++          }
++        },
++        {
++          "group": "androidx.databinding",
++          "module": "databinding-adapters",
++          "version": {
++            "requires": "8.6.0"
++          }
++        },
++        {
++          "group": "androidx.databinding",
++          "module": "databinding-ktx",
++          "version": {
++            "requires": "8.6.0"
++          }
++        },
++        {
++          "group": "org.jetbrains.kotlin",
++          "module": "kotlin-stdlib",
++          "version": {
++            "requires": "2.0.21"
++          }
++        }
++      ],
++      "files": [
++        {
++          "name": "activity-1.0.0-SNAPSHOT.aar",
++          "url": "activity-1.0.0-SNAPSHOT.aar",
++          "size": 12043,
++          "sha512": "067c57870ed9d0dcf4f090bb711dd8b1277e40d73da56128df79476a8e3152cbaf5aa3c264693871d1efdbe6b1963665c257a586070445204715d754e010b61a",
++          "sha256": "586c8266f63b1b314967ed726e47f4a27b2d840cbe95634fb6fb5a0d8d506cf8",
++          "sha1": "37f70e5bc6d4ced748b32c0380b9f1912c4769d7",
++          "md5": "3bbd8ae930cdf03c1e4a656d4ddeaca4"
++        }
++      ]
++    },
++    {
++      "name": "releaseSourcesElements-published",
++      "attributes": {
++        "org.gradle.category": "documentation",
++        "org.gradle.dependency.bundling": "external",
++        "org.gradle.docstype": "sources",
++        "org.gradle.jvm.environment": "android",
++        "org.gradle.libraryelements": "jar",
++        "org.gradle.usage": "java-runtime",
++        "org.jetbrains.kotlin.platform.type": "androidJvm"
++      },
++      "files": [
++        {
++          "name": "activity-1.0.0-SNAPSHOT-sources.jar",
++          "url": "activity-1.0.0-SNAPSHOT-sources.jar",
++          "size": 5307,
++          "sha512": "575aabbc637ebd05425fe6d1355e88ba8efd432ed39e887ecabb7104a60f13f515264b37d9f15265da980cd3742de69691c8f3699e02294b94d167142e24b9f3",
++          "sha256": "be253ae8a49e93185c68d9bf6dbb2c930f92289319e80fccf7edb1b0b10e4377",
++          "sha1": "7faec5cfe8668fb834c8028caa2fcd9ea062737a",
++          "md5": "0054fe338609d64ecd9b51ff90ba0505"
++        }
++      ]
++    }
++  ]
++}
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.aar.md5
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.aar.md5 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.aar.md5
+new file mode 100644
+--- /dev/null	(date 1733803160000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.aar.md5	(date 1733803160000)
+@@ -0,0 +1,1 @@
++3bbd8ae930cdf03c1e4a656d4ddeaca4
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.aar.sha1
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.aar.sha1 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.aar.sha1
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.aar.sha1	(date 1733995756000)
+@@ -0,0 +1,1 @@
++8df6f11d9fa5b6c00fd214f1774937c8326d6f66
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.pom.sha256
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.pom.sha256 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.pom.sha256
+new file mode 100644
+--- /dev/null	(date 1733803160000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.pom.sha256	(date 1733803160000)
+@@ -0,0 +1,1 @@
++5038391cb4eb3a4e2a4dc27daea827908d0b5b023e9ca32bbbe59fd5be6c0bbc
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.aar.md5
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.aar.md5 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.aar.md5
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.aar.md5	(date 1733995756000)
+@@ -0,0 +1,1 @@
++851143e2c5bf8efc42d522a0b670bb28
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.module.sha512
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.module.sha512 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.module.sha512
+new file mode 100644
+--- /dev/null	(date 1733803160000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.module.sha512	(date 1733803160000)
+@@ -0,0 +1,1 @@
++b514fbfc6953a5ac48496003d9de22846cdab79ecdf2cb45c1efaa30682a7fe1e710444489b98da79b5a3cb898b482fd9ca41b77d953662830b0b8cae1ed5f8a
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.module.sha256
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.module.sha256 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.module.sha256
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.module.sha256	(date 1733995756000)
+@@ -0,0 +1,1 @@
++38a4bd811e8d861aa4a2bd710560775895790150f133a64a8f689f7a29e5f67f
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/maven-metadata.xml.sha256
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/maven-metadata.xml.sha256 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/maven-metadata.xml.sha256
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/maven-metadata.xml.sha256	(date 1733995756000)
+@@ -0,0 +1,1 @@
++3f69256f8cca144cef7f86cb72b845ef109b1c6f3d78cb8906f49dd2178bcedd
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.aar.sha256
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.aar.sha256 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.aar.sha256
+new file mode 100644
+--- /dev/null	(date 1733803160000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.aar.sha256	(date 1733803160000)
+@@ -0,0 +1,1 @@
++586c8266f63b1b314967ed726e47f4a27b2d840cbe95634fb6fb5a0d8d506cf8
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1-sources.jar.sha256
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1-sources.jar.sha256 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1-sources.jar.sha256
+new file mode 100644
+--- /dev/null	(date 1733803160000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1-sources.jar.sha256	(date 1733803160000)
+@@ -0,0 +1,1 @@
++be253ae8a49e93185c68d9bf6dbb2c930f92289319e80fccf7edb1b0b10e4377
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.pom.sha256
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.pom.sha256 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.pom.sha256
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.pom.sha256	(date 1733995756000)
+@@ -0,0 +1,1 @@
++625a0a96180b1a7c4efb7c4d7fab4ae4b22bbcfdf16ca155d9759b682e2a8dce
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.module
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.module b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.module
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241212.092814-2.module	(date 1733995756000)
+@@ -0,0 +1,190 @@
++{
++  "formatVersion": "1.1",
++  "component": {
++    "group": "com.tp.library.common",
++    "module": "activity",
++    "version": "1.0.0-SNAPSHOT",
++    "attributes": {
++      "org.gradle.status": "integration"
++    }
++  },
++  "createdBy": {
++    "gradle": {
++      "version": "8.7"
++    }
++  },
++  "variants": [
++    {
++      "name": "releaseApiElements-published",
++      "attributes": {
++        "org.gradle.category": "library",
++        "org.gradle.jvm.environment": "android",
++        "org.gradle.usage": "java-api",
++        "org.jetbrains.kotlin.platform.type": "androidJvm"
++      },
++      "dependencies": [
++        {
++          "group": "androidx.databinding",
++          "module": "viewbinding",
++          "version": {
++            "requires": "8.6.1"
++          }
++        },
++        {
++          "group": "androidx.databinding",
++          "module": "databinding-common",
++          "version": {
++            "requires": "8.6.1"
++          }
++        },
++        {
++          "group": "androidx.databinding",
++          "module": "databinding-runtime",
++          "version": {
++            "requires": "8.6.1"
++          }
++        },
++        {
++          "group": "androidx.databinding",
++          "module": "databinding-adapters",
++          "version": {
++            "requires": "8.6.1"
++          }
++        },
++        {
++          "group": "androidx.databinding",
++          "module": "databinding-ktx",
++          "version": {
++            "requires": "8.6.1"
++          }
++        },
++        {
++          "group": "org.jetbrains.kotlin",
++          "module": "kotlin-stdlib",
++          "version": {
++            "requires": "2.0.21"
++          }
++        }
++      ],
++      "files": [
++        {
++          "name": "activity-1.0.0-SNAPSHOT.aar",
++          "url": "activity-1.0.0-SNAPSHOT.aar",
++          "size": 54038,
++          "sha512": "61b3930831ea9c878d990d1010384b2a11fc87734da80a3801f50ad9bd9cc21a4835ca4dd7f8152696b0a09cf063b4d3d6bcd39b233aa3ae3e1d882688e71c14",
++          "sha256": "c58420e3e0448e00427cb648a74b0e254fe8423eb3b6187c7d5c11e0d4b1501d",
++          "sha1": "8df6f11d9fa5b6c00fd214f1774937c8326d6f66",
++          "md5": "851143e2c5bf8efc42d522a0b670bb28"
++        }
++      ]
++    },
++    {
++      "name": "releaseRuntimeElements-published",
++      "attributes": {
++        "org.gradle.category": "library",
++        "org.gradle.jvm.environment": "android",
++        "org.gradle.usage": "java-runtime",
++        "org.jetbrains.kotlin.platform.type": "androidJvm"
++      },
++      "dependencies": [
++        {
++          "group": "androidx.core",
++          "module": "core-ktx",
++          "version": {
++            "requires": "1.13.1"
++          }
++        },
++        {
++          "group": "androidx.appcompat",
++          "module": "appcompat",
++          "version": {
++            "requires": "1.7.0"
++          }
++        },
++        {
++          "group": "com.google.android.material",
++          "module": "material",
++          "version": {
++            "requires": "1.10.0"
++          }
++        },
++        {
++          "group": "androidx.databinding",
++          "module": "viewbinding",
++          "version": {
++            "requires": "8.6.1"
++          }
++        },
++        {
++          "group": "androidx.databinding",
++          "module": "databinding-common",
++          "version": {
++            "requires": "8.6.1"
++          }
++        },
++        {
++          "group": "androidx.databinding",
++          "module": "databinding-runtime",
++          "version": {
++            "requires": "8.6.1"
++          }
++        },
++        {
++          "group": "androidx.databinding",
++          "module": "databinding-adapters",
++          "version": {
++            "requires": "8.6.1"
++          }
++        },
++        {
++          "group": "androidx.databinding",
++          "module": "databinding-ktx",
++          "version": {
++            "requires": "8.6.1"
++          }
++        },
++        {
++          "group": "org.jetbrains.kotlin",
++          "module": "kotlin-stdlib",
++          "version": {
++            "requires": "2.0.21"
++          }
++        }
++      ],
++      "files": [
++        {
++          "name": "activity-1.0.0-SNAPSHOT.aar",
++          "url": "activity-1.0.0-SNAPSHOT.aar",
++          "size": 54038,
++          "sha512": "61b3930831ea9c878d990d1010384b2a11fc87734da80a3801f50ad9bd9cc21a4835ca4dd7f8152696b0a09cf063b4d3d6bcd39b233aa3ae3e1d882688e71c14",
++          "sha256": "c58420e3e0448e00427cb648a74b0e254fe8423eb3b6187c7d5c11e0d4b1501d",
++          "sha1": "8df6f11d9fa5b6c00fd214f1774937c8326d6f66",
++          "md5": "851143e2c5bf8efc42d522a0b670bb28"
++        }
++      ]
++    },
++    {
++      "name": "releaseSourcesElements-published",
++      "attributes": {
++        "org.gradle.category": "documentation",
++        "org.gradle.dependency.bundling": "external",
++        "org.gradle.docstype": "sources",
++        "org.gradle.jvm.environment": "android",
++        "org.gradle.libraryelements": "jar",
++        "org.gradle.usage": "java-runtime",
++        "org.jetbrains.kotlin.platform.type": "androidJvm"
++      },
++      "files": [
++        {
++          "name": "activity-1.0.0-SNAPSHOT-sources.jar",
++          "url": "activity-1.0.0-SNAPSHOT-sources.jar",
++          "size": 5349,
++          "sha512": "7d9d38a78a9ed4543760c3b1f89219df1bc45f641103c055d2be825f4cce93eb42115dcf6c11e6500afbffb111f9930345b6be39667d7081532ce681a16ac01e",
++          "sha256": "5b1126ff7fe32934de272d43a3d0ccb150c68356de6bf2e62c2432f0d8931d45",
++          "sha1": "02b00771531a9b4407cd17b308c33c8f506509c2",
++          "md5": "ea2bf88cd9bdbc2db3a7e720bca23887"
++        }
++      ]
++    }
++  ]
++}
+Index: Mine/Hilt-Sample/schemas/com.cn.mine.hilt.sample.room.AppDataBase/1.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Mine/Hilt-Sample/schemas/com.cn.mine.hilt.sample.room.AppDataBase/1.json b/Mine/Hilt-Sample/schemas/com.cn.mine.hilt.sample.room.AppDataBase/1.json
+new file mode 100644
+--- /dev/null	(date 1733984544000)
++++ b/Mine/Hilt-Sample/schemas/com.cn.mine.hilt.sample.room.AppDataBase/1.json	(date 1733984544000)
+@@ -0,0 +1,52 @@
++{
++  "formatVersion": 1,
++  "database": {
++    "version": 1,
++    "identityHash": "53d8862be12c5199cf78d98caba9045b",
++    "entities": [
++      {
++        "tableName": "user",
++        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `username` TEXT NOT NULL, `useralias` TEXT NOT NULL, `age` INTEGER NOT NULL, PRIMARY KEY(`id`))",
++        "fields": [
++          {
++            "fieldPath": "id",
++            "columnName": "id",
++            "affinity": "INTEGER",
++            "notNull": true
++          },
++          {
++            "fieldPath": "username",
++            "columnName": "username",
++            "affinity": "TEXT",
++            "notNull": true
++          },
++          {
++            "fieldPath": "useralias",
++            "columnName": "useralias",
++            "affinity": "TEXT",
++            "notNull": true
++          },
++          {
++            "fieldPath": "age",
++            "columnName": "age",
++            "affinity": "INTEGER",
++            "notNull": true
++          }
++        ],
++        "primaryKey": {
++          "autoGenerate": false,
++          "columnNames": [
++            "id"
++          ]
++        },
++        "indices": [],
++        "foreignKeys": []
++      }
++    ],
++    "views": [],
++    "setupQueries": [
++      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
++      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '53d8862be12c5199cf78d98caba9045b')"
++    ]
++  }
++}
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/maven-metadata.xml.sha256
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/maven-metadata.xml.sha256 b/local_maven/com/tp/library/common/activity/maven-metadata.xml.sha256
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/maven-metadata.xml.sha256	(date 1733995756000)
+@@ -0,0 +1,1 @@
++f5874317f6ff9405f6cc1a5cfba77339f1f4430004f3ec8be38c243b3e0a20b4
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/maven-metadata.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/maven-metadata.xml b/local_maven/com/tp/library/common/activity/maven-metadata.xml
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/maven-metadata.xml	(date 1733995756000)
+@@ -0,0 +1,12 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<metadata>
++  <groupId>com.tp.library.common</groupId>
++  <artifactId>activity</artifactId>
++  <versioning>
++    <latest>1.0.0-SNAPSHOT</latest>
++    <versions>
++      <version>1.0.0-SNAPSHOT</version>
++    </versions>
++    <lastUpdated>20241212092914</lastUpdated>
++  </versioning>
++</metadata>
+Index: local_maven/com/tp/library/common/activity/maven-metadata.xml.sha512
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/maven-metadata.xml.sha512 b/local_maven/com/tp/library/common/activity/maven-metadata.xml.sha512
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/maven-metadata.xml.sha512	(date 1733995756000)
+@@ -0,0 +1,1 @@
++bc4b3f334587b464941ca2fc82fd6d4d7c64652db1fe429dc55f93975f4d70aa4731d920a521a86ed269149f88f2a7511260a5c59acd5373a9bb014c780a3238
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.aar.sha512
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.aar.sha512 b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.aar.sha512
+new file mode 100644
+--- /dev/null	(date 1733803160000)
++++ b/local_maven/com/tp/library/common/activity/1.0.0-SNAPSHOT/activity-1.0.0-20241210.035651-1.aar.sha512	(date 1733803160000)
+@@ -0,0 +1,1 @@
++067c57870ed9d0dcf4f090bb711dd8b1277e40d73da56128df79476a8e3152cbaf5aa3c264693871d1efdbe6b1963665c257a586070445204715d754e010b61a
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/maven-metadata.xml.md5
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/maven-metadata.xml.md5 b/local_maven/com/tp/library/common/activity/maven-metadata.xml.md5
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/maven-metadata.xml.md5	(date 1733995756000)
+@@ -0,0 +1,1 @@
++5f2654e2d2834b2118695254f82ac447
+\ No newline at end of file
+Index: local_maven/com/tp/library/common/activity/maven-metadata.xml.sha1
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/local_maven/com/tp/library/common/activity/maven-metadata.xml.sha1 b/local_maven/com/tp/library/common/activity/maven-metadata.xml.sha1
+new file mode 100644
+--- /dev/null	(date 1733995756000)
++++ b/local_maven/com/tp/library/common/activity/maven-metadata.xml.sha1	(date 1733995756000)
+@@ -0,0 +1,1 @@
++7ba3830c597a844b533bde593f1b25c2b7a98267
+\ No newline at end of file

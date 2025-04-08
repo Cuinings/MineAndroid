@@ -6,7 +6,11 @@ package com.cn.mine.wan.android.data.entity
  * @Description:
  */
 data class CommonData<T>(
-    var data: T? = null,
+    var data: T,
     var errorCode: Int = 0,//-1001登录失败需要重新登录   0成功
     var errorMsg: String = ""
 )
+
+fun <T> CommonData<T>.result(success: (T) -> Unit, error: (String) -> Unit) {
+    if (errorCode == 0) success.invoke(data) else error.invoke(errorMsg)
+}

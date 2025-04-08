@@ -8,7 +8,7 @@
         android:id="@+id/wanAndroid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_login"
+        android:text="@string/text_register"
         android:textSize="@dimen/sp30"
         android:layout_marginTop="@dimen/dp30"
         app:layout_constraintVertical_chainStyle="packed"
@@ -44,7 +44,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/usernameLayout"
-        app:layout_constraintBottom_toTopOf="@id/login">
+        app:layout_constraintBottom_toTopOf="@id/rePasswordLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"
@@ -57,16 +57,26 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/login"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/rePasswordLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/text_login"
         android:layout_margin="@dimen/dp10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordLayout"
-        app:layout_constraintBottom_toTopOf="@id/register"/>
+        app:layout_constraintTop_toBottomOf="@+id/passwordLayout"
+        app:layout_constraintBottom_toTopOf="@id/register">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/rePassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/text_re_password"
+            android:inputType="textPassword"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/register"
@@ -76,7 +86,7 @@
         android:layout_margin="@dimen/dp10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login"
+        app:layout_constraintTop_toBottomOf="@id/rePasswordLayout"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

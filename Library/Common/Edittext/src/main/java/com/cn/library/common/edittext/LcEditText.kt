@@ -3,6 +3,10 @@ package com.cn.library.common.edittext
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
+import android.view.FocusFinder
+import android.view.KeyEvent
+import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 
@@ -45,5 +49,37 @@ class LcEditText: EditText {
         } catch (e: IllegalAccessException) {
             e.printStackTrace()
         }
+    }
+
+    fun requestFocusWithInput() {
+        postDelayed({
+            requestFocus()
+            (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).showSoftInput(this, 0)
+        }, 300)
+    }
+
+    private fun isDirectKeyCode(keyCode: Int): Boolean {
+        return keyCode == KeyEvent.KEYCODE_DPAD_UP || keyCode == KeyEvent.KEYCODE_DPAD_DOWN || keyCode == KeyEvent.KEYCODE_DPAD_LEFT || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (isDirectKeyCode(keyCode)) {
+            var direction = FOCUS_DOWN
+            when (keyCode) {
+                KeyEvent.KEYCODE_DPAD_UP -> direction = FOCUS_UP
+                KeyEvent.KEYCODE_DPAD_DOWN -> direction = FOCUS_DOWN
+                KeyEvent.KEYCODE_DPAD_LEFT -> direction = FOCUS_LEFT
+                KeyEvent.KEYCODE_DPAD_RIGHT -> direction = FOCUS_RIGHT
+            }
+            val nextFocusView = FocusFinder.getInstance().findNextFocus(
+                parent as ViewGroup,
+                this, direction
+            )
+            if (null != nextFocusView) {
+                nextFocusView.requestFocus()
+                return true
+            }
+        }
+        return super.onKeyDown(keyCode, event)
     }
 }

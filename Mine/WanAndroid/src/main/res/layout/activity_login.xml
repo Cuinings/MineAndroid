@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/username"
+        android:layout_width="@dimen/dp200"
+        android:layout_height="wrap_content"
+        android:hint="用户名"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/password"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/password"
+        android:layout_width="@dimen/dp200"
+        android:layout_height="wrap_content"
+        android:hint="密码"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/username" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="登录"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/register"
+        app:layout_constraintTop_toBottomOf="@id/password"/>
+
+    <Button
+        android:id="@+id/register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="注册"
+        app:layout_constraintStart_toEndOf="@id/login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,6 +32,8 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "MineAndroid"
+
+include(":Sample:Test")
 include(":Sample:Hilt")
 
 include(":Mine:WanAndroid")
@@ -43,4 +45,4 @@ include(":Library:Common:Application")
 include(":Library:Common:Activity")
 include(":Library:Common:Color")
 include(":Library:Common:Popupwindow")
-include(":Sample:Test")
+include(":Library:Common:EditText")

@@ -1,12 +1,14 @@
-package com.cn.mine.wan.android.app.page.register
+package com.cn.mine.wan.android.app.page.user.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.cn.library.common.activity.BasicVBActivity
+import com.cn.mine.wan.android.app.page.main.MainActivity
+import com.cn.mine.wan.android.app.page.user.register.RegisterActivity
 import com.cn.mine.wan.android.data.entity.result
 import com.cn.mine.wan.android.databinding.ActivityLoginBinding
-import com.cn.mine.wan.android.databinding.ActivityRegisterBinding
 import com.cn.mine.wan.android.net.WanAndroidAPI
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -18,7 +20,7 @@ import javax.inject.Inject
  * @Description:
  */
 @AndroidEntryPoint
-class RegisterActivity: BasicVBActivity<ActivityRegisterBinding>({ ActivityRegisterBinding.inflate(it) }) {
+class LoginActivity: BasicVBActivity<ActivityLoginBinding>({ ActivityLoginBinding.inflate(it) }) {
 
     @Inject
     lateinit var wanAndroidAPI: WanAndroidAPI
@@ -27,39 +29,37 @@ class RegisterActivity: BasicVBActivity<ActivityRegisterBinding>({ ActivityRegis
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding.login.setOnClickListener { loginActivityClick.login() }
         binding.register.setOnClickListener { loginActivityClick.register() }
     }
 
     inner class LoginActivityClick {
+        fun login() { lifecycleScope.launch {
+            checkParamLogin { username, password -> wanAndroidAPI.login(username, password).result({
+                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                finish()
+            }) {
+                Toast.makeText(this@LoginActivity, it, Toast.LENGTH_SHORT).show()
+            } }
+        } }
+
         fun register() { lifecycleScope.launch {
-            checkParamRegister { username, password, rePassword ->
-                wanAndroidAPI.register(username, password, rePassword).result({
-                    finish()
-                }) {
-                    Toast.makeText(this@RegisterActivity, it, Toast.LENGTH_SHORT).show()
-                }
-            }
+            startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
         } }
     }
 
-
-    suspend fun checkParamRegister(action: suspend (String, String, String) -> Unit) {
+    suspend fun checkParamLogin(action: suspend (String, String) -> Unit) {
         val username = binding.username.text.toString()
         val password = binding.password.text.toString()
-        val rePassword = binding.rePassword.text.toString()
         if (username.isBlank()) {
             Toast.makeText(this, "用户名不能为空", Toast.LENGTH_SHORT).show()
             return
         }
-        if (password.isBlank() || rePassword.isBlank()) {
+        if (password.isBlank()) {
             Toast.makeText(this, "密码不能为空", Toast.LENGTH_SHORT).show()
             return
         }
-        if (password != rePassword) {
-            Toast.makeText(this, "两次密码不一致", Toast.LENGTH_SHORT).show()
-            return
-        }
-        action.invoke(username,  password, rePassword)
+        action.invoke(username,  password)
     }
 
 }

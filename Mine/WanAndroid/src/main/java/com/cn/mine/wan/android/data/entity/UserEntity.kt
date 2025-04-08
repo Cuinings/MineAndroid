@@ -3,7 +3,7 @@ package com.cn.mine.wan.android.data.entity
 /**
  * @Author: CuiNing
  * @Time: 2025/4/8 18:21
- * @Description:
+ * @Description: 用户信息
  */
 data class UserEntity(
     val admin: Boolean,

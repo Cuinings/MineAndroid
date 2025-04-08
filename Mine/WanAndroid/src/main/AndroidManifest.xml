@@ -12,19 +12,17 @@
         <activity
             android:name=".app.page.main.MainActivity"
             android:exported="true">
-        </activity>
-        <activity
-            android:name=".app.page.login.LoginActivity"
-            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".app.page.register.RegisterActivity"
+        <activity android:name=".app.page.user.login.LoginActivity"
             android:exported="true">
-
+        </activity>
+        <activity android:name=".app.page.user.register.RegisterActivity"
+            android:exported="true">
         </activity>
     </application>
 

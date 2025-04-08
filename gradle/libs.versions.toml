@@ -57,6 +57,7 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version = "1.1.0" }
 
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
@@ -81,7 +82,8 @@ squareup-okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version = 
 squareup-okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version = "4.12.0" }
 
 #BRVAH RecyclerView Adapter
-cymchad-base-recyclerview-adapter = { group ="io.github.cymchad", name = "BaseRecyclerViewAdapterHelper4", version = "4.1.4" }
+cymchad-base-recyclerview-adapter3 = { group ="io.github.cymchad", name = "BaseRecyclerViewAdapterHelper", version = "3.0.14" }
+cymchad-base-recyclerview-adapter4 = { group ="io.github.cymchad", name = "BaseRecyclerViewAdapterHelper4", version = "4.1.4" }
 
 #Glide
 glide = { group = "com.github.bumptech.glide", name = "glide", version = "4.16.0"}

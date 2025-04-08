@@ -56,12 +56,14 @@ dependencies {
     implementation(project(":Library:Common:Throttle"))
     implementation(project(":Library:Common:Debounce"))
 
-    implementation(libs.cymchad.base.recyclerview.adapter)
+    implementation(libs.cymchad.base.recyclerview.adapter3)
 
     implementation(libs.squareup.retrofit)
     implementation(libs.squareup.retrofit.converter.gson)
     implementation(libs.squareup.okhttp3)
     implementation(libs.squareup.okhttp3.logging.interceptor)
+
+    implementation(libs.androidx.swiperefreshlayout)
 
     implementation(libs.androidx.lifecycle.viewmodel)
 

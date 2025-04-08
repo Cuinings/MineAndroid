@@ -1,6 +1,7 @@
 package com.cn.mine.wan.android.net
 
 import android.util.Log
+import com.chad.library.adapter4.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 import okhttp3.ResponseBody
@@ -13,7 +14,7 @@ class ResponseInterceptor: Interceptor {
         val body = response.body
         val contentType = body?.contentType()
         val bodyString = body?.string()
-        Log.d(ResponseInterceptor::class.simpleName, "\t\t\n$request\n$bodyString\n\n")
+        if (BuildConfig.DEBUG) Log.d(ResponseInterceptor::class.simpleName, "\n$request\n$bodyString\n")
         return response.newBuilder().body(bodyString?.let { ResponseBody.create(contentType, it) }).build()
     }
 

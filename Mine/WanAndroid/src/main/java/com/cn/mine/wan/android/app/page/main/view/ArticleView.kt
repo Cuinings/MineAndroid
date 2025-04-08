@@ -32,10 +32,6 @@ class ArticleView: SwipeRefreshLayout {
         })
     }
 
-    fun autoRefresh() {
-        post { isRefreshing = true }
-    }
-
     fun addArticle(articles: CommonPageData<ArticleEntity>) {
         Log.d(ArticleView::class.simpleName, "addArticle: $articles")
         articles.takeIf { it.curPage == 1 }?.let { mAdapter.setList(it.datas) }?:mAdapter.addData(articles.datas)

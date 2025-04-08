@@ -51,8 +51,7 @@ class MainActivity : BasicVBActivity<ActivityMainBinding>({ inflate(it) }) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         Log.d(TAG, "requestCode:$requestCode, permissions:$permissions, grantResults:${grantResults.size}, ${grantResults[0]}")
         if (requestCode == 100 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            binding.articleView.autoRefresh()
-            onRefresh()
+            binding.articleView.isRefreshing = true
         }
     }
 

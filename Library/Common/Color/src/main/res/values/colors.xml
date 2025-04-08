@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="main_blue_normal">#1A9AEB</color>
-    <color name="main_blue_pressed">#0B82CD</color>
-    <color name="main_blue_hig_light">#39AEF7</color>
+    <color name="blue_normal">#1A9AEB</color>
+    <color name="blue_pressed">#0B82CD</color>
+
+    <color name="height_light">#39AEF7</color>
+
+    <color name="stroke_normal">#66939393</color>
 </resources>

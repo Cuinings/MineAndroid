@@ -12,9 +12,7 @@ import androidx.viewbinding.ViewBinding
  * @Time: 2024/11/22 15:48
  * @Description:
  */
-abstract class BasicVBActivity<VB: ViewBinding>(
-    private val block: (LayoutInflater) -> VB
-): BasicActivity() {
+abstract class BasicVBActivity<VB: ViewBinding>(private val block: (LayoutInflater) -> VB): BasicActivity() {
 
     private var _binding: VB? = null
 
@@ -22,8 +20,8 @@ abstract class BasicVBActivity<VB: ViewBinding>(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         _binding = block(layoutInflater).apply {
-            enableEdgeToEdge()
             setContentView(root)
             ViewCompat.setOnApplyWindowInsetsListener(root) { v, insets ->
                 val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

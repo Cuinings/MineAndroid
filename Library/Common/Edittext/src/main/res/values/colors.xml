@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="edit_text_cursor">#1A9AEB</color>
+
+    <color name="edit_text_stroke_normal">#939393</color>
+    <color name="edit_text_stroke_focus">#1A9AEB</color>
+
+    <color name="edit_text_hint_text_normal">#66000000</color>
+    <color name="edit_text_hint_text_focus">#66000000</color>
+
+    <color name="edit_text_text_normal">#000000</color>
+    <color name="edit_text_text_focus">#000000</color>
+</resources>

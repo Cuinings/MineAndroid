@@ -27,15 +27,28 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
+    }
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
     }
 }
 
 dependencies {
+
+    implementation(project(":Library:Common:Activity"))
+    implementation(project(":Library:Common:Application"))
+    implementation(project(":Library:Common:Popupwindow"))
+    implementation(project(":Library:Common:Dpi"))
+    implementation(project(":Library:Common:Color"))
+    implementation(project(":Library:Common:Throttle"))
+    implementation(project(":Library:Common:Debounce"))
+    implementation(project(":Library:Common:EditText"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

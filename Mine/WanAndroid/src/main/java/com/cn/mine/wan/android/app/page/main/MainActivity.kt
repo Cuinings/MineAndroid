@@ -11,10 +11,9 @@ import androidx.lifecycle.lifecycleScope
 import com.cn.library.common.activity.BasicVBActivity
 import com.cn.mine.wan.android.data.entity.result
 import com.cn.mine.wan.android.databinding.ActivityMainBinding
-import com.cn.mine.wan.android.databinding.ActivityMainBinding.*
+import com.cn.mine.wan.android.databinding.ActivityMainBinding.inflate
 import com.cn.mine.wan.android.net.WanAndroidAPI
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

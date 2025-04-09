@@ -27,23 +27,9 @@ class MainActivity : BasicVBActivity<ActivityMainBinding>({ inflate(it) }) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.doSomething()
         Log.d(TAG, "onCreate: wanAndroidAPI -> $wanAndroidAPI")
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.INTERNET), 100)
-        binding.articleView.setOnRefreshListener { onRefresh() }
-    }
-
-    private fun onRefresh() {
-        lifecycleScope.launch {
-            wanAndroidAPI.article(0).result({
-                Log.d(MainActivityViewModel::class.simpleName, "article: $it")
-                binding.articleView.addArticle(it)
-            }) {
-                Toast.makeText(this@MainActivity, it, Toast.LENGTH_SHORT).show()
-                binding.articleView.isRefreshing = false
-            }
-            Log.d(TAG, "onCreate: onRefresh")
-        }
+        binding.articleView.setOnRefreshListener { /*onRefresh()*/ }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -51,6 +37,7 @@ class MainActivity : BasicVBActivity<ActivityMainBinding>({ inflate(it) }) {
         Log.d(TAG, "requestCode:$requestCode, permissions:$permissions, grantResults:${grantResults.size}, ${grantResults[0]}")
         if (requestCode == 100 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             binding.articleView.isRefreshing = true
+//            onRefresh()
         }
     }
 

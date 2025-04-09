@@ -5,5 +5,7 @@
 
     <color name="height_light">#39AEF7</color>
 
+    <!--描邊色-->
     <color name="stroke_normal">#66939393</color>
+    <color name="solid_normal">#FFFFFF</color>
 </resources>

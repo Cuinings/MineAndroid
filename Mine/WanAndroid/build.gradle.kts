@@ -40,6 +40,7 @@ android {
     buildFeatures {
         dataBinding = true
         viewBinding = true
+        buildConfig = true
     }
     room {
         schemaDirectory("$projectDir/schemas")

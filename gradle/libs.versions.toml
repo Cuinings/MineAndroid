@@ -24,6 +24,7 @@ room = "2.6.1"
 
 #三方库版本
 retrofit = "2.11.0"
+glide = "4.16.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -82,7 +83,7 @@ squareup-okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = 
 cymchad-base-recyclerview-adapter3 = { group ="io.github.cymchad", name = "BaseRecyclerViewAdapterHelper", version = "3.0.14" }
 cymchad-base-recyclerview-adapter4 = { group ="io.github.cymchad", name = "BaseRecyclerViewAdapterHelper4", version = "4.1.4" }
 #Glide
-glide = { group = "com.github.bumptech.glide", name = "glide", version = "4.16.0"}
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide"}
 #腾讯X5内核
 tencent_tbs_sdk = { group = "com.tencent.tbs", name = "tbssdk", version = "44286" }
 

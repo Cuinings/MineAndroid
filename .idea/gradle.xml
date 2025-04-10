@@ -17,6 +17,8 @@
             <option value="$PROJECT_DIR$/Library/Common/Color" />
             <option value="$PROJECT_DIR$/Library/Common/Debounce" />
             <option value="$PROJECT_DIR$/Library/Common/Dpi" />
+            <option value="$PROJECT_DIR$/Library/Common/Drawable" />
+            <option value="$PROJECT_DIR$/Library/Common/Drawable/DSL" />
             <option value="$PROJECT_DIR$/Library/Common/EditText" />
             <option value="$PROJECT_DIR$/Library/Common/Popupwindow" />
             <option value="$PROJECT_DIR$/Library/Common/Throttle" />

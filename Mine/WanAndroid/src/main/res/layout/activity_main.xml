@@ -4,9 +4,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.page.main.MainActivity">
+    tools:context=".ui.main.MainActivity">
 
-    <com.cn.mine.wan.android.app.page.main.view.ArticleView
+    <com.cn.mine.wan.android.ui.main.view.ArticleView
         android:id="@+id/articleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

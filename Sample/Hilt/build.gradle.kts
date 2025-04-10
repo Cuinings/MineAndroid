@@ -9,7 +9,7 @@ plugins {
 
 android {
     namespace = "com.cn.sample.hilt"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.cn.sample.hilt"

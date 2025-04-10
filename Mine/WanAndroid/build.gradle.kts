@@ -9,7 +9,7 @@ plugins {
 
 android {
     namespace = "com.cn.mine.wan.android"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.cn.mine.wan.android"

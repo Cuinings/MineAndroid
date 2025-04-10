@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.cn.sample.test"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.cn.sample.test"

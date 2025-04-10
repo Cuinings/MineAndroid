@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.cn.library.common.activity"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 24

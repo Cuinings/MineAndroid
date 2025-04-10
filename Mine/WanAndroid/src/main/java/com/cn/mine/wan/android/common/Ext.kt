@@ -1,7 +1,6 @@
 package com.cn.mine.wan.android.common
 
 import com.cn.mine.wan.android.BuildConfig
-import com.cn.mine.wan.android.app.WanAndroid
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob

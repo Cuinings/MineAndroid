@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
-        android:name=".app.WanAndroid"
+        android:name=".WanAndroid"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MineAndroid">
         <activity
-            android:name=".app.page.main.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,10 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".app.page.user.login.LoginActivity"
+        <activity android:name=".ui.user.login.LoginActivity"
             android:exported="true">
         </activity>
-        <activity android:name=".app.page.user.register.RegisterActivity"
+        <activity android:name=".ui.user.register.RegisterActivity"
             android:exported="true">
         </activity>
     </application>

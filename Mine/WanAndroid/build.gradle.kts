@@ -50,12 +50,15 @@ android {
 dependencies {
 
     implementation(project(":Library:Common:Activity"))
+    implementation(project(":Library:Common:ViewModel"))
     implementation(project(":Library:Common:Application"))
     implementation(project(":Library:Common:Popupwindow"))
     implementation(project(":Library:Common:Dpi"))
     implementation(project(":Library:Common:Color"))
     implementation(project(":Library:Common:Throttle"))
     implementation(project(":Library:Common:Debounce"))
+
+    implementation(libs.tencent.tbs.sdk)
 
     implementation(libs.cymchad.base.recyclerview.adapter3)
 

@@ -13,22 +13,48 @@
         android:background="@drawable/selector_article_item_background">
 
         <TextView
-            android:id="@+id/articleTitle"
+            android:id="@+id/articleName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp12"
+            android:layout_marginEnd="@dimen/dp12"
+            android:textStyle="bold"
+            android:textSize="@dimen/sp16"
             android:text="@{article.title}"
-            android:textSize="@dimen/sp12"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
-            android:id="@+id/articleAuthor"
+            android:id="@+id/shareAuthor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{article.author}"
-            android:textSize="@dimen/sp8"
-            android:layout_marginTop="@dimen/dp5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/articleTitle"/>
+            android:layout_marginTop="@dimen/dp10"
+            app:articleAuthor="@{article.author}"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/articleName"
+            app:layout_constraintEnd_toStartOf="@id/chapterName"
+            app:layout_constraintTop_toBottomOf="@id/articleName"/>
+
+        <TextView
+            android:id="@+id/chapterName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp10"
+            android:layout_marginTop="@dimen/dp10"
+            app:articleChapter="@{article.superChapterName}"
+            app:layout_goneMarginStart="@dimen/dp0"
+            app:layout_constraintStart_toEndOf="@id/shareAuthor"
+            app:layout_constraintTop_toBottomOf="@id/articleName"/>
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp12"
+            android:layout_marginTop="@dimen/dp10"
+            app:articleTime="@{article.niceShareDate}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/articleName"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

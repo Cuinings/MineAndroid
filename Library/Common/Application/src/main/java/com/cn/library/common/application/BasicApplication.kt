@@ -1,5 +1,6 @@
 package com.cn.library.common.application
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
@@ -22,6 +23,16 @@ abstract class BasicApplication: Application(), ViewModelStoreOwner {
         super.attachBaseContext(base)
         base?.let { context = it }
     }
+
+    @SuppressLint("NewApi")
+    override fun onCreate() {
+        super.onCreate()
+        getProcessName()?.takeIf { it == packageName }?.let {
+            initApplication()
+        }
+    }
+
+    abstract fun initApplication()
 
     val viewmodelProvider: ViewModelProvider get() = ViewModelProvider(this, appFactory)
 

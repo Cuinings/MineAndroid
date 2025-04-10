@@ -11,6 +11,7 @@ data class CommonData<T>(
     var errorMsg: String = ""
 )
 
-fun <T> CommonData<T>.result(success: (T) -> Unit, error: (String) -> Unit) {
-    if (errorCode == 0) success.invoke(data) else error.invoke(errorMsg)
+fun <T> CommonData<T>.result(success: (T) -> Unit, finishAction: (String) -> Unit) {
+    if (errorCode == 0) success.invoke(data)
+    finishAction.invoke(errorMsg)
 }

@@ -1,4 +1,4 @@
-package com.cn.mine.wan.android.data.entity
+package com.cn.library.data.wan.android.entity
 
 /**
  * @Author: CuiNing

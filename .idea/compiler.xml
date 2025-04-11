@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="17" />
+    <bytecodeTargetLevel target="11">
+      <module name="MineAndroid.Mine.WanAndroid-Bean" target="21" />
+      <module name="MineAndroid.Mine.WanAndroid-Data" target="21" />
+    </bytecodeTargetLevel>
   </component>
 </project>

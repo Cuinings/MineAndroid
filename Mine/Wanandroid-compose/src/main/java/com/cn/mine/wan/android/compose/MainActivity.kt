@@ -8,14 +8,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.cn.mine.wan.android.compose.ui.MainEntrance
 import com.cn.mine.wan.android.compose.ui.theme.MineAndroidTheme
+import dagger.hilt.android.AndroidEntryPoint
 
 @ExperimentalMaterial3Api
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +24,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             MineAndroidTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MainEntrance(Modifier.padding(innerPadding).fillMaxSize())
+                    MainEntrance(Modifier.padding(innerPadding).fillMaxSize()) {
+
+                    }
                 }
             }
         }

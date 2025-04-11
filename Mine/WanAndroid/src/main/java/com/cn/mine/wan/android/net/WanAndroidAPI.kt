@@ -1,10 +1,10 @@
 package com.cn.mine.wan.android.net
 
-import com.cn.mine.wan.android.data.entity.ArticleEntity
-import com.cn.mine.wan.android.data.entity.BannerEntity
-import com.cn.mine.wan.android.data.entity.CommonData
-import com.cn.mine.wan.android.data.entity.CommonPageData
-import com.cn.mine.wan.android.data.entity.UserEntity
+import com.cn.library.data.wan.android.entity.ArticleEntity
+import com.cn.library.data.wan.android.entity.BannerEntity
+import com.cn.library.data.wan.android.entity.CommonData
+import com.cn.library.data.wan.android.entity.CommonPageData
+import com.cn.library.data.wan.android.entity.UserEntity
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET

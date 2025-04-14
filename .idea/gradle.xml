@@ -6,7 +6,7 @@
       <GradleProjectSettings>
         <option name="testRunner" value="CHOOSE_PER_TEST" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleJvm" value="jbr-17" />
+        <option name="gradleJvm" value="jbr-21" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -21,17 +21,14 @@
             <option value="$PROJECT_DIR$/Library/Common/Drawable/DSL" />
             <option value="$PROJECT_DIR$/Library/Common/EditText" />
             <option value="$PROJECT_DIR$/Library/Common/Popupwindow" />
+            <option value="$PROJECT_DIR$/Library/Common/RecyclerView" />
+            <option value="$PROJECT_DIR$/Library/Common/RecyclerView/Adapter" />
             <option value="$PROJECT_DIR$/Library/Common/Throttle" />
             <option value="$PROJECT_DIR$/Library/Common/ViewModel" />
             <option value="$PROJECT_DIR$/Library/Data" />
             <option value="$PROJECT_DIR$/Library/Data/WanAndroid" />
             <option value="$PROJECT_DIR$/Mine" />
             <option value="$PROJECT_DIR$/Mine/WanAndroid" />
-            <option value="$PROJECT_DIR$/Mine/Wanandroid-compose" />
-            <option value="$PROJECT_DIR$/Sample" />
-            <option value="$PROJECT_DIR$/Sample/Design-Model" />
-            <option value="$PROJECT_DIR$/Sample/Hilt" />
-            <option value="$PROJECT_DIR$/Sample/Test" />
           </set>
         </option>
       </GradleProjectSettings>

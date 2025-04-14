@@ -3,7 +3,7 @@
     <data>
         <variable
             name="article"
-            type="com.cn.mine.wan.android.data.entity.ArticleEntity" />
+            type="com.cn.library.data.wan.android.entity.ArticleEntity" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.cn.library.common.activity.BasicVBActivity
-import com.cn.mine.wan.android.data.entity.result
+import com.cn.library.data.wan.android.entity.result
 import com.cn.mine.wan.android.databinding.ActivityRegisterBinding
 import com.cn.mine.wan.android.net.WanAndroidAPI
 import dagger.hilt.android.AndroidEntryPoint

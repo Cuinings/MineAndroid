@@ -10,12 +10,12 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.chad.library.adapter.base.BaseBinderAdapter
-import com.chad.library.adapter.base.binder.QuickDataBindingItemBinder
-import com.chad.library.adapter.base.module.LoadMoreModule
+import com.cn.library.common.recyclerview.adapter.BaseBinderAdapter
+import com.cn.library.common.recyclerview.adapter.binder.QuickDataBindingItemBinder
+import com.cn.library.common.recyclerview.adapter.module.LoadMoreModule
+import com.cn.library.data.wan.android.entity.ArticleEntity
+import com.cn.library.data.wan.android.entity.CommonPageData
 import com.cn.mine.wan.android.R
-import com.cn.mine.wan.android.data.entity.ArticleEntity
-import com.cn.mine.wan.android.data.entity.CommonPageData
 import com.cn.mine.wan.android.databinding.ItemArticleBinding
 
 class ArticleView: SwipeRefreshLayout {

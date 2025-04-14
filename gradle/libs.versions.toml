@@ -80,8 +80,8 @@ squareup-retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "c
 squareup-okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version = "4.12.0" }
 squareup-okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version = "4.12.0" }
 #BRVAH RecyclerView Adapter
-cymchad-base-recyclerview-adapter3 = { group ="io.github.cymchad", name = "BaseRecyclerViewAdapterHelper", version = "3.0.14" }
-cymchad-base-recyclerview-adapter4 = { group ="io.github.cymchad", name = "BaseRecyclerViewAdapterHelper4", version = "4.1.4" }
+#cymchad-base-recyclerview-adapter3 = { group ="io.github.cymchad", name = "BaseRecyclerViewAdapterHelper", version = "3.0.14" }
+#cymchad-base-recyclerview-adapter4 = { group ="io.github.cymchad", name = "BaseRecyclerViewAdapterHelper4", version = "4.1.4" }
 #Glide
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide"}
 #腾讯X5内核

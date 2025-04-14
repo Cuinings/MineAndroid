@@ -57,11 +57,11 @@ dependencies {
     implementation(project(":Library:Common:Color"))
     implementation(project(":Library:Common:Throttle"))
     implementation(project(":Library:Common:Debounce"))
+    implementation(project(":Library:Common:RecyclerView:Adapter"))
+
     implementation(project(":Library:Data:WanAndroid"))
 
     implementation(libs.tencent.tbs.sdk)
-
-    implementation(libs.cymchad.base.recyclerview.adapter3)
 
     implementation(libs.squareup.retrofit)
     implementation(libs.squareup.retrofit.converter.gson)

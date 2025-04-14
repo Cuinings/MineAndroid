@@ -6,21 +6,29 @@ package com.cn.sample.design_model.delegate.pattern
  * @Description:    静态委派模式
  */
 
-class RealConfCtrl: IConfCtrl {
+class StaticRealConfCtrl: IConfCtrl {
 
     companion object {
-        val TAG = RealConfCtrl::class.simpleName
+        val TAG = StaticRealConfCtrl::class.simpleName
     }
     override fun create(name: String?) {
-        println("$TAG create:$name")
+        println("$TAG create by $name")
+    }
+
+    override fun join() {
+        println("$TAG join")
     }
 }
 
 class ProxyConfCtrl: IConfCtrl {
 
-    var realConfCtrl: RealConfCtrl = RealConfCtrl()
+    private var realConfCtrl: StaticRealConfCtrl = StaticRealConfCtrl()
 
     override fun create(name: String?) {
         realConfCtrl.create(name)
+    }
+
+    override fun join() {
+        realConfCtrl.join()
     }
 }

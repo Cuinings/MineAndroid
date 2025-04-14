@@ -7,4 +7,5 @@ package com.cn.sample.design_model.delegate.pattern
  */
 interface IConfCtrl {
     fun create(name: String?)
+    fun join()
 }

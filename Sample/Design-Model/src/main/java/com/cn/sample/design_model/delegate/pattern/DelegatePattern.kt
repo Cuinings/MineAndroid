@@ -8,17 +8,18 @@ import java.lang.reflect.Proxy
  * @Description:
  */
 fun main() {
-    println("1111")
+
     val confCtrl: IConfCtrl = ProxyConfCtrl()
     confCtrl.create("Static")
-
-    val dynamicRealConfCtrl: IConfCtrl = DynamicRealConfCtrl()
+    confCtrl.join()
 
     val proxyConfCtrl = Proxy.newProxyInstance(
         IConfCtrl::class.java.classLoader,
         arrayOf(IConfCtrl::class.java),
-        ConfCtrlHandler(dynamicRealConfCtrl)
+        ConfCtrlHandler(DynamicRealConfCtrl())
     ) as IConfCtrl
+
     proxyConfCtrl.create("Dynamic")
+    proxyConfCtrl.join()
 
 }

@@ -35,7 +35,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "MineAndroid"
 
-//include(":Sample:Test")
+include(":Sample:Test")
 //include(":Sample:Hilt")
 //include(":Sample:Design-Model")
 

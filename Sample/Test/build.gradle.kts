@@ -49,6 +49,9 @@ dependencies {
     implementation(project(":Library:Common:Throttle"))
     implementation(project(":Library:Common:Debounce"))
     implementation(project(":Library:Common:EditText"))
+    implementation(project(":Library:Common:RecyclerView:Adapter"))
+
+    implementation(libs.google.code.gson)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

@@ -7,7 +7,6 @@
       <module name="MineAndroid.Mine.WanAndroid-Data" target="21" />
       <module name="MineAndroid.Sample.Design-Model" target="21" />
       <module name="MineAndroid.Sample.Hilt" target="21" />
-      <module name="MineAndroid.Sample.Test" target="21" />
     </bytecodeTargetLevel>
   </component>
 </project>

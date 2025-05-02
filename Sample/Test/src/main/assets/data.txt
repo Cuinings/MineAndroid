@@ -1,0 +1,221 @@
+ [
+       {
+          "id": "1",
+          "parentId": "0",
+          "nodeName": "最强单位部门",
+          "children": [
+             {
+                "id": "1007627",
+                "parentId": "1",
+                "nodeName": "艾欧尼亚区域管理局",
+                "children": [
+                   {
+                      "id": "1007637",
+                      "parentId": "1007627",
+                      "nodeName": "艾欧尼亚执法支队",
+                      "children": [
+                         {
+                            "id": "1007666",
+                            "parentId": "1007637",
+                            "children": [],
+                            "nodeName": "艾欧尼亚一大队",
+                            "sortId": "1",
+                            "deptCode": "5001061113",
+                            "checked": false
+                         }
+                      ],
+                      "sortId": "0",
+                      "deptCode": "5001061084",
+                      "checked": false
+                   },
+                   {
+                      "id": "1007642",
+                      "parentId": "1007627",
+                      "children": [],
+                      "nodeName": "艾欧尼亚环境卫生管理处",
+                      "sortId": "1",
+                      "deptCode": "5001061089",
+                      "checked": false
+                   }
+                ],
+                "sortId": "0",
+                "deptCode": "5001061074",
+                "checked": false
+             },
+             {
+                "id": "1007725",
+                "parentId": "1",
+                "children": [
+                   {
+                      "id": "1007731",
+                      "parentId": "1007725",
+                      "children": [],
+                      "nodeName": "部门2",
+                      "sortId": "0",
+                      "deptCode": "5001061178",
+                      "checked": false
+                   }
+                ],
+                "nodeName": "虚拟部门",
+                "sortId": "0",
+                "deptCode": "5001061172",
+                "checked": false
+             },
+             {
+                "id": "1007726",
+                "parentId": "1",
+                "children": [
+                   {
+                      "id": "1007727",
+                      "parentId": "1007726",
+                      "children": [],
+                      "nodeName": "部门1",
+                      "sortId": "0",
+                      "deptCode": "5001061174",
+                      "checked": false
+                   }
+                ],
+                "nodeName": "小孙部门",
+                "sortId": "0",
+                "deptCode": "5001061173",
+                "checked": false
+             },
+             {
+                "id": "1007734",
+                "parentId": "1",
+                "children": [],
+                "nodeName": "挂机部门",
+                "sortId": "0",
+                "deptCode": "5001061181",
+                "checked": false
+             },
+             {
+                "id": "1007719",
+                "parentId": "1",
+                "children": [
+                   {
+                      "id": "1007720",
+                      "parentId": "1007719",
+                      "children": [
+                         {
+                            "id": "1007628",
+                            "parentId": "1007720",
+                            "children": [
+                               {
+                                  "id": "1007635",
+                                  "parentId": "1007628",
+                                  "children": [],
+                                  "nodeName": "黑铁社区",
+                                  "sortId": "9",
+                                  "deptCode": "5001061082",
+                                  "checked": false
+                               },
+                            ],
+                            "nodeName": "艾欧尼亚低段位",
+                            "sortId": "2",
+                            "deptCode": "5001061075",
+                            "checked": false
+                         },
+                         {
+                            "id": "1007630",
+                            "parentId": "1007720",
+                            "children": [],
+                            "nodeName": "艾欧尼亚管理委员会",
+                            "sortId": "4",
+                            "deptCode": "5001061077",
+                            "checked": false
+                         },
+                         {
+                            "id": "1007712",
+                            "parentId": "1007720",
+                            "children": [
+                               {
+                                  "id": "1007716",
+                                  "parentId": "1007712",
+                                  "children": [],
+                                  "nodeName": "嘿嘿社区",
+                                  "sortId": "77",
+                                  "deptCode": "5001061163",
+                                  "checked": false
+                               }
+                            ],
+                            "nodeName": "艾欧尼亚童家桥街道",
+                            "sortId": "74",
+                            "deptCode": "5001061159",
+                            "checked": false
+                         }
+                      ],
+                      "nodeName": "各街道办事处",
+                      "sortId": "0",
+                      "deptCode": "5001061167",
+                      "checked": false
+                   },
+                   {
+                      "id": "1007735",
+                      "parentId": "1007719",
+                      "children": [],
+                      "nodeName": "灯光专业部门1",
+                      "sortId": "0",
+                      "deptCode": "5001061182",
+                      "checked": false
+                   },
+                   {
+                      "id": "1007714",
+                      "parentId": "1007719",
+                      "children": [
+                         {
+                            "id": "1007722",
+                            "parentId": "1007714",
+                            "children": [
+                               {
+                                  "id": "1007732",
+                                  "parentId": "1007722",
+                                  "children": [],
+                                  "nodeName": "清洁测试公司",
+                                  "sortId": "0",
+                                  "deptCode": "5001061179",
+                                  "checked": false
+                               }
+                            ],
+                            "nodeName": "艾欧尼亚环境保护局下级单位（测试）",
+                            "sortId": "0",
+                            "deptCode": "5001061169",
+                            "checked": false
+                         }
+                      ],
+                      "nodeName": "艾欧尼亚环境保护局",
+                      "sortId": "16",
+                      "deptCode": "5001061161",
+                      "checked": false
+                   },
+                   {
+                      "id": "1007711",
+                      "parentId": "1007719",
+                      "children": [],
+                      "nodeName": "艾欧尼亚体育局",
+                      "sortId": "18",
+                      "deptCode": "5001061158",
+                      "checked": false
+                   },
+                ],
+                "nodeName": "艾欧尼亚责任单位",
+                "sortId": "1",
+                "deptCode": "5001061166",
+                "checked": false
+             },
+             {
+                "id": "-2",
+                "parentId": "1",
+                "children": [],
+                "nodeName": "公众号",
+                "sortId": "2",
+                "deptCode": "1000000001",
+                "checked": false
+             },
+          ],
+          "sortId": "1",
+          "deptCode": "1000000000",
+          "checked": false
+       }
+    ]
+ 

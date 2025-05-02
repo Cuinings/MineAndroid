@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    id("maven-publish")
 }
 
 android {
@@ -40,4 +41,18 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+publishing {
+    publications {
+        register<MavenPublication>(name) {
+            groupId = "com.cn.library.common"
+            artifactId = "application"
+            version = "1.0.0-SNAPSHOT"
+            afterEvaluate{ from(components["release"]) }
+        }
+    }
+    repositories {
+        maven(url = uri("$rootDir\\local_maven"))
+    }
 }

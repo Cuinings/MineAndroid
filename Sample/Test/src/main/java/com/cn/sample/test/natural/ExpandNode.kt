@@ -4,8 +4,8 @@ import com.cn.library.common.recyclerview.adapter.entity.node.BaseExpandNode
 import com.cn.library.common.recyclerview.adapter.entity.node.BaseNode
 import java.util.concurrent.CopyOnWriteArrayList
 
-class NaturalNode(
-    val achName: String = "",                           //部门名称
+class ExpandNode(
+    val name: String = "",                           //部门名称
     var level: Int = 0,                                 //层级
     var group: Boolean = false,                         //组
     var online: Boolean = false,                        //在线离线

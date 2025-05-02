@@ -1,11 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    id("maven-publish")
 }
 
 android {
-    namespace = "com.cn.library.common.activity"
+    namespace = "com.cn.mine.wan.android.data"
     compileSdk = 35
 
     defaultConfig {
@@ -25,15 +24,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    buildFeatures {
-        dataBinding = true
-        viewBinding = true
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "11"
     }
 }
 
@@ -45,18 +40,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-}
-
-publishing {
-    publications {
-        register<MavenPublication>(name) {
-            groupId = "com.cn.library.common"
-            artifactId = "activity"
-            version = "1.0.0-SNAPSHOT"
-            afterEvaluate{ from(components["release"]) }
-        }
-    }
-    repositories {
-        maven(url = uri("$rootDir\\local_maven"))
-    }
 }

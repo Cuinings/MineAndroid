@@ -12,7 +12,7 @@ import com.cn.library.common.recyclerview.adapter.holder.BaseViewHolder
 import com.cn.library.common.recyclerview.adapter.provider.BaseNodeProvider
 import com.cn.sample.test.R
 
-class NaturalList: RecyclerView {
+class ExpandList: RecyclerView {
 
     private val mAdapter = NaturalListAdapter()
 
@@ -26,7 +26,7 @@ class NaturalList: RecyclerView {
         adapter = mAdapter.apply {
             addChildClickViewIds(R.id.llExpand)
         }
-        data = NaturalData.naturalCommonData.child
+        data = ExpandData.naturalCommonData.child
     }
 
     var data: MutableList<BaseNode>? = arrayListOf()
@@ -45,9 +45,9 @@ class NaturalList: RecyclerView {
         override val layoutId: Int get() = R.layout.item_command_dispatcher_natural
 
         override fun convert(helper: BaseViewHolder, item: BaseNode) {
-            item as NaturalNode
+            item as ExpandNode
             resources.getDimensionPixelSize(R.dimen.dp14).let { helper.itemView.setPadding(it * item.level, 0, 0, 0) }
-            helper.setText(R.id.naturalName, item.achName)
+            helper.setText(R.id.naturalName, item.name)
             helper.setImageResource(R.id.ivExpand, if (item.isExpanded) R.drawable.selector_icon_expand_on else R.drawable.selector_icon_expand_off)
             helper.setImageResource(R.id.ivCheck, if (item.selected) R.drawable.selector_choice_on else R.drawable.selector_choice_off)
             helper.setImageResource(R.id.ivDevice, if (item.online) R.drawable.selector_icon_ipc_online else R.drawable.selector_icon_ipc_offline)
@@ -64,7 +64,7 @@ class NaturalList: RecyclerView {
             super.onChildClick(helper, view, data, position)
             when(view.id) {
                 R.id.llExpand -> {
-//                    data as NaturalNode
+//                    data as ExpandNode
 //                    data.isExpanded = !data.isExpanded
                     mAdapter.expandOrCollapse(position, true, true)
                 }

@@ -1,6 +1,5 @@
 package com.cn.sample.design_model.delegate.pattern
 
-import android.util.Log
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 

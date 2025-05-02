@@ -22,9 +22,6 @@
       <SelectionState runConfigName="Sample.Design-Model">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="Mine.Wanandroid-compose">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
     </selectionStates>
   </component>
 </project>

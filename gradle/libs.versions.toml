@@ -1,5 +1,5 @@
 [versions]
-agp = "8.9.1"
+agp = "8.9.2"
 kotlin = "2.1.0"
 kotlinKapt = "1.9.24"
 coreKtx = "1.15.0"
@@ -23,6 +23,7 @@ hilt = "2.56"
 room = "2.6.1"
 
 #三方库版本
+okhttp = "4.12.0"
 retrofit = "2.11.0"
 glide = "4.16.0"
 
@@ -77,8 +78,8 @@ squareup-retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "c
 #squareup-retrofit-converter-protobuf = { group = "com.squareup.retrofit2", name = "converter-protobuf", version.ref = "retrofit" }
 #squareup-retrofit-converter-wire = { group = "com.squareup.retrofit2", name = "converter-wire", version.ref = "retrofit" }
 #okhttp3
-squareup-okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version = "4.12.0" }
-squareup-okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version = "4.12.0" }
+squareup-okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+squareup-okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 #BRVAH RecyclerView Adapter
 #cymchad-base-recyclerview-adapter3 = { group ="io.github.cymchad", name = "BaseRecyclerViewAdapterHelper", version = "3.0.14" }
 #cymchad-base-recyclerview-adapter4 = { group ="io.github.cymchad", name = "BaseRecyclerViewAdapterHelper4", version = "4.1.4" }
@@ -86,6 +87,10 @@ squareup-okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = 
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide"}
 #腾讯X5内核
 tencent_tbs_sdk = { group = "com.tencent.tbs", name = "tbssdk", version = "44286" }
+
+#local
+common-application = { group = "com.cn.library.common", name = "application", version = "1.0.0-SNAPSHOT"}
+common-activity = { group = "com.cn.library.common", name = "activity", version = "1.0.0-SNAPSHOT"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

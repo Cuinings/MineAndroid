@@ -11,11 +11,11 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Library" />
+            <option value="$PROJECT_DIR$/Library/Andlinker" />
             <option value="$PROJECT_DIR$/Library/Common" />
             <option value="$PROJECT_DIR$/Library/Common/Activity" />
             <option value="$PROJECT_DIR$/Library/Common/Application" />
             <option value="$PROJECT_DIR$/Library/Common/Color" />
-            <option value="$PROJECT_DIR$/Library/Common/Debounce" />
             <option value="$PROJECT_DIR$/Library/Common/Dpi" />
             <option value="$PROJECT_DIR$/Library/Common/Drawable" />
             <option value="$PROJECT_DIR$/Library/Common/Drawable/DSL" />
@@ -23,12 +23,15 @@
             <option value="$PROJECT_DIR$/Library/Common/Popupwindow" />
             <option value="$PROJECT_DIR$/Library/Common/RecyclerView" />
             <option value="$PROJECT_DIR$/Library/Common/RecyclerView/Adapter" />
-            <option value="$PROJECT_DIR$/Library/Common/Throttle" />
             <option value="$PROJECT_DIR$/Library/Common/ViewModel" />
-            <option value="$PROJECT_DIR$/Sample" />
-            <option value="$PROJECT_DIR$/Sample/Design-Model" />
-            <option value="$PROJECT_DIR$/Sample/Hilt" />
-            <option value="$PROJECT_DIR$/Sample/Test" />
+            <option value="$PROJECT_DIR$/Library/Utils" />
+            <option value="$PROJECT_DIR$/Library/Utils/Debounce" />
+            <option value="$PROJECT_DIR$/Library/Utils/Email" />
+            <option value="$PROJECT_DIR$/Library/Utils/IP" />
+            <option value="$PROJECT_DIR$/Library/Utils/Throttle" />
+            <option value="$PROJECT_DIR$/Mine" />
+            <option value="$PROJECT_DIR$/Mine/WanAndroid" />
+            <option value="$PROJECT_DIR$/Mine/WanAndroid/Data" />
           </set>
         </option>
       </GradleProjectSettings>

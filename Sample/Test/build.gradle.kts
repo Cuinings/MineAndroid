@@ -46,10 +46,11 @@ dependencies {
     implementation(project(":Library:Common:Popupwindow"))
     implementation(project(":Library:Common:Dpi"))
     implementation(project(":Library:Common:Color"))
-    implementation(project(":Library:Common:Throttle"))
-    implementation(project(":Library:Common:Debounce"))
     implementation(project(":Library:Common:EditText"))
     implementation(project(":Library:Common:RecyclerView:Adapter"))
+
+    implementation(project(":Library:Utils:Debounce"))
+    implementation(project(":Library:Utils:Throttle"))
 
     implementation(libs.google.code.gson)
 

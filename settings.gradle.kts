@@ -35,16 +35,15 @@ dependencyResolutionManagement {
 
 rootProject.name = "MineAndroid"
 
-include(":Sample:Test")
-include(":Sample:Hilt")
-include(":Sample:Design-Model")
+//include(":Sample:Test")
+//include(":Sample:Hilt")
+//include(":Sample:Design-Model")
 
-//include(":Mine:WanAndroid")
-//include(":Mine:WanAndroid:Data")
-//include(":Mine:Wanandroid-compose")
+include(":Mine:WanAndroid")
+include(":Mine:WanAndroid:Data")
 
-include(":Library:Common:Debounce")
-include(":Library:Common:Throttle")
+include(":Library:Andlinker")
+
 include(":Library:Common:Dpi")
 include(":Library:Common:Application")
 include(":Library:Common:Activity")
@@ -54,3 +53,8 @@ include(":Library:Common:EditText")
 include(":Library:Common:ViewModel")
 include(":Library:Common:Drawable:DSL")
 include(":Library:Common:RecyclerView:Adapter")
+
+include(":Library:Utils:Debounce")
+include(":Library:Utils:Email")
+include(":Library:Utils:IP")
+include(":Library:Utils:Throttle")

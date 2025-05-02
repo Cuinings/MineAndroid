@@ -1,4 +1,4 @@
-package com.cn.library.data.wan.android.entity
+package com.cn.mine.wan.android.data.entity
 
 data class TagEntity(
     val name: String,

@@ -40,6 +40,7 @@ include(":Sample:Test")
 //include(":Sample:Design-Model")
 
 include(":Mine:WanAndroid")
+include(":Mine:WanAndroid:Data")
 
 //include(":Mine:Wanandroid-compose")
 include(":Library:Common:Debounce")
@@ -52,5 +53,4 @@ include(":Library:Common:Popupwindow")
 include(":Library:Common:EditText")
 include(":Library:Common:ViewModel")
 include(":Library:Common:Drawable:DSL")
-include(":Library:Data:WanAndroid")
 include(":Library:Common:RecyclerView:Adapter")

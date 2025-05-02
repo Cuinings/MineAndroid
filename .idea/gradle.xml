@@ -25,10 +25,9 @@
             <option value="$PROJECT_DIR$/Library/Common/RecyclerView/Adapter" />
             <option value="$PROJECT_DIR$/Library/Common/Throttle" />
             <option value="$PROJECT_DIR$/Library/Common/ViewModel" />
-            <option value="$PROJECT_DIR$/Library/Data" />
-            <option value="$PROJECT_DIR$/Library/Data/WanAndroid" />
             <option value="$PROJECT_DIR$/Mine" />
             <option value="$PROJECT_DIR$/Mine/WanAndroid" />
+            <option value="$PROJECT_DIR$/Mine/WanAndroid/Data" />
             <option value="$PROJECT_DIR$/Sample" />
             <option value="$PROJECT_DIR$/Sample/Test" />
           </set>

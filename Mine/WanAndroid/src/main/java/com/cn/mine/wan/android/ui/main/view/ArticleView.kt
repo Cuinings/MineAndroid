@@ -13,9 +13,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.cn.library.common.recyclerview.adapter.BaseBinderAdapter
 import com.cn.library.common.recyclerview.adapter.binder.QuickDataBindingItemBinder
 import com.cn.library.common.recyclerview.adapter.module.LoadMoreModule
-import com.cn.library.data.wan.android.entity.ArticleEntity
-import com.cn.library.data.wan.android.entity.CommonPageData
 import com.cn.mine.wan.android.R
+import com.cn.mine.wan.android.data.entity.ArticleEntity
+import com.cn.mine.wan.android.data.entity.CommonPageData
 import com.cn.mine.wan.android.databinding.ItemArticleBinding
 
 class ArticleView: SwipeRefreshLayout {

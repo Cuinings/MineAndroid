@@ -49,6 +49,8 @@ android {
 
 dependencies {
 
+    implementation(project(":Mine:WanAndroid:Data"))
+
     implementation(project(":Library:Common:Activity"))
     implementation(project(":Library:Common:ViewModel"))
     implementation(project(":Library:Common:Application"))
@@ -58,8 +60,6 @@ dependencies {
     implementation(project(":Library:Common:Throttle"))
     implementation(project(":Library:Common:Debounce"))
     implementation(project(":Library:Common:RecyclerView:Adapter"))
-
-    implementation(project(":Library:Data:WanAndroid"))
 
     implementation(libs.tencent.tbs.sdk)
 

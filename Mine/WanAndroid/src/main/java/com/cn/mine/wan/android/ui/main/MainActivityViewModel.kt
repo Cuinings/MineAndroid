@@ -5,9 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.cn.library.commom.viewmodel.BasicViewModel
 import com.cn.library.commom.viewmodel.UIEvent
 import com.cn.library.commom.viewmodel.UIState
-import com.cn.library.data.wan.android.entity.ArticleEntity
-import com.cn.library.data.wan.android.entity.CommonPageData
-import com.cn.library.data.wan.android.entity.result
+import com.cn.mine.wan.android.data.entity.ArticleEntity
+import com.cn.mine.wan.android.data.entity.CommonPageData
+import com.cn.mine.wan.android.data.entity.result
 import com.cn.mine.wan.android.net.WanAndroidAPI
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

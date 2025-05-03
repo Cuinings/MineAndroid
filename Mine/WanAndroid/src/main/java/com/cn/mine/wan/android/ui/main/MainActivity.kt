@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import com.cn.library.common.activity.BasicVBActivity
+import com.cn.library.remote.msg.subscriber.annotation.Subscriber
 import com.cn.mine.wan.android.ui.main.view.ArticleView
 import com.cn.mine.wan.android.databinding.ActivityMainBinding
 import com.cn.mine.wan.android.databinding.ActivityMainBinding.inflate
@@ -62,5 +63,8 @@ class MainActivity : BasicVBActivity<ActivityMainBinding>({ inflate(it) }) {
             viewModel.sendUIIntent(MainActivityUIEvent.GetArticle(0))
         }
     }
+
+    @Subscriber("Test")
+    fun subscriber() {}
 
 }

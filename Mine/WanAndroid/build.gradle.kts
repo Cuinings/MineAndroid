@@ -19,6 +19,13 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+
+        kapt {
+            arguments {
+                arg("appId", this@defaultConfig.applicationId!!)
+            }
+        }
     }
 
     buildTypes {
@@ -61,6 +68,11 @@ dependencies {
 
     implementation(project(":Library:Utils:Debounce"))
     implementation(project(":Library:Utils:Throttle"))
+
+    implementation(project(":Library:Remote:Msg:Router:Client"))
+
+    implementation(project(":Library:Remote:Msg:Subscriber:Annotation"))
+    kapt(project(":Library:Remote:Msg:Subscriber:Processor"))
 
     implementation(libs.tencent.tbs.sdk)
 

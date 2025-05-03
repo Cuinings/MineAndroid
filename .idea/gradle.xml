@@ -11,7 +11,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Library" />
-            <option value="$PROJECT_DIR$/Library/Andlinker" />
             <option value="$PROJECT_DIR$/Library/Common" />
             <option value="$PROJECT_DIR$/Library/Common/Activity" />
             <option value="$PROJECT_DIR$/Library/Common/Application" />
@@ -23,15 +22,27 @@
             <option value="$PROJECT_DIR$/Library/Common/Popupwindow" />
             <option value="$PROJECT_DIR$/Library/Common/RecyclerView" />
             <option value="$PROJECT_DIR$/Library/Common/RecyclerView/Adapter" />
+            <option value="$PROJECT_DIR$/Library/Common/Service" />
             <option value="$PROJECT_DIR$/Library/Common/ViewModel" />
+            <option value="$PROJECT_DIR$/Library/Remote" />
+            <option value="$PROJECT_DIR$/Library/Remote/Andlinker" />
+            <option value="$PROJECT_DIR$/Library/Remote/Msg" />
+            <option value="$PROJECT_DIR$/Library/Remote/Msg/Router" />
+            <option value="$PROJECT_DIR$/Library/Remote/Msg/Router/Client" />
+            <option value="$PROJECT_DIR$/Library/Remote/Msg/Subscriber" />
+            <option value="$PROJECT_DIR$/Library/Remote/Msg/Subscriber/Annotation" />
+            <option value="$PROJECT_DIR$/Library/Remote/Msg/Subscriber/Processor" />
             <option value="$PROJECT_DIR$/Library/Utils" />
             <option value="$PROJECT_DIR$/Library/Utils/Debounce" />
             <option value="$PROJECT_DIR$/Library/Utils/Email" />
+            <option value="$PROJECT_DIR$/Library/Utils/Gson" />
             <option value="$PROJECT_DIR$/Library/Utils/IP" />
             <option value="$PROJECT_DIR$/Library/Utils/Throttle" />
             <option value="$PROJECT_DIR$/Mine" />
             <option value="$PROJECT_DIR$/Mine/WanAndroid" />
             <option value="$PROJECT_DIR$/Mine/WanAndroid/Data" />
+            <option value="$PROJECT_DIR$/Sample" />
+            <option value="$PROJECT_DIR$/Sample/Test" />
           </set>
         </option>
       </GradleProjectSettings>

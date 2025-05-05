@@ -64,6 +64,8 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version = "1.1.0" }
+androidx-vectordrawable = { group = "androidx.vectordrawable", name = "vectordrawable", version = "1.1.0" }
+androidx-vectordrawable-animated = { group = "androidx.vectordrawable", name = "vectordrawable-animated", version = "1.1.0" }
 
 androidx-startup = { group = "androidx.startup", name = "startup-runtime", version.ref = "startup" }
 
@@ -93,7 +95,9 @@ squareup-okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = 
 #Glide
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide"}
 #腾讯X5内核
-tencent_tbs_sdk = { group = "com.tencent.tbs", name = "tbssdk", version = "44286" }
+tencent-tbs-sdk = { group = "com.tencent.tbs", name = "tbssdk", version = "44286" }
+
+android-svg= { group = "com.caverock", name = "androidsvg", version = "1.4" }
 
 #local
 common-application = { group = "com.cn.library.common", name = "application", version = "1.0.0-SNAPSHOT"}

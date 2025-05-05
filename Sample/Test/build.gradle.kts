@@ -52,6 +52,10 @@ dependencies {
     implementation(project(":Library:Utils:Debounce"))
     implementation(project(":Library:Utils:Throttle"))
 
+    implementation(libs.android.svg)
+    implementation(libs.androidx.vectordrawable)
+    implementation(libs.androidx.vectordrawable.animated)
+
     implementation(libs.google.code.gson)
 
     implementation(libs.androidx.core.ktx)

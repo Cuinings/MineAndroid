@@ -1,4 +1,4 @@
-package com.cn.sample.test.natural
+package com.cn.sample.test.expand
 
 import com.cn.library.common.recyclerview.adapter.entity.node.BaseExpandNode
 import com.cn.library.common.recyclerview.adapter.entity.node.BaseNode

@@ -6,12 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.cn.sample.test.expand.ExpandList
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/str_test_"/>
+
+    <!--<com.cn.sample.test.expand.ExpandList
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
     <com.cn.sample.test.Mic
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

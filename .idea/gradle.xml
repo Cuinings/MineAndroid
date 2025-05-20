@@ -41,6 +41,7 @@
             <option value="$PROJECT_DIR$/Mine" />
             <option value="$PROJECT_DIR$/Mine/WanAndroid" />
             <option value="$PROJECT_DIR$/Mine/WanAndroid/Data" />
+            <option value="$PROJECT_DIR$/Mine/WanAndroid/Overlay" />
             <option value="$PROJECT_DIR$/Sample" />
             <option value="$PROJECT_DIR$/Sample/Test" />
           </set>

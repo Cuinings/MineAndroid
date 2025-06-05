@@ -5,7 +5,7 @@ import android.util.Log
 /**
  * @Author: CuiNing
  * @Time: 2025/6/5 18:47
- * @Descrpition:
+ * @Description:
  */
 object MsgRouterServiceConfig {
 

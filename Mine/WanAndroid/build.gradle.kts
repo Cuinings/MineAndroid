@@ -71,6 +71,8 @@ dependencies {
 
     implementation(project(":Library:Remote:Msg:Router:Client"))
 
+    implementation(project(":Library:Remote:Msg:Router:Client"))
+    implementation(project(":Library:Remote:Msg:Router:Service"))
     implementation(project(":Library:Remote:Msg:Subscriber:Annotation"))
     kapt(project(":Library:Remote:Msg:Subscriber:Processor"))
 

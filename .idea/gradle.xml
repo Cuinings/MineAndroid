@@ -29,6 +29,7 @@
             <option value="$PROJECT_DIR$/Library/Remote/Msg" />
             <option value="$PROJECT_DIR$/Library/Remote/Msg/Router" />
             <option value="$PROJECT_DIR$/Library/Remote/Msg/Router/Client" />
+            <option value="$PROJECT_DIR$/Library/Remote/Msg/Router/Service" />
             <option value="$PROJECT_DIR$/Library/Remote/Msg/Subscriber" />
             <option value="$PROJECT_DIR$/Library/Remote/Msg/Subscriber/Annotation" />
             <option value="$PROJECT_DIR$/Library/Remote/Msg/Subscriber/Processor" />

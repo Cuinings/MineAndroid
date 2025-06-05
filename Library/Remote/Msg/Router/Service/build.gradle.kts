@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.cn.library.remote.andlinker"
+    namespace = "com.cn.library.remote.msg.router.service"
     compileSdk = 35
 
     defaultConfig {
@@ -24,17 +24,21 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "11"
     }
 }
 
 dependencies {
 
-    api(project(":Library:Common:Service"))
+    implementation(project(":Library:Remote:Andlinker"))
+
+    implementation(project(":Library:Remote:Msg:Router:Client"))
+
+    implementation(libs.androidx.startup)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

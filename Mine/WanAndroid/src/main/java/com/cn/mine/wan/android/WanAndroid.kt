@@ -1,10 +1,20 @@
 package com.cn.mine.wan.android
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
 import android.util.Log
+import androidx.core.content.ContextCompat
+import com.cn.library.common.application.ApplicationContextExt
 import com.cn.library.common.application.BasicApplication
 import com.cn.mine.wan.android.common.launchIO
 import com.tencent.smtt.sdk.QbSdk
 import dagger.hilt.android.HiltAndroidApp
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.channels.trySendBlocking
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 
 /**
  * @Author: CuiNing
@@ -16,6 +26,10 @@ class WanAndroid: BasicApplication() {
 
     override fun initApplication() {
         initX5Environment()
+        SubscriberCallback()
+        isConnected.let { boolean ->
+
+        }
     }
 
     /**
@@ -40,5 +54,53 @@ class WanAndroid: BasicApplication() {
             })
         }
     }
+
+    val isConnected: () -> Flow<Boolean> = {
+        callbackFlow {
+            ContextCompat.getSystemService(ApplicationContextExt.context, ConnectivityManager::class.java)?.let { cm ->
+                val callback = object: ConnectivityManager.NetworkCallback() {
+
+                    override fun onCapabilitiesChanged(
+                        network: Network,
+                        networkCapabilities: NetworkCapabilities
+                    ) {
+                        super.onCapabilitiesChanged(network, networkCapabilities)
+                        trySendBlocking(networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET))
+                    }
+
+                    override fun onLost(network: Network) {
+                        super.onLost(network)
+                        trySendBlocking(false)
+                    }
+
+                }
+                cm.registerDefaultNetworkCallback(callback)
+                awaitClose { cm.unregisterNetworkCallback(callback) }
+            }
+        }
+    }
+
+    /*fun isConnected(context: Context): Flow<Boolean> = callbackFlow {
+        ContextCompat.getSystemService(context, ConnectivityManager::class.java)?.let { cm ->
+            val callback = object: ConnectivityManager.NetworkCallback() {
+
+                override fun onCapabilitiesChanged(
+                    network: Network,
+                    networkCapabilities: NetworkCapabilities
+                ) {
+                    super.onCapabilitiesChanged(network, networkCapabilities)
+                    trySendBlocking(networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET))
+                }
+
+                override fun onLost(network: Network) {
+                    super.onLost(network)
+                    trySendBlocking(false)
+                }
+
+            }
+            cm.registerDefaultNetworkCallback(callback)
+            awaitClose { cm.unregisterNetworkCallback(callback) }
+        }
+    }*/
 
 }

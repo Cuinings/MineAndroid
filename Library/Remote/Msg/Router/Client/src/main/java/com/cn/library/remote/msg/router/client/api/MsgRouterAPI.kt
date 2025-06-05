@@ -13,6 +13,8 @@ import com.cn.library.remote.msg.router.client.bean.Msg
 @RemoteInterface
 interface MsgRouterAPI {
 
+    fun initServerApp(pkg: String)
+
     /**
      * 订阅消息
      */
@@ -23,13 +25,22 @@ interface MsgRouterAPI {
      */
     fun unSubscribeMsg(process: String)
 
+    /**
+     * 消息分发
+     */
     fun dispatcherMsg(@Inout msg: Msg)
 
     /**
+     * 注册回调
      * @param callback
      * @param source
      */
     fun registerCallback(@Callback callback: MsgRouterCallback, source: String)
 
+    /**
+     * 反注册回调
+     * @param callback
+     * @param source
+     */
     fun unRegisterCallback(@Callback callback: MsgRouterCallback, source: String)
 }

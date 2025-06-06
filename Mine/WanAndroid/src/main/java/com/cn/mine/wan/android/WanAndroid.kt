@@ -1,6 +1,6 @@
 package com.cn.mine.wan.android
 
-import android.content.Context
+import android.R
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
@@ -27,9 +27,9 @@ class WanAndroid: BasicApplication() {
     override fun initApplication() {
         initX5Environment()
         SubscriberCallback()
-        isConnected.let { boolean ->
-
-        }
+        /*isConnected.let { boolean ->
+            Log.d(TAG, "initApplication: ${boolean}")
+        }*/
     }
 
     /**
@@ -55,7 +55,7 @@ class WanAndroid: BasicApplication() {
         }
     }
 
-    val isConnected: () -> Flow<Boolean> = {
+    /*val isConnected: () -> Flow<Boolean> = {
         callbackFlow {
             ContextCompat.getSystemService(ApplicationContextExt.context, ConnectivityManager::class.java)?.let { cm ->
                 val callback = object: ConnectivityManager.NetworkCallback() {
@@ -64,12 +64,14 @@ class WanAndroid: BasicApplication() {
                         network: Network,
                         networkCapabilities: NetworkCapabilities
                     ) {
-                        super.onCapabilitiesChanged(network, networkCapabilities)
+                        Log.d(TAG, "onCapabilitiesChanged: ")
+//                        super.onCapabilitiesChanged(network, networkCapabilities)
                         trySendBlocking(networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET))
                     }
 
                     override fun onLost(network: Network) {
-                        super.onLost(network)
+//                        super.onLost(network)
+                        Log.d(TAG, "onLost: ")
                         trySendBlocking(false)
                     }
 
@@ -78,7 +80,7 @@ class WanAndroid: BasicApplication() {
                 awaitClose { cm.unregisterNetworkCallback(callback) }
             }
         }
-    }
+    }*/
 
     /*fun isConnected(context: Context): Flow<Boolean> = callbackFlow {
         ContextCompat.getSystemService(context, ConnectivityManager::class.java)?.let { cm ->

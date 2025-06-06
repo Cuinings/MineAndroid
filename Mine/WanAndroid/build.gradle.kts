@@ -65,6 +65,7 @@ dependencies {
     implementation(project(":Library:Common:Dpi"))
     implementation(project(":Library:Common:Color"))
     implementation(project(":Library:Common:RecyclerView:Adapter"))
+    implementation(project(":Library:Common:Flow"))
 
     implementation(project(":Library:Utils:Debounce"))
     implementation(project(":Library:Utils:Throttle"))

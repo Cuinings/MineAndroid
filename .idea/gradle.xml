@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/Library/Common/Drawable" />
             <option value="$PROJECT_DIR$/Library/Common/Drawable/DSL" />
             <option value="$PROJECT_DIR$/Library/Common/EditText" />
+            <option value="$PROJECT_DIR$/Library/Common/Flow" />
             <option value="$PROJECT_DIR$/Library/Common/Popupwindow" />
             <option value="$PROJECT_DIR$/Library/Common/RecyclerView" />
             <option value="$PROJECT_DIR$/Library/Common/RecyclerView/Adapter" />

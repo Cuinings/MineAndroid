@@ -23,7 +23,6 @@ inline fun <T> T.launchIO(crossinline action: T.() -> Unit) {
     mScope.launch(Dispatchers.IO) { action.invoke(this@launchIO) }
 }
 
-
 inline fun <T> Flow<T>.flowOnLifecycle(
     lifecycle: Lifecycle,
     minActivityState: Lifecycle.State = Lifecycle.State.CREATED

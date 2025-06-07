@@ -40,6 +40,8 @@ include(":Sample:Test")
 //include(":Sample:Design-Model")
 
 include(":Mine:WanAndroid")
+include(":Mine:WanAndroid:Events")
+include(":Mine:WanAndroid:Repository")
 include(":Mine:WanAndroid:Data")
 include(":Mine:WanAndroid:Overlay")
 
@@ -47,25 +49,26 @@ include(":Library:Remote:Andlinker")
 include(":Library:Remote:Msg:Subscriber:Annotation")
 include(":Library:Remote:Msg:Subscriber:Processor")
 include(":Library:Remote:Msg:Router:Client")
-include(":Library:Remote:Msg:Router:Service")
 
+include(":Library:Remote:Msg:Router:Service")
 include(":Library:Common:Application")
 include(":Library:Common:Activity")
 include(":Library:Common:Service")
 include(":Library:Common:ViewModel")
-include(":Library:Common:Popupwindow")
 
+include(":Library:Common:Popupwindow")
 include(":Library:Common:Dpi")
 include(":Library:Common:Drawable:DSL")
+
 include(":Library:Common:Color")
 
 include(":Library:Common:EditText")
 
 include(":Library:Common:Flow")
-
 include(":Library:Common:RecyclerView:Adapter")
 include(":Library:Utils:Throttle")
 include(":Library:Utils:Debounce")
 include(":Library:Utils:Email")
 include(":Library:Utils:IP")
 include(":Library:Utils:Gson")
+include(":Library:Utils:NetWork")

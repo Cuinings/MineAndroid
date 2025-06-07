@@ -16,10 +16,11 @@
       <module name="MineAndroid.Library.Msg.Subscribe.Processor.main" target="17" />
       <module name="MineAndroid.Library.Msg.Subscribe.Processor.test" target="17" />
       <module name="MineAndroid.Library.Service" target="21" />
-      <module name="MineAndroid.Library.Utils.Regular" target="21" />
       <module name="MineAndroid.Mine.WanAndroid-Bean" target="21" />
       <module name="MineAndroid.Mine.Wanandroid-compose" target="21" />
       <module name="MineAndroid.Mine.WanAndroid-Data" target="21" />
+      <module name="MineAndroid.Mine.WanAndroid.NetWorkRequest" target="21" />
+      <module name="MineAndroid.Mine.WanAndroid.Respository" target="21" />
       <module name="MineAndroid.Sample.Design-Model" target="21" />
       <module name="MineAndroid.Sample.Hilt" target="21" />
     </bytecodeTargetLevel>

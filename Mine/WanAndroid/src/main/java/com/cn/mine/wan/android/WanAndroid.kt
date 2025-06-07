@@ -1,20 +1,11 @@
 package com.cn.mine.wan.android
 
-import android.R
-import android.net.ConnectivityManager
-import android.net.Network
-import android.net.NetworkCapabilities
 import android.util.Log
-import androidx.core.content.ContextCompat
-import com.cn.library.common.application.ApplicationContextExt
 import com.cn.library.common.application.BasicApplication
 import com.cn.mine.wan.android.common.launchIO
+import com.cn.mine.wan.android.repository.Repository.initializerRepository
 import com.tencent.smtt.sdk.QbSdk
 import dagger.hilt.android.HiltAndroidApp
-import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.channels.trySendBlocking
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.callbackFlow
 
 /**
  * @Author: CuiNing
@@ -25,6 +16,7 @@ import kotlinx.coroutines.flow.callbackFlow
 class WanAndroid: BasicApplication() {
 
     override fun initApplication() {
+        this@WanAndroid.initializerRepository()
         initX5Environment()
         SubscriberCallback()
         /*isConnected.let { boolean ->

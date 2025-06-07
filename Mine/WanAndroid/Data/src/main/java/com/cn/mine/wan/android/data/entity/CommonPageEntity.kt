@@ -5,7 +5,7 @@ package com.cn.mine.wan.android.data.entity
  * @Time: 2024/12/12 16:30
  * @Description:
  */
-data class CommonPageData<T>(
+data class CommonPageEntity<T>(
     var curPage: Int,
     var datas: MutableList<T>,
     var offset: Int = 0,

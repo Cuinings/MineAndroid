@@ -100,8 +100,8 @@ tencent-tbs-sdk = { group = "com.tencent.tbs", name = "tbssdk", version = "44286
 android-svg= { group = "com.caverock", name = "androidsvg", version = "1.4" }
 
 #local
-common-application = { group = "com.cn.library.common", name = "application", version = "1.0.0-SNAPSHOT"}
-common-activity = { group = "com.cn.library.common", name = "activity", version = "1.0.0-SNAPSHOT"}
+common-library-application = { group = "com.cn.library.common", name = "application", version = "1.0.0-SNAPSHOT"}
+common-library-activity = { group = "com.cn.library.common", name = "activity", version = "1.0.0-SNAPSHOT"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

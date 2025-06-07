@@ -15,7 +15,7 @@ import com.cn.library.common.recyclerview.adapter.binder.QuickDataBindingItemBin
 import com.cn.library.common.recyclerview.adapter.module.LoadMoreModule
 import com.cn.mine.wan.android.R
 import com.cn.mine.wan.android.data.entity.ArticleEntity
-import com.cn.mine.wan.android.data.entity.CommonPageData
+import com.cn.mine.wan.android.data.entity.CommonPageEntity
 import com.cn.mine.wan.android.databinding.ItemArticleBinding
 
 class ArticleView: SwipeRefreshLayout {
@@ -61,7 +61,7 @@ class ArticleView: SwipeRefreshLayout {
             Log.d(TAG, "pageNum:$it")
         } }
 
-    fun addArticle(articles: CommonPageData<ArticleEntity>?) {
+    fun addArticle(articles: CommonPageEntity<ArticleEntity>?) {
         articles?.run {
             this@ArticleView.pageCount = this.pageCount
             pageNum = curPage

@@ -56,9 +56,12 @@ android {
 
 dependencies {
 
+    implementation(project(":Mine:WanAndroid:Events"))
+    implementation(project(":Mine:WanAndroid:Repository"))
     implementation(project(":Mine:WanAndroid:Data"))
 
     implementation(project(":Library:Common:Activity"))
+//    implementation(libs.common.library.activity)
     implementation(project(":Library:Common:ViewModel"))
     implementation(project(":Library:Common:Application"))
     implementation(project(":Library:Common:Popupwindow"))
@@ -69,6 +72,7 @@ dependencies {
 
     implementation(project(":Library:Utils:Debounce"))
     implementation(project(":Library:Utils:Throttle"))
+    implementation(project(":Library:Utils:NetWork"))
 
     implementation(project(":Library:Remote:Msg:Router:Client"))
 

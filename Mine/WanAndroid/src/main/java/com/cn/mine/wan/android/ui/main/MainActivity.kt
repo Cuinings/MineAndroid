@@ -12,7 +12,6 @@ import com.cn.library.common.activity.BasicVBActivity
 import com.cn.library.common.flow.collectByLifecycleScope
 import com.cn.library.common.flow.collectByScope
 import com.cn.library.remote.msg.subscriber.annotation.Subscriber
-import com.cn.mine.wan.android.ConnectivityManagerHelper.isConnected
 import com.cn.mine.wan.android.ui.main.view.ArticleView
 import com.cn.mine.wan.android.databinding.ActivityMainBinding
 import com.cn.mine.wan.android.databinding.ActivityMainBinding.inflate
@@ -57,15 +56,13 @@ class MainActivity : BasicVBActivity<ActivityMainBinding>({ inflate(it) }) {
                 }
             }
         }
-        isConnected.collectByScope(lifecycleScope) {
-            Log.d(TAG, "initApplication: $it")
-        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         Log.d(TAG, "requestCode:$requestCode, permissions:$permissions, grantResults:${grantResults.size}, ${grantResults[0]}")
         if (requestCode == 100 && grantResults[0] == PackageManager.PERMISSION_GRANTED ) {
+            viewModel.sendUIIntent(MainActivityUIEvent.GetBanner)
             viewModel.sendUIIntent(MainActivityUIEvent.GetArticle(0))
         }
     }

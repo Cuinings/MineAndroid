@@ -2,8 +2,8 @@ package com.cn.mine.wan.android.net
 
 import com.cn.mine.wan.android.data.entity.ArticleEntity
 import com.cn.mine.wan.android.data.entity.BannerEntity
-import com.cn.mine.wan.android.data.entity.CommonData
-import com.cn.mine.wan.android.data.entity.CommonPageData
+import com.cn.mine.wan.android.data.entity.CommonEntity
+import com.cn.mine.wan.android.data.entity.CommonPageEntity
 import com.cn.mine.wan.android.data.entity.UserEntity
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -18,7 +18,7 @@ interface WanAndroidAPI {
      */
     @POST("/user/login")
     @FormUrlEncoded
-    suspend fun login(@Field("username") username: String, @Field("password") password: String): CommonData<UserEntity>
+    suspend fun login(@Field("username") username: String, @Field("password") password: String): CommonEntity<UserEntity>
 
     /**
      * 登出
@@ -31,17 +31,17 @@ interface WanAndroidAPI {
      */
     @POST("/user/register")
     @FormUrlEncoded
-    suspend fun register(@Field("username") username: String, @Field("password") password: String, @Field("repassword")  repassword: String): CommonData<UserEntity>
+    suspend fun register(@Field("username") username: String, @Field("password") password: String, @Field("repassword")  repassword: String): CommonEntity<UserEntity>
 
     /**
      * 首页Banner
      */
     @GET("/banner/json")
-    suspend fun banner(): CommonData<List<BannerEntity>>
+    suspend fun banner(): CommonEntity<List<BannerEntity>>
 
     /**
      * 文章列表
      */
     @GET("/article/list/{pageNum}/json")
-    suspend fun article(@Path("pageNum") pageNum: Int): CommonData<CommonPageData<ArticleEntity>>
+    suspend fun article(@Path("pageNum") pageNum: Int): CommonEntity<CommonPageEntity<ArticleEntity>>
 }

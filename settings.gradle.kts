@@ -36,10 +36,10 @@ dependencyResolutionManagement {
 rootProject.name = "MineAndroid"
 
 include(":Sample:Test")
-//include(":Sample:Hilt")
-//include(":Sample:Design-Model")
+include(":Sample:Hilt")
+include(":Sample:Design-Model")
 
-include(":Mine:WanAndroid")
+include(":Mine:WanAndroid:App")
 include(":Mine:WanAndroid:Events")
 include(":Mine:WanAndroid:Repository")
 include(":Mine:WanAndroid:Data")
@@ -49,8 +49,8 @@ include(":Library:Remote:Andlinker")
 include(":Library:Remote:Msg:Subscriber:Annotation")
 include(":Library:Remote:Msg:Subscriber:Processor")
 include(":Library:Remote:Msg:Router:Client")
-
 include(":Library:Remote:Msg:Router:Service")
+
 include(":Library:Common:Application")
 include(":Library:Common:Activity")
 include(":Library:Common:Service")

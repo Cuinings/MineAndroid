@@ -1,35 +1,28 @@
-package com.cn.mine.wan.android.ui.main
+package com.cn.mine.wan.android.app.page.main
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cn.library.commom.viewmodel.BasicViewModel
 import com.cn.library.commom.viewmodel.UIEvent
 import com.cn.library.commom.viewmodel.UIState
-import com.cn.library.common.activity.BasicActivity
-import com.cn.library.common.application.ApplicationContextExt
-import com.cn.library.common.flow.collectByScope
-import com.cn.library.utils.network.isConnected
+import com.cn.mine.wan.android.app.page.main.ArticleUIState.Article
+import com.cn.mine.wan.android.app.page.main.ArticleUIState.ArticleFinish
 import com.cn.mine.wan.android.data.entity.ArticleEntity
 import com.cn.mine.wan.android.data.entity.CommonEntity
 import com.cn.mine.wan.android.data.entity.CommonPageEntity
-import com.cn.mine.wan.android.data.entity.result
 import com.cn.mine.wan.android.events.EventResult
 import com.cn.mine.wan.android.events.article.ArticleEvent
 import com.cn.mine.wan.android.events.banner.BannerEvent
-import com.cn.mine.wan.android.net.WanAndroidAPI
-import com.cn.mine.wan.android.ui.main.ArticleUIState.*
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(): BasicViewModel<MainActivityUIState, MainActivityUIEvent>() {
 
     @Inject
-    lateinit var wanAndroidAPI: WanAndroidAPI
-
-    private val bannerEvent: BannerEvent by lazy { BannerEvent() }
-    private val articleEvent: ArticleEvent by lazy { ArticleEvent() }
+    lateinit var bannerEvent: BannerEvent
+    @Inject
+    lateinit var articleEvent: ArticleEvent
 
     override fun initUIState(): MainActivityUIState {
         Log.d(MainActivityViewModel::class.simpleName, "initUIState: ")

@@ -33,7 +33,7 @@ class MainActivity : BasicVBActivity<ActivityMainBinding>({ inflate(it) }) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate: wanAndroidAPI -> $wanAndroidAPI")
         viewModel.uiStateFlow.map { it.articleUIState }.collectByLifecycleScope(lifecycleScope) { articleUIState ->
-            Log.d(TAG, "uiStateFlow collect: $articleUIState")
+            Log.d(TAG, "uiStateFlow collect: ${articleUIState.javaClass.simpleName}")
             when(articleUIState) {
                 ArticleUIState.INIT -> ActivityCompat.requestPermissions(this@MainActivity, arrayOf(Manifest.permission.INTERNET), 100)
                 is ArticleUIState.Article -> binding.articleView.addArticle(articleUIState.articles)

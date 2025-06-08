@@ -35,7 +35,7 @@ abstract class BasicViewModel<S: UIState, I: UIEvent>: ViewModel() {
     val uiIntentFlow: Flow<I> = _uiIntentFlow.receiveAsFlow()
 
 
-    fun sendUiState(copy: S.() -> S) = _uiStateFlow.update { copy(_uiStateFlow.value) }.apply { Log.d(TAG, "sendUiState: ${_uiStateFlow.value}") }
+    fun sendUiState(copy: S.() -> S) = _uiStateFlow.update { copy(_uiStateFlow.value) }//.apply { Log.d(TAG, "sendUiState: ${_uiStateFlow.value}") }
     fun sendUIIntent(intent: I) = viewModelScope.launch { _uiIntentFlow.send(intent) }
 
     init {

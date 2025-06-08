@@ -1,5 +1,8 @@
 package com.cn.mine.wan.android.repository.article
 
+import com.cn.mine.wan.android.data.entity.ArticleEntity
+import com.cn.mine.wan.android.data.entity.CommonEntity
+import com.cn.mine.wan.android.data.entity.CommonPageEntity
 import com.cn.mine.wan.android.repository.IRepository
 
 
@@ -10,6 +13,6 @@ import com.cn.mine.wan.android.repository.IRepository
  */
 interface ArticleRepository: IRepository {
 
-    suspend fun article()
+    suspend fun article(index: Int, action: (Result<CommonEntity<CommonPageEntity<ArticleEntity>>>) -> Unit)
 
 }

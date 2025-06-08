@@ -29,9 +29,7 @@ class BannerEvent: IEvent<BannerParam, EventResult<CommonEntity<List<BannerEntit
     ) { scope.launch {
         bannerRepository.banner {
             action.invoke(
-                it.takeIf { it.isSuccess }?.let {
-                    EventResult.Success(it.getOrNull())
-                }?: EventResult.Failed(it.exceptionOrNull())
+                it.takeIf { it.isSuccess }?.let { EventResult.Success(it.getOrNull()) }?: EventResult.Failed(it.exceptionOrNull())
             )
         }
     } }

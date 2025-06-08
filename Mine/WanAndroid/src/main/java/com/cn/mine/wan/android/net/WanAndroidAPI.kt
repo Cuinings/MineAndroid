@@ -33,11 +33,7 @@ interface WanAndroidAPI {
     @FormUrlEncoded
     suspend fun register(@Field("username") username: String, @Field("password") password: String, @Field("repassword")  repassword: String): CommonEntity<UserEntity>
 
-    /**
-     * 首页Banner
-     */
-    @GET("/banner/json")
-    suspend fun banner(): CommonEntity<List<BannerEntity>>
+
 
     /**
      * 文章列表

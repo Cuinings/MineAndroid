@@ -1,3 +1,7 @@
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -25,11 +29,21 @@ android {
                 arg("appId", this@defaultConfig.applicationId!!)
             }
         }
+
+        signingConfigs {
+            create("WanAndroid") {
+                keyAlias = "WanAndroid"
+                keyPassword = "WanAndroid"
+                storeFile = file("WanAndroidApp.jks")
+                storePassword = "WanAndroid"
+            }
+        }
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.findByName("WanAndroid")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -50,6 +64,11 @@ android {
     }
     room {
         schemaDirectory("$projectDir/schemas")
+    }
+    applicationVariants.all {
+        outputs.all {
+            (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName = "WanAndroid-App-$name-$versionName.apk"
+        }
     }
 }
 

@@ -1,6 +1,6 @@
 package com.cn.mine.wan.android.events
 
-import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.Flow
 
 /**
  * @Author: CuiNing
@@ -8,5 +8,5 @@ import kotlinx.coroutines.CoroutineScope
  * @Description:
  */
 interface IEvent<in Params, out Result> {
-    fun execute(scope: CoroutineScope, param: Params?, action: (Result) -> Unit)
+    fun execute(param: Params?): Flow<Result>
 }

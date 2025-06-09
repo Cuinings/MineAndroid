@@ -13,6 +13,6 @@ import com.cn.mine.wan.android.repository.IRepository
  */
 interface ArticleRepository: IRepository {
 
-    suspend fun article(index: Int, action: (Result<CommonEntity<CommonPageEntity<ArticleEntity>>>) -> Unit)
+    suspend fun article(index: Int): Result<CommonEntity<CommonPageEntity<ArticleEntity>>>
 
 }

@@ -11,6 +11,6 @@ import com.cn.mine.wan.android.repository.IRepository
  */
 interface BannerRepository: IRepository {
 
-    suspend fun banner(action: (Result<CommonEntity<List<BannerEntity>>?>) -> Unit)
+    suspend fun banner(): Result<CommonEntity<List<BannerEntity>>?>
 
 }

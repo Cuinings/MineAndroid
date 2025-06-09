@@ -10,8 +10,8 @@ import com.cn.mine.wan.android.events.article.ArticleEvent.ArticleParam
 import com.cn.mine.wan.android.repository.article.ArticleRepository
 import com.cn.mine.wan.android.repository.article.impl.ArticleRepositoryImpl
 import com.cn.mine.wan.android.repository.article.source.remote.ArticleDataSource
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 /**
  * @Author: CuiNing
@@ -25,14 +25,9 @@ class ArticleEvent: IEvent<ArticleParam, EventResult<CommonEntity<CommonPageEnti
     private val articleRepository: ArticleRepository = ArticleRepositoryImpl(ArticleDataSource())
 
     override fun execute(
-        scope: CoroutineScope,
         param: ArticleParam?,
-        action: (EventResult<CommonEntity<CommonPageEntity<ArticleEntity>>>) -> Unit
-    ) { scope.launch {
-        articleRepository.article(param?.index?:0) {
-            action.invoke(
-                it.takeIf { it.isSuccess }?.let { EventResult.Success(it.getOrNull()) }?: EventResult.Failed(it.exceptionOrNull())
-            )
-        }
-    } }
+    ): Flow<EventResult<CommonEntity<CommonPageEntity<ArticleEntity>>>> = flow {
+        val result = articleRepository.article(param?.index?:0)
+        emit(result.takeIf { it.isSuccess }?.let { EventResult.Success(it.getOrNull()) }?: EventResult.Failed(result.exceptionOrNull()))
+    }
 }

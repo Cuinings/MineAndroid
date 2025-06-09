@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.cn.library.commom.viewmodel.BasicViewModel
 import com.cn.library.commom.viewmodel.UIEvent
 import com.cn.library.commom.viewmodel.UIState
+import com.cn.library.common.flow.collectByScope
 import com.cn.mine.wan.android.app.page.main.ArticleUIState.Article
 import com.cn.mine.wan.android.app.page.main.ArticleUIState.ArticleFinish
 import com.cn.mine.wan.android.data.entity.ArticleEntity
@@ -33,12 +34,12 @@ class MainActivityViewModel @Inject constructor(): BasicViewModel<MainActivityUI
         Log.d(TAG, "handleEvent: $event")
         when (event) {
             MainActivityUIEvent.GetBanner -> {
-                bannerEvent.execute(viewModelScope, null) {
+                bannerEvent.execute(null).collectByScope(viewModelScope) {
                     Log.d(TAG, "GetBanner execute result: $it")
                 }
             }
             is MainActivityUIEvent.GetArticle -> {
-                articleEvent.execute(viewModelScope, ArticleEvent.ArticleParam(event.page)) {
+                articleEvent.execute(ArticleEvent.ArticleParam(event.page)).collectByScope(viewModelScope) {
                     when(it) {
                         is EventResult.Loading -> {}
                         is EventResult.Success<CommonEntity<CommonPageEntity<ArticleEntity>>> -> {

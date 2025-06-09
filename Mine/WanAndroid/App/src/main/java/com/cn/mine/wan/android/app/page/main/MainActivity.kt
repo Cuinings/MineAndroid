@@ -9,7 +9,7 @@ import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import com.cn.library.common.activity.BasicVBActivity
-import com.cn.library.common.flow.collectByLifecycleScope
+import com.cn.library.common.flow.collectByScope
 import com.cn.library.remote.msg.subscriber.annotation.Subscriber
 import com.cn.mine.wan.android.app.databinding.ActivityMainBinding
 import com.cn.mine.wan.android.app.databinding.ActivityMainBinding.inflate
@@ -23,7 +23,7 @@ class MainActivity  : BasicVBActivity<ActivityMainBinding>({ inflate(it) }) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.uiStateFlow.map { it.articleUIState }.collectByLifecycleScope(lifecycleScope) { articleUIState ->
+        viewModel.uiStateFlow.map { it.articleUIState }.collectByScope (lifecycleScope) { articleUIState ->
             Log.d(TAG, "uiStateFlow collect: ${articleUIState.javaClass.simpleName}")
             when(articleUIState) {
                 ArticleUIState.INIT -> ActivityCompat.requestPermissions(this@MainActivity, arrayOf(Manifest.permission.INTERNET), 100)

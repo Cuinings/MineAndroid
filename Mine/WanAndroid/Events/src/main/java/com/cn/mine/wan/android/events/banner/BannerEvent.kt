@@ -10,6 +10,8 @@ import com.cn.mine.wan.android.repository.banner.BannerRepository
 import com.cn.mine.wan.android.repository.banner.impl.BannerRepositoryImpl
 import com.cn.mine.wan.android.repository.banner.source.remote.BannerDataSource
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 
 /**
@@ -23,14 +25,9 @@ class BannerEvent: IEvent<BannerParam, EventResult<CommonEntity<List<BannerEntit
 
     private val bannerRepository: BannerRepository = BannerRepositoryImpl(BannerDataSource())
     override fun execute(
-        scope: CoroutineScope,
         param: BannerParam?,
-        action: (EventResult<CommonEntity<List<BannerEntity>>>) -> Unit
-    ) { scope.launch {
-        bannerRepository.banner {
-            action.invoke(
-                it.takeIf { it.isSuccess }?.let { EventResult.Success(it.getOrNull()) }?: EventResult.Failed(it.exceptionOrNull())
-            )
-        }
-    } }
+    ): Flow<EventResult<CommonEntity<List<BannerEntity>>>> = flow {
+        val result =  bannerRepository.banner()
+        emit(result.takeIf { it.isSuccess }?.let { EventResult.Success(it.getOrNull()) }?: EventResult.Failed(result.exceptionOrNull()))
+    }
 }

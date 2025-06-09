@@ -8,10 +8,10 @@ import com.cn.library.utils.network.config.NetworkConfig
  * @Time: 2025/6/7 23:33
  * @Description:
  */
-object Repository {
+object RepositoryModule {
 
-    fun Context.initializerRepository() {
-        RepositoryContextExt.context = this@initializerRepository
+    fun Context.initializerRepositoryModule() {
+        RepositoryContextExt.context = this@initializerRepositoryModule
         NetworkConfig.BASE_URL = "https://www.wanandroid.com"
     }
 

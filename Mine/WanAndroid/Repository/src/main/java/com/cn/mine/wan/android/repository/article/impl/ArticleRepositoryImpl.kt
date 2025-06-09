@@ -1,8 +1,11 @@
 package com.cn.mine.wan.android.repository.article.impl
 
+import android.accounts.NetworkErrorException
+import com.cn.library.utils.network.isNetworkAvailable
 import com.cn.mine.wan.android.data.entity.ArticleEntity
 import com.cn.mine.wan.android.data.entity.CommonEntity
 import com.cn.mine.wan.android.data.entity.CommonPageEntity
+import com.cn.mine.wan.android.repository.RepositoryContextExt.context
 import com.cn.mine.wan.android.repository.article.ArticleRepository
 import com.cn.mine.wan.android.repository.article.source.remote.ArticleDataSource
 
@@ -16,16 +19,7 @@ class ArticleRepositoryImpl(
 ): ArticleRepository {
 
     override suspend fun article(index: Int): Result<CommonEntity<CommonPageEntity<ArticleEntity>>> {
-        return articleDataSource.article(index)
-        /*context.isConnected {
-            action.invoke(
-                if (it) {
-                    articleDataSource.article(index)
-                } else {
-                    Result.failure(NetworkErrorException("Network Error"))
-                }
-            )
-        }*/
+        return if (context.isNetworkAvailable()) articleDataSource.article(index) else Result.failure(NetworkErrorException("Network Error"))
     }
 
 }

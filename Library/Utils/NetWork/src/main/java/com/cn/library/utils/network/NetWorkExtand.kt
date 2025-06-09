@@ -17,8 +17,8 @@ import kotlinx.coroutines.flow.callbackFlow
  * @Description:
  */
 @SuppressLint("MissingPermission")
-fun Context.isConnected(): Flow<Boolean> = callbackFlow {
-    ContextCompat.getSystemService(this@isConnected, ConnectivityManager::class.java)?.let { cm ->
+fun Context.isNetworkAvailableFlow(): Flow<Boolean> = callbackFlow {
+    ContextCompat.getSystemService(this@isNetworkAvailableFlow, ConnectivityManager::class.java)?.let { cm ->
         val callback = object: ConnectivityManager.NetworkCallback() {
             override fun onCapabilitiesChanged(network: Network, networkCapabilities: NetworkCapabilities) {
                 trySendBlocking(networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET))
@@ -33,5 +33,10 @@ fun Context.isConnected(): Flow<Boolean> = callbackFlow {
 }
 
 @SuppressLint("MissingPermission")
-suspend fun Context.isConnected(action: suspend (Boolean) -> Unit) = this@isConnected.isConnected().collect { action.invoke(it) }
+suspend fun Context.isNetworkAvailableFlow(action: suspend (Boolean) -> Unit) = this@isNetworkAvailableFlow.isNetworkAvailableFlow().collect { action.invoke(it) }
 
+@SuppressLint("MissingPermission")
+suspend fun Context.isNetworkAvailable(): Boolean {
+    val connectivityManager = ContextCompat.getSystemService(this@isNetworkAvailable, ConnectivityManager::class.java)
+    return connectivityManager?.getNetworkCapabilities(connectivityManager.activeNetwork)?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
+}

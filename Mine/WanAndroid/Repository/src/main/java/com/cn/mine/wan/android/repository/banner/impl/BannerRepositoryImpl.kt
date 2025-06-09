@@ -1,7 +1,10 @@
 package com.cn.mine.wan.android.repository.banner.impl
 
+import android.accounts.NetworkErrorException
+import com.cn.library.utils.network.isNetworkAvailable
 import com.cn.mine.wan.android.data.entity.BannerEntity
 import com.cn.mine.wan.android.data.entity.CommonEntity
+import com.cn.mine.wan.android.repository.RepositoryContextExt.context
 import com.cn.mine.wan.android.repository.banner.BannerRepository
 import com.cn.mine.wan.android.repository.banner.source.remote.BannerDataSource
 
@@ -15,16 +18,7 @@ class BannerRepositoryImpl(
 ): BannerRepository {
 
     override suspend fun banner(): Result<CommonEntity<List<BannerEntity>>?> {
-        return bannerDataSource.banner()
-        /*context.isConnected {
-            action.invoke(
-                if (it) {
-                    bannerDataSource.banner()
-                } else {
-                    Result.failure(NetworkErrorException("Network Error"))
-                }
-            )
-        }*/
+        return if (context.isNetworkAvailable()) bannerDataSource.banner() else Result.failure(NetworkErrorException("Network Error"))
     }
 
 }

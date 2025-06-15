@@ -1,16 +1,17 @@
 package com.cn.mine.wan.android.repository.article.source.remote
 
 import com.cn.library.utils.network.retrofit.RetrofitExt.retrofit
-import com.cn.mine.wan.android.data.entity.ArticleEntity
-import com.cn.mine.wan.android.data.entity.CommonEntity
-import com.cn.mine.wan.android.data.entity.CommonPageEntity
+import com.cn.mine.wan.android.data.wan.android.ArticleEntity
+import com.cn.mine.wan.android.data.wan.android.CommonEntity
+import com.cn.mine.wan.android.data.wan.android.CommonPageEntity
+import javax.inject.Inject
 
 /**
  * @Author: CuiNing
  * @Time: 2025/6/8 9:37
  * @Description:
  */
-class ArticleDataSource {
+class ArticleDataSource @Inject constructor() {
 
     private val articleApiService: ArticleApiService by lazy { retrofit.create(ArticleApiService::class.java) }
 

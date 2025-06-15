@@ -2,7 +2,7 @@ package com.cn.mine.wan.android.app
 
 import android.util.Log
 import com.cn.library.common.application.BasicApplication
-import com.cn.mine.wan.android.repository.RepositoryModule.initializerRepositoryModule
+import com.cn.mine.wan.android.repository.RepositoryInitializer
 import com.tencent.smtt.sdk.QbSdk
 import dagger.hilt.android.HiltAndroidApp
 
@@ -15,7 +15,7 @@ import dagger.hilt.android.HiltAndroidApp
 class WanAndroidApp: BasicApplication() {
 
     override fun initApplication() {
-        this@WanAndroidApp.initializerRepositoryModule()
+        RepositoryInitializer.initializer(this@WanAndroidApp)
         initX5Environment()
         SubscriberCallback()
     }

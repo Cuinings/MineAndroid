@@ -15,8 +15,8 @@ import com.cn.library.common.recyclerview.adapter.binder.QuickDataBindingItemBin
 import com.cn.library.common.recyclerview.adapter.module.LoadMoreModule
 import com.cn.mine.wan.android.app.R
 import com.cn.mine.wan.android.app.databinding.ItemArticleBinding
-import com.cn.mine.wan.android.data.entity.ArticleEntity
-import com.cn.mine.wan.android.data.entity.CommonPageEntity
+import com.cn.mine.wan.android.data.wan.android.ArticleEntity
+import com.cn.mine.wan.android.data.wan.android.CommonPageEntity
 
 class ArticleListView: SwipeRefreshLayout {
 
@@ -31,9 +31,9 @@ class ArticleListView: SwipeRefreshLayout {
 
     constructor(context: Context): this(context, null)
 
-    constructor(context: Context, attrs: AttributeSet?): super(context, attrs) { initArticleView() }
+    constructor(context: Context, attrs: AttributeSet?): super(context, attrs) { initializer() }
 
-    private fun initArticleView() {
+    private fun initializer() {
         addView(RecyclerView(context).apply {
             layoutParams = RecyclerView.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
             layoutManager = LinearLayoutManager(context)
@@ -76,10 +76,14 @@ class ArticleListView: SwipeRefreshLayout {
     inner class ArticleAdapter: BaseBinderAdapter(arrayListOf()), LoadMoreModule
 
     inner class ArticleItem: QuickDataBindingItemBinder<ArticleEntity, ItemArticleBinding>() {
-        override fun onCreateDataBinding(layoutInflater: LayoutInflater, parent: ViewGroup, viewType: Int): ItemArticleBinding = ItemArticleBinding.inflate(layoutInflater, parent, false)
+
+        override fun onCreateDataBinding(layoutInflater: LayoutInflater, parent: ViewGroup, viewType: Int): ItemArticleBinding =
+            ItemArticleBinding.inflate(layoutInflater, parent, false)
+
         override fun convert(holder: BinderDataBindingHolder<ItemArticleBinding>, data: ArticleEntity) {
             holder.dataBinding.article = data
         }
+
     }
 
     interface OnRefreshCallBack {

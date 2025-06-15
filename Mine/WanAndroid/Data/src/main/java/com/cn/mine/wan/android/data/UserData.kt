@@ -1,7 +1,7 @@
 package com.cn.mine.wan.android.data
 
 import com.cn.mine.wan.android.data.UserData.userEntity
-import com.cn.mine.wan.android.data.entity.UserEntity
+import com.cn.mine.wan.android.data.wan.android.UserEntity
 
 
 /**

@@ -2,6 +2,7 @@ package com.cn.mine.wan.android.app.module
 
 import com.cn.mine.wan.android.events.article.ArticleEvent
 import com.cn.mine.wan.android.events.banner.BannerEvent
+import com.cn.mine.wan.android.events.entrance.EntranceEvent
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,6 +17,10 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object EventModule {
+
+    @Singleton
+    @Provides
+    fun providerEntranceEvent(): EntranceEvent = EntranceEvent()
 
     @Singleton
     @Provides

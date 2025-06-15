@@ -10,4 +10,7 @@
     <color name="solid_normal">#FFFFFF</color>
     <color name="transparent">#FFFFFFFF</color>
     <color name="text_step_cc">#CC000000</color>
+    <color name="text_step_focus">#FFFFFF</color>
+
+
 </resources>

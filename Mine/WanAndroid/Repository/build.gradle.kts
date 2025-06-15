@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.room)
+    alias(libs.plugins.google.devtools.ksp)
 }
 
 android {
@@ -30,6 +32,9 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    room {
+        schemaDirectory("$projectDir/schemas")
+    }
 }
 
 dependencies {
@@ -37,6 +42,12 @@ dependencies {
     implementation(project(":Mine:WanAndroid:Data"))
 
     api(project(":Library:Utils:NetWork"))
+
+    implementation(libs.hilt.android)
+
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

@@ -1,12 +1,7 @@
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt)
-    alias(libs.plugins.room)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.google.devtools.ksp)
 }
@@ -62,9 +57,6 @@ android {
         viewBinding = true
         buildConfig = true
     }
-    room {
-        schemaDirectory("$projectDir/schemas")
-    }
     applicationVariants.all {
         outputs.all {
             (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName = "WanAndroid-App-$name-$versionName.apk"
@@ -78,8 +70,7 @@ dependencies {
     implementation(project(":Mine:WanAndroid:Repository"))
     implementation(project(":Mine:WanAndroid:Data"))
 
-    implementation(project(":Library:Common:Activity"))
-//    implementation(libs.common.library.activity)
+    implementation(libs.common.library.activity)
     implementation(project(":Library:Common:ViewModel"))
     implementation(project(":Library:Common:Application"))
     implementation(project(":Library:Common:Popupwindow"))
@@ -109,10 +100,6 @@ dependencies {
     implementation(libs.androidx.swiperefreshlayout)
 
     implementation(libs.androidx.lifecycle.viewmodel)
-
-    implementation(libs.androidx.room.ktx)
-    implementation(libs.androidx.room.runtime)
-    ksp(libs.androidx.room.compiler)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)

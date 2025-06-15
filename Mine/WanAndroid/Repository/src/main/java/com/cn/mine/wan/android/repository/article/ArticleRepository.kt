@@ -1,8 +1,8 @@
 package com.cn.mine.wan.android.repository.article
 
-import com.cn.mine.wan.android.data.entity.ArticleEntity
-import com.cn.mine.wan.android.data.entity.CommonEntity
-import com.cn.mine.wan.android.data.entity.CommonPageEntity
+import com.cn.mine.wan.android.data.wan.android.ArticleEntity
+import com.cn.mine.wan.android.data.wan.android.CommonEntity
+import com.cn.mine.wan.android.data.wan.android.CommonPageEntity
 import com.cn.mine.wan.android.repository.IRepository
 
 

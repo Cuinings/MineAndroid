@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="str_entrance_article_recommendation">文章推荐</string>
+    <string name="str_entrance_harmony">鸿蒙开发</string>
+    <string name="str_entrance_mine">我的</string>
+</resources>

@@ -8,9 +8,9 @@ import com.cn.library.commom.viewmodel.UIState
 import com.cn.library.common.flow.collectByScope
 import com.cn.mine.wan.android.app.page.main.ArticleUIState.Article
 import com.cn.mine.wan.android.app.page.main.ArticleUIState.ArticleFinish
-import com.cn.mine.wan.android.data.entity.ArticleEntity
-import com.cn.mine.wan.android.data.entity.CommonEntity
-import com.cn.mine.wan.android.data.entity.CommonPageEntity
+import com.cn.mine.wan.android.data.wan.android.ArticleEntity
+import com.cn.mine.wan.android.data.wan.android.CommonEntity
+import com.cn.mine.wan.android.data.wan.android.CommonPageEntity
 import com.cn.mine.wan.android.events.EventResult
 import com.cn.mine.wan.android.events.article.ArticleEvent
 import com.cn.mine.wan.android.events.banner.BannerEvent

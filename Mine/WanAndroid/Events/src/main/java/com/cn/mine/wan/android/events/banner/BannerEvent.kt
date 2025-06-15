@@ -1,7 +1,7 @@
 package com.cn.mine.wan.android.events.banner
 
-import com.cn.mine.wan.android.data.entity.BannerEntity
-import com.cn.mine.wan.android.data.entity.CommonEntity
+import com.cn.mine.wan.android.data.wan.android.BannerEntity
+import com.cn.mine.wan.android.data.wan.android.CommonEntity
 import com.cn.mine.wan.android.events.EventParam
 import com.cn.mine.wan.android.events.EventResult
 import com.cn.mine.wan.android.events.IEvent
@@ -9,10 +9,8 @@ import com.cn.mine.wan.android.events.banner.BannerEvent.BannerParam
 import com.cn.mine.wan.android.repository.banner.BannerRepository
 import com.cn.mine.wan.android.repository.banner.impl.BannerRepositoryImpl
 import com.cn.mine.wan.android.repository.banner.source.remote.BannerDataSource
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.launch
 
 /**
  * @Author: CuiNing

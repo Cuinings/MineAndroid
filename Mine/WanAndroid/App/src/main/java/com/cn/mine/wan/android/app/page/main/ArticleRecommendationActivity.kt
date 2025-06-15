@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.map
 
 @AndroidEntryPoint
-class MainActivity  : BasicVBActivity<ActivityMainBinding>({ inflate(it) }) {
+class ArticleRecommendationActivity  : BasicVBActivity<ActivityMainBinding>({ inflate(it) }) {
 
     private val viewModel by viewModels<MainActivityViewModel>()
 
@@ -26,11 +26,11 @@ class MainActivity  : BasicVBActivity<ActivityMainBinding>({ inflate(it) }) {
         viewModel.uiStateFlow.map { it.articleUIState }.collectByScope (lifecycleScope) { articleUIState ->
             Log.d(TAG, "uiStateFlow collect: ${articleUIState.javaClass.simpleName}")
             when(articleUIState) {
-                ArticleUIState.INIT -> ActivityCompat.requestPermissions(this@MainActivity, arrayOf(Manifest.permission.INTERNET), 100)
+                ArticleUIState.INIT -> ActivityCompat.requestPermissions(this@ArticleRecommendationActivity, arrayOf(Manifest.permission.INTERNET), 100)
                 is ArticleUIState.Article -> binding.articleView.addArticle(articleUIState.articles)
                 is ArticleUIState.ArticleFinish -> {
                     binding.articleView.takeIf { it.isRefreshing }?.isRefreshing = false
-                    articleUIState.msg?.takeIf{ it.isNotBlank() }?.let { Toast.makeText(this@MainActivity, it, Toast.LENGTH_SHORT).show() }
+                    articleUIState.msg?.takeIf{ it.isNotBlank() }?.let { Toast.makeText(this@ArticleRecommendationActivity, it, Toast.LENGTH_SHORT).show() }
 
                 }
             }

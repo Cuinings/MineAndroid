@@ -1,18 +1,25 @@
 package com.cn.mine.wan.android.repository
 
-import android.content.Context
-import com.cn.library.utils.network.config.NetworkConfig
+import com.cn.mine.wan.android.repository.article.ArticleRepository
+import com.cn.mine.wan.android.repository.article.impl.ArticleRepositoryImpl
+import com.cn.mine.wan.android.repository.article.source.remote.ArticleDataSource
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 /**
  * @Author: CuiNing
- * @Time: 2025/6/7 23:33
+ * @Time: 2025/6/14 18:07
  * @Description:
  */
+@Module
+@InstallIn(SingletonComponent::class)
 object RepositoryModule {
 
-    fun Context.initializerRepositoryModule() {
-        RepositoryContextExt.context = this@initializerRepositoryModule
-        NetworkConfig.BASE_URL = "https://www.wanandroid.com"
-    }
-
+    @Singleton
+    @Provides
+    fun providerArticleRepository(articleDataSource: ArticleDataSource): ArticleRepository =
+        ArticleRepositoryImpl(articleDataSource)
 }

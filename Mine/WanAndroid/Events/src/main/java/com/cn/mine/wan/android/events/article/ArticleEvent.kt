@@ -1,8 +1,8 @@
 package com.cn.mine.wan.android.events.article
 
-import com.cn.mine.wan.android.data.entity.ArticleEntity
-import com.cn.mine.wan.android.data.entity.CommonEntity
-import com.cn.mine.wan.android.data.entity.CommonPageEntity
+import com.cn.mine.wan.android.data.wan.android.ArticleEntity
+import com.cn.mine.wan.android.data.wan.android.CommonEntity
+import com.cn.mine.wan.android.data.wan.android.CommonPageEntity
 import com.cn.mine.wan.android.events.EventParam
 import com.cn.mine.wan.android.events.EventResult
 import com.cn.mine.wan.android.events.IEvent

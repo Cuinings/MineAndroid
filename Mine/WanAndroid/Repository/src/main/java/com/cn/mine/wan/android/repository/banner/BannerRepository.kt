@@ -1,7 +1,7 @@
 package com.cn.mine.wan.android.repository.banner
 
-import com.cn.mine.wan.android.data.entity.BannerEntity
-import com.cn.mine.wan.android.data.entity.CommonEntity
+import com.cn.mine.wan.android.data.wan.android.BannerEntity
+import com.cn.mine.wan.android.data.wan.android.CommonEntity
 import com.cn.mine.wan.android.repository.IRepository
 
 /**

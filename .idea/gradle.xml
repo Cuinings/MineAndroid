@@ -25,6 +25,7 @@
             <option value="$PROJECT_DIR$/Library/Common/RecyclerView/Adapter" />
             <option value="$PROJECT_DIR$/Library/Common/Service" />
             <option value="$PROJECT_DIR$/Library/Common/ViewModel" />
+            <option value="$PROJECT_DIR$/Library/Common/WebView" />
             <option value="$PROJECT_DIR$/Library/Remote" />
             <option value="$PROJECT_DIR$/Library/Remote/Andlinker" />
             <option value="$PROJECT_DIR$/Library/Remote/Msg" />

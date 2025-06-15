@@ -5,6 +5,7 @@
 
     <com.cn.mine.wan.android.app.page.entrance.EntranceView
         android:id="@+id/entrance"
+        android:focusable="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

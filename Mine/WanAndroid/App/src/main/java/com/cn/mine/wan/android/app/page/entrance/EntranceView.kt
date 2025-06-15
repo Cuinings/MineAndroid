@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cn.library.common.recyclerview.adapter.BaseBinderAdapter
 import com.cn.library.common.recyclerview.adapter.binder.QuickDataBindingItemBinder
+import com.cn.mine.wan.android.app.R
 import com.cn.mine.wan.android.app.databinding.ItemEntranceBinding
 import com.cn.mine.wan.android.entity.EntranceEntity
 
@@ -51,6 +52,10 @@ class EntranceView: RecyclerView {
 
     inner class EntranceItem: QuickDataBindingItemBinder<EntranceEntity, ItemEntranceBinding>() {
 
+        init {
+            addChildClickViewIds(R.id.entranceItem)
+        }
+
         override fun onCreateDataBinding(layoutInflater: LayoutInflater, parent: ViewGroup, viewType: Int): ItemEntranceBinding =
             ItemEntranceBinding.inflate(layoutInflater, parent, false)
 
@@ -60,6 +65,11 @@ class EntranceView: RecyclerView {
 
         override fun onClick(holder: BinderDataBindingHolder<ItemEntranceBinding>, view: View, data: EntranceEntity, position: Int) {
             super.onClick(holder, view, data, position)
+            onClickListener?.onClick(data)
+        }
+
+        override fun onChildClick(holder: BinderDataBindingHolder<ItemEntranceBinding>, view: View, data: EntranceEntity, position: Int) {
+            super.onChildClick(holder, view, data, position)
             onClickListener?.onClick(data)
         }
 

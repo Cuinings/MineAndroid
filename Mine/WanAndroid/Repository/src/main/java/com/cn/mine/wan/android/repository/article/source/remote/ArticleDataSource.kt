@@ -1,9 +1,9 @@
 package com.cn.mine.wan.android.repository.article.source.remote
 
 import com.cn.library.utils.network.retrofit.RetrofitExt.retrofit
-import com.cn.mine.wan.android.data.wan.android.ArticleEntity
-import com.cn.mine.wan.android.data.wan.android.CommonEntity
-import com.cn.mine.wan.android.data.wan.android.CommonPageEntity
+import com.cn.mine.wan.android.entity.ArticleEntity
+import com.cn.mine.wan.android.entity.CommonEntity
+import com.cn.mine.wan.android.entity.CommonPageEntity
 import javax.inject.Inject
 
 /**

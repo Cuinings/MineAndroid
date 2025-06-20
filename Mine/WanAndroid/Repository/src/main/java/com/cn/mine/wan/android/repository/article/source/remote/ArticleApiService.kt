@@ -1,8 +1,8 @@
 package com.cn.mine.wan.android.repository.article.source.remote
 
-import com.cn.mine.wan.android.data.wan.android.ArticleEntity
-import com.cn.mine.wan.android.data.wan.android.CommonEntity
-import com.cn.mine.wan.android.data.wan.android.CommonPageEntity
+import com.cn.mine.wan.android.entity.ArticleEntity
+import com.cn.mine.wan.android.entity.CommonEntity
+import com.cn.mine.wan.android.entity.CommonPageEntity
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

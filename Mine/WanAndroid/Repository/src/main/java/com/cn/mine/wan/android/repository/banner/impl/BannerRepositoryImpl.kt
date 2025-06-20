@@ -2,8 +2,8 @@ package com.cn.mine.wan.android.repository.banner.impl
 
 import android.accounts.NetworkErrorException
 import com.cn.library.utils.network.isNetworkAvailable
-import com.cn.mine.wan.android.data.wan.android.BannerEntity
-import com.cn.mine.wan.android.data.wan.android.CommonEntity
+import com.cn.mine.wan.android.entity.BannerEntity
+import com.cn.mine.wan.android.entity.CommonEntity
 import com.cn.mine.wan.android.repository.RepositoryContextExt.context
 import com.cn.mine.wan.android.repository.banner.BannerRepository
 import com.cn.mine.wan.android.repository.banner.source.remote.BannerDataSource

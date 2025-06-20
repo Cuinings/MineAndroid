@@ -1,8 +1,8 @@
 package com.cn.mine.wan.android.repository.banner.source.remote
 
 import com.cn.library.utils.network.retrofit.RetrofitExt.retrofit
-import com.cn.mine.wan.android.data.wan.android.BannerEntity
-import com.cn.mine.wan.android.data.wan.android.CommonEntity
+import com.cn.mine.wan.android.entity.BannerEntity
+import com.cn.mine.wan.android.entity.CommonEntity
 
 /**
  * @Author: CuiNing

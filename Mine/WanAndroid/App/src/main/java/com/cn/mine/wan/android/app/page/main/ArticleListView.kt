@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -15,8 +16,8 @@ import com.cn.library.common.recyclerview.adapter.binder.QuickDataBindingItemBin
 import com.cn.library.common.recyclerview.adapter.module.LoadMoreModule
 import com.cn.mine.wan.android.app.R
 import com.cn.mine.wan.android.app.databinding.ItemArticleBinding
-import com.cn.mine.wan.android.data.wan.android.ArticleEntity
-import com.cn.mine.wan.android.data.wan.android.CommonPageEntity
+import com.cn.mine.wan.android.entity.ArticleEntity
+import com.cn.mine.wan.android.entity.CommonPageEntity
 
 class ArticleListView: SwipeRefreshLayout {
 
@@ -26,6 +27,7 @@ class ArticleListView: SwipeRefreshLayout {
 
     var onRefreshCallBack: OnRefreshCallBack? = null
     var onLoadMoreCallBack: OnLoadMoreCallBack? = null
+    var onArticleClickListener: OnArticleClickListener? = null
 
     private var mAdapter = ArticleAdapter()
 
@@ -84,6 +86,20 @@ class ArticleListView: SwipeRefreshLayout {
             holder.dataBinding.article = data
         }
 
+        override fun onClick(
+            holder: BinderDataBindingHolder<ItemArticleBinding>,
+            view: View,
+            data: ArticleEntity,
+            position: Int
+        ) {
+            super.onClick(holder, view, data, position)
+            onArticleClickListener?.onClick(data)
+        }
+
+    }
+
+    interface OnArticleClickListener {
+        fun onClick(item: com.cn.mine.wan.android.entity.ArticleEntity)
     }
 
     interface OnRefreshCallBack {

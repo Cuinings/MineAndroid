@@ -39,8 +39,6 @@ android {
 
 dependencies {
 
-    implementation(project(":Mine:WanAndroid:Data"))
-
     api(project(":Library:Utils:NetWork"))
 
     implementation(libs.hilt.android)

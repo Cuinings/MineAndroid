@@ -23,6 +23,8 @@
             android:name=".page.main.ArticleRecommendationActivity"
             android:exported="true">
         </activity>
+        <activity android:name=".page.h5.H5Activity"
+            android:exported="true"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET"
         tools:ignore="ManifestOrder" />

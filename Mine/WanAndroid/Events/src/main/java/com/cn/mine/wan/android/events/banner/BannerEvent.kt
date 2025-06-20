@@ -1,7 +1,7 @@
 package com.cn.mine.wan.android.events.banner
 
-import com.cn.mine.wan.android.data.wan.android.BannerEntity
-import com.cn.mine.wan.android.data.wan.android.CommonEntity
+import com.cn.mine.wan.android.entity.BannerEntity
+import com.cn.mine.wan.android.entity.CommonEntity
 import com.cn.mine.wan.android.events.EventParam
 import com.cn.mine.wan.android.events.EventResult
 import com.cn.mine.wan.android.events.IEvent

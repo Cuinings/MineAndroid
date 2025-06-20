@@ -1,7 +1,7 @@
 package com.cn.mine.wan.android.repository.banner.source.remote
 
-import com.cn.mine.wan.android.data.wan.android.BannerEntity
-import com.cn.mine.wan.android.data.wan.android.CommonEntity
+import com.cn.mine.wan.android.entity.BannerEntity
+import com.cn.mine.wan.android.entity.CommonEntity
 import retrofit2.Response
 import retrofit2.http.GET
 

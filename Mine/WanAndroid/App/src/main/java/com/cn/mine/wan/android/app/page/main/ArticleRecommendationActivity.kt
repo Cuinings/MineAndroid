@@ -1,6 +1,7 @@
 package com.cn.mine.wan.android.app.page.main
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,8 @@ import com.cn.library.common.flow.collectByScope
 import com.cn.library.remote.msg.subscriber.annotation.Subscriber
 import com.cn.mine.wan.android.app.databinding.ActivityMainBinding
 import com.cn.mine.wan.android.app.databinding.ActivityMainBinding.inflate
+import com.cn.mine.wan.android.app.page.h5.H5Activity
+import com.cn.mine.wan.android.entity.ArticleEntity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.map
 
@@ -44,6 +47,11 @@ class ArticleRecommendationActivity  : BasicVBActivity<ActivityMainBinding>({ in
             onLoadMoreCallBack = object : ArticleListView.OnLoadMoreCallBack {
                 override fun onLoadMore(pageNum: Int) {
                     viewModel.sendUIIntent(MainActivityUIEvent.GetArticle(pageNum))
+                }
+            }
+            onArticleClickListener = object: ArticleListView.OnArticleClickListener {
+                override fun onClick(item: ArticleEntity) {
+                    startActivity(Intent(this@ArticleRecommendationActivity, H5Activity::class.java).apply { putExtra("url", item.link) })
                 }
             }
         }

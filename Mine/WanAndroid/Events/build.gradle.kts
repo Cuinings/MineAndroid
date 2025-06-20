@@ -34,7 +34,6 @@ android {
 
 dependencies {
 
-    api(project(":Mine:WanAndroid:Data"))
     api(project(":Mine:WanAndroid:Repository"))
 
     implementation(project(":Library:Common:Flow"))

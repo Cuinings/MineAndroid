@@ -19,6 +19,7 @@
       <module name="MineAndroid.Mine.WanAndroid-Bean" target="21" />
       <module name="MineAndroid.Mine.Wanandroid-compose" target="21" />
       <module name="MineAndroid.Mine.WanAndroid-Data" target="21" />
+      <module name="MineAndroid.Mine.WanAndroid.Data" target="21" />
       <module name="MineAndroid.Mine.WanAndroid.NetWorkRequest" target="21" />
       <module name="MineAndroid.Mine.WanAndroid.Respository" target="21" />
     </bytecodeTargetLevel>

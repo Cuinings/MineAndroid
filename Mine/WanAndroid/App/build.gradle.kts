@@ -68,7 +68,6 @@ dependencies {
 
     implementation(project(":Mine:WanAndroid:Events"))
     implementation(project(":Mine:WanAndroid:Repository"))
-    implementation(project(":Mine:WanAndroid:Data"))
 
     implementation(libs.common.library.activity)
     implementation(project(":Library:Common:ViewModel"))
@@ -78,6 +77,7 @@ dependencies {
     implementation(project(":Library:Common:Color"))
     implementation(project(":Library:Common:RecyclerView:Adapter"))
     implementation(project(":Library:Common:Flow"))
+    implementation(project(":Library:Common:WebView"))
 
     implementation(project(":Library:Utils:Debounce"))
     implementation(project(":Library:Utils:Throttle"))

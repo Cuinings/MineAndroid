@@ -2,9 +2,9 @@ package com.cn.mine.wan.android.repository.article.impl
 
 import android.accounts.NetworkErrorException
 import com.cn.library.utils.network.isNetworkAvailable
-import com.cn.mine.wan.android.data.wan.android.ArticleEntity
-import com.cn.mine.wan.android.data.wan.android.CommonEntity
-import com.cn.mine.wan.android.data.wan.android.CommonPageEntity
+import com.cn.mine.wan.android.entity.ArticleEntity
+import com.cn.mine.wan.android.entity.CommonEntity
+import com.cn.mine.wan.android.entity.CommonPageEntity
 import com.cn.mine.wan.android.repository.RepositoryContextExt.context
 import com.cn.mine.wan.android.repository.article.ArticleRepository
 import com.cn.mine.wan.android.repository.article.source.remote.ArticleDataSource

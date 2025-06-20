@@ -42,7 +42,6 @@ include(":Sample:Design-Model")
 include(":Mine:WanAndroid:App")
 include(":Mine:WanAndroid:Events")
 include(":Mine:WanAndroid:Repository")
-include(":Mine:WanAndroid:Data")
 include(":Mine:WanAndroid:Overlay")
 
 include(":Library:Remote:Andlinker")

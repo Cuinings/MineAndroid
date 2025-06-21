@@ -33,8 +33,13 @@ class CnWebView: WebView {
                 view: WebView?,
                 request: WebResourceRequest?
             ): Boolean {
+                val url = request?.url?.toString()?:""
+                if (url.startsWith("http://") || url.startsWith("https://"))
+                    return false
                 return super.shouldOverrideUrlLoading(view, request)
             }
+
+
         }
     }
 }

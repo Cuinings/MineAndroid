@@ -14,7 +14,11 @@ import androidx.annotation.FloatRange
 import androidx.core.graphics.PathParser
 import androidx.core.graphics.toColorInt
 import androidx.core.graphics.withSave
-
+/**
+ * @Author: CuiNing
+ * @Time: 2025/8/12 15:12
+ * @Description:
+ */
 class MicEnergyView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,

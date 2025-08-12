@@ -4,6 +4,18 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/build-logic" name="build-logic">
+                <projects>
+                  <project path="$PROJECT_DIR$/build-logic" />
+                  <project path="$PROJECT_DIR$/build-logic/convention" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
         <option name="testRunner" value="CHOOSE_PER_TEST" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleJvm" value="jbr-21" />
@@ -20,6 +32,8 @@
             <option value="$PROJECT_DIR$/Library/Common/Drawable/DSL" />
             <option value="$PROJECT_DIR$/Library/Common/EditText" />
             <option value="$PROJECT_DIR$/Library/Common/Flow" />
+            <option value="$PROJECT_DIR$/Library/Common/Fragment" />
+            <option value="$PROJECT_DIR$/Library/Common/MicEnergyView" />
             <option value="$PROJECT_DIR$/Library/Common/Popupwindow" />
             <option value="$PROJECT_DIR$/Library/Common/RecyclerView" />
             <option value="$PROJECT_DIR$/Library/Common/RecyclerView/Adapter" />
@@ -42,16 +56,10 @@
             <option value="$PROJECT_DIR$/Library/Utils/IP" />
             <option value="$PROJECT_DIR$/Library/Utils/NetWork" />
             <option value="$PROJECT_DIR$/Library/Utils/Throttle" />
-            <option value="$PROJECT_DIR$/Mine" />
-            <option value="$PROJECT_DIR$/Mine/WanAndroid" />
-            <option value="$PROJECT_DIR$/Mine/WanAndroid/App" />
-            <option value="$PROJECT_DIR$/Mine/WanAndroid/Events" />
-            <option value="$PROJECT_DIR$/Mine/WanAndroid/Overlay" />
-            <option value="$PROJECT_DIR$/Mine/WanAndroid/Repository" />
             <option value="$PROJECT_DIR$/Sample" />
-            <option value="$PROJECT_DIR$/Sample/Design-Model" />
-            <option value="$PROJECT_DIR$/Sample/Hilt" />
             <option value="$PROJECT_DIR$/Sample/Test" />
+            <option value="$PROJECT_DIR$/build-logic" />
+            <option value="$PROJECT_DIR$/build-logic/convention" />
           </set>
         </option>
       </GradleProjectSettings>

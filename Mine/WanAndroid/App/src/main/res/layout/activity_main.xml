@@ -9,6 +9,7 @@
     <com.cn.mine.wan.android.app.page.main.ArticleListView
         android:id="@+id/articleView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

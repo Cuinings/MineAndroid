@@ -2,6 +2,8 @@ package com.cn.mine.wan.android.app.page.entrance
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.KeyEvent
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.cn.library.common.activity.BasicVBActivity
@@ -43,6 +45,11 @@ class EntranceActivity : BasicVBActivity<ActivityEntranceBinding>({ inflate(it) 
                 }
             }
         }
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        Log.d(TAG, "onKeyDown: keyCode:$keyCode, ${event?.action}")
+        return super.onKeyDown(keyCode, event)
     }
 
 }

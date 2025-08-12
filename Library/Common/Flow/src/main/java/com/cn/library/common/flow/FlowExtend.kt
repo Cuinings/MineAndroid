@@ -4,6 +4,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.LifecycleCoroutineScope
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.launch
@@ -27,6 +28,14 @@ fun <T> Flow<T>.flowOnLifecycle(
     }
     close()
 }
+fun <T> T.delayByScope(
+    coroutineScope: CoroutineScope,
+    delay: Long,
+    action: suspend (T) -> Unit
+) = coroutineScope.launch {
+    delay(delay)
+    action.invoke(this@delayByScope)
+}
 
 /**
  * 下游
@@ -35,8 +44,3 @@ fun <T> Flow<T>.collectByScope(
     coroutineScope: CoroutineScope,
     action: suspend (T) -> Unit
 ) = coroutineScope.launch { collect { action.invoke(it) } }
-
-fun <T> Flow<T>.collectByLifecycleScope(
-    lifecycleScope: LifecycleCoroutineScope,
-    action: suspend (T) -> Unit
-) = collectByScope(lifecycleScope, action)

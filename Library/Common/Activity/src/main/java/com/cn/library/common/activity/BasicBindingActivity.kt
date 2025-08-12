@@ -12,7 +12,7 @@ import androidx.viewbinding.ViewBinding
  * @Time: 2024/11/22 15:48
  * @Description:
  */
-abstract class BasicVBActivity<VB: ViewBinding>(private val block: (LayoutInflater) -> VB): BasicActivity() {
+abstract class BasicBindingActivity<VB: ViewBinding>(private val block: (LayoutInflater) -> VB): BasicActivity() {
 
     private var _binding: VB? = null
 

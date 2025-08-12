@@ -6,17 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/str_test_"/>
 
-    <!--<com.cn.sample.test.expand.ExpandList
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/micEnergyLayout"
+        android:layout_width="@dimen/dp24"
+        android:layout_height="@dimen/dp24"
+        android:focusable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <com.cn.sample.test.Mic
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>-->
+        <com.cn.library.common.mic.energy.view.MicEnergyView
+            android:id="@+id/micEnergy"
+            android:layout_width="@dimen/dp24"
+            android:layout_height="@dimen/dp24"
+            android:duplicateParentState="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

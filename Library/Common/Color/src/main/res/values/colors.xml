@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="blue_normal">#1A9AEB</color>
-    <color name="blue_pressed">#0B82CD</color>
-
-    <color name="height_light">#39AEF7</color>
-
+    <!--light-->
+    <color name="light">#1A9AEB</color>
+    <color name="light_6">#FF1A9AEB</color>
+    <color name="light_7">#FF0B82CD</color>
+    <color name="light_background">#7FC1EAFF</color>
+    <color name="light_start_focus_start">#FF35A5EB</color>
+    <color name="light_end_focus_start">#FF21B9D1</color>
+    <!--滚动条scrollbar-->
+    <color name="scrollbar">#66939393</color>
+    <!--页面指示器颜色-->
+    <color name="indicator_background">#66FFFFFF</color>
+    <color name="indicator">#FFFFFF</color>
     <!--描邊色-->
     <color name="stroke_normal">#66939393</color>
     <color name="solid_normal">#FFFFFF</color>
     <color name="transparent">#FFFFFFFF</color>
     <color name="text_step_cc">#CC000000</color>
+    <color name="text_step_66">#66000000</color>
+    <color name="text_step_99">#99000000</color>
     <color name="text_step_focus">#FFFFFF</color>
 
 

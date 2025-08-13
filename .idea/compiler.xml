@@ -21,12 +21,8 @@
       <module name="MineAndroid.Mine.Wanandroid-Compose.App" target="21" />
       <module name="MineAndroid.Mine.Wanandroid-Compose.core.data" target="21" />
       <module name="MineAndroid.Mine.WanAndroid-Data" target="21" />
-      <module name="MineAndroid.Mine.WanAndroid.App" target="21" />
       <module name="MineAndroid.Mine.WanAndroid.Data" target="21" />
-      <module name="MineAndroid.Mine.WanAndroid.Events" target="21" />
       <module name="MineAndroid.Mine.WanAndroid.NetWorkRequest" target="21" />
-      <module name="MineAndroid.Mine.WanAndroid.Overlay" target="21" />
-      <module name="MineAndroid.Mine.WanAndroid.Repository" target="21" />
       <module name="MineAndroid.Mine.WanAndroid.Respository" target="21" />
       <module name="MineAndroid.Sample.Design-Model" target="21" />
       <module name="MineAndroid.Sample.Hilt" target="21" />

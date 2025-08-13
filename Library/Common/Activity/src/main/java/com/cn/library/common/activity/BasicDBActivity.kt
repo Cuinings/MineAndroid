@@ -29,7 +29,10 @@ abstract class BasicDBActivity<DB: ViewDataBinding>(
                 insets
             }
         }
+        onBindLayout()
     }
+
+    abstract fun onBindLayout()
 
     override fun onDestroy() {
         _binding = null

@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/text_register"
-        android:textSize="@dimen/sp30"
+        android:textSize="@dimen/sp13"
         android:layout_marginTop="@dimen/dp30"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"

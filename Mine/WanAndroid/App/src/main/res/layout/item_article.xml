@@ -19,7 +19,7 @@
             android:layout_marginStart="@dimen/dp12"
             android:layout_marginEnd="@dimen/dp12"
             android:textStyle="bold"
-            android:textSize="@dimen/sp16"
+            android:textSize="@dimen/sp13"
             android:text="@{article.title}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>

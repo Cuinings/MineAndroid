@@ -4,9 +4,9 @@ import kotlinx.coroutines.flow.Flow
 
 /**
  * @Author: CuiNing
- * @Time: 2025/8/13 13:12
+ * @Time: 2025/6/7 20:03
  * @Description:
  */
-interface IEvent<out Result> {
-    fun execute(): Flow<Result>
+interface IEventWithParam<in Params, out Result> {
+    fun execute(param: Params): Flow<Result>
 }

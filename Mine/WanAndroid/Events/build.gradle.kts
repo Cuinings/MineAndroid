@@ -38,6 +38,8 @@ dependencies {
 
     implementation(project(":Library:Common:Flow"))
 
+    implementation(libs.hilt.android)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

@@ -12,6 +12,8 @@ import com.cn.mine.wan.android.repository.entrance.EntranceRepository
  */
 class EntranceRepositoryImpl: EntranceRepository {
     override suspend fun entrance(): Result<MutableList<EntranceEntity>> = Result.success(arrayListOf<EntranceEntity>().apply {
+        add(EntranceEntity(name = R.string.str_entrance_Login, type = EntranceType.LOGIN))
+        add(EntranceEntity(name = R.string.str_entrance_Logout, type = EntranceType.LOGOUT))
         add(EntranceEntity(name = R.string.str_entrance_article_recommendation, type = EntranceType.ARTICLE_RECOMMENDATION))
         add(EntranceEntity(name = R.string.str_entrance_harmony, type = EntranceType.HARMONY))
         add(EntranceEntity(name = R.string.str_entrance_mine, type = EntranceType.MINE))

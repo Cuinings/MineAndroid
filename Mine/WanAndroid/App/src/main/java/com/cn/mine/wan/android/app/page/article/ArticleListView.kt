@@ -1,4 +1,4 @@
-package com.cn.mine.wan.android.app.page.main
+package com.cn.mine.wan.android.app.page.article
 
 import android.content.Context
 import android.util.AttributeSet

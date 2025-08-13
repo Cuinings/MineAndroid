@@ -16,4 +16,10 @@ fun <T> CommonEntity<T>.result(success: (T) -> Unit, finishAction: (String) -> U
     finishAction.invoke(errorMsg)
 }
 
+fun <T> CommonEntity<T>.bLogin(login: (T) -> Unit, finishAction: (String) -> Unit) {
+    if (errorCode == -1001) login.invoke(data)
+    finishAction.invoke(errorMsg)
+}
+
+
 

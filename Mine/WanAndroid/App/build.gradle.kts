@@ -69,7 +69,8 @@ dependencies {
     implementation(project(":Mine:WanAndroid:Events"))
     implementation(project(":Mine:WanAndroid:Repository"))
 
-    implementation(libs.common.library.activity)
+//    implementation(libs.common.library.activity)
+    implementation(project(":Library:Common:Activity"))
     implementation(project(":Library:Common:ViewModel"))
     implementation(project(":Library:Common:Application"))
     implementation(project(":Library:Common:Popupwindow"))
@@ -83,12 +84,11 @@ dependencies {
     implementation(project(":Library:Utils:Throttle"))
     implementation(project(":Library:Utils:NetWork"))
 
-    implementation(project(":Library:Remote:Msg:Router:Client"))
 
-    implementation(project(":Library:Remote:Msg:Router:Client"))
-    implementation(project(":Library:Remote:Msg:Router:Service"))
-    implementation(project(":Library:Remote:Msg:Subscriber:Annotation"))
-    kapt(project(":Library:Remote:Msg:Subscriber:Processor"))
+//    implementation(project(":Library:Remote:Msg:Router:Client"))
+//    implementation(project(":Library:Remote:Msg:Router:Service"))
+//    implementation(project(":Library:Remote:Msg:Subscriber:Annotation"))
+//    kapt(project(":Library:Remote:Msg:Subscriber:Processor"))
 
     implementation(libs.tencent.tbs.sdk)
 

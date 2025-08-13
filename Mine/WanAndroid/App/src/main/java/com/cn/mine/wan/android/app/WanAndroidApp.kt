@@ -2,9 +2,10 @@ package com.cn.mine.wan.android.app
 
 import android.util.Log
 import com.cn.library.common.application.BasicApplication
-import com.cn.mine.wan.android.repository.RepositoryInitializer
+import com.cn.mine.wan.android.repository.RepositoryModule
 import com.tencent.smtt.sdk.QbSdk
 import dagger.hilt.android.HiltAndroidApp
+import javax.inject.Inject
 
 /**
  * @Author: CuiNing
@@ -14,10 +15,11 @@ import dagger.hilt.android.HiltAndroidApp
 @HiltAndroidApp
 class WanAndroidApp: BasicApplication() {
 
+    @Inject lateinit var repository: RepositoryModule
+
     override fun initApplication() {
-        RepositoryInitializer.initializer(this@WanAndroidApp)
+        repository.initializer(this@WanAndroidApp)
         initX5Environment()
-        SubscriberCallback()
     }
 
     /**

@@ -4,12 +4,11 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".page.main.ArticleRecommendationActivity">
+    tools:context=".page.article.ArticleRecommendationActivity">
 
-    <com.cn.mine.wan.android.app.page.main.ArticleListView
+    <com.cn.mine.wan.android.app.page.article.ArticleListView
         android:id="@+id/articleView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"/>
+        android:layout_height="match_parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

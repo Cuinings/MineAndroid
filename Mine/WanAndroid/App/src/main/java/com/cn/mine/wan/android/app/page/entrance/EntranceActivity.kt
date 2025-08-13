@@ -10,7 +10,8 @@ import com.cn.library.common.activity.BasicVBActivity
 import com.cn.library.common.flow.collectByScope
 import com.cn.mine.wan.android.app.databinding.ActivityEntranceBinding
 import com.cn.mine.wan.android.app.databinding.ActivityEntranceBinding.inflate
-import com.cn.mine.wan.android.app.page.main.ArticleRecommendationActivity
+import com.cn.mine.wan.android.app.page.login.LoginActivity
+import com.cn.mine.wan.android.app.page.article.ArticleRecommendationActivity
 import com.cn.mine.wan.android.entity.EntranceEntity
 import com.cn.mine.wan.android.entity.EntranceType
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,6 +30,7 @@ class EntranceActivity : BasicVBActivity<ActivityEntranceBinding>({ inflate(it) 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.uiStateFlow.map { it.entranceUIState }.collectByScope(lifecycleScope) {
+            Log.i(TAG, "uiStateFlow: $it")
             when(it) {
                 EntranceUIState.INIT -> viewModel.sendUIIntent(EntranceActivityUIEvent.LoadEntrance)
                 is EntranceUIState.Entrance -> { binding.entrance.data = it.entrances }
@@ -40,6 +42,8 @@ class EntranceActivity : BasicVBActivity<ActivityEntranceBinding>({ inflate(it) 
                     EntranceType.ARTICLE_RECOMMENDATION -> ArticleRecommendationActivity::class.java
                     EntranceType.HARMONY -> ArticleRecommendationActivity::class.java
                     EntranceType.MINE -> ArticleRecommendationActivity::class.java
+                    EntranceType.LOGIN -> LoginActivity::class.java
+                    EntranceType.LOGOUT -> ArticleRecommendationActivity::class.java
                 }.let {
                     startActivity(Intent(this@EntranceActivity, it))
                 }

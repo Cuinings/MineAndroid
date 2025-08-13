@@ -3,6 +3,7 @@ package com.cn.mine.wan.android.app.page.entrance
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,6 +47,7 @@ class EntranceView: RecyclerView {
         set(value) {
             field = value
             mAdapter.setList(field)
+            Log.i(EntranceView::class.simpleName, "data: $field")
         }
 
     inner class EntranceAdapter: BaseBinderAdapter(arrayListOf())
@@ -61,6 +63,7 @@ class EntranceView: RecyclerView {
 
         override fun convert(holder: BinderDataBindingHolder<ItemEntranceBinding>, data: EntranceEntity) {
             holder.dataBinding.entrance = data
+            Log.i(EntranceView::class.simpleName, "convert: $data")
         }
 
         override fun onClick(holder: BinderDataBindingHolder<ItemEntranceBinding>, view: View, data: EntranceEntity, position: Int) {

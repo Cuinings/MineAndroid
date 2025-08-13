@@ -8,12 +8,14 @@ import androidx.annotation.StringRes
  * @Description:
  */
 data class EntranceEntity(
-    @StringRes val name: Int,
-    val type: EntranceType
+    @StringRes val name: Int = 0,
+    val type: EntranceType = EntranceType.ARTICLE_RECOMMENDATION
 )
 
 enum class EntranceType {
     ARTICLE_RECOMMENDATION,
     HARMONY,
     MINE,
+    LOGIN,
+    LOGOUT,
 }

@@ -2,7 +2,7 @@ package com.cn.mine.wan.android.room
 
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.cn.mine.wan.android.repository.RepositoryContextExt.context
+import com.cn.mine.wan.android.repository.RepositoryExt.context
 
 /**
  * @Author: CuiNing

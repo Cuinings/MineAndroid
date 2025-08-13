@@ -1,4 +1,4 @@
-package com.cn.mine.wan.android.app.page.main
+package com.cn.mine.wan.android.app.page.article
 
 import android.Manifest
 import android.content.Intent
@@ -11,7 +11,6 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import com.cn.library.common.activity.BasicVBActivity
 import com.cn.library.common.flow.collectByScope
-import com.cn.library.remote.msg.subscriber.annotation.Subscriber
 import com.cn.mine.wan.android.app.databinding.ActivityMainBinding
 import com.cn.mine.wan.android.app.databinding.ActivityMainBinding.inflate
 import com.cn.mine.wan.android.app.page.h5.H5Activity
@@ -65,8 +64,5 @@ class ArticleRecommendationActivity  : BasicVBActivity<ActivityMainBinding>({ in
             viewModel.sendUIIntent(MainActivityUIEvent.GetArticle(0))
         }
     }
-
-    @Subscriber("Test")
-    fun subscriber() {}
 
 }

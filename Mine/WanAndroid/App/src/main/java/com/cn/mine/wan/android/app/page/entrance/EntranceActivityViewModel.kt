@@ -29,7 +29,7 @@ class EntranceActivityViewModel @Inject constructor(): BasicViewModel<EntranceAc
 
     override fun handleEvent(event: EntranceActivityUIEvent) {
         when (event) {
-            EntranceActivityUIEvent.LoadEntrance -> entranceEvent.execute(null).collectByScope(viewModelScope) {
+            EntranceActivityUIEvent.LoadEntrance -> entranceEvent.execute().collectByScope(viewModelScope) {
                 when(it) {
                     is EventResult.Success<MutableList<EntranceEntity>> -> sendUiState { copy(entranceUIState = EntranceUIState.Entrance(it.result?:arrayListOf())) }
                     else -> {}

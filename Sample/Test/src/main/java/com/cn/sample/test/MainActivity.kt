@@ -6,13 +6,13 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.graphics.drawable.toDrawable
 import androidx.lifecycle.lifecycleScope
-import com.cn.library.common.activity.BasicBindingActivity
+import com.cn.library.common.activity.BasicVBActivity
 import com.cn.sample.test.databinding.ActivityMainBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Locale
 
-class MainActivity : BasicBindingActivity<ActivityMainBinding>({ ActivityMainBinding.inflate(it) }) {
+class MainActivity : BasicVBActivity<ActivityMainBinding>({ ActivityMainBinding.inflate(it) }) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

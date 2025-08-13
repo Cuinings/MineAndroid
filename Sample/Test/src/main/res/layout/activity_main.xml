@@ -29,4 +29,10 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <com.cn.sample.test.HeartBeatView
+        android:layout_width="@dimen/dp24"
+        android:layout_height="@dimen/dp24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

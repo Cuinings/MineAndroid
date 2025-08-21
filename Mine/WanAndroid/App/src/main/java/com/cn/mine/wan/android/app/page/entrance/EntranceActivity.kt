@@ -29,8 +29,8 @@ class EntranceActivity : BasicVBActivity<ActivityEntranceBinding>({ inflate(it) 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.uiStateFlow.map { it.entranceUIState }.collectByScope(lifecycleScope) {
-            Log.i(TAG, "uiStateFlow: $it")
+        viewModel.uiState.map { it.entranceUIState }.collectByScope(lifecycleScope) {
+            Log.i(TAG, "uiState: $it")
             when(it) {
                 EntranceUIState.INIT -> viewModel.sendUIIntent(EntranceActivityUIEvent.LoadEntrance)
                 is EntranceUIState.Entrance -> { binding.entrance.data = it.entrances }

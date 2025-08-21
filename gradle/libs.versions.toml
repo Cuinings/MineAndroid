@@ -77,6 +77,7 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version = "1.1.0" }
 androidx-vectordrawable = { group = "androidx.vectordrawable", name = "vectordrawable", version = "1.1.0" }
 androidx-vectordrawable-animated = { group = "androidx.vectordrawable", name = "vectordrawable-animated", version = "1.1.0" }
+androidx-palette = { group = "androidx.palette", name = "palette-ktx", version = "1.0.0" }
 
 androidx-startup = { group = "androidx.startup", name = "startup-runtime", version.ref = "startup" }
 

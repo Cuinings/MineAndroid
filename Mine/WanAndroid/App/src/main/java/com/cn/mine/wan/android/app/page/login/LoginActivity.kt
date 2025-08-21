@@ -5,7 +5,6 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.cn.library.common.activity.BasicDBActivity
-import com.cn.library.common.activity.BasicVBActivity
 import com.cn.library.common.flow.collectByScope
 import com.cn.mine.wan.android.app.databinding.ActivityLoginBinding
 import com.cn.mine.wan.android.app.databinding.ActivityLoginBinding.inflate
@@ -23,7 +22,7 @@ class LoginActivity: BasicDBActivity<ActivityLoginBinding>({ inflate(it) })  {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.uiStateFlow.collectByScope(lifecycleScope) {
+        viewModel.uiState.collectByScope(lifecycleScope) {
             when(it) {
                 LoginActivityState.Init -> {
 //                    binding.username.setText("Cuining@1015597172")

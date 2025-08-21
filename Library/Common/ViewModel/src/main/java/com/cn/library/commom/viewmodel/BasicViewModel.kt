@@ -4,14 +4,15 @@ import android.util.Log
 import androidx.annotation.Keep
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -30,19 +31,22 @@ abstract class BasicViewModel<S: UIState, E: UIEvent>: ViewModel() {
         lateinit var TAG: String
     }
 
-    private val _uiStateFlow = MutableStateFlow(this.initUIState())
-    private val _uiIntentFlow = Channel<E>()
+    private val _uiIntent = Channel<E>()
+    private val _uiState = MutableStateFlow(this.initUIState())
 
-    val uiStateFlow: SharedFlow<S> = _uiStateFlow.asStateFlow()
-    val uiIntentFlow: Flow<E> = _uiIntentFlow.receiveAsFlow()
+    val uiState: SharedFlow<S> = _uiState.asStateFlow()
 
-
-    fun sendUiState(copy: S.() -> S) = _uiStateFlow.update { copy(_uiStateFlow.value.copy()) }
-    fun sendUIIntent(intent: E) = viewModelScope.launch { _uiIntentFlow.send(intent) }
+    fun sendUIIntent(intent: E) = viewModelScope.launch { _uiIntent.send(intent) }
+    fun sendUiState(copy: S.() -> S) {
+        _uiState.update { copy(_uiState.value) }
+    }
+    fun sendState(action: (MutableStateFlow<S>) -> Unit) {
+        action.invoke(_uiState)
+    }
 
     init {
         TAG = javaClass.simpleName
-        viewModelScope.launch { _uiIntentFlow.receiveAsFlow().collect { handleEvent(it) } }
+        viewModelScope.launch { _uiIntent.receiveAsFlow().collect { handleEvent(it) } }
     }
 
     /**
@@ -55,5 +59,19 @@ abstract class BasicViewModel<S: UIState, E: UIEvent>: ViewModel() {
      */
     abstract fun handleEvent(event: E)
 
-
 }
+
+/*
+class CustomMutableStateFlow<T> (
+    initialValue: T,
+    private val areEqual: (old: T, new: T) -> Boolean
+): MutableStateFlow<T> {
+    private val _state = MutableStateFlow<T>(initialValue)
+    override var value: T
+        get() = _state.value
+        set(value) {
+            if (areEqual(_state.value, value)) {
+                _state.value = value
+            }
+        }
+}*/

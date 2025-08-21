@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
+        android:name=".TestApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,14 +17,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".expand.one.ExpandOneActivity"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".expand.two.ExpandTwoActivity"
-            android:exported="true">
-        </activity>
+        <receiver android:name=".wallpaper.receiver.WallpaperChangeReceiver"
+            android:enabled="true"
+            android:exported="false"/>
     </application>
+    <uses-permission android:name="android.permission.SET_WALLPAPER"/>
+    <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS"/>
+    <uses-permission android:name="android.permission.BIND_WALLPAPER"/>
+    <uses-permission android:name="android.permission.MANAGE_DEVICE_POLICY_WALLPAPER"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 </manifest>

@@ -26,10 +26,6 @@
       <module name="MineAndroid.Mine.WanAndroid.Respository" target="21" />
       <module name="MineAndroid.Sample.Design-Model" target="21" />
       <module name="MineAndroid.Sample.Hilt" target="21" />
-      <module name="MineAndroid.TP.Launcher" target="21" />
-      <module name="MineAndroid.TP.Launcher.Event" target="21" />
-      <module name="MineAndroid.TP.Launcher.Model" target="21" />
-      <module name="MineAndroid.TP.Launcher.Repository" target="21" />
     </bytecodeTargetLevel>
   </component>
 </project>

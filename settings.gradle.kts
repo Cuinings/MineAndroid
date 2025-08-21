@@ -36,10 +36,10 @@ dependencyResolutionManagement {
 
 rootProject.name = "MineAndroid"
 
-//include(":TP:Launcher")
-//include(":TP:Launcher:Model")
-//include(":TP:Launcher:Event")
-//include(":TP:Launcher:Repository")
+include(":TP:Launcher")
+include(":TP:Launcher:Model")
+include(":TP:Launcher:Event")
+include(":TP:Launcher:Repository")
 
 include(":Sample:Test")
 //include(":Sample:Hilt")
@@ -50,8 +50,8 @@ include(":Mine:WanAndroid:Events")
 include(":Mine:WanAndroid:Repository")
 include(":Mine:WanAndroid:Overlay")
 //include(":Mine:Wanandroid-Compose:App")
-
 //include(":Mine:Wanandroid-Compose:core:data")
+
 include(":Library:Remote:Andlinker")
 include(":Library:Remote:Msg:Subscriber:Annotation")
 include(":Library:Remote:Msg:Subscriber:Processor")

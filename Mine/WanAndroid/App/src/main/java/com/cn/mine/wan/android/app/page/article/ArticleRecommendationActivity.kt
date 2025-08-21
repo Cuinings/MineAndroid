@@ -25,8 +25,8 @@ class ArticleRecommendationActivity  : BasicVBActivity<ActivityMainBinding>({ in
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.uiStateFlow.map { it.articleUIState }.collectByScope (lifecycleScope) { articleUIState ->
-            Log.d(TAG, "uiStateFlow collect: ${articleUIState.javaClass.simpleName}")
+        viewModel.uiState.map { it.articleUIState }.collectByScope (lifecycleScope) { articleUIState ->
+            Log.d(TAG, "uiState collect: ${articleUIState.javaClass.simpleName}")
             when(articleUIState) {
                 ArticleUIState.INIT -> ActivityCompat.requestPermissions(this@ArticleRecommendationActivity, arrayOf(Manifest.permission.INTERNET), 100)
                 is ArticleUIState.Article -> binding.articleView.addArticle(articleUIState.articles)

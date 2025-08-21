@@ -24,7 +24,7 @@ object OkHttpExt {
     val okHttpClient by lazy { OkHttpClient.Builder()
         .addInterceptor(ResponseInterceptor())
         .addInterceptor(HttpLoggingInterceptor())
-//        .cookieJar(PersistentCookieJar(context))
+        .cookieJar(PersistentCookieJar(context))
         .build() }
 }
 

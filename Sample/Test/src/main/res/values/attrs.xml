@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/values/attrs.xml -->
+<resources>
+    <declare-styleable name="CircleProgressView">
+        <attr name="progressColor" format="color" />
+        <attr name="bgColor" format="color" />
+        <attr name="progressWidth" format="dimension" />
+        <attr name="startAngle" format="float" />
+        <attr name="iconPadding" format="dimension"/>
+    </declare-styleable>
+    <declare-styleable name="RoundProgressBar">
+        <attr name="barColor" format="color" />          <!-- 进度条颜色 -->
+        <attr name="ringWidth" format="dimension" />     <!-- 圆环宽度 -->
+        <attr name="ringBackground" format="color" />    <!-- 背景圆环颜色 -->
+        <attr name="startBarAngle" format="float" />        <!-- 起始角度（默认从顶部开始） -->
+    </declare-styleable>
+    <declare-styleable name="GradientRingView">
+        <attr name="gradientRingStartColor" format="color"/>
+        <attr name="gradientRingEndColor" format="color"/>
+    </declare-styleable>
+    <declare-styleable name="AdaptiveWallpaperView">
+        <!-- 颜色过渡动画时长 (ms) -->
+        <attr name="animationDuration" format="integer" />
+    </declare-styleable>
+</resources>

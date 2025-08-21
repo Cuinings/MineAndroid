@@ -64,6 +64,11 @@
             <option value="$PROJECT_DIR$/Mine/WanAndroid/Repository" />
             <option value="$PROJECT_DIR$/Sample" />
             <option value="$PROJECT_DIR$/Sample/Test" />
+            <option value="$PROJECT_DIR$/TP" />
+            <option value="$PROJECT_DIR$/TP/Launcher" />
+            <option value="$PROJECT_DIR$/TP/Launcher/Event" />
+            <option value="$PROJECT_DIR$/TP/Launcher/Model" />
+            <option value="$PROJECT_DIR$/TP/Launcher/Repository" />
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/build-logic/convention" />
           </set>

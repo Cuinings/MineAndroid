@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.google.devtools.ksp)
 }
 
 android {
@@ -15,6 +18,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        kapt {
+            arguments {
+                arg("appId", this@defaultConfig.applicationId!!)
+            }
+        }
     }
 
     buildTypes {
@@ -42,6 +51,7 @@ android {
 dependencies {
 
     implementation(project(":Library:Common:Activity"))
+    implementation(project(":Library:Common:ViewModel"))
     implementation(project(":Library:Common:Application"))
     implementation(project(":Library:Common:Popupwindow"))
     implementation(project(":Library:Common:Dpi"))
@@ -49,6 +59,7 @@ dependencies {
     implementation(project(":Library:Common:EditText"))
     implementation(project(":Library:Common:RecyclerView:Adapter"))
     implementation(project(":Library:Common:MicEnergyView"))
+    implementation(project(":Library:Common:Flow"))
 
     implementation(project(":Library:Utils:Debounce"))
     implementation(project(":Library:Utils:Throttle"))
@@ -56,8 +67,14 @@ dependencies {
     implementation(libs.android.svg)
     implementation(libs.androidx.vectordrawable)
     implementation(libs.androidx.vectordrawable.animated)
+    implementation(libs.androidx.palette)
 
     implementation(libs.google.code.gson)
+
+    implementation(libs.androidx.lifecycle.viewmodel)
+
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

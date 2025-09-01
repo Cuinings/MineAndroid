@@ -77,7 +77,15 @@ class MainActivity : BasicVBActivity<ActivityMainBinding>({ ActivityMainBinding.
                     toggleActive(repeatCount % 2 == 0)
                     setEnergyLevel(count)
                 }
+                binding.micEnergyView.run {
+                    toggleActive(repeatCount % 2 == 0)
+                    setEnergyLevel(count)
+                }
                 binding.micEnergy1.run {
+                    toggleActive(repeatCount % 2 == 0)
+                    setEnergyLevel(count)
+                }
+                binding.micEnergyView1.run {
                     toggleActive(repeatCount % 2 == 0)
                     setEnergyLevel(count)
                 }
@@ -91,6 +99,7 @@ class MainActivity : BasicVBActivity<ActivityMainBinding>({ ActivityMainBinding.
                 setActive(it.isSelected)
             }
         }
+
         binding.circleProgressView.run {
             decodeBitmapFromResource(this@MainActivity, R.drawable.ic_launcher_foreground)?.let { setCenterIcon(it) }
         }

@@ -103,30 +103,38 @@ class MicEnergyView1: View {
         energyBarPath.computeBounds(energyBarBounds, true)
     }
 
+    override fun drawableStateChanged() {
+        super.drawableStateChanged()
+        Log.d(MicEnergyView.Companion.TAG, "drawableStateChanged: ${drawableState.size}")
+        bFocused = drawableState.contains(android.R.attr.state_focused)
+    }
+
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        // 根据状态选择绘制内容
-        when (currentState) {
-            STATE_OFF_DEFAULT -> {
-                // 关闭默认状态
-                drawMicPath(canvas, micOffDefaultPath, colorNormal)
-                drawWarning(canvas)
-            }
-            STATE_OFF_FOCUSED -> {
-                // 关闭焦点状态
-                drawMicPath(canvas, micOffFocusedPath, colorFocused)
-                drawWarning(canvas)
-            }
-            STATE_ON_DEFAULT -> {
-                // 开启默认状态
-                drawMicPath(canvas, micOnDefaultPath, colorNormal)
-                if (energyEnabled) drawEnergyBar(canvas)
-            }
-            STATE_ON_FOCUSED -> {
-                // 开启焦点状态
-                drawMicPath(canvas, micOnFocusedPath, colorFocused)
-                if (energyEnabled) drawEnergyBar(canvas)
-            }
+        // 1. 绘制麦克风主体
+        drawMicPath(canvas, getCurrentMicPath(), getCurrentMicColor())
+        // 2. 根据状态绘制附加元素
+        when {
+            // 关闭状态：绘制警告图标
+            currentState == STATE_OFF_DEFAULT || currentState == STATE_OFF_FOCUSED -> drawWarning(canvas)
+            // 开启状态且能量条启用：绘制能量条
+            energyEnabled -> drawEnergyBar(canvas)
+        }
+    }
+
+    private fun getCurrentMicPath(): Path {
+        return when (currentState) {
+            STATE_OFF_DEFAULT, STATE_OFF_FOCUSED -> micOffDefaultPath // 关闭状态共用路径
+            STATE_ON_DEFAULT, STATE_ON_FOCUSED -> micOnDefaultPath // 开启状态共用路径
+            else -> micOffDefaultPath
+        }
+    }
+
+    private fun getCurrentMicColor(): Int {
+        return if (currentState == STATE_OFF_FOCUSED || currentState == STATE_ON_FOCUSED) {
+            colorFocused
+        } else {
+            colorNormal
         }
     }
 
@@ -159,6 +167,7 @@ class MicEnergyView1: View {
 
     override fun onFocusChanged(gainFocus: Boolean, direction: Int, previouslyFocusedRect: Rect?) {
         super.onFocusChanged(gainFocus, direction, previouslyFocusedRect)
+        Log.d(TAG, "onFocusChanged: $gainFocus")
         bFocused = gainFocus
         updateState()
     }

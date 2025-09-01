@@ -49,8 +49,6 @@ include(":Mine:WanAndroid:App")
 include(":Mine:WanAndroid:Events")
 include(":Mine:WanAndroid:Repository")
 include(":Mine:WanAndroid:Overlay")
-//include(":Mine:Wanandroid-Compose:App")
-//include(":Mine:Wanandroid-Compose:core:data")
 
 include(":Library:Remote:Andlinker")
 include(":Library:Remote:Msg:Subscriber:Annotation")

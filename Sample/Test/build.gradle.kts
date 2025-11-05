@@ -61,6 +61,7 @@ dependencies {
     implementation(project(":Library:Common:MicEnergyView"))
     implementation(project(":Library:Common:Flow"))
 
+    implementation(project(":Library:Utils:Domain"))
     implementation(project(":Library:Utils:Debounce"))
     implementation(project(":Library:Utils:Throttle"))
 

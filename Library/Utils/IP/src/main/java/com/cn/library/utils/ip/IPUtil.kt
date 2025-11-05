@@ -4,6 +4,11 @@ import java.net.InetAddress
 import java.net.UnknownHostException
 import java.util.regex.Pattern
 
+/**
+ * IP地址
+ * 正则匹配
+ * 转换
+ */
 object IPUtil {
 
     private const val REGEX_IP_V4 = "^(\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5])$"

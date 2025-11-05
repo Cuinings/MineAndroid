@@ -1,7 +1,5 @@
 package com.cn.sample.test
 
-import android.content.Intent
-import android.content.IntentFilter
 import com.cn.library.common.application.BasicApplication
 import dagger.hilt.android.HiltAndroidApp
 

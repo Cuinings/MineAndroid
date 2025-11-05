@@ -17,6 +17,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".touch.TouchEventTest"
+            android:exported="true"
+            android:launchMode="singleInstance">
+        </activity>
         <receiver android:name=".wallpaper.receiver.WallpaperChangeReceiver"
             android:enabled="true"
             android:exported="false"/>

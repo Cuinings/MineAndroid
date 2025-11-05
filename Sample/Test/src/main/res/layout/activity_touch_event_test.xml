@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.cn.sample.test.touch.TouchView1 xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/touchView1">
+
+    <com.cn.sample.test.touch.TouchView2
+        android:layout_width="@dimen/dp600"
+        android:layout_height="@dimen/dp600"
+        android:id="@+id/touchView2"
+        android:background="@android:color/holo_blue_dark">
+
+        <com.cn.sample.test.touch.TouchView3
+            android:layout_width="@dimen/dp300"
+            android:layout_height="@dimen/dp300"
+            android:id="@+id/touchView3"
+            android:background="@android:color/holo_red_dark">
+
+        </com.cn.sample.test.touch.TouchView3>
+
+    </com.cn.sample.test.touch.TouchView2>
+
+</com.cn.sample.test.touch.TouchView1>

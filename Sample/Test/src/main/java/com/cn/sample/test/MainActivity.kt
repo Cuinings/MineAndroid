@@ -23,6 +23,7 @@ import com.cn.sample.test.wallpaper.receiver.WallpaperChangeReceiver
 import com.cn.sample.test.wallpaper.viewmodel.WallpaperEvent
 import com.cn.sample.test.wallpaper.viewmodel.WallpaperState
 import com.cn.sample.test.wallpaper.viewmodel.WallpaperViewModel
+import com.cn.wan.android.domain.DomainUtil.isDomain
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
@@ -46,6 +47,12 @@ class MainActivity : BasicVBActivity<ActivityMainBinding>({ ActivityMainBinding.
     @OptIn(FlowPreview::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Log.e(TAG, "onCreate: www.baidu.com ${"www.baidu.com".isDomain()}")
+        Log.e(TAG, "onCreate: baidu.com ${"baidu.com".isDomain()}")
+        Log.e(TAG, "onCreate: ccc.xxx ${"sipnet.ru".isDomain()}")
+        Log.e(TAG, "onCreate: xxxxx. ${"xxxxx.".isDomain()}")
+        Log.e(TAG, "onCreate: .xxxxx ${".xxxxx".isDomain()}")
         Log.d("MainActivity", "onCreate: 111")
         Log.d("MainActivity", "onCreate: Locale:${Locale.getDefault()}")
         Locale.getDefault().let {

@@ -64,6 +64,10 @@ include(":Library:Common:Service")
 include(":Library:Common:ViewModel")
 include(":Library:Common:Popupwindow")
 
+include(":Library:Common:WebView")
+
+include(":Library:Common:MicEnergyView")
+
 include(":Library:Common:Dpi")
 
 include(":Library:Common:Drawable:DSL")
@@ -78,5 +82,4 @@ include(":Library:Utils:Email")
 include(":Library:Utils:IP")
 include(":Library:Utils:Gson")
 include(":Library:Utils:NetWork")
-include(":Library:Common:WebView")
-include(":Library:Common:MicEnergyView")
+include(":Library:Utils:Domain")

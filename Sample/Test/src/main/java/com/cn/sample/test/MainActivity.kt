@@ -1,7 +1,6 @@
 package com.cn.sample.test
 
 import android.annotation.SuppressLint
-import android.app.WallpaperManager
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
@@ -82,11 +81,11 @@ class MainActivity : BasicVBActivity<ActivityMainBinding>({ ActivityMainBinding.
                 }
                 binding.micEnergy.run {
                     toggleActive(repeatCount % 2 == 0)
-                    setEnergyLevel(count)
+                    setEnergy(count)
                 }
                 binding.micEnergyView.run {
                     toggleActive(repeatCount % 2 == 0)
-                    setEnergyLevel(count)
+                    setEnergy(count)
                 }
                 binding.micEnergy1.run {
                     toggleActive(repeatCount % 2 == 0)

@@ -5,12 +5,10 @@ import android.graphics.Canvas
 import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.Path
-import android.graphics.Rect
 import android.graphics.RectF
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import androidx.annotation.FloatRange
 import androidx.core.graphics.PathParser
 import androidx.core.graphics.toColorInt
@@ -227,7 +225,7 @@ class MicEnergyView : View {
      * 设置能量级别
      * @param level 能量级别（0.0 - 1.0）
      */
-    fun setEnergyLevel(@FloatRange(from = 0.00, to = 1.00)  level: Float) {
+    fun setEnergy(@FloatRange(from = 0.00, to = 1.00)  level: Float) {
         post {
             level.coerceIn(0f, 1f).takeIf { it != energyLevel }?.let {
                 energyLevel = it

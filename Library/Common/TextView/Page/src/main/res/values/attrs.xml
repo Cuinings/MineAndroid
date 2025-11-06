@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PagedTextView">
+        <!-- 文本大小 -->
+        <attr name="textSize" format="dimension" />
+        <!-- 文本颜色 -->
+        <attr name="textColor" format="color" />
+        <!-- 支持标准的android:text属性 -->
+        <attr name="android:text" />
+    </declare-styleable>
+</resources>

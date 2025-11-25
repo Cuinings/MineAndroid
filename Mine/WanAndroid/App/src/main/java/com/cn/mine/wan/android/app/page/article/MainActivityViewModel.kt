@@ -3,8 +3,8 @@ package com.cn.mine.wan.android.app.page.article
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cn.library.commom.viewmodel.BasicViewModel
-import com.cn.library.commom.viewmodel.UIEvent
-import com.cn.library.commom.viewmodel.UIState
+import com.cn.library.commom.viewmodel.UiIntent
+import com.cn.library.commom.viewmodel.UiState
 import com.cn.library.common.flow.collectByScope
 import com.cn.mine.wan.android.app.page.article.ArticleUIState.Article
 import com.cn.mine.wan.android.app.page.article.ArticleUIState.ArticleFinish
@@ -58,15 +58,15 @@ class MainActivityViewModel @Inject constructor(): BasicViewModel<MainActivityUI
 
 }
 
-data class  MainActivityUIState(val articleUIState: ArticleUIState): UIState {}
+data class  MainActivityUIState(val articleUIState: ArticleUIState): UiState {}
 
-sealed class ArticleUIState: UIState {
+sealed class ArticleUIState: UiState {
     data object INIT: ArticleUIState()
     data class Article(val articles: CommonPageEntity<ArticleEntity>?): ArticleUIState()
     data class ArticleFinish(val msg: String? = null): ArticleUIState()
 }
 
-sealed class MainActivityUIEvent: UIEvent {
+sealed class MainActivityUIEvent: UiIntent {
     object GetBanner: MainActivityUIEvent()
     data class GetArticle(val page: Int): MainActivityUIEvent()
 }

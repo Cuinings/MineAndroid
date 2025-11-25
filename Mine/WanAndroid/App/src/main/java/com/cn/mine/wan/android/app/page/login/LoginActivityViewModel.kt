@@ -3,8 +3,8 @@ package com.cn.mine.wan.android.app.page.login
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cn.library.commom.viewmodel.BasicViewModel
-import com.cn.library.commom.viewmodel.UIEvent
-import com.cn.library.commom.viewmodel.UIState
+import com.cn.library.commom.viewmodel.UiIntent
+import com.cn.library.commom.viewmodel.UiState
 import com.cn.library.common.flow.collectByScope
 import com.cn.mine.wan.android.entity.CommonEntity
 import com.cn.mine.wan.android.entity.UserEntity
@@ -46,10 +46,10 @@ class LoginActivityViewModel @Inject constructor(): BasicViewModel<LoginActivity
     }
 }
 
-sealed class LoginActivityState: UIState {
+sealed class LoginActivityState: UiState {
     object Init: LoginActivityState()
     data class LoginSuccess(val entity: UserEntity?): LoginActivityState()
 }
-sealed class LoginActivityEvent: UIEvent {
+sealed class LoginActivityEvent: UiIntent {
     data class Login(val username: String, val password: String): LoginActivityEvent()
 }

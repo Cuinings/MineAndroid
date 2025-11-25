@@ -6,16 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
-import com.cn.library.commom.viewmodel.BasicViewModel
-import com.cn.library.commom.viewmodel.UIEvent
-import com.cn.library.commom.viewmodel.UIState
+import com.cn.library.commom.viewmodel.BasicMviViewModel
+import com.cn.library.commom.viewmodel.UiIntent
+import com.cn.library.commom.viewmodel.UiState
 
 /**
  * @Author: CuiNing
  * @Time: 2024/11/22 15:48
  * @Description:
  */
-abstract class BasicVmVBFragment<VM: BasicViewModel<out UIState, out UIEvent>, VB: ViewBinding>(
+abstract class BasicVmVBFragment<VM: BasicMviViewModel<out UiState, out UiIntent>, VB: ViewBinding>(
     private val blockViewModel: (ViewModelProvider) -> VM,
     private val blockBinding: (LayoutInflater) -> VB
 ): BasicFragment() {

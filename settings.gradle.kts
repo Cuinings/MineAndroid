@@ -36,19 +36,14 @@ dependencyResolutionManagement {
 
 rootProject.name = "MineAndroid"
 
-include(":TP:Launcher")
-include(":TP:Launcher:Model")
-include(":TP:Launcher:Event")
-include(":TP:Launcher:Repository")
-
 include(":Sample:Test")
 //include(":Sample:Hilt")
 
 //include(":Sample:Design-Model")
-include(":Mine:WanAndroid:App")
-include(":Mine:WanAndroid:Events")
-include(":Mine:WanAndroid:Repository")
-include(":Mine:WanAndroid:Overlay")
+//include(":Mine:WanAndroid:App")
+//include(":Mine:WanAndroid:Events")
+//include(":Mine:WanAndroid:Repository")
+//include(":Mine:WanAndroid:Overlay")
 
 include(":Library:Remote:Andlinker")
 include(":Library:Remote:Msg:Subscriber:Annotation")
@@ -66,16 +61,20 @@ include(":Library:Common:Popupwindow")
 
 include(":Library:Common:WebView")
 
-include(":Library:Common:MicEnergyView")
+include(":Library:Common:View:Microphone")
+include(":Library:Common:View:EditText")
+include(":Library:Common:View:Loading")
+include(":Library:Common:View:TextView:Page")
+include(":Library:Common:View:TextView:Marquee")
+include(":Library:Common:View:RecyclerView:Adapter")
+include(":Library:Common:View:Icon:Battery")
 
 include(":Library:Common:Dpi")
 
 include(":Library:Common:Drawable:DSL")
-
 include(":Library:Common:Color")
-include(":Library:Common:EditText")
 include(":Library:Common:Flow")
-include(":Library:Common:RecyclerView:Adapter")
+
 include(":Library:Utils:Throttle")
 include(":Library:Utils:Debounce")
 include(":Library:Utils:Email")

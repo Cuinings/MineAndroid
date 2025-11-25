@@ -12,5 +12,5 @@ import dagger.hilt.android.HiltAndroidApp
 class TestApp: BasicApplication() {
 
     override fun initApplication() {
-        }
+    }
 }

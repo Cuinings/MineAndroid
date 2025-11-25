@@ -56,10 +56,14 @@ dependencies {
     implementation(project(":Library:Common:Popupwindow"))
     implementation(project(":Library:Common:Dpi"))
     implementation(project(":Library:Common:Color"))
-    implementation(project(":Library:Common:EditText"))
-    implementation(project(":Library:Common:RecyclerView:Adapter"))
-    implementation(project(":Library:Common:MicEnergyView"))
     implementation(project(":Library:Common:Flow"))
+
+    implementation(project(":Library:Common:View:EditText"))
+    implementation(project(":Library:Common:View:RecyclerView:Adapter"))
+    implementation(project(":Library:Common:View:Microphone"))
+    implementation(project(":Library:Common:View:TextView:Marquee"))
+    implementation(project(":Library:Common:View:TextView:Page"))
+    implementation(project(":Library:Common:View:Loading"))
 
     implementation(project(":Library:Utils:Domain"))
     implementation(project(":Library:Utils:Debounce"))

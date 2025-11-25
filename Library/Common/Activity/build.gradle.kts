@@ -38,6 +38,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":Library:Common:ViewModel"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

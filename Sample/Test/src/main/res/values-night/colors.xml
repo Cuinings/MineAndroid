@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="main_entrance_text_color">#90FFFFFF</color>
+    <color name="main_entrance_background">#10000000</color>
+</resources>

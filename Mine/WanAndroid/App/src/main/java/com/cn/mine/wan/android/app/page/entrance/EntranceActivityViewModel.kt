@@ -2,8 +2,8 @@ package com.cn.mine.wan.android.app.page.entrance
 
 import androidx.lifecycle.viewModelScope
 import com.cn.library.commom.viewmodel.BasicViewModel
-import com.cn.library.commom.viewmodel.UIEvent
-import com.cn.library.commom.viewmodel.UIState
+import com.cn.library.commom.viewmodel.UiIntent
+import com.cn.library.commom.viewmodel.UiState
 import com.cn.library.common.flow.collectByScope
 import com.cn.mine.wan.android.entity.EntranceEntity
 import com.cn.mine.wan.android.events.EventResult
@@ -41,14 +41,14 @@ class EntranceActivityViewModel @Inject constructor(): BasicViewModel<EntranceAc
     }
 }
 
-data class EntranceActivityUIState(val entranceUIState: EntranceUIState): UIState
+data class EntranceActivityUIState(val entranceUIState: EntranceUIState): UiState
 
 
-sealed class EntranceUIState: UIState {
+sealed class EntranceUIState: UiState {
     object INIT: EntranceUIState()
     data class Entrance(val entrances: MutableList<EntranceEntity>): EntranceUIState()
 }
 
-sealed class EntranceActivityUIEvent: UIEvent {
+sealed class EntranceActivityUIEvent: UiIntent {
     object LoadEntrance: EntranceActivityUIEvent()
 }

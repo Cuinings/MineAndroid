@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.cn.sample.test.wallpaper.AdaptiveWallpaperView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.cn.sample.test.child.wallpaper.AdaptiveWallpaperView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@android:color/white"
     android:id="@+id/mainActivityView"
-    tools:context=".MainActivity">
+    tools:context=".main.MainActivity">
 
-    <com.cn.sample.test.HeartBeatView
+    <com.cn.sample.test.main.MainEntranceListView
+        android:id="@+id/activity_main_entrance"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <!--<com.cn.sample.test.child.HeartBeatView
         android:id="@+id/heartBeatView"
         android:layout_width="@dimen/dp24"
         android:layout_height="@dimen/dp24"
@@ -16,75 +21,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/micEnergyLayout"
-        android:layout_width="@dimen/dp24"
-        android:layout_height="@dimen/dp24"
-        android:focusable="true"
-        android:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/heartBeatView">
-
-        <com.cn.library.common.mic.energy.view.MicEnergyView
-            android:id="@+id/micEnergy"
-            android:layout_width="@dimen/dp24"
-            android:layout_height="@dimen/dp24"
-            android:focusable="true"
-            android:duplicateParentState="true"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.cn.library.common.mic.energy.view.MicEnergyView
-        android:id="@+id/micEnergyView"
-        android:layout_width="@dimen/dp24"
-        android:layout_height="@dimen/dp24"
-        android:focusable="true"
-        app:layout_constraintStart_toEndOf="@id/micEnergyLayout"
-        app:layout_constraintTop_toBottomOf="@id/heartBeatView"/>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/micEnergyLayout1"
-        android:layout_width="@dimen/dp24"
-        android:layout_height="@dimen/dp24"
-        android:focusable="true"
-        android:visibility="visible"
-        app:layout_constraintStart_toEndOf="@id/micEnergyView"
-        app:layout_constraintTop_toBottomOf="@id/heartBeatView">
-
-        <com.cn.library.common.mic.energy.view.MicEnergyView1
-            android:id="@+id/micEnergy1"
-            android:layout_width="@dimen/dp24"
-            android:layout_height="@dimen/dp24"
-            android:duplicateParentState="true"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.cn.library.common.mic.energy.view.MicEnergyView1
-        android:id="@+id/micEnergyView1"
-        android:layout_width="@dimen/dp24"
-        android:layout_height="@dimen/dp24"
-        android:focusable="true"
-        app:layout_constraintStart_toEndOf="@id/micEnergyLayout1"
-        app:layout_constraintTop_toBottomOf="@id/heartBeatView"/>
-
-    <com.cn.sample.test.FavoriteView
+    <com.cn.sample.test.child.FavoriteView
         android:id="@+id/favoriteView"
         android:layout_width="@dimen/dp24"
         android:layout_height="@dimen/dp24"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/micEnergyLayout"/>
+        app:layout_constraintTop_toBottomOf="@id/micEnergyView"/>
 
-    <com.cn.sample.test.CircleProgressView
+    <com.cn.sample.test.child.CircleProgressView
         android:id="@+id/circleProgressView"
         android:layout_width="@dimen/dp50"
         android:layout_height="@dimen/dp50"
@@ -94,16 +39,6 @@
         app:progressWidth="@dimen/dp2"
         app:bgColor="@color/transparent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/favoriteView"/>
+        app:layout_constraintTop_toBottomOf="@id/favoriteView"/>-->
 
-    <com.cn.sample.test.LoadingView
-        android:layout_width="@dimen/dp100"
-        android:layout_height="@dimen/dp100"
-        android:background="#99000000"
-        android:visibility="visible"
-        app:gradientRingStartColor="@color/white"
-        app:gradientRingEndColor="@color/light_6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/circleProgressView"/>
-
-</com.cn.sample.test.wallpaper.AdaptiveWallpaperView>
+</com.cn.sample.test.child.wallpaper.AdaptiveWallpaperView>

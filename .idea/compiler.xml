@@ -6,6 +6,14 @@
       <module name="MineAndroid.Library.Common.Debounce" target="17" />
       <module name="MineAndroid.Library.Common.Debounce.main" target="17" />
       <module name="MineAndroid.Library.Common.Debounce.test" target="17" />
+      <module name="MineAndroid.Library.Common.EditText" target="21" />
+      <module name="MineAndroid.Library.Common.Loading" target="21" />
+      <module name="MineAndroid.Library.Common.Marquee.TextView" target="21" />
+      <module name="MineAndroid.Library.Common.MicEnergyView" target="21" />
+      <module name="MineAndroid.Library.Common.Microphone" target="21" />
+      <module name="MineAndroid.Library.Common.RecyclerView.Adapter" target="21" />
+      <module name="MineAndroid.Library.Common.TextView.Marquee" target="21" />
+      <module name="MineAndroid.Library.Common.TextView.Page" target="21" />
       <module name="MineAndroid.Library.Common.Throttle" target="17" />
       <module name="MineAndroid.Library.Common.Throttle.main" target="17" />
       <module name="MineAndroid.Library.Common.Throttle.test" target="17" />
@@ -21,11 +29,19 @@
       <module name="MineAndroid.Mine.Wanandroid-Compose.App" target="21" />
       <module name="MineAndroid.Mine.Wanandroid-Compose.core.data" target="21" />
       <module name="MineAndroid.Mine.WanAndroid-Data" target="21" />
+      <module name="MineAndroid.Mine.WanAndroid.App" target="21" />
       <module name="MineAndroid.Mine.WanAndroid.Data" target="21" />
+      <module name="MineAndroid.Mine.WanAndroid.Events" target="21" />
       <module name="MineAndroid.Mine.WanAndroid.NetWorkRequest" target="21" />
+      <module name="MineAndroid.Mine.WanAndroid.Overlay" target="21" />
+      <module name="MineAndroid.Mine.WanAndroid.Repository" target="21" />
       <module name="MineAndroid.Mine.WanAndroid.Respository" target="21" />
       <module name="MineAndroid.Sample.Design-Model" target="21" />
       <module name="MineAndroid.Sample.Hilt" target="21" />
+      <module name="MineAndroid.TP.Launcher" target="21" />
+      <module name="MineAndroid.TP.Launcher.Event" target="21" />
+      <module name="MineAndroid.TP.Launcher.Model" target="21" />
+      <module name="MineAndroid.TP.Launcher.Repository" target="21" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -15,7 +15,9 @@ import com.cn.library.common.application.ApplicationContextExt.context
  */
 abstract class BasicApplication: Application(), ViewModelStoreOwner {
 
-    protected val TAG: String by lazy { this.javaClass.simpleName }
+    companion object {
+        lateinit var TAG: String
+    }
 
     private val mAppViewModelStore: ViewModelStore = ViewModelStore()
 
@@ -27,7 +29,7 @@ abstract class BasicApplication: Application(), ViewModelStoreOwner {
     @SuppressLint("NewApi")
     override fun onCreate() {
         super.onCreate()
-        getProcessName()?.takeIf { it == packageName }?.let {
+        getProcessName()?.takeIf { it == packageName }?.apply { TAG = this }?.let {
             initApplication()
         }
     }

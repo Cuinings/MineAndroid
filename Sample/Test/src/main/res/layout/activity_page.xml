@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.cn.library.common.textview.page.PagedTextView
+        android:id="@+id/pageText"
+        android:layout_width="@dimen/dp300"
+        android:layout_height="@dimen/dp300"
+        android:background="#f0f0f0"
+        android:gravity="center_vertical"
+        android:text="这是一个Kotlin实现的循环滚动文字示例，支持上下左右方向！"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/btnPrev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="上一页"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pageText"
+        app:layout_constraintEnd_toStartOf="@id/btnNext"
+        app:layout_constraintBottom_toTopOf="@id/btnEnableCycle3"/>
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="下一页"
+        app:layout_constraintStart_toEndOf="@id/btnPrev"
+        app:layout_constraintTop_toTopOf="@id/btnPrev"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/btnEnableCycle3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="启用3次循环"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnPrev"
+        app:layout_constraintEnd_toStartOf="@id/btnEnableCycleInfinite"/>
+
+    <Button
+        android:id="@+id/btnEnableCycleInfinite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="启用无限循环"
+        app:layout_constraintStart_toEndOf="@id/btnEnableCycle3"
+        app:layout_constraintTop_toTopOf="@id/btnEnableCycle3"
+        app:layout_constraintEnd_toStartOf="@id/btnDisableCycle"/>
+
+    <Button
+        android:id="@+id/btnDisableCycle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="禁用循环"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/btnEnableCycleInfinite"
+        app:layout_constraintTop_toTopOf="@id/btnEnableCycle3"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- 重置按钮 -->
+    <Button
+        android:id="@+id/btnReset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="重置到第一页"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnEnableCycle3"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- 状态信息显示区域 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:padding="12dp"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/tvPageInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="页码: -/-"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#333333" />
+
+        <TextView
+            android:id="@+id/tvCycleInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="循环模式: 未启用"
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/tvDirectionInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="循环方向: -"
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:layout_marginTop="2dp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,10 +14,6 @@
         <attr name="ringBackground" format="color" />    <!-- 背景圆环颜色 -->
         <attr name="startBarAngle" format="float" />        <!-- 起始角度（默认从顶部开始） -->
     </declare-styleable>
-    <declare-styleable name="GradientRingView">
-        <attr name="gradientRingStartColor" format="color"/>
-        <attr name="gradientRingEndColor" format="color"/>
-    </declare-styleable>
     <declare-styleable name="AdaptiveWallpaperView">
         <!-- 颜色过渡动画时长 (ms) -->
         <attr name="animationDuration" format="integer" />

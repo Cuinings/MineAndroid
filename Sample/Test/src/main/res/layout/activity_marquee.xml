@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.cn.library.common.textview.marquee.MarqueeTextView
+        android:id="@+id/marqueeText"
+        android:layout_width="@dimen/dp300"
+        android:layout_height="@dimen/dp300"
+        android:background="#f0f0f0"
+        android:gravity="center_vertical"
+        android:text="这是一个Kotlin实现的循环滚动文字示例，支持上下左右方向！"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/loopCountText"/>
+
+    <TextView
+        android:id="@+id/loopCountText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="当前循环: 0"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/marqueeText"
+        app:layout_constraintBottom_toTopOf="@id/btnLeft"/>
+
+    <Button
+        android:id="@+id/btnLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="向左"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loopCountText"
+        app:layout_constraintEnd_toStartOf="@id/btnRight"
+        app:layout_constraintBottom_toTopOf="@id/btnLoop3"/>
+
+    <Button
+        android:id="@+id/btnRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="向右"
+        app:layout_constraintStart_toEndOf="@id/btnLeft"
+        app:layout_constraintTop_toTopOf="@id/btnLeft"
+        app:layout_constraintEnd_toStartOf="@id/btnUp"/>
+
+    <Button
+        android:id="@+id/btnUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="向上"
+        app:layout_constraintStart_toEndOf="@id/btnRight"
+        app:layout_constraintTop_toTopOf="@id/btnLeft"
+        app:layout_constraintEnd_toStartOf="@id/btnDown" />
+
+    <Button
+        android:id="@+id/btnDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="向下"
+        app:layout_constraintStart_toEndOf="@id/btnUp"
+        app:layout_constraintTop_toTopOf="@id/btnLeft"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/btnLoop3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="循环3次"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnLeft"
+        app:layout_constraintEnd_toStartOf="@id/btnLoop5"
+        app:layout_constraintBottom_toTopOf="@id/btnStop"/>
+
+    <Button
+        android:id="@+id/btnLoop5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="循环5次"
+        app:layout_constraintStart_toEndOf="@id/btnLoop3"
+        app:layout_constraintTop_toTopOf="@id/btnLoop3"
+        app:layout_constraintEnd_toStartOf="@id/btnLoopInfinite" />
+
+    <Button
+        android:id="@+id/btnLoopInfinite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="无限循环"
+        app:layout_constraintStart_toEndOf="@id/btnLoop5"
+        app:layout_constraintTop_toTopOf="@id/btnLoop3"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="停止动画"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnLoop3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

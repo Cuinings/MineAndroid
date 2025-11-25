@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.cn.library.commom.viewmodel.BasicMviViewModel
+import com.cn.library.commom.viewmodel.UiEffect
 import com.cn.library.commom.viewmodel.UiIntent
 import com.cn.library.commom.viewmodel.UiState
 
@@ -15,7 +16,7 @@ import com.cn.library.commom.viewmodel.UiState
  * @Time: 2024/11/22 15:48
  * @Description:
  */
-abstract class BasicVmVBFragment<VM: BasicMviViewModel<out UiState, out UiIntent>, VB: ViewBinding>(
+abstract class BasicVmVBFragment<VM: BasicMviViewModel<out UiState, out UiIntent, out UiEffect>, VB: ViewBinding>(
     private val blockViewModel: (ViewModelProvider) -> VM,
     private val blockBinding: (LayoutInflater) -> VB
 ): BasicFragment() {

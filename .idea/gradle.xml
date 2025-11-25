@@ -66,6 +66,8 @@
             <option value="$PROJECT_DIR$/Library/Utils/Throttle" />
             <option value="$PROJECT_DIR$/Sample" />
             <option value="$PROJECT_DIR$/Sample/Test" />
+            <option value="$PROJECT_DIR$/Sample/remote_library_test_one" />
+            <option value="$PROJECT_DIR$/Sample/remote_library_test_two" />
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/build-logic/convention" />
           </set>

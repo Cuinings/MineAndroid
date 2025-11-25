@@ -32,7 +32,7 @@ sealed class CounterIntent: UiIntent {
 
 sealed class CounterEffect: UiEffect {
     data class ShowToast(val message: String) : CounterEffect()
-    data class ShowSnackbar(val message: String) : CounterEffect()
+    data class ShowSnackBar(val message: String) : CounterEffect()
     object NavigateToNext : CounterEffect()
 }
 @HiltViewModel
@@ -68,7 +68,7 @@ class CounterActivityViewModel @Inject constructor(): BasicMviViewModel<CounterS
             )
         }
         if (currentState.count <= 0) {
-            sendEffect(CounterEffect.ShowSnackbar("计数不能为负数"))
+            sendEffect(CounterEffect.ShowSnackBar("计数不能为负数"))
         }
     }
 

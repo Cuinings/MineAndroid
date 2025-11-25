@@ -1,19 +1,22 @@
-/*
+
 package com.cn.sample.test.sample.mvi
 
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.viewModels
 import com.cn.library.common.activity.BasicStateVmVbActivity
+import com.cn.sample.test.databinding.ActivityCounterBinding
 
-*/
+
 /**
  * @Author: CuiNing
  * @Time: 2025/11/6 17:12
  * @Description:
- *//*
+ */
 
-class CounterActivity: BasicStateVmVbActivity<CounterState, CounterIntent, CounterEffect, CounterActivityViewModel>() {
+class CounterActivity: BasicStateVmVbActivity<ActivityCounterBinding, CounterState, CounterIntent, CounterEffect, CounterActivityViewModel>({
+    ActivityCounterBinding.inflate(it)
+}) {
 
     override val viewModel by viewModels<CounterActivityViewModel>()
 
@@ -81,7 +84,7 @@ class CounterActivity: BasicStateVmVbActivity<CounterState, CounterIntent, Count
                 // 实际项目中显示Toast
                 android.widget.Toast.makeText(this, effect.message, android.widget.Toast.LENGTH_SHORT).show()
             }
-            is CounterEffect.ShowSnackbar -> {
+            is CounterEffect.ShowSnackBar -> {
                 // 实际项目中显示Snackbar
             }
             is CounterEffect.NavigateToNext -> {
@@ -89,4 +92,4 @@ class CounterActivity: BasicStateVmVbActivity<CounterState, CounterIntent, Count
             }
         }
     }
-}*/
+}

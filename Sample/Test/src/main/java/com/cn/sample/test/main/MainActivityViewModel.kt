@@ -50,7 +50,7 @@ class MainActivityViewModel @Inject constructor(): BasicMviViewModel<CounterStat
             )
         }
         if (currentState.count <= 0) {
-            sendEffect(CounterEffect.ShowSnackbar("计数不能为负数"))
+            sendEffect(CounterEffect.ShowSnackBar("计数不能为负数"))
         }
     }
 

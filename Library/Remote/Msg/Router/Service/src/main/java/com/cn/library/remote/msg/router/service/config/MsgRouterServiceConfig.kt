@@ -12,7 +12,7 @@ object MsgRouterServiceConfig {
     /**
      * 服务app包名
      */
-    var SERVER_PACKAGE: String = ""
+    var SERVER_PACKAGE: String = "com.cn.test.remote.test.one"
         set(value) { value.takeIf { it != field }?.let {
             field = it
             Log.d(MsgRouterServiceConfig::class.simpleName, "SERVER_PACKAGE:$it")

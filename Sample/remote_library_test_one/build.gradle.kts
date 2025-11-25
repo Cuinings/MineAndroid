@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.google.devtools.ksp)
 }
 
 android {
@@ -15,6 +17,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        kapt {
+            arguments {
+                arg("appId", this@defaultConfig.applicationId!!)
+            }
+        }
     }
 
     buildTypes {
@@ -36,6 +44,11 @@ android {
 }
 
 dependencies {
+
+    implementation(project(":Library:Remote:Msg:Subscriber:Annotation"))
+    kapt(project(":Library:Remote:Msg:Subscriber:Processor"))
+    implementation(project(":Library:Remote:Msg:Router:Client"))
+    implementation(project(":Library:Remote:Msg:Router:Service"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

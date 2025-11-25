@@ -23,12 +23,16 @@ object MsgRouterProvider {
     private val TAG = MsgRouterProvider::class.java.simpleName
 
     internal var msgCallback: MsgCallback? = null
+        set(value) {
+            field = value
+            value?.subscribeMsgByCallback()
+        }
 
     private var router: MsgRouterAPI? = null
 
     internal fun Msg.dispatcher() = router?.dispatcherMsg(this)
 
-    internal fun subscribeMsg(msgIds: MutableList<String>) = router?.subscribeMsg(msgIds, processName)
+    internal fun subscribeMsg(msgIds: MutableList<String>) = router?.subscribeMsg(msgIds, processName)?: Log.e(MsgRouterProvider::class.simpleName, "router is NUll for subscribeMsg ")
 
     internal fun MsgBody.dispatcher(target: String) = processName.takeIf { it.isNotBlank() }?.let {
         Msg(it, target, this).dispatcher()
@@ -36,6 +40,7 @@ object MsgRouterProvider {
 
     internal var callback = object: MsgRouterCallback{
         override fun dispatchMsg(msg: Msg) {
+            Log.d(TAG, "dispatchMsg: $msg")
             msgCallback?.onRcvMsg(msg, msg.source)
         }
     }
@@ -49,16 +54,21 @@ object MsgRouterProvider {
     fun Context.bindMsgRouter(result: (Boolean) -> Unit): Any = RemoteBuilder(this.apply {
         processName = this@bindMsgRouter.processName()
     })
-        .svrPkg("com.cn.mine.wan.android")
+        .svrPkg("com.cn.test.remote.test.one")
         .action(ACTION_MSG)
         .createInstance(MsgRouterAPI::class.java)
         .registerCallback(callback)
         .bindCallback(object: RemoteBindCallback{
             override fun bindResult(boolean: Boolean) {
+                Log.d(TAG, "bindResult:$boolean")
                 boolean.takeIf { it }?.let {
                     router =  getApiFromCache(MsgRouterAPI::class.java)?.apply {
-                        this.registerCallback(callback, processName)
-                        subscribeMsg(msgCallback?.onSubScribe()?: mutableListOf(), processName)
+                        registerCallback(callback, processName)
+                        (msgCallback?.onSubScribe() ?: mutableListOf()).onEach {
+                            Log.d(TAG, "bindResult: subscribeMsg:$it")
+                        }.let {
+                            this.subscribeMsg(it, processName)
+                        }
                     }
                 }?: {
                     router?.unSubscribeMsg(processName)
@@ -70,5 +80,9 @@ object MsgRouterProvider {
 
         })
         .build()
+
+    private fun MsgCallback?.subscribeMsgByCallback() {
+
+    }
 
 }

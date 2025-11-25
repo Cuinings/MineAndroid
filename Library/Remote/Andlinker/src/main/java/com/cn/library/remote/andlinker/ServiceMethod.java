@@ -1,5 +1,6 @@
 package com.cn.library.remote.andlinker;
 
+import com.cn.library.remote.andlinker.annotation.Callback;
 import com.cn.library.remote.andlinker.annotation.In;
 import com.cn.library.remote.andlinker.annotation.Inout;
 import com.cn.library.remote.andlinker.annotation.OneWay;

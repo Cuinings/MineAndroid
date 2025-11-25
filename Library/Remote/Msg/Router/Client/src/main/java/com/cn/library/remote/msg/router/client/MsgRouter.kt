@@ -20,7 +20,9 @@ object MsgRouter {
 
     const val ACTION_MSG = "com.cn.library.remote.msg.router"
 
-    fun MsgCallback.bind() { MsgRouterProvider.msgCallback = this }
+    fun MsgCallback.bind() {
+        MsgRouterProvider.msgCallback = this
+    }
 
     fun subscribe(msgIds: Array<String>) = router.subscribeMsg(msgIds,
         MsgRouterProvider.processName

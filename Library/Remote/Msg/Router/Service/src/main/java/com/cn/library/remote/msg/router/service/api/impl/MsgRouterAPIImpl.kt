@@ -40,9 +40,9 @@ class MsgRouterAPIImpl: MsgRouterAPI {
     override fun dispatcherMsg(msg: Msg) {
         subscriberMsgMap.forEach { (process, subcribes) ->
             subcribes.takeIf { it.contains(msg.content.code) }?.let {
-                callbacks[process]?.dispatchMsg(msg)?.apply {
+                callbacks[process]?.dispatchMsg(msg)/*?.apply {
                     Log.d(TAG, "dispatcherMsg: $process, ${msg.content.code} dispatcher success")
-                }?:Log.e(TAG, "$process, unbind Callback")
+                }*/?:Log.e(TAG, "$process, unbind Callback")
             }?:Log.e(TAG, "$process no subscribe ${msg.content.code}")
         }
     }

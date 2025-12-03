@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <!-- 自适应网格 -->
+    <com.cn.sample.test.child.app.AppLayout
+        android:id="@+id/app_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:itemHeight="@dimen/dp56"
+        app:itemWidth="@dimen/dp60"
+        app:maxColumns="ColumnMax"
+        app:maxRows="RowMin"
+        app:itemMargin="@dimen/dp4"
+        app:itemIconSize="@dimen/dp24"
+        app:itemTextSize="@dimen/sp6"
+        app:itemCornerRadius="@dimen/dp4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- 控制按钮 -->
+    <Button
+        android:id="@+id/btn_remove0"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="移除0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <Button
+        android:id="@+id/btn_remove1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="移除1"
+        android:layout_marginStart="@dimen/dp4"
+        app:layout_constraintStart_toEndOf="@id/btn_remove0"
+        app:layout_constraintBottom_toBottomOf="@id/btn_remove0"/>
+
+    <Button
+        android:id="@+id/btn_remove2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="移除2"
+        android:layout_marginStart="@dimen/dp4"
+        app:layout_constraintStart_toEndOf="@id/btn_remove1"
+        app:layout_constraintBottom_toBottomOf="@id/btn_remove1"/>
+
+    <Button
+        android:id="@+id/btn_remove3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="移除3"
+        android:layout_marginStart="@dimen/dp4"
+        app:layout_constraintStart_toEndOf="@id/btn_remove2"
+        app:layout_constraintBottom_toBottomOf="@id/btn_remove2"/>
+
+    <Button
+        android:id="@+id/btn_remove4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="移除4"
+        android:layout_marginStart="@dimen/dp4"
+        app:layout_constraintStart_toEndOf="@id/btn_remove3"
+        app:layout_constraintBottom_toBottomOf="@id/btn_remove3"/>
+
+    <Button
+        android:id="@+id/btn_remove5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="移除5"
+        android:layout_marginStart="@dimen/dp4"
+        app:layout_constraintStart_toEndOf="@id/btn_remove4"
+        app:layout_constraintBottom_toBottomOf="@id/btn_remove4"/>
+
+    <Button
+        android:id="@+id/btn_add0"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="添加0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_remove0"/>
+
+    <Button
+        android:id="@+id/btn_add1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="添加1"
+        android:layout_marginStart="@dimen/dp4"
+        app:layout_constraintStart_toEndOf="@id/btn_add0"
+        app:layout_constraintBottom_toBottomOf="@id/btn_add0"/>
+
+    <Button
+        android:id="@+id/btn_add2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="添加2"
+        android:layout_marginStart="@dimen/dp4"
+        app:layout_constraintStart_toEndOf="@id/btn_add1"
+        app:layout_constraintBottom_toBottomOf="@id/btn_add1"/>
+
+    <Button
+        android:id="@+id/btn_add3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="添加3"
+        android:layout_marginStart="@dimen/dp4"
+        app:layout_constraintStart_toEndOf="@id/btn_add2"
+        app:layout_constraintBottom_toBottomOf="@id/btn_add2"/>
+
+    <Button
+        android:id="@+id/btn_add4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="添加4"
+        android:layout_marginStart="@dimen/dp4"
+        app:layout_constraintStart_toEndOf="@id/btn_add3"
+        app:layout_constraintBottom_toBottomOf="@id/btn_add3"/>
+
+    <Button
+        android:id="@+id/btn_add5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="添加5"
+        android:layout_marginStart="@dimen/dp4"
+        app:layout_constraintStart_toEndOf="@id/btn_add4"
+        app:layout_constraintBottom_toBottomOf="@id/btn_add4"/>
+
+    <Button
+        android:id="@+id/rows2Columns3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="2行3列"
+        android:layout_marginStart="@dimen/dp4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <Button
+        android:id="@+id/rows1Columns6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="1行6列"
+        android:layout_marginStart="@dimen/dp4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rows2Columns3"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

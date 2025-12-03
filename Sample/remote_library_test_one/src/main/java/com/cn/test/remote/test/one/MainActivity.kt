@@ -34,11 +34,16 @@ class MainActivity : AppCompatActivity() {
     fun dispatcherMsgTest(view: View) {
         dispatcherMsg(MsgBody().apply {
             this.code = "XXXX"
+            this.body = "{name:\"xxx\"}"
         })
     }
 
     @Subscriber("XXXX")
-    fun xxx(){
-        Log.d(MainActivity::class.simpleName, "xxx: ")
+    fun xxx(value: NameBean){
+        Log.d(MainActivity::class.simpleName, "xxx: $value")
     }
 }
+
+data class NameBean(
+    var name: String
+)

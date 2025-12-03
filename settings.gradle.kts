@@ -37,6 +37,8 @@ dependencyResolutionManagement {
 rootProject.name = "MineAndroid"
 
 include(":Sample:Test")
+include(":Sample:remote_library_test_one")
+include(":Sample:remote_library_test_two")
 //include(":Sample:Hilt")
 
 //include(":Sample:Design-Model")
@@ -82,5 +84,3 @@ include(":Library:Utils:IP")
 include(":Library:Utils:Gson")
 include(":Library:Utils:NetWork")
 include(":Library:Utils:Domain")
-include(":Sample:remote_library_test_one")
-include(":Sample:remote_library_test_two")

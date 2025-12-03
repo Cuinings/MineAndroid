@@ -14,10 +14,6 @@
             android:name=".main.MainActivity"
             android:exported="true"
             android:launchMode="singleInstance">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".child.textview.marquee.MarqueeActivity"
             android:exported="true"
@@ -27,13 +23,21 @@
             android:exported="true"
             android:launchMode="singleInstance">
         </activity>
-        <receiver android:name=".child.wallpaper.receiver.WallpaperChangeReceiver"
-            android:enabled="true"
-            android:exported="false"/>
+        <activity android:name=".child.app.AppLayoutActivity"
+            android:exported="true"
+            android:launchMode="singleInstance">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+<!--        <receiver android:name=".child.wallpaper.receiver.WallpaperChangeReceiver"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="false"/>-->
     </application>
     <uses-permission android:name="android.permission.SET_WALLPAPER"/>
     <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS"/>
-    <uses-permission android:name="android.permission.BIND_WALLPAPER"/>
+<!--    <uses-permission android:name="android.permission.BIND_WALLPAPER"/>-->
     <uses-permission android:name="android.permission.MANAGE_DEVICE_POLICY_WALLPAPER"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>

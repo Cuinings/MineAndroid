@@ -49,6 +49,7 @@ dependencies {
     kapt(project(":Library:Remote:Msg:Subscriber:Processor"))
     implementation(project(":Library:Remote:Msg:Router:Client"))
     implementation(project(":Library:Remote:Msg:Router:Service"))
+    implementation(project(":Library:Utils:Gson"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

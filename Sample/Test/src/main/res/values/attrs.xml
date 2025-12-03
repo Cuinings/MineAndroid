@@ -18,4 +18,20 @@
         <!-- 颜色过渡动画时长 (ms) -->
         <attr name="animationDuration" format="integer" />
     </declare-styleable>
+    <declare-styleable name="AppLayout">
+        <attr name="maxColumns" >
+            <enum name="ColumnMin" value="3"/>
+            <enum name="ColumnMax" value="6"/>
+        </attr>
+        <attr name="maxRows">
+            <enum name="RowMin" value="1"/>
+            <enum name="RowMax" value="2"/>
+        </attr>
+        <attr name="itemMargin" format="dimension" />
+        <attr name="itemWidth" format="dimension" />
+        <attr name="itemHeight" format="dimension" />
+        <attr name="itemIconSize" format="dimension" />
+        <attr name="itemTextSize" format="dimension" />
+        <attr name="itemCornerRadius" format="dimension" />
+    </declare-styleable>
 </resources>

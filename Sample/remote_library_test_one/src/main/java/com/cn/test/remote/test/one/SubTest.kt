@@ -15,7 +15,7 @@ class SubTest {
     }
 
     @Subscriber("XXXX")
-    fun xxx(){
-        Log.d(SubTest::class.simpleName, "xxx: ")
+    fun xxx(value: NameBean){
+        Log.d(MainActivity::class.simpleName, "xxx: $value")
     }
 }

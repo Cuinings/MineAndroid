@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.cn.sample.test.R
+import kotlin.random.Random
 
 /**
  * @Author: CuiNing
@@ -69,5 +70,10 @@ class AppLayoutActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.rows1Columns6).setOnClickListener { appLayout?.setMaxColumnsAndRows(AppLayout.MAX_COLUMNS_6, AppLayout.MAX_ROW_1) }
         findViewById<Button>(R.id.rows2Columns3).setOnClickListener { appLayout?.setMaxColumnsAndRows(AppLayout.MAX_COLUMNS_3, AppLayout.MAX_ROW_2) }
+
+        findViewById<Button>(R.id.addMore).setOnClickListener {
+            appLayout?.addItem(AppEntity(name = Random.nextInt(0, Int.MAX_VALUE).toString()))
+        }
+        findViewById<Button>(R.id.removeAll).setOnClickListener { appLayout?.removeAll() }
     }
 }

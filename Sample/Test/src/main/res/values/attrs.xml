@@ -20,12 +20,13 @@
     </declare-styleable>
     <declare-styleable name="AppLayout">
         <attr name="maxColumns" >
-            <enum name="ColumnMin" value="3"/>
-            <enum name="ColumnMax" value="6"/>
+            <enum name="Column3" value="3"/>
+            <enum name="Column4" value="3"/>
+            <enum name="Column6" value="6"/>
         </attr>
         <attr name="maxRows">
-            <enum name="RowMin" value="1"/>
-            <enum name="RowMax" value="2"/>
+            <enum name="Row1" value="1"/>
+            <enum name="Row2" value="2"/>
         </attr>
         <attr name="itemMargin" format="dimension" />
         <attr name="itemWidth" format="dimension" />

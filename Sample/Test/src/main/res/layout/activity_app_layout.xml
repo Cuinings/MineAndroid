@@ -16,8 +16,8 @@
         android:layout_height="wrap_content"
         app:itemHeight="@dimen/dp56"
         app:itemWidth="@dimen/dp60"
-        app:maxColumns="ColumnMax"
-        app:maxRows="RowMin"
+        app:maxColumns="Column3"
+        app:maxRows="Row2"
         app:itemMargin="@dimen/dp4"
         app:itemIconSize="@dimen/dp24"
         app:itemTextSize="@dimen/sp6"
@@ -150,5 +150,22 @@
         android:layout_marginStart="@dimen/dp4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/rows2Columns3"/>
+
+    <Button
+        android:id="@+id/addMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="无限添加"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_add0"/>
+
+    <Button
+        android:id="@+id/removeAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp4"
+        android:text="移除所有"
+        app:layout_constraintStart_toEndOf="@id/addMore"
+        app:layout_constraintBottom_toTopOf="@id/btn_add0"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,9 +35,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "MineAndroid"
 
-include(":Sample:Test")
-include(":Sample:remote_library_test_one")
-include(":Sample:remote_library_test_two")
+//include(":Sample:Test")
+//include(":Sample:remote_library_test_one")
+//include(":Sample:remote_library_test_two")
 
 include(":Library:Remote:Andlinker")
 include(":Library:Remote:Msg:Subscriber:Annotation")
@@ -46,11 +46,11 @@ include(":Library:Remote:Msg:Router:Client")
 
 include(":Library:Remote:Msg:Router:Service")
 include(":Library:Common:Application")
-include(":Library:Common:Activity")
-include(":Library:Common:Fragment")
+//include(":Library:Common:Activity")
+//include(":Library:Common:Fragment")
 
 include(":Library:Common:Service")
-include(":Library:Common:ViewModel")
+//include(":Library:Common:ViewModel")
 include(":Library:Common:Popupwindow")
 
 include(":Library:Common:WebView")
@@ -67,7 +67,7 @@ include(":Library:Common:Dpi")
 
 include(":Library:Common:Drawable:DSL")
 include(":Library:Common:Color")
-include(":Library:Common:Flow")
+//include(":Library:Common:Flow")
 
 include(":Library:Utils:Throttle")
 include(":Library:Utils:Debounce")

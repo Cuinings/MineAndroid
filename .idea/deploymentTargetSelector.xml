@@ -15,10 +15,10 @@
       </SelectionState>
       <SelectionState runConfigName="Sample.Test">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-12-03T07:18:21.600687300Z">
+        <DropdownSelection timestamp="2025-12-24T06:28:14.504953300Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="Default" identifier="serial=10.67.68.106:5555;connection=47a8139e" />
+              <DeviceId pluginId="Default" identifier="serial=172.16.165.54:5555;connection=531721fc" />
             </handle>
           </Target>
         </DropdownSelection>
@@ -49,6 +49,12 @@
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="Sample.remote_library_test_two">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="Board">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="board.home">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

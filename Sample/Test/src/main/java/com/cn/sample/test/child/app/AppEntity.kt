@@ -10,8 +10,6 @@ import androidx.annotation.StringRes
  * @Description:
  */
 data class AppEntity(
-    @StringRes var nameRes: Int? = null,
-    @DrawableRes var iconRes: Int? = null,
     var type: AppType? = null,
     var name: String? = null,
     var icon: Bitmap? = null

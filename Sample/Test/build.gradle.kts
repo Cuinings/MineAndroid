@@ -13,7 +13,7 @@ android {
     defaultConfig {
         applicationId = "com.cn.sample.test"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -68,6 +68,8 @@ dependencies {
     implementation(project(":Library:Utils:Domain"))
     implementation(project(":Library:Utils:Debounce"))
     implementation(project(":Library:Utils:Throttle"))
+
+//    implementation(project(":Sample:nativelib"))
 
     implementation(libs.android.svg)
     implementation(libs.androidx.vectordrawable)

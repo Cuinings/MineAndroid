@@ -1,5 +1,4 @@
 pluginManagement {
-    includeBuild("build-logic")
     repositories {
         maven { url = uri("https://maven.aliyun.com/repository/public") }
         maven { url = uri("https://maven.aliyun.com/repository/google") }
@@ -39,13 +38,6 @@ rootProject.name = "MineAndroid"
 include(":Sample:Test")
 include(":Sample:remote_library_test_one")
 include(":Sample:remote_library_test_two")
-//include(":Sample:Hilt")
-
-//include(":Sample:Design-Model")
-//include(":Mine:WanAndroid:App")
-//include(":Mine:WanAndroid:Events")
-//include(":Mine:WanAndroid:Repository")
-//include(":Mine:WanAndroid:Overlay")
 
 include(":Library:Remote:Andlinker")
 include(":Library:Remote:Msg:Subscriber:Annotation")

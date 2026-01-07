@@ -3,6 +3,7 @@ package com.cn.library.common.activity
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
+import android.view.WindowManager
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +17,9 @@ abstract class BasicActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         TAG = this.javaClass.simpleName
+        useSystemWallpaper().takeIf { it }?.let {
+            window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER)
+        }
         super.onCreate(savedInstanceState)
     }
 
@@ -38,6 +42,8 @@ abstract class BasicActivity: AppCompatActivity() {
     protected fun Intent.launch() {
         resultLauncher.launch(this)
     }
+
+    open fun useSystemWallpaper(): Boolean = true
 
     companion object {
         lateinit var TAG: String

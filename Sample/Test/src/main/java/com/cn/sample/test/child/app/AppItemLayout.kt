@@ -18,6 +18,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.graphics.drawable.toDrawable
 import androidx.core.graphics.toColorInt
 import com.cn.sample.test.R
@@ -27,7 +29,7 @@ import com.cn.sample.test.R
  * @Time: 2025/12/2 11:13
  * @Description:
  */
-class AppItemLayout: LinearLayout {
+class AppItemLayout: ConstraintLayout {
 
     private val focusScaleDefault = 1.0f
     private var mScaleX = 1.15f
@@ -48,8 +50,9 @@ class AppItemLayout: LinearLayout {
 
     var nameSize: Float = 24f
 
-    private var iconView: ImageView? = null
-    private var nameView: TextView? = null
+    private var appIcon: ImageView? = null
+    private var appName: TextView? = null
+    private var appExpand: ImageView? = null
 
     constructor(context: Context): this(context, null)
 
@@ -58,8 +61,6 @@ class AppItemLayout: LinearLayout {
     @SuppressLint("NewApi", "CustomViewStyleable", "UseKtx")
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int): super(context, attrs, defStyleAttr) {
         outlineSpotShadowColor = Color.GRAY
-        orientation = VERTICAL
-        gravity = Gravity.CENTER
         background = StateListDrawable().apply {
             addState(intArrayOf(android.R.attr.state_focused), Color.TRANSPARENT.toDrawable())
             addState(intArrayOf(android.R.attr.state_pressed), Color.TRANSPARENT.toDrawable())
@@ -70,7 +71,7 @@ class AppItemLayout: LinearLayout {
             layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
             setImageResource(R.drawable.ic_launcher_foreground)
         }.let {
-            iconView = it
+            appIcon = it
             addView(it)
         }
         TextView(context).apply {
@@ -79,25 +80,38 @@ class AppItemLayout: LinearLayout {
             setTextColor(Color.BLACK)
             text = "123123123"
         }.let {
-            nameView = it
+            appName = it
             addView(it)
+        }
+        ImageView(context).apply {
+            scaleType = ImageView.ScaleType.CENTER_INSIDE
+            layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+            setImageResource(R.drawable.selector_icon_expand)
+        }.let {
+            appExpand = it
+            addView(it)
+        }
+
+        ConstraintSet().apply {
+            clone(this@AppItemLayout)
+
         }
     }
 
     fun setName(@StringRes value: Int) {
-        nameView?.setText(value)
+        appName?.setText(value)
     }
 
     fun setName(value: String) {
-        nameView?.text = value
+        appName?.text = value
     }
 
     fun setIcon(@DrawableRes value: Int) {
-        iconView?.setImageResource(value)
+        appIcon?.setImageResource(value)
     }
 
     fun setIcon( value: Bitmap) {
-        iconView?.setImageBitmap(value)
+        appIcon?.setImageBitmap(value)
     }
 
     private var lastCornerType = CornerType.IDLE
@@ -283,7 +297,7 @@ class AppItemLayout: LinearLayout {
     }
 
     fun setIconWh(width: Int, height: Int) = post {
-        iconView?.layoutParams = iconView?.layoutParams?.apply {
+        appIcon?.layoutParams = appIcon?.layoutParams?.apply {
             this.width = width
             this.height = height
         }

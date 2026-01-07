@@ -59,6 +59,7 @@ publishing {
         }
     }
     repositories {
+        mavenLocal()
         maven(url = uri("$rootDir\\local_maven"))
     }
 }

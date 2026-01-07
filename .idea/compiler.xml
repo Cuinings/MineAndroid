@@ -9,13 +9,10 @@
       <module name="MineAndroid.Board.Home" target="21" />
       <module name="MineAndroid.board.home" target="21" />
       <module name="MineAndroid.Library.Andlinker" target="21" />
-      <module name="MineAndroid.Library.Common.Activity" target="21" />
       <module name="MineAndroid.Library.Common.Debounce" target="17" />
       <module name="MineAndroid.Library.Common.Debounce.main" target="17" />
       <module name="MineAndroid.Library.Common.Debounce.test" target="17" />
       <module name="MineAndroid.Library.Common.EditText" target="21" />
-      <module name="MineAndroid.Library.Common.Flow" target="21" />
-      <module name="MineAndroid.Library.Common.Fragment" target="21" />
       <module name="MineAndroid.Library.Common.Loading" target="21" />
       <module name="MineAndroid.Library.Common.Marquee.TextView" target="21" />
       <module name="MineAndroid.Library.Common.MicEnergyView" target="21" />
@@ -26,7 +23,6 @@
       <module name="MineAndroid.Library.Common.Throttle" target="17" />
       <module name="MineAndroid.Library.Common.Throttle.main" target="17" />
       <module name="MineAndroid.Library.Common.Throttle.test" target="17" />
-      <module name="MineAndroid.Library.Common.ViewModel" target="21" />
       <module name="MineAndroid.Library.Msg.Subscribe.Annotation" target="17" />
       <module name="MineAndroid.Library.Msg.Subscribe.Annotation.main" target="17" />
       <module name="MineAndroid.Library.Msg.Subscribe.Annotation.test" target="17" />
@@ -49,9 +45,6 @@
       <module name="MineAndroid.Sample.Design-Model" target="21" />
       <module name="MineAndroid.Sample.Hilt" target="21" />
       <module name="MineAndroid.Sample.nativelib" target="21" />
-      <module name="MineAndroid.Sample.remote_library_test_one" target="21" />
-      <module name="MineAndroid.Sample.remote_library_test_two" target="21" />
-      <module name="MineAndroid.Sample.Test" target="21" />
       <module name="MineAndroid.TP.Launcher" target="21" />
       <module name="MineAndroid.TP.Launcher.Event" target="21" />
       <module name="MineAndroid.TP.Launcher.Model" target="21" />

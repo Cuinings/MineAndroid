@@ -76,3 +76,7 @@ include(":Library:Utils:IP")
 include(":Library:Utils:Gson")
 include(":Library:Utils:NetWork")
 include(":Library:Utils:Domain")
+
+include(":core:core-resources")
+include(":core:core-ui")
+include(":core:core-utils")

@@ -56,6 +56,10 @@
             <option value="$PROJECT_DIR$/Sample/Test" />
             <option value="$PROJECT_DIR$/Sample/remote_library_test_one" />
             <option value="$PROJECT_DIR$/Sample/remote_library_test_two" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/core-resources" />
+            <option value="$PROJECT_DIR$/core/core-ui" />
+            <option value="$PROJECT_DIR$/core/core-utils" />
           </set>
         </option>
       </GradleProjectSettings>

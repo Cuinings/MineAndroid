@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.cn.core.utils"
+    namespace = "com.cn.core.ui"
     compileSdk = 35
 
     defaultConfig {
@@ -26,6 +26,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
     kotlinOptions {
         jvmTarget = "17"
     }
@@ -33,7 +37,9 @@ android {
 
 dependencies {
 
-    implementation(libs.google.code.gson)
+
+    testImplementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

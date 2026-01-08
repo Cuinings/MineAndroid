@@ -1,6 +1,5 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    id("mineandroid.android.application")
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.google.devtools.ksp)
 }

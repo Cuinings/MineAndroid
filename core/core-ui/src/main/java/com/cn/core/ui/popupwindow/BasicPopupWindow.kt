@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.PopupWindow
+import androidx.core.graphics.drawable.toDrawable
 
 /**
  * @Author: CuiNing
@@ -35,7 +36,7 @@ open class BasicPopupWindow: PopupWindow {
         isTouchable = true
         isOutsideTouchable = true
         windowLayoutType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
-        this.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        this.setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
         (if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN else WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE).let {
             softInputMode = it
         }

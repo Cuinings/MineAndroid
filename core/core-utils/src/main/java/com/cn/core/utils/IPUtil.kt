@@ -27,7 +27,7 @@ object IPUtil {
     fun Long.ipToStringBig(): String = "${this and 0xFFL}.${this shr 8 and 0xFFL}.${this shr 16 and 0xFFL}.${this shr 24 and 0xFFL}"
     fun String.ipToLongBig(): Long {
         var ip = 0x0L
-        if (this == null || this.isEmpty()) {
+        if (this.isEmpty()) {
             return ip
         }
         try {

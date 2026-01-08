@@ -10,6 +10,7 @@ import com.google.gson.stream.JsonToken
 import com.google.gson.stream.JsonWriter
 import kotlin.collections.iterator
 
+@Suppress("UNCHECKED_CAST")
 class EnumTypeAdapterFactory: TypeAdapterFactory {
 
     companion object {
@@ -31,7 +32,7 @@ class EnumTypeAdapterFactory: TypeAdapterFactory {
             return null
         }
         val maps = mutableMapOf<T, ValueType>()
-        type.rawType.enumConstants.filterNotNull().forEach {
+        type.rawType.enumConstants?.filterNotNull()?.forEach {
             val tt: T = it as T
             //@SerializedName标记的处理
             val serializedName = tt.javaClass.getField((it as Enum<*>).name).getAnnotation(SerializedName::class.java)

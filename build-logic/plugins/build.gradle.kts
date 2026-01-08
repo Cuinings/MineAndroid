@@ -22,21 +22,21 @@ gradlePlugin {
     plugins {
         create("androidApplication") {
             id = "mineandroid.android.application"
-            implementationClass = "buildlogic.AndroidApplicationPlugin"
+            implementationClass = "buildlogic.AndroidApplicationConventionPlugin"
             displayName = "MineAndroid Android Application Plugin"
             description = "Configures common settings for Android Application modules"
         }
         
         create("androidLibrary") {
             id = "mineandroid.android.library"
-            implementationClass = "buildlogic.AndroidLibraryPlugin"
+            implementationClass = "buildlogic.AndroidLibraryConventionPlugin"
             displayName = "MineAndroid Android Library Plugin"
             description = "Configures common settings for Android Library modules"
         }
         
         create("kotlinLibrary") {
             id = "mineandroid.kotlin.library"
-            implementationClass = "buildlogic.KotlinLibraryPlugin"
+            implementationClass = "buildlogic.KotlinLibraryConventionPlugin"
             displayName = "MineAndroid Kotlin Library Plugin"
             description = "Configures common settings for Kotlin Library modules"
         }

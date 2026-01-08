@@ -1,141 +1,175 @@
 [versions]
-androidGradlePlugin = "8.9.2"
+# Android Gradle Plugin 版本
 agp = "8.9.2"
 androidTools = "31.9.2"
+
+# Kotlin 相关版本
 kotlin = "2.1.20"
 kotlinKapt = "1.9.24"
-coreKtx = "1.15.0"
-junit = "4.13.2"
-junitVersion = "1.2.1"
-espressoCore = "3.6.1"
-appcompat = "1.7.0"
-material = "1.12.0"
-activity = "1.9.3"
-fragment = "1.8.8"
-constraintlayout = "2.1.4"
-
 symbol-processing = "2.1.20-1.0.31"
-lifecycleRuntimeKtx = "2.8.7"
-activityCompose = "1.9.3"
-composeBom = "2024.12.01"
 
-startup = "1.1.1"
+# AndroidX 核心库
+androidxCore = "1.15.0"
+androidxAppCompat = "1.7.0"
+androidxActivity = "1.9.3"
+androidxFragment = "1.8.8"
+androidxConstraintlayout = "2.1.4"
 
+# Lifecycle 相关
+androidxLifecycle = "2.8.7"
+
+# Compose 相关
+androidxComposeBom = "2024.12.01"
+
+# 测试相关
+junit = "4.13.2"
+junitJupiter = "5.10.1"
+androidxJunit = "1.2.1"
+androidxEspresso = "3.6.1"
+truth = "1.4.4"
+mockito = "5.10.0"
+mockitoKotlin = "5.3.1"
+mockitoAndroid = "5.10.0"
+coroutinesTest = "1.8.1"
+
+# 架构组件
+androidxStartup = "1.1.1"
+androidxRoom = "2.6.1"
+
+# 依赖注入
 hilt = "2.56"
 
-room = "2.6.1"
-truth = "1.4.4"
-
+# 代码生成
 googleAutoService = "1.0-rc7"
 
-#三方库版本
+# 三方库
 okhttp = "4.12.0"
 retrofit = "2.11.0"
 glide = "4.16.0"
+
+# 插件版本
 firebaseCrashlyticsPlugin = "3.0.2"
 firebasePerfPlugin = "1.4.2"
 androidxLintGradle = "1.0.0-alpha03"
 
 [libraries]
+# AndroidX 库
 androidx-lint-gradle = { group = "androidx.lint", name = "lint-gradle", version.ref = "androidxLintGradle" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
-androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity" }
-androidx-fragment = { group = "androidx.fragment", name = "fragment", version.ref = "fragment" }
-androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
-androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
-
-androidx-cardview = { group = "androidx.cardview", name = "cardview", version = "1.0.0" }
-
-androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
-androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
-androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
-truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
-
-#androidx-lifecycle-extensions = { group = "androidx.lifecycle", name = "lifecycle-extensions", version.ref = "lifecycleRuntimeKtx" }
-androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
-androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleRuntimeKtx" }
-
-androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
-androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
-
-androidx-ui = { group = "androidx.compose.ui", name = "ui" }
-androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
-androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
-androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
-androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
-androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCore" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppCompat" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "androidxActivity" }
+androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "androidxActivity" }
+androidx-fragment = { group = "androidx.fragment", name = "fragment", version.ref = "androidxFragment" }
+androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "androidxFragment" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidxConstraintlayout" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version = "1.1.0" }
 androidx-vectordrawable = { group = "androidx.vectordrawable", name = "vectordrawable", version = "1.1.0" }
 androidx-vectordrawable-animated = { group = "androidx.vectordrawable", name = "vectordrawable-animated", version = "1.1.0" }
-androidx-palette = { group = "androidx.palette", name = "palette-ktx", version = "1.0.0" }
+androidx-cardview = { group = "androidx.cardview", name = "cardview", version = "1.0.0" }
+androidx-palette-ktx = { group = "androidx.palette", name = "palette-ktx", version = "1.0.0" }
 
-androidx-startup = { group = "androidx.startup", name = "startup-runtime", version.ref = "startup" }
+# Material Design
+material = { group = "com.google.android.material", name = "material", version = "1.12.0" }
 
+# Lifecycle 组件
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
+androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "androidxLifecycle" }
+
+# Compose
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxComposeBom" }
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
+
+# 测试相关
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+junit-jupiter-api = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junitJupiter" }
+junit-jupiter-params = { group = "org.junit.jupiter", name = "junit-jupiter-params", version.ref = "junitJupiter" }
+junit-jupiter-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junitJupiter" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxJunit" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidxEspresso" }
+truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
+
+# Mockito 相关
+mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
+mockito-junit-jupiter = { group = "org.mockito", name = "mockito-junit-jupiter", version.ref = "mockito" }
+mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlin" }
+mockito-android = { group = "org.mockito", name = "mockito-android", version.ref = "mockitoAndroid" }
+
+# 协程测试
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesTest" }
+
+# 架构组件
+androidx-startup = { group = "androidx.startup", name = "startup-runtime", version.ref = "androidxStartup" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidxRoom" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "androidxRoom" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidxRoom" }
+
+# 依赖注入
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
-protobuf-javanano = { group = "com.google.protobuf.nano", name = "protobuf-javanano", version = "3.0.0-alpha-7" }
-google-code-gson = { group = "com.google.code.gson", name = "gson", version = "2.11.0"}
 
+# Google 库
+google-code-gson = { group = "com.google.code.gson", name = "gson", version = "2.11.0" }
 google-auto-service = { group = "com.google.auto.service", name = "auto-service", version.ref = "googleAutoService" }
-#三方框架
-#kapt ksp代码生成相关
+protobuf-javanano = { group = "com.google.protobuf.nano", name = "protobuf-javanano", version = "3.0.0-alpha-7" }
+
+# SquareUp 库
 squareup-javapoet = { group = "com.squareup", name = "javapoet", version = "1.13.0" }
 squareup-kotlinpoet = { group = "com.squareup", name = "kotlinpoet", version = "2.0.0" }
-#retrofit
-squareup-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
-squareup-retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
-#squareup-retrofit-converter-jackson = { group = "com.squareup.retrofit2", name = "converter-jackson", version.ref = "retrofit" }
-#squareup-retrofit-converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
-#squareup-retrofit-converter-protobuf = { group = "com.squareup.retrofit2", name = "converter-protobuf", version.ref = "retrofit" }
-#squareup-retrofit-converter-wire = { group = "com.squareup.retrofit2", name = "converter-wire", version.ref = "retrofit" }
-#okhttp3
 squareup-okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 squareup-okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
-#BRVAH RecyclerView Adapter
-#cymchad-base-recyclerview-adapter3 = { group ="io.github.cymchad", name = "BaseRecyclerViewAdapterHelper", version = "3.0.14" }
-#cymchad-base-recyclerview-adapter4 = { group ="io.github.cymchad", name = "BaseRecyclerViewAdapterHelper4", version = "4.1.4" }
-#Glide
-glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide"}
-#腾讯X5内核
+squareup-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+squareup-retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+
+# 图片加载
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+
+# 其他三方库
 tencent-tbs-sdk = { group = "com.tencent.tbs", name = "tbssdk", version = "44286" }
+android-svg = { group = "com.caverock", name = "androidsvg", version = "1.4" }
 
-android-svg= { group = "com.caverock", name = "androidsvg", version = "1.4" }
+# 本地库依赖
+common-library-application = { group = "com.cn.library.common", name = "application", version = "1.0.0-SNAPSHOT" }
+common-library-activity = { group = "com.cn.library.common", name = "activity", version = "1.0.0-SNAPSHOT" }
 
-#local
-common-library-application = { group = "com.cn.library.common", name = "application", version = "1.0.0-SNAPSHOT"}
-common-library-activity = { group = "com.cn.library.common", name = "activity", version = "1.0.0-SNAPSHOT"}
-
-# Dependencies of the included build-logic
-android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
+# build-logic 依赖
+android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 android-tools-common = { group = "com.android.tools", name = "common", version.ref = "androidTools" }
 compose-gradlePlugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 firebase-crashlytics-gradlePlugin = { group = "com.google.firebase", name = "firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsPlugin" }
 firebase-performance-gradlePlugin = { group = "com.google.firebase", name = "perf-plugin", version.ref = "firebasePerfPlugin" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "symbol-processing" }
-room-gradlePlugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "room" }
+room-gradlePlugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "androidxRoom" }
 
 [plugins]
-android-lint = { id = "com.android.lint", version.ref = "androidGradlePlugin" }
+# Android 插件
+android-lint = { id = "com.android.lint", version.ref = "agp" }
 android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlinKapt" }
 android-library = { id = "com.android.library", version.ref = "agp" }
+
+# Kotlin 插件
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlinKapt" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
-google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "symbol-processing" }
+
+# Compose 插件
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
+# 代码生成插件
+google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "symbol-processing" }
+
+# 架构插件
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+room = { id = "androidx.room", version.ref = "androidxRoom" }
+
+# 其他插件
 protobuf = { id = "com.google.protobuf", version = "0.9.4" }
-room = { id = "androidx.room", version = "2.6.1" }
 

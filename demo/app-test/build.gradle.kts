@@ -33,6 +33,8 @@ android {
         jvmTarget = "17"
     }
 
+    // 配置动态功能模块
+    dynamicFeatures += listOf(":demo:app_test_resources")
 
 }
 
@@ -47,6 +49,9 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+
+    // Play Core 用于动态功能模块加载
+    implementation("com.google.android.play:core:1.10.3")
 
     // 单元测试依赖
     testImplementation(libs.junit)

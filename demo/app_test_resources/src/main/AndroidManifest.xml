@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution">
+
+    <!--
+    -dist:module ：定义动态功能模块的基本信息
+        - dist:instant="false" ：非即时应用模块
+        - dist:title ：模块标题，用于Google Play显示
+    - dist:delivery ：定义模块的交付方式
+        - dist:install-time ：安装时交付（随主应用一起安装）
+        - dist:on-demand ：按需交付（用户请求时下载）
+        - dist:conditional ：条件交付（基于设备特性）
+    - dist:fusing ：
+        - dist:include="true" ：允许将模块合并到主APK中（针对不支持动态功能的设备）
+   -->
+    <dist:module
+        dist:instant="false"
+        dist:title="@string/app_test_resources_title">
+        <dist:delivery>
+<!--            <dist:install-time />-->
+            <dist:on-demand />
+<!--            <dist:conditional />-->
+        </dist:delivery>
+        <dist:fusing dist:include="false" />
+    </dist:module>
+
+    <application />
+</manifest>

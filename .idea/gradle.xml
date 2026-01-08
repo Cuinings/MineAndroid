@@ -32,6 +32,7 @@
             <option value="$PROJECT_DIR$/core/core-utils" />
             <option value="$PROJECT_DIR$/demo" />
             <option value="$PROJECT_DIR$/demo/app-test" />
+            <option value="$PROJECT_DIR$/demo/app_test_resources" />
           </set>
         </option>
       </GradleProjectSettings>

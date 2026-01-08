@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">测试资源</string>
+    <string name="hello_world">你好，世界！</string>
+    <string name="resource_package">资源包</string>
+</resources>

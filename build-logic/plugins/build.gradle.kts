@@ -26,14 +26,21 @@ gradlePlugin {
             displayName = "MineAndroid Android Application Plugin"
             description = "Configures common settings for Android Application modules"
         }
-        
+
         create("androidLibrary") {
             id = "mineandroid.android.library"
             implementationClass = "buildlogic.AndroidLibraryConventionPlugin"
             displayName = "MineAndroid Android Library Plugin"
             description = "Configures common settings for Android Library modules"
         }
-        
+
+        create("androidDynamicFeature") {
+            id = "mineandroid.android.dynamic-feature"
+            implementationClass = "buildlogic.AndroidDynamicFeatureConventionPlugin"
+            displayName = "MineAndroid Android Dynamic Feature Plugin"
+            description = "Configures common settings for Android Dynamic Feature modules"
+        }
+
         create("kotlinLibrary") {
             id = "mineandroid.kotlin.library"
             implementationClass = "buildlogic.KotlinLibraryConventionPlugin"

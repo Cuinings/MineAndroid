@@ -36,3 +36,23 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                groupId = "com.cn.core"
+                artifactId = "core-resources"
+                version = "1.0.0"
+
+                // 从Android发布组件生成
+                from(components["release"])
+            }
+        }
+        repositories {
+            maven {
+                url = uri("${rootDir}/maven-repo")
+            }
+        }
+    }
+}

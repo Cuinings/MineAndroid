@@ -16,7 +16,7 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
-        mavenLocal().apply { url = uri("$rootDir\\local_maven") }
+        mavenLocal().apply { url = uri("$rootDir\\maven-repo") }
     }
 }
 dependencyResolutionManagement {
@@ -30,7 +30,7 @@ dependencyResolutionManagement {
         maven { url = uri("https://jitpack.io") }
         google()
         mavenCentral()
-        mavenLocal().apply { url = uri("$rootDir\\local_maven") }
+        mavenLocal().apply { url = uri("$rootDir\\maven-repo") }
     }
 }
 

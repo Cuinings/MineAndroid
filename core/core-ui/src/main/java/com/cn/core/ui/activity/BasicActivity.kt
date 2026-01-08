@@ -1,6 +1,7 @@
 package com.cn.core.ui.activity
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.view.WindowManager
@@ -15,12 +16,16 @@ import androidx.appcompat.app.AppCompatActivity
  */
 abstract class BasicActivity: AppCompatActivity() {
 
+    // 使用实例属性替代静态TAG，避免线程安全问题
+    open val tag: String by lazy { this.javaClass.simpleName }
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        TAG = this.javaClass.simpleName
-        useSystemWallpaper().takeIf { it }?.let {
+        super.onCreate(savedInstanceState)
+
+        // 优化useSystemWallpaper的调用逻辑
+        if (useSystemWallpaper()) {
             window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER)
         }
-        super.onCreate(savedInstanceState)
     }
 
     private var resultLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
@@ -32,9 +37,16 @@ abstract class BasicActivity: AppCompatActivity() {
     open fun onStartActivityResult(resultCode: Int, intent: Intent?) {  }
 
     /**
-     * 是否有悬浮权限
+     * 检查悬浮窗权限，如果有则执行action，否则跳转权限设置
      */
-    fun canDrawOverlays(action: () -> Unit) = if (Settings.canDrawOverlays(this)) action.invoke() else Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION).launch()
+    fun withOverlayPermission(action: () -> Unit) {
+        if (Settings.canDrawOverlays(this)) {
+            action.invoke()
+        } else {
+            // 使用更安全的权限请求方式
+            Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName")).launch()
+        }
+    }
 
     /**
      * 对子类开放StartActivityForResult
@@ -45,8 +57,5 @@ abstract class BasicActivity: AppCompatActivity() {
 
     open fun useSystemWallpaper(): Boolean = true
 
-    companion object {
-        lateinit var TAG: String
-    }
-
+    // 移除了静态TAG的companion object
 }

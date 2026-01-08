@@ -29,60 +29,85 @@ open class BasicPopupWindow: PopupWindow {
 
     @SuppressLint("InlinedApi")
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int): super(context, attrs, defStyleAttr, defStyleRes) {
-        TAG = this.javaClass.simpleName
+        tag = this.javaClass.simpleName
         width = ViewGroup.LayoutParams.WRAP_CONTENT
         height = ViewGroup.LayoutParams.WRAP_CONTENT
         isFocusable = true
         isTouchable = true
         isOutsideTouchable = true
-        windowLayoutType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
-        this.setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
-        (if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN else WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE).let {
-            softInputMode = it
+        this.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        // 根据Android版本设置合适的softInputMode，新版本优先使用ADJUST_RESIZE
+        softInputMode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
+        } else {
+            WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN
         }
+
+        // 简化触摸拦截逻辑
         this.setTouchInterceptor { _, event ->
-            if (!isOutsideTouchable) {
-                contentView?.dispatchTouchEvent(event)
+            // 当不允许外部触摸时，将事件传递给contentView
+            if (!isOutsideTouchable && contentView != null) {
+                contentView.dispatchTouchEvent(event)
             }
+            // 只有当isFocusable为true且不允许外部触摸时，才拦截事件
             isFocusable && !isOutsideTouchable
         }
     }
 
+    // 使用属性替代companion object中的lateinit var
+    open var tag: String = ""
+
+    // contentView非空检查，避免空指针异常
     open fun show() {
-        if (!this.isShowing) {
-            showAtLocation(contentView, Gravity.CENTER, 0, 0)
+        contentView?.let {
+            if (!isShowing) {
+                showAtLocation(it, Gravity.CENTER, 0, 0)
+            }
         }
     }
 
     open fun show(gravity: Int) {
-        if (!this.isShowing) {
-            showAtLocation(contentView, gravity , 0, 0)
+        contentView?.let {
+            if (!isShowing) {
+                showAtLocation(it, gravity, 0, 0)
+            }
         }
     }
 
     open fun show(gravity: Int, offsetX: Int, offsetY: Int) {
-        if (!this.isShowing) {
-            showAtLocation(contentView, gravity , offsetX, offsetY)
+        contentView?.let {
+            if (!isShowing) {
+                showAtLocation(it, gravity, offsetX, offsetY)
+            }
         }
     }
-
 
     open fun show(offsetX: Int, offsetY: Int) {
-        if (!isShowing) {
-            showAtLocation(contentView, Gravity.TOP or Gravity.LEFT, offsetX, offsetY)
+        contentView?.let {
+            if (!isShowing) {
+                showAtLocation(it, Gravity.TOP or Gravity.LEFT, offsetX, offsetY)
+            }
         }
     }
 
+    // 优化showAtTopStart方法，添加contentView非空检查
     open fun showAtTopStart(view: View){
         showAtTopStart(view, 0)
     }
 
     open fun showAtTopStart(view: View, offsetY: Int){
-        val location = IntArray(2)
-        view.getLocationInWindow(location)
-        contentView.run {
-            measure(0, 0)
-            showAtLocation(view, Gravity.NO_GRAVITY, location[0], location[1] - measuredHeight - offsetY)
+        contentView?.let {contentView ->
+            val location = IntArray(2)
+            view.getLocationInWindow(location)
+
+            contentView.run {
+                measure(
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+                )
+                showAtLocation(view, Gravity.NO_GRAVITY, location[0], location[1] - measuredHeight - offsetY)
+            }
         }
     }
 
@@ -91,11 +116,17 @@ open class BasicPopupWindow: PopupWindow {
     }
 
     open fun showAtTopCenter(view: View, offsetY: Int){
-        val location = IntArray(2)
-        view.getLocationInWindow(location)
-        contentView.run {
-            measure(0, 0)
-            showAtLocation(view, Gravity.NO_GRAVITY, location[0] + view.width / 2 - measuredWidth / 2, location[1] - measuredHeight - offsetY)
+        contentView?.let {contentView ->
+            val location = IntArray(2)
+            view.getLocationInWindow(location)
+
+            contentView.run {
+                measure(
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+                )
+                showAtLocation(view, Gravity.NO_GRAVITY, location[0] + view.width / 2 - measuredWidth / 2, location[1] - measuredHeight - offsetY)
+            }
         }
     }
 
@@ -104,47 +135,65 @@ open class BasicPopupWindow: PopupWindow {
     }
 
     open fun showAtBottomCenter(view: View, offsetY: Int){
-        val location = IntArray(2)
-        view.getLocationOnScreen(location)
-        contentView.run {
-            measure(0, 0)
-            showAtLocation(view, Gravity.NO_GRAVITY, location[0] + view.width / 2 - measuredWidth / 2, location[1] + view.height + offsetY)
+        contentView?.let {contentView ->
+            val location = IntArray(2)
+            view.getLocationOnScreen(location)
+
+            contentView.run {
+                measure(
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+                )
+                showAtLocation(view, Gravity.NO_GRAVITY, location[0] + view.width / 2 - measuredWidth / 2, location[1] + view.height + offsetY)
+            }
         }
     }
 
     open fun showAtRightCenter(view: View) {
-        val location = IntArray(2)
-        view.getLocationOnScreen(location)
-        contentView.run {
-            measure(0, 0)
-            showAtLocation(view, Gravity.NO_GRAVITY, location[0] + view.width, location[1] + view.height / 2 - measuredHeight / 2)
+        contentView?.let {contentView ->
+            val location = IntArray(2)
+            view.getLocationOnScreen(location)
+
+            contentView.run {
+                measure(
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+                )
+                showAtLocation(view, Gravity.NO_GRAVITY, location[0] + view.width, location[1] + view.height / 2 - measuredHeight / 2)
+            }
         }
     }
 
     open fun showAtLeftCenter(view: View) {
-        val location = IntArray(2)
-        view.getLocationOnScreen(location)
-        contentView.run {
-            measure(0, 0)
-            showAtLocation(view, Gravity.NO_GRAVITY, location[0] - measuredWidth, location[1] + view.height / 2 - measuredHeight / 2)
+        contentView?.let {contentView ->
+            val location = IntArray(2)
+            view.getLocationOnScreen(location)
+
+            contentView.run {
+                measure(
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+                )
+                showAtLocation(view, Gravity.NO_GRAVITY, location[0] - measuredWidth, location[1] + view.height / 2 - measuredHeight / 2)
+            }
         }
     }
 
+    // 优化showAtLocation方法，添加parent非空检查
     override fun showAtLocation(parent: View?, gravity: Int, x: Int, y: Int) {
-        if (!isShowing) {
-            super.showAtLocation(parent, gravity, x, y)
+        parent?.let {
+            if (!isShowing) {
+                super.showAtLocation(it, gravity, x, y)
+            }
         }
     }
 
-    override fun dismiss() { dismissAction { super.dismiss() } }
-
-    private fun dismissAction(action: () -> Unit) {
-        if (allowDismiss) action.invoke()
+    // 简化dismiss方法实现
+    override fun dismiss() {
+        if (allowDismiss) {
+            super.dismiss()
+        }
     }
 
     open var allowDismiss = true
-
-    companion object {
-        lateinit var TAG: String
-    }
 }

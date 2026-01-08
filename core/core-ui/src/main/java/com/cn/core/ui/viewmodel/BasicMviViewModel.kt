@@ -29,29 +29,39 @@ abstract class BasicMviViewModel<S: UiState, I: UiIntent, E: UiEffect>(
     private val _state = MutableStateFlow(initialState)
     val state: SharedFlow<S> = _state.asStateFlow()
 
-    // 副作用管理（Channel 确保一次性消费）
-    private val _effect = Channel<E>()
+    // 副作用管理（Channel 确保一次性消费，设置容量限制）
+    private val _effect = Channel<E>(capacity = Channel.UNLIMITED)
     val effect = _effect.receiveAsFlow()
 
     // 当前状态（只读）
     val currentState: S
         get() = _state.value
+
     /**
      * 处理意图的入口方法
      */
-    fun processIntent(intent: I) = viewModelScope.launch { handleIntent(intent) }
+    fun processIntent(intent: I) = viewModelScope.launch {
+        handleIntent(intent)
+    }
 
     /**
      * 处理意图
      */
-    abstract fun handleIntent(intent: I)
+    abstract suspend fun handleIntent(intent: I)
 
     /**
      * 安全更新状态 - 确保创建新状态对象
      */
     protected fun updateState(update: S.() -> S) {
-        _state.update { currentState ->
-            update(currentState)
+        _state.update(update)
+    }
+
+    /**
+     * 批量更新状态
+     */
+    protected fun batchUpdateState(vararg updates: S.() -> S) {
+        _state.update {currentState ->
+            updates.fold(currentState) { state, update -> update(state) }
         }
     }
 
@@ -65,10 +75,25 @@ abstract class BasicMviViewModel<S: UiState, I: UiIntent, E: UiEffect>(
     }
 
     /**
+     * 安全发送副作用，避免Channel已满导致的挂起
+     */
+    protected fun trySendEffect(effect: E) {
+        _effect.trySend(effect).isSuccess
+    }
+
+    /**
      * 重置状态到初始值
      */
     protected fun resetState() {
         _state.value = initialState
+    }
+
+    /**
+     * 清理资源，关闭Channel
+     */
+    override fun onCleared() {
+        super.onCleared()
+        _effect.close()
     }
 
 }

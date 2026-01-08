@@ -135,8 +135,10 @@ tencent-tbs-sdk = { group = "com.tencent.tbs", name = "tbssdk", version = "44286
 android-svg = { group = "com.caverock", name = "androidsvg", version = "1.4" }
 
 # 本地库依赖
-common-library-application = { group = "com.cn.library.common", name = "application", version = "1.0.0-SNAPSHOT" }
-common-library-activity = { group = "com.cn.library.common", name = "activity", version = "1.0.0-SNAPSHOT" }
+# core模块本地maven依赖
+core-resources = { group = "com.cn.core", name = "core-resources", version = "1.0.0" }
+core-ui = { group = "com.cn.core", name = "core-ui", version = "1.0.0" }
+core-utils = { group = "com.cn.core", name = "core-utils", version = "1.0.0" }
 
 # build-logic 依赖
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }

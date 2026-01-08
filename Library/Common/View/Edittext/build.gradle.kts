@@ -33,7 +33,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":Library:Common:Dpi"))
+
+    implementation(project(":core:core-resources"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

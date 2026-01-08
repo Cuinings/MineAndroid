@@ -34,8 +34,6 @@ android {
 
 dependencies {
 
-    implementation(project(":Library:Common:Activity"))
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

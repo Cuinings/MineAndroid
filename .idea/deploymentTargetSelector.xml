@@ -15,10 +15,10 @@
       </SelectionState>
       <SelectionState runConfigName="Sample.Test">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-12-24T06:28:14.504953300Z">
+        <DropdownSelection timestamp="2026-01-08T01:53:12.499985200Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="Default" identifier="serial=172.16.165.54:5555;connection=531721fc" />
+              <DeviceId pluginId="Default" identifier="serial=172.16.165.54:5555;connection=3408aa35" />
             </handle>
           </Target>
         </DropdownSelection>
@@ -56,6 +56,17 @@
       </SelectionState>
       <SelectionState runConfigName="board.home">
         <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="demo.app-test">
+        <option name="selectionMode" value="DROPDOWN" />
+        <DropdownSelection timestamp="2026-01-08T02:53:41.331338200Z">
+          <Target type="DEFAULT_BOOT">
+            <handle>
+              <DeviceId pluginId="Default" identifier="serial=172.16.165.54:5555;connection=3408aa35" />
+            </handle>
+          </Target>
+        </DropdownSelection>
+        <DialogSelection />
       </SelectionState>
     </selectionStates>
   </component>

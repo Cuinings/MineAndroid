@@ -9,27 +9,73 @@
       <module name="MineAndroid.Board.Home" target="21" />
       <module name="MineAndroid.board.home" target="21" />
       <module name="MineAndroid.Library.Andlinker" target="21" />
+      <module name="MineAndroid.Library.Common.Activity" target="21" />
+      <module name="MineAndroid.Library.Common.Application" target="21" />
+      <module name="MineAndroid.Library.Common.Color" target="21" />
       <module name="MineAndroid.Library.Common.Debounce" target="17" />
       <module name="MineAndroid.Library.Common.Debounce.main" target="17" />
       <module name="MineAndroid.Library.Common.Debounce.test" target="17" />
+      <module name="MineAndroid.Library.Common.Dpi" target="21" />
+      <module name="MineAndroid.Library.Common.Drawable.DSL" target="21" />
       <module name="MineAndroid.Library.Common.EditText" target="21" />
+      <module name="MineAndroid.Library.Common.Flow" target="21" />
+      <module name="MineAndroid.Library.Common.Fragment" target="21" />
       <module name="MineAndroid.Library.Common.Loading" target="21" />
       <module name="MineAndroid.Library.Common.Marquee.TextView" target="21" />
       <module name="MineAndroid.Library.Common.MicEnergyView" target="21" />
       <module name="MineAndroid.Library.Common.Microphone" target="21" />
+      <module name="MineAndroid.Library.Common.Popupwindow" target="21" />
       <module name="MineAndroid.Library.Common.RecyclerView.Adapter" target="21" />
+      <module name="MineAndroid.Library.Common.Service" target="21" />
       <module name="MineAndroid.Library.Common.TextView.Marquee" target="21" />
       <module name="MineAndroid.Library.Common.TextView.Page" target="21" />
       <module name="MineAndroid.Library.Common.Throttle" target="17" />
       <module name="MineAndroid.Library.Common.Throttle.main" target="17" />
       <module name="MineAndroid.Library.Common.Throttle.test" target="17" />
+      <module name="MineAndroid.Library.Common.View.EditText" target="21" />
+      <module name="MineAndroid.Library.Common.View.Icon.Battery" target="21" />
+      <module name="MineAndroid.Library.Common.View.Loading" target="21" />
+      <module name="MineAndroid.Library.Common.View.Microphone" target="21" />
+      <module name="MineAndroid.Library.Common.View.RecyclerView.Adapter" target="21" />
+      <module name="MineAndroid.Library.Common.View.TextView.Marquee" target="21" />
+      <module name="MineAndroid.Library.Common.View.TextView.Page" target="21" />
+      <module name="MineAndroid.Library.Common.ViewModel" target="21" />
+      <module name="MineAndroid.Library.Common.WebView" target="21" />
       <module name="MineAndroid.Library.Msg.Subscribe.Annotation" target="17" />
       <module name="MineAndroid.Library.Msg.Subscribe.Annotation.main" target="17" />
       <module name="MineAndroid.Library.Msg.Subscribe.Annotation.test" target="17" />
       <module name="MineAndroid.Library.Msg.Subscribe.Processor" target="17" />
       <module name="MineAndroid.Library.Msg.Subscribe.Processor.main" target="17" />
       <module name="MineAndroid.Library.Msg.Subscribe.Processor.test" target="17" />
+      <module name="MineAndroid.Library.Remote.Andlinker" target="21" />
+      <module name="MineAndroid.Library.Remote.Msg.Router.Client" target="21" />
+      <module name="MineAndroid.Library.Remote.Msg.Router.Service" target="21" />
+      <module name="MineAndroid.Library.Remote.Msg.Subscriber.Annotation" target="17" />
+      <module name="MineAndroid.Library.Remote.Msg.Subscriber.Annotation.main" target="17" />
+      <module name="MineAndroid.Library.Remote.Msg.Subscriber.Annotation.test" target="17" />
+      <module name="MineAndroid.Library.Remote.Msg.Subscriber.Processor" target="17" />
+      <module name="MineAndroid.Library.Remote.Msg.Subscriber.Processor.main" target="17" />
+      <module name="MineAndroid.Library.Remote.Msg.Subscriber.Processor.test" target="17" />
       <module name="MineAndroid.Library.Service" target="21" />
+      <module name="MineAndroid.Library.Utils.Debounce" target="17" />
+      <module name="MineAndroid.Library.Utils.Debounce.main" target="17" />
+      <module name="MineAndroid.Library.Utils.Debounce.test" target="17" />
+      <module name="MineAndroid.Library.Utils.Domain" target="17" />
+      <module name="MineAndroid.Library.Utils.Domain.main" target="17" />
+      <module name="MineAndroid.Library.Utils.Domain.test" target="17" />
+      <module name="MineAndroid.Library.Utils.Email" target="17" />
+      <module name="MineAndroid.Library.Utils.Email.main" target="17" />
+      <module name="MineAndroid.Library.Utils.Email.test" target="17" />
+      <module name="MineAndroid.Library.Utils.Gson" target="17" />
+      <module name="MineAndroid.Library.Utils.Gson.main" target="17" />
+      <module name="MineAndroid.Library.Utils.Gson.test" target="17" />
+      <module name="MineAndroid.Library.Utils.IP" target="17" />
+      <module name="MineAndroid.Library.Utils.IP.main" target="17" />
+      <module name="MineAndroid.Library.Utils.IP.test" target="17" />
+      <module name="MineAndroid.Library.Utils.NetWork" target="21" />
+      <module name="MineAndroid.Library.Utils.Throttle" target="17" />
+      <module name="MineAndroid.Library.Utils.Throttle.main" target="17" />
+      <module name="MineAndroid.Library.Utils.Throttle.test" target="17" />
       <module name="MineAndroid.Mine.WanAndroid-Bean" target="21" />
       <module name="MineAndroid.Mine.Wanandroid-compose" target="21" />
       <module name="MineAndroid.Mine.Wanandroid-Compose.App" target="21" />
@@ -45,6 +91,9 @@
       <module name="MineAndroid.Sample.Design-Model" target="21" />
       <module name="MineAndroid.Sample.Hilt" target="21" />
       <module name="MineAndroid.Sample.nativelib" target="21" />
+      <module name="MineAndroid.Sample.remote_library_test_one" target="21" />
+      <module name="MineAndroid.Sample.remote_library_test_two" target="21" />
+      <module name="MineAndroid.Sample.Test" target="21" />
       <module name="MineAndroid.TP.Launcher" target="21" />
       <module name="MineAndroid.TP.Launcher.Event" target="21" />
       <module name="MineAndroid.TP.Launcher.Model" target="21" />

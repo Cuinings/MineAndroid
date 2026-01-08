@@ -49,12 +49,14 @@ android {
 
 dependencies {
 
+    implementation(project(":core:core-resources"))
+
     implementation(project(":Library:Common:Activity"))
     implementation(project(":Library:Common:ViewModel"))
     implementation(project(":Library:Common:Application"))
     implementation(project(":Library:Common:Popupwindow"))
-    implementation(project(":Library:Common:Dpi"))
-    implementation(project(":Library:Common:Color"))
+//    implementation(project(":Library:Common:Dpi"))
+//    implementation(project(":Library:Common:Color"))
     implementation(project(":Library:Common:Flow"))
 
     implementation(project(":Library:Common:View:EditText"))

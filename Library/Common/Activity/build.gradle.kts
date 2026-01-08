@@ -35,6 +35,11 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+
+    // 添加publishing配置，解决发布警告
+    publishing {
+        singleVariant("release") {}
+    }
 }
 
 dependencies {
@@ -51,7 +56,7 @@ dependencies {
 
 publishing {
     publications {
-        register<MavenPublication>(name) {
+        register<MavenPublication>("release") {
             groupId = "com.cn.library.common"
             artifactId = "activity"
             version = "1.0.0-SNAPSHOT"

@@ -23,52 +23,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/Library" />
-            <option value="$PROJECT_DIR$/Library/Common" />
-            <option value="$PROJECT_DIR$/Library/Common/Activity" />
-            <option value="$PROJECT_DIR$/Library/Common/Application" />
-            <option value="$PROJECT_DIR$/Library/Common/Color" />
-            <option value="$PROJECT_DIR$/Library/Common/Dpi" />
-            <option value="$PROJECT_DIR$/Library/Common/Drawable" />
-            <option value="$PROJECT_DIR$/Library/Common/Drawable/DSL" />
-            <option value="$PROJECT_DIR$/Library/Common/Flow" />
-            <option value="$PROJECT_DIR$/Library/Common/Fragment" />
-            <option value="$PROJECT_DIR$/Library/Common/Popupwindow" />
-            <option value="$PROJECT_DIR$/Library/Common/Service" />
-            <option value="$PROJECT_DIR$/Library/Common/View" />
-            <option value="$PROJECT_DIR$/Library/Common/View/EditText" />
-            <option value="$PROJECT_DIR$/Library/Common/View/Icon" />
-            <option value="$PROJECT_DIR$/Library/Common/View/Icon/Battery" />
-            <option value="$PROJECT_DIR$/Library/Common/View/Loading" />
-            <option value="$PROJECT_DIR$/Library/Common/View/Microphone" />
-            <option value="$PROJECT_DIR$/Library/Common/View/RecyclerView" />
-            <option value="$PROJECT_DIR$/Library/Common/View/RecyclerView/Adapter" />
-            <option value="$PROJECT_DIR$/Library/Common/View/TextView" />
-            <option value="$PROJECT_DIR$/Library/Common/View/TextView/Marquee" />
-            <option value="$PROJECT_DIR$/Library/Common/View/TextView/Page" />
-            <option value="$PROJECT_DIR$/Library/Common/ViewModel" />
-            <option value="$PROJECT_DIR$/Library/Common/WebView" />
-            <option value="$PROJECT_DIR$/Library/Remote" />
-            <option value="$PROJECT_DIR$/Library/Remote/Andlinker" />
-            <option value="$PROJECT_DIR$/Library/Remote/Msg" />
-            <option value="$PROJECT_DIR$/Library/Remote/Msg/Router" />
-            <option value="$PROJECT_DIR$/Library/Remote/Msg/Router/Client" />
-            <option value="$PROJECT_DIR$/Library/Remote/Msg/Router/Service" />
-            <option value="$PROJECT_DIR$/Library/Remote/Msg/Subscriber" />
-            <option value="$PROJECT_DIR$/Library/Remote/Msg/Subscriber/Annotation" />
-            <option value="$PROJECT_DIR$/Library/Remote/Msg/Subscriber/Processor" />
-            <option value="$PROJECT_DIR$/Library/Utils" />
-            <option value="$PROJECT_DIR$/Library/Utils/Debounce" />
-            <option value="$PROJECT_DIR$/Library/Utils/Domain" />
-            <option value="$PROJECT_DIR$/Library/Utils/Email" />
-            <option value="$PROJECT_DIR$/Library/Utils/Gson" />
-            <option value="$PROJECT_DIR$/Library/Utils/IP" />
-            <option value="$PROJECT_DIR$/Library/Utils/NetWork" />
-            <option value="$PROJECT_DIR$/Library/Utils/Throttle" />
-            <option value="$PROJECT_DIR$/Sample" />
-            <option value="$PROJECT_DIR$/Sample/Test" />
-            <option value="$PROJECT_DIR$/Sample/remote_library_test_one" />
-            <option value="$PROJECT_DIR$/Sample/remote_library_test_two" />
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/build-logic/conventions" />
             <option value="$PROJECT_DIR$/build-logic/plugins" />
@@ -76,6 +30,8 @@
             <option value="$PROJECT_DIR$/core/core-resources" />
             <option value="$PROJECT_DIR$/core/core-ui" />
             <option value="$PROJECT_DIR$/core/core-utils" />
+            <option value="$PROJECT_DIR$/demo" />
+            <option value="$PROJECT_DIR$/demo/app-test" />
           </set>
         </option>
       </GradleProjectSettings>

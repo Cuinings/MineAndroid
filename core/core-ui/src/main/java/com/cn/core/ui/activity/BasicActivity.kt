@@ -17,15 +17,15 @@ import androidx.appcompat.app.AppCompatActivity
 abstract class BasicActivity: AppCompatActivity() {
 
     // 使用实例属性替代静态TAG，避免线程安全问题
-    open val tag: String by lazy { this.javaClass.simpleName }
+    open val TAG: String by lazy { this.javaClass.simpleName }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // 优化useSystemWallpaper的调用逻辑
+        // 必须在super.onCreate之前设置FLAG_SHOW_WALLPAPER
         if (useSystemWallpaper()) {
             window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER)
         }
+        super.onCreate(savedInstanceState)
+
     }
 
     private var resultLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(

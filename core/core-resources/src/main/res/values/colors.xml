@@ -16,6 +16,7 @@
     <color name="stroke_normal">#66939393</color>
     <color name="solid_normal">#FFFFFF</color>
     <color name="transparent">#FFFFFFFF</color>
+    <color name="text_step_33">#33000000</color>
     <color name="text_step_cc">#CC000000</color>
     <color name="text_step_66">#66000000</color>
     <color name="text_step_99">#99000000</color>

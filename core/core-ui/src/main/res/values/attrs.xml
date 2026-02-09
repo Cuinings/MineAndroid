@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MicrophoneView">
+        <attr name="scaleValue" format="float"/>
+
+        <attr name="waringColor" format="color"/>
+        <attr name="waringFocusColor" format="color"/>
+
+        <attr name="micOnColor" format="color"/>
+        <attr name="micOnFocusColor" format="color"/>
+
+        <attr name="micOffColor" format="color"/>
+        <attr name="micOffFocusColor" format="color"/>
+
+        <attr name="energyNormalColor" format="color"/>
+        <attr name="energyNormalFocusColor" format="color"/>
+
+        <attr name="energyColor" format="color"/>
+
+        <attr name="roundBackgroundColor" format="color"/>
+        <attr name="roundBackgroundFocusColor" format="color"/>
+
+        <attr name="waringPath" format="string"/>
+        <attr name="offPath" format="string"/>
+        <attr name="onPath" format="string"/>
+        <attr name="energyPath" format="string"/>
+
+        <attr name="energy" format="float"/>
+        <attr name="energyLeft" format="float"/>
+        <attr name="energyTop" format="float"/>
+        <attr name="energyRight" format="float"/>
+        <attr name="energyBottom" format="float"/>
+    </declare-styleable>
+
+    <declare-styleable name="PagedTextView">
+        <!-- 文本大小 -->
+        <attr name="textSize" format="dimension" />
+        <!-- 文本颜色 -->
+        <attr name="textColor" format="color" />
+        <!-- 支持标准的android:text属性 -->
+        <attr name="android:text" />
+    </declare-styleable>
+
+
+    <declare-styleable name="LoadingView">
+        <attr name="gradientRingStartColor" format="color"/>
+        <attr name="gradientRingEndColor" format="color"/>
+    </declare-styleable>
+</resources>

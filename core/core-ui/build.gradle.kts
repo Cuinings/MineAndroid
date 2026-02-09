@@ -27,8 +27,8 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures {
-        dataBinding = true
         viewBinding = true
+        dataBinding = true
     }
     kotlinOptions {
         jvmTarget = "17"
@@ -37,6 +37,7 @@ android {
 
 dependencies {
 
+    implementation(project(":core:core-resources"))
 
     testImplementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)

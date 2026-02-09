@@ -6,6 +6,7 @@ androidTools = "31.9.2"
 # Kotlin 相关版本
 kotlin = "2.1.20"
 kotlinKapt = "1.9.24"
+leakcanaryAndroid = "2.12"
 symbol-processing = "2.1.20-1.0.31"
 
 # AndroidX 核心库
@@ -31,6 +32,7 @@ mockito = "5.10.0"
 mockitoKotlin = "5.3.1"
 mockitoAndroid = "5.10.0"
 coroutinesTest = "1.8.1"
+kotlinxCoroutines = "1.8.1"
 
 # 架构组件
 androidxStartup = "1.1.1"
@@ -69,6 +71,7 @@ androidx-cardview = { group = "androidx.cardview", name = "cardview", version = 
 androidx-palette-ktx = { group = "androidx.palette", name = "palette-ktx", version = "1.0.0" }
 
 # Material Design
+leakcanary-android = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanaryAndroid" }
 material = { group = "com.google.android.material", name = "material", version = "1.12.0" }
 
 # Lifecycle 组件
@@ -101,8 +104,10 @@ mockito-junit-jupiter = { group = "org.mockito", name = "mockito-junit-jupiter",
 mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlin" }
 mockito-android = { group = "org.mockito", name = "mockito-android", version.ref = "mockitoAndroid" }
 
-# 协程测试
+# 协程相关
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesTest" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 
 # 架构组件
 androidx-startup = { group = "androidx.startup", name = "startup-runtime", version.ref = "androidxStartup" }

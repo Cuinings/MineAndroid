@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent">
+
+    <!-- 底层内容：可以替换为你的实际页面 -->
+    <ScrollView
+        android:id="@+id/underlyingScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="底层页面内容"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <!-- 添加一些测试内容使页面可滚动 -->
+            <View android:layout_height="50dp" android:layout_width="match_parent"/>
+            <TextView
+                android:text="内容区域1"
+                android:textColor="@android:color/white"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
+            <View android:layout_height="50dp" android:layout_width="match_parent"/>
+            <TextView android:text="内容区域2" android:textColor="@android:color/white" android:layout_height="wrap_content" android:layout_width="match_parent"/>
+            <View android:layout_height="50dp" android:layout_width="match_parent"/>
+            <TextView android:text="内容区域3" android:textColor="@android:color/white" android:layout_height="wrap_content" android:layout_width="match_parent"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- 模糊SurfaceView -->
+    <com.cn.other.test.blur.BlurSurfaceView
+        android:id="@+id/blurSurfaceView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

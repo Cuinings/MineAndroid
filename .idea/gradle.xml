@@ -23,16 +23,26 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/board" />
+            <option value="$PROJECT_DIR$/board/meet" />
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/build-logic/conventions" />
             <option value="$PROJECT_DIR$/build-logic/plugins" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/core-remote" />
+            <option value="$PROJECT_DIR$/core/core-remote/andlinker" />
+            <option value="$PROJECT_DIR$/core/core-remote/msg-router-client" />
+            <option value="$PROJECT_DIR$/core/core-remote/msg-router-service" />
+            <option value="$PROJECT_DIR$/core/core-remote/msg-subscriber-annotation" />
+            <option value="$PROJECT_DIR$/core/core-remote/msg-subscriber-processor" />
             <option value="$PROJECT_DIR$/core/core-resources" />
             <option value="$PROJECT_DIR$/core/core-ui" />
             <option value="$PROJECT_DIR$/core/core-utils" />
             <option value="$PROJECT_DIR$/demo" />
             <option value="$PROJECT_DIR$/demo/app-test" />
             <option value="$PROJECT_DIR$/demo/app_test_resources" />
+            <option value="$PROJECT_DIR$/demo/other-test" />
+            <option value="$PROJECT_DIR$/launcher" />
           </set>
         </option>
       </GradleProjectSettings>

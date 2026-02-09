@@ -7,8 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.cn.library.remote.msg.router.client.MsgRouter.dispatcherMsg
-import com.cn.library.remote.msg.router.client.bean.MsgBody
+import com.cn.core.remote.msg.router.client.MsgRouter.dispatcherMsg
+import com.cn.core.remote.msg.router.client.bean.MsgBody
 import com.cn.library.remote.msg.subscriber.annotation.Subscriber
 
 class MainActivity : AppCompatActivity() {

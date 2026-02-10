@@ -1,13 +1,23 @@
 plugins {
-    id("java-library")
-    alias(libs.plugins.kotlin.jvm)
+    id("mineandroid.kotlin.library")
 }
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
-kotlin {
-    compilerOptions {
-        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                groupId = "com.cn.core"
+                artifactId = "msg-subscriber-annotation"
+                version = "1.0.0"
+
+                // 从Java发布组件生成
+                from(components["java"])
+            }
+        }
+        repositories {
+            maven {
+                url = uri("${rootDir}/maven-repo")
+            }
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.cn.core.msg.subscriber.annotation
+package com.cn.core.remote.msg.subscriber.annotation
 
 /**
  * @Author: CuiNing

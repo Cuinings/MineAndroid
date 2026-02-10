@@ -1,6 +1,5 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
+    id("mineandroid.android.library")
 }
 
 android {
@@ -30,6 +29,9 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    publishing {
+        singleVariant("release") {}
+    }
 }
 
 dependencies {
@@ -40,4 +42,24 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                groupId = "com.cn.core"
+                artifactId = "andlinker"
+                version = "1.0.0"
+
+                // 从Android发布组件生成
+                from(components["release"])
+            }
+        }
+        repositories {
+            maven {
+                url = uri("${rootDir}/maven-repo")
+            }
+        }
+    }
 }

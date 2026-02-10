@@ -1080,6 +1080,11 @@
     <dimen name="dp58point5">58.5dp</dimen>
     <dimen name="dp59point5">59.5dp</dimen>
 
+    <dimen name="sp1">1sp</dimen>
+    <dimen name="sp2">2sp</dimen>
+    <dimen name="sp3">3sp</dimen>
+    <dimen name="sp4">4sp</dimen>
+    <dimen name="sp5">5sp</dimen>
     <dimen name="sp6">6sp</dimen>
     <dimen name="sp7">7sp</dimen>
     <dimen name="sp8">8sp</dimen>

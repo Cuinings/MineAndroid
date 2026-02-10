@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="@dimen/dp280"
+    android:layout_height="@dimen/dp292"
+    android:animateLayoutChanges="true">
+
+    <TextView
+        android:id="@+id/home_fragment_app_list_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="应用列表"
+        android:textSize="@dimen/sp10"
+        android:layout_marginTop="@dimen/dp18"
+        android:layout_marginStart="@dimen/dp18"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/home_fragment_app_list_manager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="主页应用管理"
+        android:textSize="@dimen/sp7"
+        android:layout_marginTop="@dimen/dp18"
+        android:layout_marginEnd="@dimen/dp18"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <com.cn.board.meet.home.AppList
+        android:id="@+id/home_fragment_app_list"
+        android:layout_width="@dimen/dp250"
+        android:paddingStart="@dimen/dp2"
+        android:paddingTop="@dimen/dp2"
+        android:layout_height="@dimen/dp230"
+        android:layout_marginTop="@dimen/dp38"
+        android:layout_marginEnd="@dimen/dp16"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        tools:itemCount="8"
+        tools:listitem="@layout/item_app"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/home_fragment_app_list_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/home_fragment_app_list_load_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="加载失败"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="@dimen/sp12"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

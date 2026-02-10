@@ -17,33 +17,38 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
+// 解决资源重复问题
+tasks.withType<Copy> {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
 // 配置插件发布信息
 gradlePlugin {
     plugins {
         create("androidApplication") {
             id = "mineandroid.android.application"
-            implementationClass = "buildlogic.AndroidApplicationConventionPlugin"
+            implementationClass = "buildlogic.AndroidApplicationPlugin"
             displayName = "MineAndroid Android Application Plugin"
             description = "Configures common settings for Android Application modules"
         }
 
         create("androidLibrary") {
             id = "mineandroid.android.library"
-            implementationClass = "buildlogic.AndroidLibraryConventionPlugin"
+            implementationClass = "buildlogic.AndroidLibraryPlugin"
             displayName = "MineAndroid Android Library Plugin"
             description = "Configures common settings for Android Library modules"
         }
 
         create("androidDynamicFeature") {
             id = "mineandroid.android.dynamic-feature"
-            implementationClass = "buildlogic.AndroidDynamicFeatureConventionPlugin"
+            implementationClass = "buildlogic.AndroidDynamicFeaturePlugin"
             displayName = "MineAndroid Android Dynamic Feature Plugin"
             description = "Configures common settings for Android Dynamic Feature modules"
         }
 
         create("kotlinLibrary") {
             id = "mineandroid.kotlin.library"
-            implementationClass = "buildlogic.KotlinLibraryConventionPlugin"
+            implementationClass = "buildlogic.KotlinLibraryPlugin"
             displayName = "MineAndroid Kotlin Library Plugin"
             description = "Configures common settings for Kotlin Library modules"
         }

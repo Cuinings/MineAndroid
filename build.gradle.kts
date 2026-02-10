@@ -24,6 +24,3 @@ configurations.all {
         cacheChangingModulesFor(0, "seconds")
     }
 }
-
-// 应用core模块发布脚本
-apply(from = "publish-core.gradle.kts")

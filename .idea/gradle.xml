@@ -24,7 +24,11 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/board" />
+            <option value="$PROJECT_DIR$/board/contacts" />
+            <option value="$PROJECT_DIR$/board/database" />
+            <option value="$PROJECT_DIR$/board/home" />
             <option value="$PROJECT_DIR$/board/meet" />
+            <option value="$PROJECT_DIR$/board/proxy" />
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/build-logic/conventions" />
             <option value="$PROJECT_DIR$/build-logic/plugins" />

@@ -36,18 +36,19 @@ dependencyResolutionManagement {
 
 rootProject.name = "MineAndroid"
 
-//include(":Sample:Test")
-//include(":Sample:remote_library_test_one")
-//include(":Sample:remote_library_test_two")
-
-include(":core:core-resources")
-include(":core:core-ui")
-include(":core:core-utils")
 include(":demo:app-test")
 include(":demo:app_test_resources")
 include(":demo:other-test")
 include(":launcher")
+include(":board:proxy")
+include(":board:home")
 include(":board:meet")
+include(":board:contacts")
+include(":board:database")
+
+include(":core:core-ui")
+include(":core:core-utils")
+include(":core:core-resources")
 include(":core:core-remote:andlinker")
 include(":core:core-remote:msg-router-client")
 include(":core:core-remote:msg-router-service")

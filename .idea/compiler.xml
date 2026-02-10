@@ -7,7 +7,7 @@
       <module name="build-logic.convention.test" target="17" />
       <module name="MineAndroid.Board" target="21" />
       <module name="MineAndroid.Board.Home" target="21" />
-      <module name="MineAndroid.board.home" target="21" />
+      <module name="MineAndroid.board.meet.home" target="21" />
       <module name="MineAndroid.core.core-andlinker" target="21" />
       <module name="MineAndroid.core.remote" target="21" />
       <module name="MineAndroid.Library.Andlinker" target="21" />

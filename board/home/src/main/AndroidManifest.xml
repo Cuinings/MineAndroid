@@ -6,6 +6,21 @@
         <activity
             android:name=".HomeActivity"
             android:exported="true">
+            <intent-filter>
+<!--                <action android:name="android.intent.action.MAIN" />-->
+                <category android:name="android.intent.category.HOME"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
+
+        <service
+            android:name=".gesture.service.TouchInteractionService"
+            android:exported="false"
+            android:permission="android.permission.STATUS_BAR_SERVICE" />
+
+        <service
+            android:name=".gesture.service.OverviewProxyService"
+            android:exported="false"
+            android:permission="android.permission.STATUS_BAR_SERVICE" />
     </application>
 </manifest>

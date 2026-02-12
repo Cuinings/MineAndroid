@@ -14,6 +14,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -29,12 +30,18 @@ public final class AppDatabase_Impl extends AppDatabase {
   @Override
   @NonNull
   protected RoomOpenDelegate createOpenDelegate() {
-    final RoomOpenDelegate _openDelegate = new RoomOpenDelegate(2, "e044f205288a3f60617d02775c1c1373", "5a82fa5a41d3f74305f7288c97159bb9") {
+    final RoomOpenDelegate _openDelegate = new RoomOpenDelegate(2, "f50d523bb2121c7e1814ff560d19ede6", "2866915ea0a61686931852f9e55e71fe") {
       @Override
       public void createAllTables(@NonNull final SQLiteConnection connection) {
-        SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS `app_info` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `iconRes` INTEGER NOT NULL, `isSystemApp` INTEGER NOT NULL, `packageName` TEXT NOT NULL, `lastUsedTime` INTEGER NOT NULL, `usageCount` INTEGER NOT NULL)");
+        SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS `app_info` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `isSystemApp` INTEGER NOT NULL, `packageName` TEXT NOT NULL, `lastUsedTime` INTEGER NOT NULL, `usageCount` INTEGER NOT NULL, `sortOrder` INTEGER NOT NULL, `appFlag` INTEGER NOT NULL)");
+        SQLite.execSQL(connection, "CREATE UNIQUE INDEX IF NOT EXISTS `index_app_info_packageName` ON `app_info` (`packageName`)");
+        SQLite.execSQL(connection, "CREATE INDEX IF NOT EXISTS `index_app_info_lastUsedTime` ON `app_info` (`lastUsedTime`)");
+        SQLite.execSQL(connection, "CREATE INDEX IF NOT EXISTS `index_app_info_isSystemApp` ON `app_info` (`isSystemApp`)");
+        SQLite.execSQL(connection, "CREATE INDEX IF NOT EXISTS `index_app_info_usageCount` ON `app_info` (`usageCount`)");
+        SQLite.execSQL(connection, "CREATE INDEX IF NOT EXISTS `index_app_info_sortOrder` ON `app_info` (`sortOrder`)");
+        SQLite.execSQL(connection, "CREATE INDEX IF NOT EXISTS `index_app_info_appFlag` ON `app_info` (`appFlag`)");
         SQLite.execSQL(connection, "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        SQLite.execSQL(connection, "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e044f205288a3f60617d02775c1c1373')");
+        SQLite.execSQL(connection, "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f50d523bb2121c7e1814ff560d19ede6')");
       }
 
       @Override
@@ -66,14 +73,20 @@ public final class AppDatabase_Impl extends AppDatabase {
           @NonNull final SQLiteConnection connection) {
         final Map<String, TableInfo.Column> _columnsAppInfo = new HashMap<String, TableInfo.Column>(7);
         _columnsAppInfo.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsAppInfo.put("name", new TableInfo.Column("name", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsAppInfo.put("iconRes", new TableInfo.Column("iconRes", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsAppInfo.put("isSystemApp", new TableInfo.Column("isSystemApp", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsAppInfo.put("packageName", new TableInfo.Column("packageName", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsAppInfo.put("lastUsedTime", new TableInfo.Column("lastUsedTime", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsAppInfo.put("usageCount", new TableInfo.Column("usageCount", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAppInfo.put("sortOrder", new TableInfo.Column("sortOrder", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAppInfo.put("appFlag", new TableInfo.Column("appFlag", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         final Set<TableInfo.ForeignKey> _foreignKeysAppInfo = new HashSet<TableInfo.ForeignKey>(0);
-        final Set<TableInfo.Index> _indicesAppInfo = new HashSet<TableInfo.Index>(0);
+        final Set<TableInfo.Index> _indicesAppInfo = new HashSet<TableInfo.Index>(6);
+        _indicesAppInfo.add(new TableInfo.Index("index_app_info_packageName", true, Arrays.asList("packageName"), Arrays.asList("ASC")));
+        _indicesAppInfo.add(new TableInfo.Index("index_app_info_lastUsedTime", false, Arrays.asList("lastUsedTime"), Arrays.asList("ASC")));
+        _indicesAppInfo.add(new TableInfo.Index("index_app_info_isSystemApp", false, Arrays.asList("isSystemApp"), Arrays.asList("ASC")));
+        _indicesAppInfo.add(new TableInfo.Index("index_app_info_usageCount", false, Arrays.asList("usageCount"), Arrays.asList("ASC")));
+        _indicesAppInfo.add(new TableInfo.Index("index_app_info_sortOrder", false, Arrays.asList("sortOrder"), Arrays.asList("ASC")));
+        _indicesAppInfo.add(new TableInfo.Index("index_app_info_appFlag", false, Arrays.asList("appFlag"), Arrays.asList("ASC")));
         final TableInfo _infoAppInfo = new TableInfo("app_info", _columnsAppInfo, _foreignKeysAppInfo, _indicesAppInfo);
         final TableInfo _existingAppInfo = TableInfo.read(connection, "app_info");
         if (!_infoAppInfo.equals(_existingAppInfo)) {

@@ -35,54 +35,46 @@ public final class AppDao_Impl implements AppDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR ABORT INTO `app_info` (`id`,`name`,`iconRes`,`isSystemApp`,`packageName`,`lastUsedTime`,`usageCount`) VALUES (nullif(?, 0),?,?,?,?,?,?)";
+        return "INSERT OR ABORT INTO `app_info` (`id`,`isSystemApp`,`packageName`,`lastUsedTime`,`usageCount`,`sortOrder`,`appFlag`) VALUES (nullif(?, 0),?,?,?,?,?,?)";
       }
 
       @Override
       protected void bind(@NonNull final SQLiteStatement statement, @NonNull final AppInfo entity) {
         statement.bindLong(1, entity.getId());
-        if (entity.getName() == null) {
-          statement.bindNull(2);
-        } else {
-          statement.bindText(2, entity.getName());
-        }
-        statement.bindLong(3, entity.getIconRes());
         final int _tmp = entity.isSystemApp() ? 1 : 0;
-        statement.bindLong(4, _tmp);
+        statement.bindLong(2, _tmp);
         if (entity.getPackageName() == null) {
-          statement.bindNull(5);
+          statement.bindNull(3);
         } else {
-          statement.bindText(5, entity.getPackageName());
+          statement.bindText(3, entity.getPackageName());
         }
-        statement.bindLong(6, entity.getLastUsedTime());
-        statement.bindLong(7, entity.getUsageCount());
+        statement.bindLong(4, entity.getLastUsedTime());
+        statement.bindLong(5, entity.getUsageCount());
+        statement.bindLong(6, entity.getSortOrder());
+        statement.bindLong(7, entity.getAppFlag());
       }
     };
     this.__updateAdapterOfAppInfo = new EntityDeleteOrUpdateAdapter<AppInfo>() {
       @Override
       @NonNull
       protected String createQuery() {
-        return "UPDATE OR ABORT `app_info` SET `id` = ?,`name` = ?,`iconRes` = ?,`isSystemApp` = ?,`packageName` = ?,`lastUsedTime` = ?,`usageCount` = ? WHERE `id` = ?";
+        return "UPDATE OR ABORT `app_info` SET `id` = ?,`isSystemApp` = ?,`packageName` = ?,`lastUsedTime` = ?,`usageCount` = ?,`sortOrder` = ?,`appFlag` = ? WHERE `id` = ?";
       }
 
       @Override
       protected void bind(@NonNull final SQLiteStatement statement, @NonNull final AppInfo entity) {
         statement.bindLong(1, entity.getId());
-        if (entity.getName() == null) {
-          statement.bindNull(2);
-        } else {
-          statement.bindText(2, entity.getName());
-        }
-        statement.bindLong(3, entity.getIconRes());
         final int _tmp = entity.isSystemApp() ? 1 : 0;
-        statement.bindLong(4, _tmp);
+        statement.bindLong(2, _tmp);
         if (entity.getPackageName() == null) {
-          statement.bindNull(5);
+          statement.bindNull(3);
         } else {
-          statement.bindText(5, entity.getPackageName());
+          statement.bindText(3, entity.getPackageName());
         }
-        statement.bindLong(6, entity.getLastUsedTime());
-        statement.bindLong(7, entity.getUsageCount());
+        statement.bindLong(4, entity.getLastUsedTime());
+        statement.bindLong(5, entity.getUsageCount());
+        statement.bindLong(6, entity.getSortOrder());
+        statement.bindLong(7, entity.getAppFlag());
         statement.bindLong(8, entity.getId());
       }
     };
@@ -117,30 +109,22 @@ public final class AppDao_Impl implements AppDao {
 
   @Override
   public Object getAllApps(final Continuation<? super List<AppInfo>> $completion) {
-    final String _sql = "SELECT * FROM app_info ORDER BY name ASC";
+    final String _sql = "SELECT * FROM app_info ORDER BY sortOrder ASC";
     return DBUtil.performSuspending(__db, true, false, (_connection) -> {
       final SQLiteStatement _stmt = _connection.prepare(_sql);
       try {
         final int _columnIndexOfId = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "id");
-        final int _columnIndexOfName = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "name");
-        final int _columnIndexOfIconRes = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "iconRes");
         final int _columnIndexOfIsSystemApp = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "isSystemApp");
         final int _columnIndexOfPackageName = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "packageName");
         final int _columnIndexOfLastUsedTime = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "lastUsedTime");
         final int _columnIndexOfUsageCount = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "usageCount");
+        final int _columnIndexOfSortOrder = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "sortOrder");
+        final int _columnIndexOfAppFlag = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "appFlag");
         final List<AppInfo> _result = new ArrayList<AppInfo>();
         while (_stmt.step()) {
           final AppInfo _item;
           final int _tmpId;
           _tmpId = (int) (_stmt.getLong(_columnIndexOfId));
-          final String _tmpName;
-          if (_stmt.isNull(_columnIndexOfName)) {
-            _tmpName = null;
-          } else {
-            _tmpName = _stmt.getText(_columnIndexOfName);
-          }
-          final int _tmpIconRes;
-          _tmpIconRes = (int) (_stmt.getLong(_columnIndexOfIconRes));
           final boolean _tmpIsSystemApp;
           final int _tmp;
           _tmp = (int) (_stmt.getLong(_columnIndexOfIsSystemApp));
@@ -155,7 +139,11 @@ public final class AppDao_Impl implements AppDao {
           _tmpLastUsedTime = _stmt.getLong(_columnIndexOfLastUsedTime);
           final int _tmpUsageCount;
           _tmpUsageCount = (int) (_stmt.getLong(_columnIndexOfUsageCount));
-          _item = new AppInfo(_tmpId,_tmpName,_tmpIconRes,_tmpIsSystemApp,_tmpPackageName,_tmpLastUsedTime,_tmpUsageCount);
+          final int _tmpSortOrder;
+          _tmpSortOrder = (int) (_stmt.getLong(_columnIndexOfSortOrder));
+          final int _tmpAppFlag;
+          _tmpAppFlag = (int) (_stmt.getLong(_columnIndexOfAppFlag));
+          _item = new AppInfo(_tmpId,_tmpIsSystemApp,_tmpPackageName,_tmpLastUsedTime,_tmpUsageCount,_tmpSortOrder,_tmpAppFlag);
           _result.add(_item);
         }
         return _result;
@@ -168,7 +156,7 @@ public final class AppDao_Impl implements AppDao {
   @Override
   public Object getAppsByType(final boolean isSystemApp,
       final Continuation<? super List<AppInfo>> $completion) {
-    final String _sql = "SELECT * FROM app_info WHERE isSystemApp = ? ORDER BY name ASC";
+    final String _sql = "SELECT * FROM app_info WHERE isSystemApp = ? ORDER BY sortOrder ASC";
     return DBUtil.performSuspending(__db, true, false, (_connection) -> {
       final SQLiteStatement _stmt = _connection.prepare(_sql);
       try {
@@ -176,25 +164,17 @@ public final class AppDao_Impl implements AppDao {
         final int _tmp = isSystemApp ? 1 : 0;
         _stmt.bindLong(_argIndex, _tmp);
         final int _columnIndexOfId = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "id");
-        final int _columnIndexOfName = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "name");
-        final int _columnIndexOfIconRes = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "iconRes");
         final int _columnIndexOfIsSystemApp = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "isSystemApp");
         final int _columnIndexOfPackageName = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "packageName");
         final int _columnIndexOfLastUsedTime = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "lastUsedTime");
         final int _columnIndexOfUsageCount = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "usageCount");
+        final int _columnIndexOfSortOrder = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "sortOrder");
+        final int _columnIndexOfAppFlag = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "appFlag");
         final List<AppInfo> _result = new ArrayList<AppInfo>();
         while (_stmt.step()) {
           final AppInfo _item;
           final int _tmpId;
           _tmpId = (int) (_stmt.getLong(_columnIndexOfId));
-          final String _tmpName;
-          if (_stmt.isNull(_columnIndexOfName)) {
-            _tmpName = null;
-          } else {
-            _tmpName = _stmt.getText(_columnIndexOfName);
-          }
-          final int _tmpIconRes;
-          _tmpIconRes = (int) (_stmt.getLong(_columnIndexOfIconRes));
           final boolean _tmpIsSystemApp;
           final int _tmp_1;
           _tmp_1 = (int) (_stmt.getLong(_columnIndexOfIsSystemApp));
@@ -209,64 +189,11 @@ public final class AppDao_Impl implements AppDao {
           _tmpLastUsedTime = _stmt.getLong(_columnIndexOfLastUsedTime);
           final int _tmpUsageCount;
           _tmpUsageCount = (int) (_stmt.getLong(_columnIndexOfUsageCount));
-          _item = new AppInfo(_tmpId,_tmpName,_tmpIconRes,_tmpIsSystemApp,_tmpPackageName,_tmpLastUsedTime,_tmpUsageCount);
-          _result.add(_item);
-        }
-        return _result;
-      } finally {
-        _stmt.close();
-      }
-    }, $completion);
-  }
-
-  @Override
-  public Object searchApps(final String namePattern,
-      final Continuation<? super List<AppInfo>> $completion) {
-    final String _sql = "SELECT * FROM app_info WHERE name LIKE ? ORDER BY name ASC";
-    return DBUtil.performSuspending(__db, true, false, (_connection) -> {
-      final SQLiteStatement _stmt = _connection.prepare(_sql);
-      try {
-        int _argIndex = 1;
-        if (namePattern == null) {
-          _stmt.bindNull(_argIndex);
-        } else {
-          _stmt.bindText(_argIndex, namePattern);
-        }
-        final int _columnIndexOfId = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "id");
-        final int _columnIndexOfName = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "name");
-        final int _columnIndexOfIconRes = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "iconRes");
-        final int _columnIndexOfIsSystemApp = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "isSystemApp");
-        final int _columnIndexOfPackageName = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "packageName");
-        final int _columnIndexOfLastUsedTime = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "lastUsedTime");
-        final int _columnIndexOfUsageCount = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "usageCount");
-        final List<AppInfo> _result = new ArrayList<AppInfo>();
-        while (_stmt.step()) {
-          final AppInfo _item;
-          final int _tmpId;
-          _tmpId = (int) (_stmt.getLong(_columnIndexOfId));
-          final String _tmpName;
-          if (_stmt.isNull(_columnIndexOfName)) {
-            _tmpName = null;
-          } else {
-            _tmpName = _stmt.getText(_columnIndexOfName);
-          }
-          final int _tmpIconRes;
-          _tmpIconRes = (int) (_stmt.getLong(_columnIndexOfIconRes));
-          final boolean _tmpIsSystemApp;
-          final int _tmp;
-          _tmp = (int) (_stmt.getLong(_columnIndexOfIsSystemApp));
-          _tmpIsSystemApp = _tmp != 0;
-          final String _tmpPackageName;
-          if (_stmt.isNull(_columnIndexOfPackageName)) {
-            _tmpPackageName = null;
-          } else {
-            _tmpPackageName = _stmt.getText(_columnIndexOfPackageName);
-          }
-          final long _tmpLastUsedTime;
-          _tmpLastUsedTime = _stmt.getLong(_columnIndexOfLastUsedTime);
-          final int _tmpUsageCount;
-          _tmpUsageCount = (int) (_stmt.getLong(_columnIndexOfUsageCount));
-          _item = new AppInfo(_tmpId,_tmpName,_tmpIconRes,_tmpIsSystemApp,_tmpPackageName,_tmpLastUsedTime,_tmpUsageCount);
+          final int _tmpSortOrder;
+          _tmpSortOrder = (int) (_stmt.getLong(_columnIndexOfSortOrder));
+          final int _tmpAppFlag;
+          _tmpAppFlag = (int) (_stmt.getLong(_columnIndexOfAppFlag));
+          _item = new AppInfo(_tmpId,_tmpIsSystemApp,_tmpPackageName,_tmpLastUsedTime,_tmpUsageCount,_tmpSortOrder,_tmpAppFlag);
           _result.add(_item);
         }
         return _result;
@@ -279,7 +206,7 @@ public final class AppDao_Impl implements AppDao {
   @Override
   public Object searchAppsByPackage(final String packageNamePattern,
       final Continuation<? super List<AppInfo>> $completion) {
-    final String _sql = "SELECT * FROM app_info WHERE packageName LIKE ? ORDER BY name ASC";
+    final String _sql = "SELECT * FROM app_info WHERE packageName LIKE ? ORDER BY sortOrder ASC";
     return DBUtil.performSuspending(__db, true, false, (_connection) -> {
       final SQLiteStatement _stmt = _connection.prepare(_sql);
       try {
@@ -290,25 +217,17 @@ public final class AppDao_Impl implements AppDao {
           _stmt.bindText(_argIndex, packageNamePattern);
         }
         final int _columnIndexOfId = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "id");
-        final int _columnIndexOfName = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "name");
-        final int _columnIndexOfIconRes = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "iconRes");
         final int _columnIndexOfIsSystemApp = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "isSystemApp");
         final int _columnIndexOfPackageName = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "packageName");
         final int _columnIndexOfLastUsedTime = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "lastUsedTime");
         final int _columnIndexOfUsageCount = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "usageCount");
+        final int _columnIndexOfSortOrder = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "sortOrder");
+        final int _columnIndexOfAppFlag = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "appFlag");
         final List<AppInfo> _result = new ArrayList<AppInfo>();
         while (_stmt.step()) {
           final AppInfo _item;
           final int _tmpId;
           _tmpId = (int) (_stmt.getLong(_columnIndexOfId));
-          final String _tmpName;
-          if (_stmt.isNull(_columnIndexOfName)) {
-            _tmpName = null;
-          } else {
-            _tmpName = _stmt.getText(_columnIndexOfName);
-          }
-          final int _tmpIconRes;
-          _tmpIconRes = (int) (_stmt.getLong(_columnIndexOfIconRes));
           final boolean _tmpIsSystemApp;
           final int _tmp;
           _tmp = (int) (_stmt.getLong(_columnIndexOfIsSystemApp));
@@ -323,7 +242,11 @@ public final class AppDao_Impl implements AppDao {
           _tmpLastUsedTime = _stmt.getLong(_columnIndexOfLastUsedTime);
           final int _tmpUsageCount;
           _tmpUsageCount = (int) (_stmt.getLong(_columnIndexOfUsageCount));
-          _item = new AppInfo(_tmpId,_tmpName,_tmpIconRes,_tmpIsSystemApp,_tmpPackageName,_tmpLastUsedTime,_tmpUsageCount);
+          final int _tmpSortOrder;
+          _tmpSortOrder = (int) (_stmt.getLong(_columnIndexOfSortOrder));
+          final int _tmpAppFlag;
+          _tmpAppFlag = (int) (_stmt.getLong(_columnIndexOfAppFlag));
+          _item = new AppInfo(_tmpId,_tmpIsSystemApp,_tmpPackageName,_tmpLastUsedTime,_tmpUsageCount,_tmpSortOrder,_tmpAppFlag);
           _result.add(_item);
         }
         return _result;
@@ -343,25 +266,17 @@ public final class AppDao_Impl implements AppDao {
         int _argIndex = 1;
         _stmt.bindLong(_argIndex, limit);
         final int _columnIndexOfId = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "id");
-        final int _columnIndexOfName = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "name");
-        final int _columnIndexOfIconRes = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "iconRes");
         final int _columnIndexOfIsSystemApp = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "isSystemApp");
         final int _columnIndexOfPackageName = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "packageName");
         final int _columnIndexOfLastUsedTime = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "lastUsedTime");
         final int _columnIndexOfUsageCount = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "usageCount");
+        final int _columnIndexOfSortOrder = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "sortOrder");
+        final int _columnIndexOfAppFlag = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "appFlag");
         final List<AppInfo> _result = new ArrayList<AppInfo>();
         while (_stmt.step()) {
           final AppInfo _item;
           final int _tmpId;
           _tmpId = (int) (_stmt.getLong(_columnIndexOfId));
-          final String _tmpName;
-          if (_stmt.isNull(_columnIndexOfName)) {
-            _tmpName = null;
-          } else {
-            _tmpName = _stmt.getText(_columnIndexOfName);
-          }
-          final int _tmpIconRes;
-          _tmpIconRes = (int) (_stmt.getLong(_columnIndexOfIconRes));
           final boolean _tmpIsSystemApp;
           final int _tmp;
           _tmp = (int) (_stmt.getLong(_columnIndexOfIsSystemApp));
@@ -376,7 +291,11 @@ public final class AppDao_Impl implements AppDao {
           _tmpLastUsedTime = _stmt.getLong(_columnIndexOfLastUsedTime);
           final int _tmpUsageCount;
           _tmpUsageCount = (int) (_stmt.getLong(_columnIndexOfUsageCount));
-          _item = new AppInfo(_tmpId,_tmpName,_tmpIconRes,_tmpIsSystemApp,_tmpPackageName,_tmpLastUsedTime,_tmpUsageCount);
+          final int _tmpSortOrder;
+          _tmpSortOrder = (int) (_stmt.getLong(_columnIndexOfSortOrder));
+          final int _tmpAppFlag;
+          _tmpAppFlag = (int) (_stmt.getLong(_columnIndexOfAppFlag));
+          _item = new AppInfo(_tmpId,_tmpIsSystemApp,_tmpPackageName,_tmpLastUsedTime,_tmpUsageCount,_tmpSortOrder,_tmpAppFlag);
           _result.add(_item);
         }
         return _result;
@@ -389,32 +308,24 @@ public final class AppDao_Impl implements AppDao {
   @Override
   public Object getMostUsedApps(final int limit,
       final Continuation<? super List<AppInfo>> $completion) {
-    final String _sql = "SELECT * FROM app_info ORDER BY lastUsedTime DESC LIMIT ?";
+    final String _sql = "SELECT * FROM app_info ORDER BY usageCount DESC LIMIT ?";
     return DBUtil.performSuspending(__db, true, false, (_connection) -> {
       final SQLiteStatement _stmt = _connection.prepare(_sql);
       try {
         int _argIndex = 1;
         _stmt.bindLong(_argIndex, limit);
         final int _columnIndexOfId = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "id");
-        final int _columnIndexOfName = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "name");
-        final int _columnIndexOfIconRes = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "iconRes");
         final int _columnIndexOfIsSystemApp = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "isSystemApp");
         final int _columnIndexOfPackageName = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "packageName");
         final int _columnIndexOfLastUsedTime = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "lastUsedTime");
         final int _columnIndexOfUsageCount = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "usageCount");
+        final int _columnIndexOfSortOrder = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "sortOrder");
+        final int _columnIndexOfAppFlag = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "appFlag");
         final List<AppInfo> _result = new ArrayList<AppInfo>();
         while (_stmt.step()) {
           final AppInfo _item;
           final int _tmpId;
           _tmpId = (int) (_stmt.getLong(_columnIndexOfId));
-          final String _tmpName;
-          if (_stmt.isNull(_columnIndexOfName)) {
-            _tmpName = null;
-          } else {
-            _tmpName = _stmt.getText(_columnIndexOfName);
-          }
-          final int _tmpIconRes;
-          _tmpIconRes = (int) (_stmt.getLong(_columnIndexOfIconRes));
           final boolean _tmpIsSystemApp;
           final int _tmp;
           _tmp = (int) (_stmt.getLong(_columnIndexOfIsSystemApp));
@@ -429,7 +340,11 @@ public final class AppDao_Impl implements AppDao {
           _tmpLastUsedTime = _stmt.getLong(_columnIndexOfLastUsedTime);
           final int _tmpUsageCount;
           _tmpUsageCount = (int) (_stmt.getLong(_columnIndexOfUsageCount));
-          _item = new AppInfo(_tmpId,_tmpName,_tmpIconRes,_tmpIsSystemApp,_tmpPackageName,_tmpLastUsedTime,_tmpUsageCount);
+          final int _tmpSortOrder;
+          _tmpSortOrder = (int) (_stmt.getLong(_columnIndexOfSortOrder));
+          final int _tmpAppFlag;
+          _tmpAppFlag = (int) (_stmt.getLong(_columnIndexOfAppFlag));
+          _item = new AppInfo(_tmpId,_tmpIsSystemApp,_tmpPackageName,_tmpLastUsedTime,_tmpUsageCount,_tmpSortOrder,_tmpAppFlag);
           _result.add(_item);
         }
         return _result;
@@ -448,24 +363,16 @@ public final class AppDao_Impl implements AppDao {
         int _argIndex = 1;
         _stmt.bindLong(_argIndex, id);
         final int _columnIndexOfId = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "id");
-        final int _columnIndexOfName = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "name");
-        final int _columnIndexOfIconRes = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "iconRes");
         final int _columnIndexOfIsSystemApp = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "isSystemApp");
         final int _columnIndexOfPackageName = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "packageName");
         final int _columnIndexOfLastUsedTime = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "lastUsedTime");
         final int _columnIndexOfUsageCount = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "usageCount");
+        final int _columnIndexOfSortOrder = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "sortOrder");
+        final int _columnIndexOfAppFlag = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "appFlag");
         final AppInfo _result;
         if (_stmt.step()) {
           final int _tmpId;
           _tmpId = (int) (_stmt.getLong(_columnIndexOfId));
-          final String _tmpName;
-          if (_stmt.isNull(_columnIndexOfName)) {
-            _tmpName = null;
-          } else {
-            _tmpName = _stmt.getText(_columnIndexOfName);
-          }
-          final int _tmpIconRes;
-          _tmpIconRes = (int) (_stmt.getLong(_columnIndexOfIconRes));
           final boolean _tmpIsSystemApp;
           final int _tmp;
           _tmp = (int) (_stmt.getLong(_columnIndexOfIsSystemApp));
@@ -480,7 +387,11 @@ public final class AppDao_Impl implements AppDao {
           _tmpLastUsedTime = _stmt.getLong(_columnIndexOfLastUsedTime);
           final int _tmpUsageCount;
           _tmpUsageCount = (int) (_stmt.getLong(_columnIndexOfUsageCount));
-          _result = new AppInfo(_tmpId,_tmpName,_tmpIconRes,_tmpIsSystemApp,_tmpPackageName,_tmpLastUsedTime,_tmpUsageCount);
+          final int _tmpSortOrder;
+          _tmpSortOrder = (int) (_stmt.getLong(_columnIndexOfSortOrder));
+          final int _tmpAppFlag;
+          _tmpAppFlag = (int) (_stmt.getLong(_columnIndexOfAppFlag));
+          _result = new AppInfo(_tmpId,_tmpIsSystemApp,_tmpPackageName,_tmpLastUsedTime,_tmpUsageCount,_tmpSortOrder,_tmpAppFlag);
         } else {
           _result = null;
         }
@@ -505,24 +416,16 @@ public final class AppDao_Impl implements AppDao {
           _stmt.bindText(_argIndex, packageName);
         }
         final int _columnIndexOfId = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "id");
-        final int _columnIndexOfName = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "name");
-        final int _columnIndexOfIconRes = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "iconRes");
         final int _columnIndexOfIsSystemApp = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "isSystemApp");
         final int _columnIndexOfPackageName = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "packageName");
         final int _columnIndexOfLastUsedTime = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "lastUsedTime");
         final int _columnIndexOfUsageCount = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "usageCount");
+        final int _columnIndexOfSortOrder = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "sortOrder");
+        final int _columnIndexOfAppFlag = SQLiteStatementUtil.getColumnIndexOrThrow(_stmt, "appFlag");
         final AppInfo _result;
         if (_stmt.step()) {
           final int _tmpId;
           _tmpId = (int) (_stmt.getLong(_columnIndexOfId));
-          final String _tmpName;
-          if (_stmt.isNull(_columnIndexOfName)) {
-            _tmpName = null;
-          } else {
-            _tmpName = _stmt.getText(_columnIndexOfName);
-          }
-          final int _tmpIconRes;
-          _tmpIconRes = (int) (_stmt.getLong(_columnIndexOfIconRes));
           final boolean _tmpIsSystemApp;
           final int _tmp;
           _tmp = (int) (_stmt.getLong(_columnIndexOfIsSystemApp));
@@ -537,7 +440,11 @@ public final class AppDao_Impl implements AppDao {
           _tmpLastUsedTime = _stmt.getLong(_columnIndexOfLastUsedTime);
           final int _tmpUsageCount;
           _tmpUsageCount = (int) (_stmt.getLong(_columnIndexOfUsageCount));
-          _result = new AppInfo(_tmpId,_tmpName,_tmpIconRes,_tmpIsSystemApp,_tmpPackageName,_tmpLastUsedTime,_tmpUsageCount);
+          final int _tmpSortOrder;
+          _tmpSortOrder = (int) (_stmt.getLong(_columnIndexOfSortOrder));
+          final int _tmpAppFlag;
+          _tmpAppFlag = (int) (_stmt.getLong(_columnIndexOfAppFlag));
+          _result = new AppInfo(_tmpId,_tmpIsSystemApp,_tmpPackageName,_tmpLastUsedTime,_tmpUsageCount,_tmpSortOrder,_tmpAppFlag);
         } else {
           _result = null;
         }
@@ -581,7 +488,7 @@ public final class AppDao_Impl implements AppDao {
   @Override
   public Object updateAppUsage(final int id, final long lastUsedTime,
       final Continuation<? super Unit> $completion) {
-    final String _sql = "UPDATE app_info SET lastUsedTime = ? WHERE id = ?";
+    final String _sql = "UPDATE app_info SET lastUsedTime = ?, usageCount = usageCount + 1 WHERE id = ?";
     return DBUtil.performSuspending(__db, false, true, (_connection) -> {
       final SQLiteStatement _stmt = _connection.prepare(_sql);
       try {
@@ -589,6 +496,29 @@ public final class AppDao_Impl implements AppDao {
         _stmt.bindLong(_argIndex, lastUsedTime);
         _argIndex = 2;
         _stmt.bindLong(_argIndex, id);
+        _stmt.step();
+        return Unit.INSTANCE;
+      } finally {
+        _stmt.close();
+      }
+    }, $completion);
+  }
+
+  @Override
+  public Object updateAppSortOrder(final String packageName, final int sortOrder,
+      final Continuation<? super Unit> $completion) {
+    final String _sql = "UPDATE app_info SET sortOrder = ? WHERE packageName = ?";
+    return DBUtil.performSuspending(__db, false, true, (_connection) -> {
+      final SQLiteStatement _stmt = _connection.prepare(_sql);
+      try {
+        int _argIndex = 1;
+        _stmt.bindLong(_argIndex, sortOrder);
+        _argIndex = 2;
+        if (packageName == null) {
+          _stmt.bindNull(_argIndex);
+        } else {
+          _stmt.bindText(_argIndex, packageName);
+        }
         _stmt.step();
         return Unit.INSTANCE;
       } finally {

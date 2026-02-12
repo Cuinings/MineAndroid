@@ -10,6 +10,7 @@
       <module name="MineAndroid.board.meet.home" target="21" />
       <module name="MineAndroid.core.core-andlinker" target="21" />
       <module name="MineAndroid.core.remote" target="21" />
+      <module name="MineAndroid.launcher" target="21" />
       <module name="MineAndroid.Library.Andlinker" target="21" />
       <module name="MineAndroid.Library.Common.Activity" target="21" />
       <module name="MineAndroid.Library.Common.Application" target="21" />

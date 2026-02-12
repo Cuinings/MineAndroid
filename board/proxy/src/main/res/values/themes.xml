@@ -2,11 +2,15 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Board" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
 <!--        <item name="android:windowIsTranslucent">true</item>-->
         <item name="android:windowShowWallpaper">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
     <style name="Theme.Board" parent="Base.Theme.Board" />
+    <style name="Theme.Board.Blur" parent="Base.Theme.Board">
+        <item name="android:windowBlurBehindEnabled" tools:ignore="NewApi">true</item>
+        <item name="android:windowBackgroundBlurRadius" tools:ignore="NewApi">@dimen/dp25</item>
+        <item name="android:windowBlurBehindRadius" tools:ignore="NewApi">@dimen/dp25</item>
+    </style>
 </resources>

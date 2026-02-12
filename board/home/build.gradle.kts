@@ -65,4 +65,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    // 内存泄露检测工具
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.12")
+
 }

@@ -11,5 +11,6 @@ import com.cn.core.ui.application.BasicApplication
 class ProxyApplication: BasicApplication() {
 
     override fun initApplication() {
+
     }
 }

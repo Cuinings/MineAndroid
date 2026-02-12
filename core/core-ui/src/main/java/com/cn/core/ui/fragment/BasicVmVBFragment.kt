@@ -34,8 +34,8 @@ abstract class BasicVmVBFragment<VM: BasicMviViewModel<out UiState, out UiIntent
     }
 
     override fun onDestroyView() {
-        _binding = null
         super.onDestroyView()
+        _binding = null
     }
 
 }

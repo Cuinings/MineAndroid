@@ -1,0 +1,23 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.cn.board.database" >
+4
+5    <uses-sdk android:minSdkVersion="24" />
+6
+7    <application>
+7-->C:\Users\Work\AndroidStudioProjects\MineAndroid\board\database\src\main\AndroidManifest.xml:4:5-11:19
+8
+9        <!-- 无侵入式数据库初始化 Provider -->
+10        <provider
+10-->C:\Users\Work\AndroidStudioProjects\MineAndroid\board\database\src\main\AndroidManifest.xml:6:9-10:38
+11            android:name="com.cn.board.database.DatabaseInitProvider"
+11-->C:\Users\Work\AndroidStudioProjects\MineAndroid\board\database\src\main\AndroidManifest.xml:7:13-49
+12            android:authorities="${applicationId}.database.init"
+12-->C:\Users\Work\AndroidStudioProjects\MineAndroid\board\database\src\main\AndroidManifest.xml:8:13-65
+13            android:enabled="true"
+13-->C:\Users\Work\AndroidStudioProjects\MineAndroid\board\database\src\main\AndroidManifest.xml:10:13-35
+14            android:exported="false" />
+14-->C:\Users\Work\AndroidStudioProjects\MineAndroid\board\database\src\main\AndroidManifest.xml:9:13-37
+15    </application>
+16
+17</manifest>

@@ -46,7 +46,6 @@
             <option value="$PROJECT_DIR$/demo/app-test" />
             <option value="$PROJECT_DIR$/demo/app_test_resources" />
             <option value="$PROJECT_DIR$/demo/other-test" />
-            <option value="$PROJECT_DIR$/launcher" />
           </set>
         </option>
       </GradleProjectSettings>

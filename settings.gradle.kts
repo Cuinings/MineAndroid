@@ -39,7 +39,6 @@ rootProject.name = "MineAndroid"
 include(":demo:app-test")
 include(":demo:app_test_resources")
 include(":demo:other-test")
-include(":launcher")
 include(":board:proxy")
 include(":board:home")
 include(":board:meet")

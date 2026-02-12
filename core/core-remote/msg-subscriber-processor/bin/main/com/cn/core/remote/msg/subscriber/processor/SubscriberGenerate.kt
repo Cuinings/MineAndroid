@@ -1,14 +1,14 @@
 package com.cn.core.remote.msg.subscriber.processor
 
-import com.cn.library.remote.msg.subscriber.annotation.BasicSubscriber
+import com.cn.core.remote.msg.subscriber.annotation.BasicSubscriber
+import com.cn.core.remote.msg.subscriber.processor.FilerExt.generate
+import com.cn.core.remote.msg.subscriber.processor.SubscriberUtil.classQualifiedNameMap
+import com.cn.core.remote.msg.subscriber.processor.SubscriberUtil.methodParameterTypeMap
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.FieldSpec
 import com.squareup.javapoet.MethodSpec
 import com.squareup.javapoet.ParameterizedTypeName
 import com.squareup.javapoet.TypeSpec
-import com.cn.core.remote.msg.subscriber.processor.FilerExt.generate
-import com.cn.core.remote.msg.subscriber.processor.SubscriberUtil.classQualifiedNameMap
-import com.cn.core.remote.msg.subscriber.processor.SubscriberUtil.methodParameterTypeMap
 import javax.annotation.processing.Filer
 import javax.lang.model.element.Modifier
 
@@ -98,7 +98,7 @@ object SubscriberGenerate {
                                         } else {
                                             val mName = ClassName.get(typeMirrors[0]).toString()
                                             addCode("try {\n")
-                                            addCode("  sub.${methodName}(($mName) com.cn.library.utils.gson.GsonUtil.INSTANCE.fromJson(json, Class.forName(\"${mName}\")));\n")
+                                            addCode("  sub.${methodName}(($mName) com.cn.core.utils.gson.GsonUtil.INSTANCE.fromJson(json, Class.forName(\"${mName}\")));\n")
                                             addCode("")
                                             addCode("} catch (ClassNotFoundException e) {\n")
                                             addCode("  throw new RuntimeException(e);\n")

@@ -40,16 +40,19 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 }
 
 dependencies {
 
+    // 核心依赖
+    implementation(project(":board:database"))
+    
     // 可选模块依赖
     implementation(project(":board:home"))
     implementation(project(":board:meet"))

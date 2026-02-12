@@ -8,7 +8,7 @@ import org.gradle.api.Project
  */
 class CodeQualityConventionPlugin : Plugin<Project> {
     override fun apply(project: Project) {
-        // 应用detekt插件
-        project.pluginManager.apply("io.gitlab.arturbosch.detekt")
+        // 暂时移除detekt插件，避免jvm-target配置问题
+        // project.pluginManager.apply("io.gitlab.arturbosch.detekt")
     }
 }

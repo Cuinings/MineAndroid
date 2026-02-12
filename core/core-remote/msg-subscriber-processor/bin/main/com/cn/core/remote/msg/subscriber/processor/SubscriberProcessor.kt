@@ -1,6 +1,6 @@
 package com.cn.core.remote.msg.subscriber.processor
 
-import com.cn.core.msg.subscriber.annotation.Subscriber
+import com.cn.core.remote.msg.subscriber.annotation.Subscriber
 import com.google.auto.service.AutoService
 import com.cn.core.remote.msg.subscriber.processor.SubscriberCallbackGenerate.generateSubscriberCallback
 import com.cn.core.remote.msg.subscriber.processor.SubscriberGenerate.generateSubscriber
@@ -23,7 +23,7 @@ import javax.lang.model.util.Types
 import javax.tools.Diagnostic
 
 @AutoService(Processor::class)
-@SupportedAnnotationTypes("com.cn.library.remote.msg.subscribe.annotation.Subscriber")
+@SupportedAnnotationTypes("com.cn.core.remote.msg.subscribe.annotation.Subscriber")
 @SupportedSourceVersion(SourceVersion.RELEASE_17)
 class SubscriberProcessor: AbstractProcessor() {
 

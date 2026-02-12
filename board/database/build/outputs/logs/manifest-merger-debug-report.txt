@@ -1,0 +1,28 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\Work\AndroidStudioProjects\MineAndroid\board\database\src\main\AndroidManifest.xml:2:1-13:12
+INJECTED from C:\Users\Work\AndroidStudioProjects\MineAndroid\board\database\src\main\AndroidManifest.xml:2:1-13:12
+	package
+		INJECTED from C:\Users\Work\AndroidStudioProjects\MineAndroid\board\database\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\Work\AndroidStudioProjects\MineAndroid\board\database\src\main\AndroidManifest.xml:2:11-69
+application
+ADDED from C:\Users\Work\AndroidStudioProjects\MineAndroid\board\database\src\main\AndroidManifest.xml:4:5-11:19
+provider#com.cn.board.database.DatabaseInitProvider
+ADDED from C:\Users\Work\AndroidStudioProjects\MineAndroid\board\database\src\main\AndroidManifest.xml:6:9-10:38
+	android:enabled
+		ADDED from C:\Users\Work\AndroidStudioProjects\MineAndroid\board\database\src\main\AndroidManifest.xml:10:13-35
+	android:authorities
+		ADDED from C:\Users\Work\AndroidStudioProjects\MineAndroid\board\database\src\main\AndroidManifest.xml:8:13-65
+	android:exported
+		ADDED from C:\Users\Work\AndroidStudioProjects\MineAndroid\board\database\src\main\AndroidManifest.xml:9:13-37
+	android:name
+		ADDED from C:\Users\Work\AndroidStudioProjects\MineAndroid\board\database\src\main\AndroidManifest.xml:7:13-49
+uses-sdk
+INJECTED from C:\Users\Work\AndroidStudioProjects\MineAndroid\board\database\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\Work\AndroidStudioProjects\MineAndroid\board\database\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Work\AndroidStudioProjects\MineAndroid\board\database\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\Work\AndroidStudioProjects\MineAndroid\board\database\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\Work\AndroidStudioProjects\MineAndroid\board\database\src\main\AndroidManifest.xml

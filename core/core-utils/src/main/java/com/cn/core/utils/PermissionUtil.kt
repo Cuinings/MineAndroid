@@ -2,7 +2,12 @@ package com.cn.core.utils
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
+import android.os.Environment
+import android.provider.Settings
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -148,6 +153,443 @@ object PermissionUtil {
             android.Manifest.permission.VIBRATE -> "振动"
             android.Manifest.permission.RECEIVE_BOOT_COMPLETED -> "接收开机完成"
             else -> permission
+        }
+    }
+
+    /**
+     * 检查是否有悬浮窗权限
+     */
+    fun hasOverlayPermission(context: Context): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Settings.canDrawOverlays(context)
+        } else {
+            true
+        }
+    }
+
+    /**
+     * 检查是否有安装未知应用权限
+     */
+    fun hasInstallPermission(context: Context): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context.packageManager.canRequestPackageInstalls()
+        } else {
+            true
+        }
+    }
+
+    /**
+     * 检查是否有通知权限
+     */
+    fun hasNotificationPermission(context: Context): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            context.checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED
+        } else {
+            true
+        }
+    }
+
+    /**
+     * 检查是否有存储权限
+     */
+    fun hasStoragePermission(context: Context): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            checkPermission(context, android.Manifest.permission.READ_MEDIA_IMAGES) ||
+            checkPermission(context, android.Manifest.permission.READ_MEDIA_VIDEO) ||
+            checkPermission(context, android.Manifest.permission.READ_MEDIA_AUDIO)
+        } else {
+            checkPermission(context, android.Manifest.permission.READ_EXTERNAL_STORAGE) &&
+            checkPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        }
+    }
+
+    /**
+     * 检查是否有相机权限
+     */
+    fun hasCameraPermission(context: Context): Boolean {
+        return checkPermission(context, android.Manifest.permission.CAMERA)
+    }
+
+    /**
+     * 检查是否有录音权限
+     */
+    fun hasRecordAudioPermission(context: Context): Boolean {
+        return checkPermission(context, android.Manifest.permission.RECORD_AUDIO)
+    }
+
+    /**
+     * 检查是否有位置权限
+     */
+    fun hasLocationPermission(context: Context): Boolean {
+        return checkPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) ||
+        checkPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+    }
+
+    /**
+     * 检查是否有精确位置权限
+     */
+    fun hasFineLocationPermission(context: Context): Boolean {
+        return checkPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION)
+    }
+
+    /**
+     * 检查是否有粗略位置权限
+     */
+    fun hasCoarseLocationPermission(context: Context): Boolean {
+        return checkPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+    }
+
+    /**
+     * 检查是否有电话权限
+     */
+    fun hasPhonePermission(context: Context): Boolean {
+        return checkPermission(context, android.Manifest.permission.READ_PHONE_STATE) &&
+        checkPermission(context, android.Manifest.permission.CALL_PHONE)
+    }
+
+    /**
+     * 检查是否有短信权限
+     */
+    fun hasSmsPermission(context: Context): Boolean {
+        return checkPermission(context, android.Manifest.permission.SEND_SMS) &&
+        checkPermission(context, android.Manifest.permission.RECEIVE_SMS) &&
+        checkPermission(context, android.Manifest.permission.READ_SMS)
+    }
+
+    /**
+     * 检查是否有联系人权限
+     */
+    fun hasContactsPermission(context: Context): Boolean {
+        return checkPermission(context, android.Manifest.permission.READ_CONTACTS) &&
+        checkPermission(context, android.Manifest.permission.WRITE_CONTACTS)
+    }
+
+    /**
+     * 检查是否有日历权限
+     */
+    fun hasCalendarPermission(context: Context): Boolean {
+        return checkPermission(context, android.Manifest.permission.READ_CALENDAR) &&
+        checkPermission(context, android.Manifest.permission.WRITE_CALENDAR)
+    }
+
+    /**
+     * 跳转到应用设置页面
+     */
+    fun openAppSettings(context: Context) {
+        val intent = Intent()
+        intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+        val uri = Uri.fromParts("package", context.packageName, null)
+        intent.data = uri
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context.startActivity(intent)
+    }
+
+    /**
+     * 跳转到悬浮窗权限设置页面
+     */
+    fun openOverlayPermissionSettings(context: Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val intent = Intent(
+                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:" + context.packageName)
+            )
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
+        }
+    }
+
+    /**
+     * 跳转到安装未知应用权限设置页面
+     */
+    fun openInstallPermissionSettings(context: Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val intent = Intent(
+                Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,
+                Uri.parse("package:" + context.packageName)
+            )
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
+        }
+    }
+
+    /**
+     * 跳转到通知权限设置页面
+     */
+    fun openNotificationPermissionSettings(context: Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val intent = Intent()
+            intent.action = Settings.ACTION_APP_NOTIFICATION_SETTINGS
+            intent.putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
+        }
+    }
+
+    /**
+     * 跳转到应用信息页面
+     */
+    fun openAppInfo(context: Context) {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        intent.data = Uri.fromParts("package", context.packageName, null)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context.startActivity(intent)
+    }
+
+    /**
+     * 跳转到WiFi设置页面
+     */
+    fun openWifiSettings(context: Context) {
+        val intent = Intent(Settings.ACTION_WIFI_SETTINGS)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context.startActivity(intent)
+    }
+
+    /**
+     * 跳转到蓝牙设置页面
+     */
+    fun openBluetoothSettings(context: Context) {
+        val intent = Intent(Settings.ACTION_BLUETOOTH_SETTINGS)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context.startActivity(intent)
+    }
+
+    /**
+     * 跳转到位置设置页面
+     */
+    fun openLocationSettings(context: Context) {
+        val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context.startActivity(intent)
+    }
+
+    /**
+     * 跳转到移动网络设置页面
+     */
+    fun openMobileDataSettings(context: Context) {
+        val intent = Intent(Settings.ACTION_DATA_ROAMING_SETTINGS)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context.startActivity(intent)
+    }
+
+    /**
+     * 检查是否是系统应用
+     */
+    fun isSystemApp(context: Context): Boolean {
+        return try {
+            val appInfo = context.packageManager.getApplicationInfo(context.packageName, 0)
+            (appInfo.flags and android.content.pm.ApplicationInfo.FLAG_SYSTEM) != 0
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    /**
+     * 检查是否是调试应用
+     */
+    fun isDebuggable(context: Context): Boolean {
+        return try {
+            val appInfo = context.packageManager.getApplicationInfo(context.packageName, 0)
+            (appInfo.flags and android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE) != 0
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    /**
+     * 检查外部存储是否可读
+     */
+    fun isExternalStorageReadable(): Boolean {
+        return Environment.getExternalStorageState() in setOf(
+            Environment.MEDIA_MOUNTED,
+            Environment.MEDIA_MOUNTED_READ_ONLY
+        )
+    }
+
+    /**
+     * 检查外部存储是否可写
+     */
+    fun isExternalStorageWritable(): Boolean {
+        return Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED
+    }
+
+    /**
+     * 获取被拒绝的权限列表
+     */
+    fun getDeniedPermissions(context: Context, permissions: Array<String>): List<String> {
+        return permissions.filter { !checkPermission(context, it) }
+    }
+
+    /**
+     * 获取永久拒绝的权限列表
+     */
+    fun getPermanentlyDeniedPermissions(activity: Activity, permissions: Array<String>): List<String> {
+        return permissions.filter { permission ->
+            !checkPermission(activity, permission) &&
+            !shouldShowRequestPermissionRationale(activity, permission)
+        }
+    }
+
+    /**
+     * 检查是否有任何权限被拒绝
+     */
+    fun hasAnyPermissionDenied(context: Context, permissions: Array<String>): Boolean {
+        return getDeniedPermissions(context, permissions).isNotEmpty()
+    }
+
+    /**
+     * 检查是否有任何权限被永久拒绝
+     */
+    fun hasAnyPermissionPermanentlyDenied(activity: Activity, permissions: Array<String>): Boolean {
+        return getPermanentlyDeniedPermissions(activity, permissions).isNotEmpty()
+    }
+
+    /**
+     * 检查是否有安装应用权限（系统权限）
+     */
+    fun hasInstallPackagesPermission(context: Context): Boolean {
+        return checkPermission(context, android.Manifest.permission.INSTALL_PACKAGES)
+    }
+
+    /**
+     * 检查是否有删除应用权限（系统权限）
+     */
+    fun hasDeletePackagesPermission(context: Context): Boolean {
+        return checkPermission(context, android.Manifest.permission.DELETE_PACKAGES)
+    }
+
+    /**
+     * 检查是否有清除应用缓存权限（系统权限）
+     */
+    fun hasClearAppCachePermission(context: Context): Boolean {
+        return checkPermission(context, android.Manifest.permission.CLEAR_APP_CACHE)
+    }
+
+    /**
+     * 检查是否有重启设备权限（系统权限）
+     */
+    fun hasRebootPermission(context: Context): Boolean {
+        return checkPermission(context, android.Manifest.permission.REBOOT)
+    }
+
+    /**
+     * 检查是否有修改系统设置权限（系统权限）
+     */
+    fun hasWriteSettingsPermission(context: Context): Boolean {
+        return checkPermission(context, android.Manifest.permission.WRITE_SETTINGS)
+    }
+
+    /**
+     * 检查是否有修改安全设置权限（系统权限）
+     */
+    fun hasWriteSecureSettingsPermission(context: Context): Boolean {
+        return checkPermission(context, android.Manifest.permission.WRITE_SECURE_SETTINGS)
+    }
+
+    /**
+     * 检查是否有系统级权限
+     */
+    fun hasSystemPermission(context: Context, permission: String): Boolean {
+        return checkPermission(context, permission)
+    }
+
+    /**
+     * 检查是否有多个系统权限
+     */
+    fun hasSystemPermissions(context: Context, permissions: Array<String>): Boolean {
+        return checkPermissions(context, permissions)
+    }
+
+    /**
+     * 检查设备是否已root
+     */
+    fun isDeviceRooted(): Boolean {
+        return try {
+            val paths = arrayOf(
+                "/system/app/Superuser.apk",
+                "/sbin/su",
+                "/system/bin/su",
+                "/system/xbin/su",
+                "/data/local/xbin/su",
+                "/data/local/bin/su",
+                "/system/sd/xbin/su",
+                "/system/bin/failsafe/su",
+                "/data/local/su",
+                "/su/bin/su"
+            )
+            
+            for (path in paths) {
+                if (java.io.File(path).exists()) {
+                    return true
+                }
+            }
+            
+            false
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    /**
+     * 检查应用是否有root权限
+     */
+    fun hasRootPermission(): Boolean {
+        return try {
+            val process = Runtime.getRuntime().exec("su")
+            val outputStream = process.outputStream
+            outputStream.write("exit\n".toByteArray())
+            outputStream.flush()
+            val exitCode = process.waitFor()
+            exitCode == 0
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    /**
+     * 检查应用是否有root权限（通过执行命令）
+     */
+    fun hasRootPermission(command: String = "echo test"): Boolean {
+        return try {
+            val process = Runtime.getRuntime().exec(arrayOf("su", "-c", command))
+            val exitCode = process.waitFor()
+            exitCode == 0
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    /**
+     * 检查是否是特权应用（位于priv-app目录）
+     */
+    fun isPrivilegedApp(context: Context): Boolean {
+        return try {
+            val appInfo = context.packageManager.getApplicationInfo(context.packageName, 0)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                (appInfo.flags and 0x80) != 0
+            } else {
+                false
+            }
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    /**
+     * 检查是否有系统级应用安装权限
+     */
+    fun isSystemAppInstaller(context: Context): Boolean {
+        return hasInstallPackagesPermission(context) && isSystemApp(context)
+    }
+
+    /**
+     * 获取应用类型
+     */
+    fun getAppType(context: Context): String {
+        return when {
+            isPrivilegedApp(context) -> "特权应用"
+            isSystemApp(context) -> "系统应用"
+            isDebuggable(context) -> "调试应用"
+            else -> "用户应用"
         }
     }
 }

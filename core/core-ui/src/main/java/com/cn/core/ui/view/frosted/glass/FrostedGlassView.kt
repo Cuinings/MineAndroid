@@ -28,7 +28,7 @@ class FrostedGlassView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    private val borderPaint = Paint(Paint.ANTI_ALIAS_FLAG) // 边框画笔
+    private var borderPaint = Paint(Paint.ANTI_ALIAS_FLAG) // 边框画笔
     private val refreshPaint = Paint(Paint.ANTI_ALIAS_FLAG) // 刷新效果画笔
     private val backgroundPaint = Paint() // 背景画笔（复用）
     private val lightPaint = Paint(Paint.ANTI_ALIAS_FLAG) // 流光效果画笔（复用）
@@ -43,6 +43,7 @@ class FrostedGlassView @JvmOverloads constructor(
     private var progress = 0f // 边框动画进度
     private var refreshProgress = 0f // 刷新效果动画进度
     private var isInitialized = false // 初始化状态
+    private var refreshRunnable: Runnable? = null // 刷新动画延迟任务
     
     // 缓存对象，避免频繁创建
     private val backgroundPath = Path()
@@ -277,11 +278,12 @@ class FrostedGlassView @JvmOverloads constructor(
             override fun onAnimationEnd(animation: Animator) {
                 // 延迟5秒后重新启动动画，确保无缝衔接
                 // 使用postDelayed()确保在UI线程中执行，消除动画间隙
-                postDelayed({
+                refreshRunnable = Runnable { 
                     // 重置refreshProgress为0，确保动画从开始位置重新开始
                     refreshProgress = 0f
                     setupRefreshAnimation()
-                }, 5000) // 5秒延迟
+                }
+                postDelayed(refreshRunnable, 5000) // 5秒延迟
             }
             
             override fun onAnimationCancel(animation: Animator) {}
@@ -523,6 +525,7 @@ class FrostedGlassView @JvmOverloads constructor(
         super.onDetachedFromWindow()
         animator?.cancel()
         refreshAnimator?.cancel()
+        refreshRunnable?.let { removeCallbacks(it) }
     }
     
     override fun setWillNotDraw(willNotDraw: Boolean) {

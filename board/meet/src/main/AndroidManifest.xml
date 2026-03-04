@@ -4,7 +4,7 @@
         android:allowBackup="true"
         android:supportsRtl="true">
         <activity
-            android:name=".MeetActivity"
+            android:name=".MeetingControlActivity"
             android:exported="true">
         </activity>
     </application>

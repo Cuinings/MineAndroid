@@ -5,6 +5,8 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Matrix
+import android.graphics.Path
+import android.graphics.RectF
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 //noinspection ExifInterface
@@ -239,5 +241,71 @@ object ImageUtil {
         options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight)
         options.inJustDecodeBounds = false
         return BitmapFactory.decodeFile(filePath, options)
+    }
+
+    /**
+     * 为Bitmap添加圆角
+     */
+    fun addRoundCorner(bitmap: Bitmap, radius: Float): Bitmap? {
+        return try {
+            val output = createBitmap(bitmap.width, bitmap.height)
+            val canvas = Canvas(output)
+            val path = Path()
+            val rect = RectF(0f, 0f, bitmap.width.toFloat(), bitmap.height.toFloat())
+            path.addRoundRect(rect, radius, radius, Path.Direction.CW)
+            canvas.clipPath(path)
+            canvas.drawBitmap(bitmap, 0f, 0f, null)
+            output
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    /**
+     * 为Bitmap添加不同角的圆角
+     */
+    fun addRoundCorner(bitmap: Bitmap, topLeft: Float, topRight: Float, bottomLeft: Float, bottomRight: Float): Bitmap? {
+        return try {
+            val output = createBitmap(bitmap.width, bitmap.height)
+            val canvas = Canvas(output)
+            val path = Path()
+            val radii = floatArrayOf(
+                topLeft, topLeft,     // 左上角
+                topRight, topRight,   // 右上角
+                bottomRight, bottomRight, // 右下角
+                bottomLeft, bottomLeft  // 左下角
+            )
+            val rect = RectF(0f, 0f, bitmap.width.toFloat(), bitmap.height.toFloat())
+            path.addRoundRect(rect, radii, Path.Direction.CW)
+            canvas.clipPath(path)
+            canvas.drawBitmap(bitmap, 0f, 0f, null)
+            output
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    /**
+     * 将Bitmap转换为圆形
+     */
+    fun toCircleBitmap(bitmap: Bitmap): Bitmap? {
+        return try {
+            val size = minOf(bitmap.width, bitmap.height)
+            val output = createBitmap(size, size)
+            val canvas = Canvas(output)
+            val path = Path()
+            val rect = RectF(0f, 0f, size.toFloat(), size.toFloat())
+            path.addOval(rect, Path.Direction.CW)
+            canvas.clipPath(path)
+            val x = (size - bitmap.width) / 2
+            val y = (size - bitmap.height) / 2
+            canvas.drawBitmap(bitmap, x.toFloat(), y.toFloat(), null)
+            output
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
     }
 }

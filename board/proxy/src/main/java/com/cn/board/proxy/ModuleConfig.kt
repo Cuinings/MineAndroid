@@ -1,8 +1,6 @@
 package com.cn.board.proxy
 
-import android.content.Context
 import com.cn.board.meet.home.HomeActivity
-import com.cn.board.meet.MeetActivity
 import com.cn.board.contacts.ContactsActivity
 
 object ModuleConfig {
@@ -37,7 +35,7 @@ object ModuleConfig {
         
         // 如果默认模块未启用，返回第一个启用的模块
         if (BuildConfig.ENABLE_HOME) return HomeActivity::class.java
-        if (BuildConfig.ENABLE_MEET) return MeetActivity::class.java
+        if (BuildConfig.ENABLE_MEET) return MeetingCtrlActivity::class.java
         if (BuildConfig.ENABLE_CONTACTS) return ContactsActivity::class.java
         
         // 如果所有模块都未启用，返回默认的HomeActivity
@@ -50,7 +48,7 @@ object ModuleConfig {
     private fun getModuleActivityClass(moduleName: String): Class<*> {
         return when (moduleName) {
             MODULE_HOME -> HomeActivity::class.java
-            MODULE_MEET -> MeetActivity::class.java
+            MODULE_MEET -> MeetingCtrlActivity::class.java
             MODULE_CONTACTS -> ContactsActivity::class.java
             else -> HomeActivity::class.java
         }

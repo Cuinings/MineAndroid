@@ -143,6 +143,13 @@ object RegexUtil {
      */
     fun String.isStrongPassword(): Boolean = matches(REGEX_STRONG_PASSWORD)
 
+    /**
+     * E.164正则表达式
+      */
+    const val REGEX_E164: String = "^\\+(?:[0-9]●?){6,14}[0-9]$"
+
+    fun String.isValidE164() = matches(REGEX_E164)
+
     // ====================================== 通用方法 ======================================
 
     /**

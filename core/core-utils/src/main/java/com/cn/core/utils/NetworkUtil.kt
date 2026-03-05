@@ -1,5 +1,6 @@
 package com.cn.core.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
@@ -18,7 +19,7 @@ import kotlinx.coroutines.flow.callbackFlow
  * @description:
  */
 
-// 1. 移除@SuppressLint，改为在函数内部进行权限检查
+@Deprecated("")
 fun Context.networkAvailable(): Flow<Boolean> = callbackFlow {
     val connectivityManager = ContextCompat.getSystemService(this@networkAvailable, ConnectivityManager::class.java)
     if (connectivityManager == null) {
@@ -97,5 +98,14 @@ fun Context.isNetworkAvailable(): Flow<Boolean> = callbackFlow {
     trySend(initialState)
     awaitClose {
         Log.d("NetworkUtil", "awaitClose")
+    }
+}
+
+@SuppressLint("MissingPermission")
+suspend fun Context.isNetworkAvailable(action: suspend (Boolean) -> Unit) = this@isNetworkAvailable.isNetworkAvailable().collect { action.invoke(it) }
+
+suspend fun Context.networkAvailable(available: () -> Unit, unavailable: () -> Unit) {
+    isNetworkAvailable {
+        if (it) available.invoke() else unavailable.invoke()
     }
 }

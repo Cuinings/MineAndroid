@@ -3,6 +3,7 @@ package com.cn.board.proxy
 import com.cn.board.contacts.ContactsActivity
 import com.cn.board.meet.MeetingControlActivity
 import com.cn.board.meet.home.HomeActivity
+import com.cn.board.wallpaper.WallpaperSettingsActivity
 
 object ModuleConfig {
     
@@ -38,7 +39,8 @@ object ModuleConfig {
         if (BuildConfig.ENABLE_HOME) return HomeActivity::class.java
         if (BuildConfig.ENABLE_MEET) return MeetingControlActivity::class.java
         if (BuildConfig.ENABLE_CONTACTS) return ContactsActivity::class.java
-        
+        if (BuildConfig.ENABLE_WALLPAPER) return WallpaperSettingsActivity::class.java
+
         // 如果所有模块都未启用，返回默认的HomeActivity
         return HomeActivity::class.java
     }

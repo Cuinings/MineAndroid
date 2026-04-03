@@ -28,14 +28,16 @@ android {
                 "proguard-rules.pro"
             )
             buildConfigField("boolean", "ENABLE_HOME", "true")
-            buildConfigField("boolean", "ENABLE_MEET", "true")
-            buildConfigField("boolean", "ENABLE_CONTACTS", "true")
+            buildConfigField("boolean", "ENABLE_MEET", "false")
+            buildConfigField("boolean", "ENABLE_CONTACTS", "false")
+            buildConfigField("boolean", "ENABLE_WALLPAPER", "false")
             buildConfigField("String", "DEFAULT_HOME_MODULE", "\"home\"")
         }
         debug {
             buildConfigField("boolean", "ENABLE_HOME", "true")
-            buildConfigField("boolean", "ENABLE_MEET", "true")
-            buildConfigField("boolean", "ENABLE_CONTACTS", "true")
+            buildConfigField("boolean", "ENABLE_MEET", "false")
+            buildConfigField("boolean", "ENABLE_CONTACTS", "false")
+            buildConfigField("boolean", "ENABLE_WALLPAPER", "false")
             buildConfigField("String", "DEFAULT_HOME_MODULE", "\"home\"")
         }
     }
@@ -49,15 +51,13 @@ android {
 }
 
 dependencies {
-
-    // 核心依赖
-    implementation(project(":board:database"))
     
     // 可选模块依赖
-    implementation(project(":board:home"))
-    implementation(project(":board:meet"))
-    implementation(project(":board:contacts"))
-    implementation(project(":core:core-ui"))
+    implementation(project(":board:module:home"))
+    implementation(project(":board:module:meet"))
+    implementation(project(":board:module:contacts"))
+    implementation(project(":board:module:wallpaper"))
+    implementation(libs.core.ui)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

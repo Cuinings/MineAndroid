@@ -52,7 +52,7 @@ afterEvaluate {
         publications {
             create<MavenPublication>("release") {
                 groupId = "com.cn.core"
-                artifactId = "core-utils"
+                artifactId = "utils"
                 version = "1.0.0"
 
                 // 从Android发布组件生成

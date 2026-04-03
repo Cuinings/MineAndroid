@@ -25,7 +25,7 @@ class BinderUnitImpl implements BinderUnit {
     private String mSvcPkgName;
     private String mAction;
     private AndLinker.BindCallback mRegBindCallback;
-    private AndLinker.BindCallback mBindCallback;
+    private AndLinker.BindCallback mInternalBindCallback;
     private AndLinker mAndLinker;
     private HashMap<String, Object> mRemoteApiObjCache;
     private List<Object> mCbkCache = new ArrayList<>();
@@ -37,7 +37,7 @@ class BinderUnitImpl implements BinderUnit {
                 BinderUnitImpl.this.bind();
             }
         }
-    };;
+    };
 
     public BinderUnitImpl(Context context, String svcPkgName, String action) {
         this(context, svcPkgName, action, (AndLinker.BindCallback)null);
@@ -53,7 +53,7 @@ class BinderUnitImpl implements BinderUnit {
         this.mSvcPkgName = svcPkgName;
         this.mAction = action;
         this.mRegBindCallback = regBindCallback;
-        this.mBindCallback = this.newBindCallback();
+        this.mInternalBindCallback = this.newBindCallback();
         this.init();
     }
 
@@ -115,15 +115,17 @@ class BinderUnitImpl implements BinderUnit {
     }
 
     public void registerBinderCallback(AndLinker.BindCallback callback) {
-        this.mBindCallback = callback;
+        this.mRegBindCallback = callback;
     }
 
     public void unRegisterBinderCallback(AndLinker.BindCallback callback) {
-        this.mBindCallback = null;
+        if (this.mRegBindCallback == callback) {
+            this.mRegBindCallback = null;
+        }
     }
 
     private void init() {
-        this.mAndLinker = AndLinkerUtils.buildAndLinker(this.mContext, this.mSvcPkgName, this.mAction, this.mBindCallback);
+        this.mAndLinker = AndLinkerUtils.buildAndLinker(this.mContext, this.mSvcPkgName, this.mAction, this.mInternalBindCallback);
     }
 
     private AndLinker.BindCallback newBindCallback() {
@@ -156,14 +158,6 @@ class BinderUnitImpl implements BinderUnit {
     }
 
     private void rmvCheckRebind() {
-        this.handler.removeCallbacksAndMessages((Object)null);
-        if (this.handler.hasMessages(100)) {
-            this.handler.removeCallbacksAndMessages((Object)null);
-        }
-
-        if (this.handler.hasMessages(100)) {
-            this.rmvCheckRebind();
-        }
-
+        this.handler.removeCallbacksAndMessages(null);
     }
 }

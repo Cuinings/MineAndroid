@@ -32,6 +32,7 @@ public final class AndLinker {
     private static final String TAG = "AndLinker";
 
     private final Map<Method, ServiceMethod> serviceMethodCache = new ConcurrentHashMap<>();
+    private final Handler mMainHandler = new Handler(android.os.Looper.getMainLooper());
     private ServiceConnection mServiceConnection;
     private Invoker mInvoker;
     private Context mContext;
@@ -81,6 +82,10 @@ public final class AndLinker {
      * Connect to the remote service.
      */
     public void bind() {
+        if (isBind())  {
+            Logger.d(TAG, "Already bind to service, skip bind.");
+            return;
+        }
         Intent intent = new Intent();
         if (!Utils.isStringBlank(mAction)) {
             intent.setAction(mAction);
@@ -96,7 +101,15 @@ public final class AndLinker {
      * Disconnect from the remote service.
      */
     public void unbind() {
-        mContext.unbindService(mServiceConnection);
+        if (!isBind()) {
+            Logger.d(TAG, "Not bind to service, skip unbind.");
+            return;
+        }
+        try {
+            mContext.unbindService(mServiceConnection);
+        } catch (Exception e) {
+            Logger.e(TAG, "Failed to unbind service: " + e.getMessage());
+        }
     }
 
     /**
@@ -156,13 +169,11 @@ public final class AndLinker {
 
             @Override
             public void onServiceDisconnected(ComponentName name) {
-                if (mTransferService == null) {
-                    Logger.e(TAG, "Error occur, TransferService was null when service disconnected.");
-                    fireOnUnBind();
-                    return;
-                }
+                Logger.d(TAG, "onServiceDisconnected: " + name);
                 try {
-                    mTransferService.unRegister(mCallback);
+                    if (mTransferService != null) {
+                        mTransferService.unRegister(mCallback);
+                    }
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }finally {         //如果上面真的出现异常也能通知到客户端当前链接已经断开
@@ -175,32 +186,13 @@ public final class AndLinker {
 
     private void fireOnBind() {
         if (mBindCallback != null) {
-            if(mContext!=null) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mBindCallback.onBind();
-                    }
-                }, 100);
-            }else{
-                mBindCallback.onBind();
-            }
+            mMainHandler.postDelayed(() -> mBindCallback.onBind(), 100);
         }
     }
 
     private void fireOnUnBind() {
         if (mBindCallback != null) {
-            if(mContext!=null) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mBindCallback.onUnBind();
-                    }
-                }, 100);
-            }else{
-                mBindCallback.onUnBind();
-            }
-//            mBindCallback.onUnBind();
+            mMainHandler.postDelayed(() -> mBindCallback.onUnBind(), 100);
         }
     }
 

@@ -2,6 +2,7 @@ package com.cn.core.ui.view.frosted.glass
 
 import android.animation.Animator
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -16,12 +17,14 @@ import android.util.AttributeSet
 import android.view.ViewTreeObserver
 import android.view.animation.LinearInterpolator
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.withStyledAttributes
 import androidx.core.view.ViewCompat
 import com.cn.core.ui.R
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.math.sqrt
 
+@SuppressLint("Recycle")
 class FrostedGlassView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -69,31 +72,24 @@ class FrostedGlassView @JvmOverloads constructor(
     private var radiiChanged = true
 
     init {
-        // 启用硬件加速（如果可用）
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-//            setLayerType(View.LAYER_TYPE_HARDWARE, null)
-        }
-        
         // 从XML布局中读取自定义属性
-        if (attrs != null) {
-            val typedArray = context.obtainStyledAttributes(attrs, R.styleable.FrostedGlassView)
-            try {
+        attrs?.let {
+            context.withStyledAttributes(it, R.styleable.FrostedGlassView, defStyleAttr) {
                 // 读取圆角半径属性，如果未设置则使用默认值
                 val defaultRadius = 16f
-                topLeftRadius = typedArray.getDimension(R.styleable.FrostedGlassView_topLeftRadius, defaultRadius)
-                topRightRadius = typedArray.getDimension(R.styleable.FrostedGlassView_topRightRadius, defaultRadius)
-                bottomLeftRadius = typedArray.getDimension(R.styleable.FrostedGlassView_bottomLeftRadius, defaultRadius)
-                bottomRightRadius = typedArray.getDimension(R.styleable.FrostedGlassView_bottomRightRadius, defaultRadius)
+
+                topLeftRadius = getDimension(R.styleable.FrostedGlassView_topLeftRadius, defaultRadius)
+                topRightRadius = getDimension(R.styleable.FrostedGlassView_topRightRadius, defaultRadius)
+                bottomLeftRadius = getDimension(R.styleable.FrostedGlassView_bottomLeftRadius, defaultRadius)
+                bottomRightRadius = getDimension(R.styleable.FrostedGlassView_bottomRightRadius, defaultRadius)
                 // 保持向后兼容：如果设置了cornerRadius，则使用它
-                val cornerRadius = typedArray.getDimension(R.styleable.FrostedGlassView_cornerRadius, -1f)
+                val cornerRadius = getDimension(R.styleable.FrostedGlassView_cornerRadius, -1f)
                 if (cornerRadius >= 0) {
                     setCornerRadius(cornerRadius)
                 }
-            } finally {
-                typedArray.recycle()
             }
         }
-        
+        setLayerType(LAYER_TYPE_SOFTWARE, null)
         setupPaints()
         viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {

@@ -20,21 +20,23 @@ import java.util.concurrent.ConcurrentHashMap
  * - 提供默认队列
  * - 统一的任务提交接口
  * - 支持全局任务取消
+ * - 支持任务状态回调
  * - 队列状态监控
  * 
  * 使用示例：
  * ```kotlin
- * // 提交有序任务
+ * // 提交有序任务（带状态回调）
  * TaskManager.submitSerial(
  *     priority = TaskPriority.HIGH,
- *     block = { fetchData() },
- *     onSuccess = { result -> handleResult(result) }
+ *     block = { progress -> fetchData(progress) },
+ *     onSuccess = { result -> handleResult(result) },
+ *     onStateChange = { state -> handleState(state) }
  * )
  * 
  * // 提交并发任务
  * TaskManager.submitConcurrent(
  *     priority = TaskPriority.NORMAL,
- *     block = { downloadImage(url) },
+ *     block = { progress -> downloadImage(url, progress) },
  *     onSuccess = { bitmap -> displayImage(bitmap) }
  * )
  * 
@@ -46,6 +48,7 @@ import java.util.concurrent.ConcurrentHashMap
  * @see SerialTaskQueue
  * @see ConcurrentTaskQueue
  * @see Task
+ * @see TaskState
  */
 object TaskManager {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
@@ -163,9 +166,33 @@ object TaskManager {
     }
 
     /**
-     * 创建并提交有序任务
+     * 创建并提交有序任务（带进度报告）
      * 
      * 便捷方法，创建一个新任务并提交到有序队列。
+     * 
+     * @param T 任务返回值类型
+     * @param queueName 队列名称，默认为 "default_serial"
+     * @param priority 任务优先级，默认为 [TaskPriority.NORMAL]
+     * @param block 任务执行的挂起函数，接收进度报告器
+     * @param onSuccess 成功回调，可选
+     * @param onError 失败回调，可选
+     * @param onStateChange 状态变化回调，可选
+     * @return 创建并提交的任务实例
+     */
+    fun <T> submitSerial(
+        queueName: String = "default_serial",
+        priority: TaskPriority = TaskPriority.NORMAL,
+        block: suspend (ProgressReporter) -> T,
+        onSuccess: ((T) -> Unit)? = null,
+        onError: ((Throwable) -> Unit)? = null,
+        onStateChange: ((TaskState) -> Unit)? = null
+    ): Task<T> {
+        val queue = serialQueues[queueName] ?: defaultSerialQueue
+        return queue.enqueue(priority, block, onSuccess, onError, onStateChange)
+    }
+
+    /**
+     * 创建并提交有序任务（简化版本，无进度报告）
      * 
      * @param T 任务返回值类型
      * @param queueName 队列名称，默认为 "default_serial"
@@ -173,6 +200,7 @@ object TaskManager {
      * @param block 任务执行的挂起函数
      * @param onSuccess 成功回调，可选
      * @param onError 失败回调，可选
+     * @param onStateChange 状态变化回调，可选
      * @return 创建并提交的任务实例
      */
     fun <T> submitSerial(
@@ -180,10 +208,11 @@ object TaskManager {
         priority: TaskPriority = TaskPriority.NORMAL,
         block: suspend () -> T,
         onSuccess: ((T) -> Unit)? = null,
-        onError: ((Throwable) -> Unit)? = null
+        onError: ((Throwable) -> Unit)? = null,
+        onStateChange: ((TaskState) -> Unit)? = null
     ): Task<T> {
         val queue = serialQueues[queueName] ?: defaultSerialQueue
-        return queue.enqueue(priority, block, onSuccess, onError)
+        return queue.enqueue(priority, block, onSuccess, onError, onStateChange)
     }
 
     /**
@@ -206,9 +235,33 @@ object TaskManager {
     }
 
     /**
-     * 创建并提交并发任务
+     * 创建并提交并发任务（带进度报告）
      * 
      * 便捷方法，创建一个新任务并提交到并发队列。
+     * 
+     * @param T 任务返回值类型
+     * @param queueName 队列名称，默认为 "default_concurrent"
+     * @param priority 任务优先级，默认为 [TaskPriority.NORMAL]
+     * @param block 任务执行的挂起函数，接收进度报告器
+     * @param onSuccess 成功回调，可选
+     * @param onError 失败回调，可选
+     * @param onStateChange 状态变化回调，可选
+     * @return 创建并提交的任务实例
+     */
+    fun <T> submitConcurrent(
+        queueName: String = "default_concurrent",
+        priority: TaskPriority = TaskPriority.NORMAL,
+        block: suspend (ProgressReporter) -> T,
+        onSuccess: ((T) -> Unit)? = null,
+        onError: ((Throwable) -> Unit)? = null,
+        onStateChange: ((TaskState) -> Unit)? = null
+    ): Task<T> {
+        val queue = concurrentQueues[queueName] ?: defaultConcurrentQueue
+        return queue.enqueue(priority, block, onSuccess, onError, onStateChange)
+    }
+
+    /**
+     * 创建并提交并发任务（简化版本，无进度报告）
      * 
      * @param T 任务返回值类型
      * @param queueName 队列名称，默认为 "default_concurrent"
@@ -216,6 +269,7 @@ object TaskManager {
      * @param block 任务执行的挂起函数
      * @param onSuccess 成功回调，可选
      * @param onError 失败回调，可选
+     * @param onStateChange 状态变化回调，可选
      * @return 创建并提交的任务实例
      */
     fun <T> submitConcurrent(
@@ -223,10 +277,11 @@ object TaskManager {
         priority: TaskPriority = TaskPriority.NORMAL,
         block: suspend () -> T,
         onSuccess: ((T) -> Unit)? = null,
-        onError: ((Throwable) -> Unit)? = null
+        onError: ((Throwable) -> Unit)? = null,
+        onStateChange: ((TaskState) -> Unit)? = null
     ): Task<T> {
         val queue = concurrentQueues[queueName] ?: defaultConcurrentQueue
-        return queue.enqueue(priority, block, onSuccess, onError)
+        return queue.enqueue(priority, block, onSuccess, onError, onStateChange)
     }
 
     /**

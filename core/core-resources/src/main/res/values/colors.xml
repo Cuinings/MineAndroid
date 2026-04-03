@@ -2,6 +2,8 @@
 <resources>
     <!--light-->
     <color name="white">#FFFFFF</color>
+    <color name="white_0_05">#0DFFFFFF</color>
+    <color name="white_0_10">#1AFFFFFF</color>
     <color name="black">#000000</color>
     <color name="light">#1A9AEB</color>
     <color name="light_6">#FF1A9AEB</color>

@@ -1,5 +1,6 @@
 package com.cn.core.utils
 
+import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
@@ -31,15 +32,15 @@ object AppUtil {
     /**
      * 获取app名称
      */
-    fun getAppName(context: Context, packageName: String): String? {
+    fun getAppName(context: Context, packageName: String): String {
         return try {
             val packageManager = context.packageManager
             val packageInfo = packageManager.getPackageInfo(packageName, 0)
             packageInfo.applicationInfo?.let {
                 packageManager.getApplicationLabel(it).toString()
-            }
+            }?:"UNKNOWN"
         } catch (e: PackageManager.NameNotFoundException) {
-            null
+            "UNKNOWN"
         }
     }
 
@@ -61,13 +62,13 @@ object AppUtil {
     /**
      * 获取app版本名称
      */
-    fun getAppVersionName(context: Context, packageName: String): String? {
+    fun getAppVersionName(context: Context, packageName: String): String {
         return try {
             val packageManager = context.packageManager
             val packageInfo = packageManager.getPackageInfo(packageName, 0)
-            packageInfo.versionName
+            packageInfo.versionName?:"UNKNOWN"
         } catch (e: PackageManager.NameNotFoundException) {
-            null
+            "UNKNOWN"
         }
     }
 
@@ -100,7 +101,7 @@ object AppUtil {
             val applicationInfo = context.applicationInfo
             packageManager.getApplicationLabel(applicationInfo)?.toString() ?: ""
         } catch (e: Exception) {
-            ""
+            "UNKNOWN"
         }
     }
 
@@ -111,9 +112,9 @@ object AppUtil {
         return try {
             val packageManager = context.packageManager
             val packageInfo = packageManager.getPackageInfo(context.packageName, 0)
-            packageInfo.versionName ?: ""
+            packageInfo.versionName ?: "UNKNOWN"
         } catch (e: Exception) {
-            ""
+            "UNKNOWN"
         }
     }
 
@@ -154,10 +155,10 @@ object AppUtil {
         return if (includeSystemApps) {
             allApps
         } else {
-            allApps.filter { 
+            allApps.filter {
                 it.applicationInfo?.let {appInfo ->
                     (appInfo.flags and ApplicationInfo.FLAG_SYSTEM) == 0
-                } ?: false
+                } == true
             }
         }
     }
@@ -372,6 +373,7 @@ object AppUtil {
      * 需要在AndroidManifest.xml中声明权限：
      * <uses-permission android:name="android.permission.INSTALL_PACKAGES" />
      */
+    @SuppressLint("ObsoleteSdkInt")
     @androidx.annotation.RequiresPermission(android.Manifest.permission.INSTALL_PACKAGES)
     fun installAppSilently(context: Context, apkFilePath: String): Boolean {
         return try {
@@ -379,18 +381,18 @@ object AppUtil {
             if (!apkFile.exists()) {
                 return false
             }
-            
+
             if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
                 return false
             }
-            
+
             val packageManager = context.packageManager
             val installParams = android.content.pm.PackageInstaller.SessionParams(
                 android.content.pm.PackageInstaller.SessionParams.MODE_FULL_INSTALL
             )
             
-            val sessionId = packageManager.getPackageInstaller().createSession(installParams)
-            val session = packageManager.getPackageInstaller().openSession(sessionId)
+            val sessionId = packageManager.packageInstaller.createSession(installParams)
+            val session = packageManager.packageInstaller.openSession(sessionId)
             
             val apkInputStream = apkFile.inputStream()
             val sessionOutputStream = session.openWrite("app", 0, apkFile.length())
@@ -440,6 +442,7 @@ object AppUtil {
      * 需要在AndroidManifest.xml中声明权限：
      * <uses-permission android:name="android.permission.DELETE_PACKAGES" />
      */
+    @SuppressLint("ObsoleteSdkInt")
     @androidx.annotation.RequiresPermission(android.Manifest.permission.DELETE_PACKAGES)
     fun uninstallAppSilently(context: Context, packageName: String): Boolean {
         return try {

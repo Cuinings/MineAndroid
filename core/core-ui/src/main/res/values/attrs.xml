@@ -9,6 +9,23 @@
         <attr name="bottomLeftRadius" format="dimension" />
         <attr name="bottomRightRadius" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="FrostedGlowView">
+        <!-- 圆角半径属性 -->
+        <attr name="cornerRadius" />
+        <!-- 单个角的圆角半径属性 -->
+        <attr name="topLeftRadius" />
+        <attr name="topRightRadius" />
+        <attr name="bottomLeftRadius" />
+        <attr name="bottomRightRadius" />
+        <!-- 内发光属性 -->
+        <attr name="glowColor" format="color"/>
+        <attr name="glowRadius" format="dimension"/>
+        <attr name="glowStrokeWidth" format="dimension"/>
+        <attr name="glowStrokeColor" format="color"/>
+        <attr name="innerShadowThickness" format="dimension"/>
+        <attr name="innerShadowColor" format="color"/>
+    </declare-styleable>
     <declare-styleable name="MicrophoneView">
         <attr name="scaleValue" format="float"/>
 
@@ -54,5 +71,27 @@
     <declare-styleable name="LoadingView">
         <attr name="gradientRingStartColor" format="color"/>
         <attr name="gradientRingEndColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="InnerGlowView">
+        <attr name="innerGlowColor" format="color"/>
+        <attr name="innerGlowRadius" format="dimension"/>
+        <attr name="innerGlowCornerRadius" format="dimension"/>
+        <attr name="innerGlowStrokeWidth" format="dimension"/>
+        <attr name="innerGlowStrokeColor" format="color"/>
+        <attr name="innerGlowShadowThickness" format="dimension"/>
+        <attr name="innerGlowShadowColor" format="color"/>
+        <attr name="innerGlowBlurEnabled" format="boolean"/>
+        <attr name="innerGlowBlurRadius" format="dimension"/>
+        <attr name="innerGlowLiveBlurEnabled" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="WaterDropRefractionView">
+        <attr name="dropColor" format="color"/>
+        <attr name="highlightColor" format="color"/>
+        <attr name="shadowColor" format="color"/>
+        <attr name="refractionIntensity" format="float"/>
+        <attr name="waveAmplitude" format="dimension"/>
+        <attr name="waveSpeed" format="float"/>
     </declare-styleable>
 </resources>

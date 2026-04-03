@@ -154,48 +154,38 @@ final class Invoker {
         return mCallbackList;
     }
 
-    @SuppressWarnings("unchecked") // Single-interface proxy creation guarded by parameter safety.
+    @SuppressWarnings("unchecked")
     private <T> T getCallbackProxy(final Class<T> service, final int pid) {
         Utils.validateServiceInterface(service);
         return (T) Proxy.newProxyInstance(service.getClassLoader(), new Class<?>[]{service},
                 new InvocationHandler() {
                     @Override
                     public Object invoke(Object proxy, Method method, Object[] args) {
-                        /**
-                         *
-                         * 在多线程中回调该接口可能会出现
-                         * java.lang.IllegalStateException: beginBroadcast() called while already in a broadcast
-                         *
-                         * */
-                        synchronized (mCallbackList) {
-                            Object result = null;
-                            //添加策略，解决由于回调出现一次异常导致后续所有接口调用均不可用
-                            int len = -1;
-                            try {
-                                len = mCallbackList.beginBroadcast();
-                                for (int i = 0; i < len; i++) {
-                                    int cookiePid = (int) mCallbackList.getBroadcastCookie(i);
-//                                    Log.d("Invoker", "getCallbackProxy---->cookiePid = " + cookiePid);
-                                    if (cookiePid == pid) {
-                                        try {
-                                            Request request = createCallbackRequest(service.getSimpleName(), method.getName(), args);
-                                            Response response = mCallbackList.getBroadcastItem(i).callback(request);
+                        Object result = null;
+                        int len = mCallbackList.beginBroadcast();
+                        try {
+                            for (int i = 0; i < len; i++) {
+                                int cookiePid = (int) mCallbackList.getBroadcastCookie(i);
+                                if (cookiePid == pid) {
+                                    try {
+                                        Request request = createCallbackRequest(service.getSimpleName(), method.getName(), args);
+                                        Response response = mCallbackList.getBroadcastItem(i).callback(request);
+                                        if (response != null) {
                                             result = response.getResult();
                                             if (response.getStatusCode() != Response.STATUS_CODE_SUCCESS) {
                                                 Logger.e(TAG, "Execute remote callback fail: " + response.toString());
                                             }
-                                        } catch (RemoteException e) {
-                                            Logger.e(TAG, "Error when execute callback!", e);
                                         }
-                                        break;
+                                    } catch (RemoteException e) {
+                                        Logger.e(TAG, "Error when execute callback!", e);
                                     }
+                                    break;
                                 }
-                            }finally {
-                                if(len!=-1)
-                                    mCallbackList.finishBroadcast();
                             }
-                            return result;
+                        } finally {
+                            mCallbackList.finishBroadcast();
                         }
+                        return result;
                     }
                 });
     }

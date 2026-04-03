@@ -17,19 +17,24 @@ import kotlinx.coroutines.job
  * - 独立的生命周期管理
  * - 根据并发数自动选择队列类型
  * - 支持有序和并发两种模式
+ * - 支持任务状态回调
  * - 简洁的 API 设计
  * 
  * 使用示例：
  * ```kotlin
  * // 创建有序队列作用域
  * val serialScope = TaskQueueScope.serial("my_serial")
- * serialScope.enqueue { doTask1() }
- * serialScope.enqueue { doTask2() }
+ * serialScope.enqueue(
+ *     block = { progress -> doTask1(progress) },
+ *     onStateChange = { state -> handleState(state) }
+ * )
  * 
  * // 创建并发队列作用域
  * val concurrentScope = TaskQueueScope.concurrent("my_concurrent", maxConcurrency = 8)
- * concurrentScope.enqueue { downloadImage(url1) }
- * concurrentScope.enqueue { downloadImage(url2) }
+ * concurrentScope.enqueue(
+ *     block = { progress -> downloadImage(url1, progress) },
+ *     onStateChange = { state -> handleState(state) }
+ * )
  * 
  * // 使用完毕后关闭
  * serialScope.shutdown()
@@ -41,6 +46,7 @@ import kotlinx.coroutines.job
  * 
  * @see SerialTaskQueue
  * @see ConcurrentTaskQueue
+ * @see TaskState
  */
 class TaskQueueScope(
     private val name: String,
@@ -103,27 +109,54 @@ class TaskQueueScope(
     }
 
     /**
-     * 创建并加入任务
+     * 创建并加入任务（带进度报告）
      * 
      * 便捷方法，创建一个新任务并加入队列。
+     * 
+     * @param T 任务返回值类型
+     * @param priority 任务优先级，默认为 [TaskPriority.NORMAL]
+     * @param block 任务执行的挂起函数，接收进度报告器
+     * @param onSuccess 成功回调，可选
+     * @param onError 失败回调，可选
+     * @param onStateChange 状态变化回调，可选
+     * @return 创建并加入队列的任务实例
+     */
+    fun <T> enqueue(
+        priority: TaskPriority = TaskPriority.NORMAL,
+        block: suspend (ProgressReporter) -> T,
+        onSuccess: ((T) -> Unit)? = null,
+        onError: ((Throwable) -> Unit)? = null,
+        onStateChange: ((TaskState) -> Unit)? = null
+    ): Task<T> {
+        return if (maxConcurrency == 1) {
+            serialQueue!!.enqueue(priority, block, onSuccess, onError, onStateChange)
+        } else {
+            concurrentQueue!!.enqueue(priority, block, onSuccess, onError, onStateChange)
+        }
+    }
+
+    /**
+     * 创建并加入任务（简化版本，无进度报告）
      * 
      * @param T 任务返回值类型
      * @param priority 任务优先级，默认为 [TaskPriority.NORMAL]
      * @param block 任务执行的挂起函数
      * @param onSuccess 成功回调，可选
      * @param onError 失败回调，可选
+     * @param onStateChange 状态变化回调，可选
      * @return 创建并加入队列的任务实例
      */
     fun <T> enqueue(
         priority: TaskPriority = TaskPriority.NORMAL,
         block: suspend () -> T,
         onSuccess: ((T) -> Unit)? = null,
-        onError: ((Throwable) -> Unit)? = null
+        onError: ((Throwable) -> Unit)? = null,
+        onStateChange: ((TaskState) -> Unit)? = null
     ): Task<T> {
         return if (maxConcurrency == 1) {
-            serialQueue!!.enqueue(priority, block, onSuccess, onError)
+            serialQueue!!.enqueue(priority, block, onSuccess, onError, onStateChange)
         } else {
-            concurrentQueue!!.enqueue(priority, block, onSuccess, onError)
+            concurrentQueue!!.enqueue(priority, block, onSuccess, onError, onStateChange)
         }
     }
 
@@ -173,8 +206,10 @@ class TaskQueueScope(
          * 使用示例：
          * ```kotlin
          * val scope = TaskQueueScope.serial("my_serial")
-         * scope.enqueue { task1() }
-         * scope.enqueue { task2() }
+         * scope.enqueue(
+         *     block = { progress -> task1(progress) },
+         *     onStateChange = { state -> handleState(state) }
+         * )
          * ```
          */
         fun serial(name: String = "default"): TaskQueueScope {
@@ -194,8 +229,10 @@ class TaskQueueScope(
          * 使用示例：
          * ```kotlin
          * val scope = TaskQueueScope.concurrent("my_concurrent", maxConcurrency = 8)
-         * scope.enqueue { downloadImage(url1) }
-         * scope.enqueue { downloadImage(url2) }
+         * scope.enqueue(
+         *     block = { progress -> downloadImage(url, progress) },
+         *     onStateChange = { state -> handleState(state) }
+         * )
          * ```
          */
         fun concurrent(

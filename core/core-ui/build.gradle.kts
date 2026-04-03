@@ -58,7 +58,7 @@ afterEvaluate {
         publications {
             create<MavenPublication>("release") {
                 groupId = "com.cn.core"
-                artifactId = "core-ui"
+                artifactId = "ui"
                 version = "1.0.0"
 
                 // 从Android发布组件生成

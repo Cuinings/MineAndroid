@@ -47,7 +47,7 @@ afterEvaluate {
         publications {
             create<MavenPublication>("release") {
                 groupId = "com.cn.core"
-                artifactId = "core-task"
+                artifactId = "queue-task"
                 version = "1.0.0"
 
                 from(components["release"])

@@ -172,6 +172,15 @@ class FrostedGlowView @JvmOverloads constructor(
     private var clipPathDirty = true
     private var glowPathDirty = true
     private var innerPathDirty = true
+    /** 路径测量对象 */
+    private val pathMeasure = PathMeasure()
+    /** 缓存的路径总长度 */
+    private var cachedTotalLength = 0f
+    /** 缓存的光效长度 */
+    private var cachedGlowLength = 0f
+    /** 缓存的宽度和高度 */
+    private var cachedPathWidth = 0f
+    private var cachedPathHeight = 0f
     /** 圆角半径数组 */
     private val radii = FloatArray(8)
     /** 矩阵对象（用于流光效果） */
@@ -266,6 +275,9 @@ class FrostedGlowView @JvmOverloads constructor(
     private var cachedSafeGlowRadius = 0f
     /** 缓存的安全阴影厚度 */
     private var cachedSafeShadowThickness = 0f
+    /** 缓存的视图宽度和高度 */
+    private var cachedViewWidth = 0f
+    private var cachedViewHeight = 0f
 
     /**
      * 初始化视图
@@ -293,8 +305,8 @@ class FrostedGlowView @JvmOverloads constructor(
                 innerShadowColor = getColor(R.styleable.FrostedGlowView_innerShadowColor, innerShadowColor)
             }
         }
-        // 根据设备性能选择合适的图层类型
-        setLayerType(LAYER_TYPE_SOFTWARE, null)
+        // 使用硬件加速，利用GPU处理复杂的图形操作，降低CPU占用
+        setLayerType(LAYER_TYPE_HARDWARE, null)
         setupPaints()
 
         viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
@@ -365,14 +377,14 @@ class FrostedGlowView @JvmOverloads constructor(
      */
     private fun setupBorderAnimation() {
         animator = ValueAnimator.ofFloat(0f, 1f)
-        animator?.duration = 3000 // 增加动画时长，使动画更平滑
+        animator?.duration = 4000 // 增加动画时长，使动画更平滑
         animator?.repeatCount = ValueAnimator.INFINITE
         animator?.repeatMode = ValueAnimator.RESTART
         animator?.interpolator = LinearInterpolator() // 使用加速减速插值器，使动画开始和结束更平滑
         animator?.addUpdateListener {
             val newProgress = it.animatedValue as Float
-            // 减小阈值，增加重绘频率，提高流畅度
-            if (Math.abs(newProgress - progress) > 0.005f) {
+            // 进一步调整阈值，减少重绘次数，降低CPU占用
+            if (Math.abs(newProgress - progress) > 0.02f) {
                 progress = newProgress
                 // 只刷新边框区域
                 val borderExtra = (borderWidth * 2).toInt()
@@ -408,7 +420,8 @@ class FrostedGlowView @JvmOverloads constructor(
         refreshAnimator?.interpolator = LinearInterpolator()
         refreshAnimator?.addUpdateListener {
             val newProgress = it.animatedValue as Float
-            if (Math.abs(newProgress - refreshProgress) > 0.02f) {
+            // 进一步调整阈值，减少重绘次数，降低CPU占用
+            if (Math.abs(newProgress - refreshProgress) > 0.05f) {
                 refreshProgress = newProgress
                 // 只刷新内部区域
                 val borderExtra = borderWidth
@@ -428,7 +441,7 @@ class FrostedGlowView @JvmOverloads constructor(
                     refreshProgress = 0f
                     setupRefreshAnimation()
                 }
-                postDelayed(refreshRunnable, 0)
+                postDelayed(refreshRunnable, 100) // 增加延迟，避免动画过于频繁
             }
             override fun onAnimationCancel(animation: Animator) {}
             override fun onAnimationRepeat(animation: Animator) {}
@@ -531,106 +544,107 @@ class FrostedGlowView @JvmOverloads constructor(
     private fun drawInnerGlow(canvas: Canvas, width: Float, height: Float) {
         if (width <= 0 || height <= 0) return
 
-        if (cachedInnerWidth != width - borderWidth * 2 || cachedInnerHeight != height - borderWidth * 2) {
+        // 检查宽度和高度是否变化
+        val sizeChanged = cachedViewWidth != width || cachedViewHeight != height
+        val glowChanged = cachedGlowColor != glowColor || cachedGradientSafeGlowRadius != glowRadius
+        
+        if (sizeChanged || glowChanged) {
+            cachedViewWidth = width
+            cachedViewHeight = height
             cachedInnerWidth = width - borderWidth * 2
             cachedInnerHeight = height - borderWidth * 2
-        }
-
-        if (cachedInnerWidth <= 0 || cachedInnerHeight <= 0) return
-
-        if (cachedSafeGlowRadius != min(glowRadius, min(cachedInnerWidth / 2f, cachedInnerHeight / 2f))) {
+            // 重新计算安全发光半径
             cachedSafeGlowRadius = min(glowRadius, min(cachedInnerWidth / 2f, cachedInnerHeight / 2f))
+            
+            // 重新创建内发光路径
+            if (cachedInnerWidth > 0 && cachedInnerHeight > 0 && cachedSafeGlowRadius > 0f) {
+                glowPath.reset()
+                // 首先创建与borderPath相同的路径
+                glowPath.addRoundRect(
+                    borderWidth, borderWidth, width - borderWidth, height - borderWidth,
+                    radii, Path.Direction.CW
+                )
+
+                // 创建一个向内偏移的路径
+                for (i in 0 until 8) {
+                    innerRadius[i] = max(0f, radii[i] - cachedSafeGlowRadius)
+                }
+                innerPath.reset()
+                innerPath.addRoundRect(
+                    borderWidth + cachedSafeGlowRadius,
+                    borderWidth + cachedSafeGlowRadius,
+                    width - borderWidth - cachedSafeGlowRadius,
+                    height - borderWidth - cachedSafeGlowRadius,
+                    innerRadius, Path.Direction.CW
+                )
+
+                // 从外路径中减去内路径，得到环形发光区域
+                glowPath.op(innerPath, Path.Op.DIFFERENCE)
+                
+                // 重新创建渐变对象
+                topGlowGradient = LinearGradient(
+                    borderWidth, borderWidth,
+                    borderWidth, borderWidth + cachedSafeGlowRadius,
+                    intArrayOf(glowColor, Color.TRANSPARENT),
+                    floatArrayOf(0f, 1f),
+                    Shader.TileMode.CLAMP
+                )
+                
+                bottomGlowGradient = LinearGradient(
+                    borderWidth, height - borderWidth,
+                    borderWidth, height - borderWidth - cachedSafeGlowRadius,
+                    intArrayOf(glowColor, Color.TRANSPARENT),
+                    floatArrayOf(0f, 1f),
+                    Shader.TileMode.CLAMP
+                )
+                
+                leftGlowGradient = LinearGradient(
+                    borderWidth, borderWidth,
+                    borderWidth + cachedSafeGlowRadius, borderWidth,
+                    intArrayOf(glowColor, Color.TRANSPARENT),
+                    floatArrayOf(0f, 1f),
+                    Shader.TileMode.CLAMP
+                )
+                
+                rightGlowGradient = LinearGradient(
+                    width - borderWidth, borderWidth,
+                    width - borderWidth - cachedSafeGlowRadius, borderWidth,
+                    intArrayOf(glowColor, Color.TRANSPARENT),
+                    floatArrayOf(0f, 1f),
+                    Shader.TileMode.CLAMP
+                )
+                
+                cachedGlowColor = glowColor
+                cachedGradientSafeGlowRadius = glowRadius
+            }
         }
 
-        if (cachedSafeGlowRadius <= 0f) return
-
-        // 创建内发光路径，基于borderPath向内偏移
-        glowPath.reset()
-        // 首先创建与borderPath相同的路径
-        glowPath.addRoundRect(
-            borderWidth, borderWidth, width - borderWidth, height - borderWidth,
-            radii, Path.Direction.CW
-        )
-
-        // 创建一个向内偏移的路径
-        for (i in 0 until 8) {
-            innerRadius[i] = max(0f, radii[i] - cachedSafeGlowRadius)
-        }
-        innerPath.reset()
-        innerPath.addRoundRect(
-            borderWidth + cachedSafeGlowRadius,
-            borderWidth + cachedSafeGlowRadius,
-            width - borderWidth - cachedSafeGlowRadius,
-            height - borderWidth - cachedSafeGlowRadius,
-            innerRadius, Path.Direction.CW
-        )
-
-        // 从外路径中减去内路径，得到环形发光区域
-        glowPath.op(innerPath, Path.Op.DIFFERENCE)
-
-        // 检查是否需要重新创建渐变对象
-        val needUpdateGradients = cachedGlowColor != glowColor || cachedGradientSafeGlowRadius != cachedSafeGlowRadius
-        if (needUpdateGradients) {
-            topGlowGradient = null
-            bottomGlowGradient = null
-            leftGlowGradient = null
-            rightGlowGradient = null
-            cachedGlowColor = glowColor
-            cachedGradientSafeGlowRadius = cachedSafeGlowRadius
-        }
+        if (cachedInnerWidth <= 0 || cachedInnerHeight <= 0 || cachedSafeGlowRadius <= 0f) return
 
         // 分别绘制四个边的内发光，每个边使用不同的渐变方向
         // 顶部发光（从上到下渐变）
-        if (topGlowGradient == null) {
-            topGlowGradient = LinearGradient(
-                borderWidth, borderWidth,
-                borderWidth, borderWidth + cachedSafeGlowRadius,
-                intArrayOf(glowColor, Color.TRANSPARENT),
-                floatArrayOf(0f, 1f),
-                Shader.TileMode.CLAMP
-            )
+        topGlowGradient?.let {
+            glowPaint.shader = it
+            canvas.drawPath(glowPath, glowPaint)
         }
-        glowPaint.shader = topGlowGradient
-        canvas.drawPath(glowPath, glowPaint)
 
         // 底部发光（从下到上渐变）
-        if (bottomGlowGradient == null) {
-            bottomGlowGradient = LinearGradient(
-                borderWidth, height - borderWidth,
-                borderWidth, height - borderWidth - cachedSafeGlowRadius,
-                intArrayOf(glowColor, Color.TRANSPARENT),
-                floatArrayOf(0f, 1f),
-                Shader.TileMode.CLAMP
-            )
+        bottomGlowGradient?.let {
+            glowPaint.shader = it
+            canvas.drawPath(glowPath, glowPaint)
         }
-        glowPaint.shader = bottomGlowGradient
-        canvas.drawPath(glowPath, glowPaint)
 
         // 左侧发光（从左到右渐变）
-        if (leftGlowGradient == null) {
-            leftGlowGradient = LinearGradient(
-                borderWidth, borderWidth,
-                borderWidth + cachedSafeGlowRadius, borderWidth,
-                intArrayOf(glowColor, Color.TRANSPARENT),
-                floatArrayOf(0f, 1f),
-                Shader.TileMode.CLAMP
-            )
+        leftGlowGradient?.let {
+            glowPaint.shader = it
+            canvas.drawPath(glowPath, glowPaint)
         }
-        glowPaint.shader = leftGlowGradient
-        canvas.drawPath(glowPath, glowPaint)
 
         // 右侧发光（从右到左渐变）
-        if (rightGlowGradient == null) {
-            rightGlowGradient = LinearGradient(
-                width - borderWidth, borderWidth,
-                width - borderWidth - cachedSafeGlowRadius, borderWidth,
-                intArrayOf(glowColor, Color.TRANSPARENT),
-                floatArrayOf(0f, 1f),
-                Shader.TileMode.CLAMP
-            )
+        rightGlowGradient?.let {
+            glowPaint.shader = it
+            canvas.drawPath(glowPath, glowPaint)
         }
-        glowPaint.shader = rightGlowGradient
-        canvas.drawPath(glowPath, glowPaint)
 
         glowPaint.shader = null
     }
@@ -767,38 +781,44 @@ class FrostedGlowView @JvmOverloads constructor(
      */
     private fun drawFlowingBorder(canvas: Canvas, width: Float, height: Float) {
         // 1. 构建圆角矩形边框路径
-        borderPath.reset()
-        borderPath.addRoundRect(
-            borderWidth, borderWidth, width - borderWidth, height - borderWidth,
-            radii, Path.Direction.CW
-        )
-
-        val pathMeasure = PathMeasure(borderPath, false)
-        val totalLength = pathMeasure.length
-        if (totalLength <= 0f) return
-
-        // 2. 光效长度 = 周长的五分之一，使光效更紧凑
-        val glowLength = totalLength / 5f
-        // 计算循环进度，确保平滑过渡
-        val cycleProgress = (progress * totalLength) % totalLength
+        if (cachedPathWidth != width || cachedPathHeight != height || borderPathDirty) {
+            borderPath.reset()
+            borderPath.addRoundRect(
+                borderWidth, borderWidth, width - borderWidth, height - borderWidth,
+                radii, Path.Direction.CW
+            )
+            // 2. 重新计算路径长度
+            pathMeasure.setPath(borderPath, false)
+            cachedTotalLength = pathMeasure.length
+            cachedGlowLength = cachedTotalLength / 5f // 光效长度 = 周长的五分之一，使光效更紧凑
+            cachedPathWidth = width
+            cachedPathHeight = height
+            borderPathDirty = false
+        }
+        
+        // 如果路径长度为0，直接返回
+        if (cachedTotalLength <= 0f) return
+        
+        // 3. 计算循环进度，确保平滑过渡
+        val cycleProgress = (progress * cachedTotalLength) % cachedTotalLength
         val start = cycleProgress          // 光效起点（沿路径距离）
-        val end = start + glowLength                // 光效终点
+        val end = start + cachedGlowLength                // 光效终点
 
-        // 3. 设置画笔样式
+        // 4. 设置画笔样式
         lightPaint.style = Paint.Style.STROKE
         lightPaint.strokeWidth = borderWidth
         lightPaint.pathEffect = null
 
-        // 4. 绘制光效，处理边界情况以确保平滑循环
-        if (end <= totalLength) {
+        // 5. 绘制光效，处理边界情况以确保平滑循环
+        if (end <= cachedTotalLength) {
             drawSegment(canvas, pathMeasure, start.toFloat(), end)
         } else {
             // 当光效跨越路径终点时，绘制两段光效以确保视觉连续性
-            drawSegment(canvas, pathMeasure, start.toFloat(), totalLength)
-            drawSegment(canvas, pathMeasure, 0f, end - totalLength)
+            drawSegment(canvas, pathMeasure, start.toFloat(), cachedTotalLength)
+            drawSegment(canvas, pathMeasure, 0f, end - cachedTotalLength)
         }
 
-        // 5. 清除 shader，避免影响其他绘制
+        // 6. 清除 shader，避免影响其他绘制
         lightPaint.shader = null
     }
 
@@ -822,6 +842,11 @@ class FrostedGlowView @JvmOverloads constructor(
     /** 点数组（用于路径测量） */
     private val startPoint = FloatArray(2)
     private val endPoint = FloatArray(2)
+    /** 缓存的渐变对象 */
+    private var segmentGradient: LinearGradient? = null
+    /** 缓存的渐变起点和终点 */
+    private val cachedGradientStart = FloatArray(2)
+    private val cachedGradientEnd = FloatArray(2)
 
     private fun drawSegment(canvas: Canvas, pathMeasure: PathMeasure, segStart: Float, segEnd: Float) {
         segmentPath.reset()
@@ -832,19 +857,31 @@ class FrostedGlowView @JvmOverloads constructor(
         pathMeasure.getPosTan(segStart, startPoint, null)
         pathMeasure.getPosTan(segEnd, endPoint, null)
 
-        // 创建渐变：起点透明 → 中间亮白 → 终点透明
-        val gradient = LinearGradient(
-            startPoint[0], startPoint[1],
-            endPoint[0], endPoint[1],
-            intArrayOf(
-                Color.TRANSPARENT,
-                Color.argb(230, 255, 255, 255),   // 亮白，可调整透明度
-                Color.TRANSPARENT
-            ),
-            floatArrayOf(0f, 0.5f, 1f),
-            Shader.TileMode.CLAMP
-        )
-        lightPaint.shader = gradient
+        // 检查是否需要重新创建渐变对象
+        val gradientChanged = startPoint[0] != cachedGradientStart[0] || startPoint[1] != cachedGradientStart[1] ||
+                endPoint[0] != cachedGradientEnd[0] || endPoint[1] != cachedGradientEnd[1]
+        
+        if (gradientChanged || segmentGradient == null) {
+            // 创建渐变：起点透明 → 中间亮白 → 终点透明
+            segmentGradient = LinearGradient(
+                startPoint[0], startPoint[1],
+                endPoint[0], endPoint[1],
+                intArrayOf(
+                    Color.TRANSPARENT,
+                    Color.argb(230, 255, 255, 255),   // 亮白，可调整透明度
+                    Color.TRANSPARENT
+                ),
+                floatArrayOf(0f, 0.5f, 1f),
+                Shader.TileMode.CLAMP
+            )
+            // 更新缓存
+            cachedGradientStart[0] = startPoint[0]
+            cachedGradientStart[1] = startPoint[1]
+            cachedGradientEnd[0] = endPoint[0]
+            cachedGradientEnd[1] = endPoint[1]
+        }
+        
+        lightPaint.shader = segmentGradient
         canvas.drawPath(segmentPath, lightPaint)
     }
     /*private fun drawFlowingBorder(canvas: Canvas, width: Float, height: Float) {
@@ -935,6 +972,7 @@ class FrostedGlowView @JvmOverloads constructor(
         rightGlowGradient = null
         staticBorderGradient = null
         flowingStaticBorderGradient = null
+        segmentGradient = null
 //        topShadowGradient = null
 //        topLeftCornerShadowGradient = null
 //        topRightCornerShadowGradient = null
@@ -946,6 +984,18 @@ class FrostedGlowView @JvmOverloads constructor(
         cachedInnerHeight = 0f
         cachedSafeGlowRadius = 0f
         cachedSafeShadowThickness = 0f
+        cachedViewWidth = 0f
+        cachedViewHeight = 0f
+        cachedTotalLength = 0f
+        cachedGlowLength = 0f
+        cachedPathWidth = 0f
+        cachedPathHeight = 0f
+        cachedGlowColor = -1
+        cachedGradientSafeGlowRadius = -1f
+        cachedGradientStart[0] = 0f
+        cachedGradientStart[1] = 0f
+        cachedGradientEnd[0] = 0f
+        cachedGradientEnd[1] = 0f
         borderPathDirty = true
         clipPathDirty = true
         glowPathDirty = true

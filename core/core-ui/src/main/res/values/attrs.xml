@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="FrostedGlassView">
+<!--    <declare-styleable name="FrostedGlassView">-->
+<!--        &lt;!&ndash; 圆角半径属性 &ndash;&gt;-->
+<!--        <attr name="cornerRadius" format="dimension" />-->
+<!--        &lt;!&ndash; 单个角的圆角半径属性 &ndash;&gt;-->
+<!--        <attr name="topLeftRadius" format="dimension" />-->
+<!--        <attr name="topRightRadius" format="dimension" />-->
+<!--        <attr name="bottomLeftRadius" format="dimension" />-->
+<!--        <attr name="bottomRightRadius" format="dimension" />-->
+<!--    </declare-styleable>-->
+
+    <declare-styleable name="FrostedGlowView">
         <!-- 圆角半径属性 -->
         <attr name="cornerRadius" format="dimension" />
         <!-- 单个角的圆角半径属性 -->
@@ -8,16 +18,6 @@
         <attr name="topRightRadius" format="dimension" />
         <attr name="bottomLeftRadius" format="dimension" />
         <attr name="bottomRightRadius" format="dimension" />
-    </declare-styleable>
-
-    <declare-styleable name="FrostedGlowView">
-        <!-- 圆角半径属性 -->
-        <attr name="cornerRadius" />
-        <!-- 单个角的圆角半径属性 -->
-        <attr name="topLeftRadius" />
-        <attr name="topRightRadius" />
-        <attr name="bottomLeftRadius" />
-        <attr name="bottomRightRadius" />
         <!-- 内发光属性 -->
         <attr name="glowColor" format="color"/>
         <attr name="glowRadius" format="dimension"/>
@@ -94,4 +94,22 @@
         <attr name="waveAmplitude" format="dimension"/>
         <attr name="waveSpeed" format="float"/>
     </declare-styleable>
+
+<!--    <declare-styleable name="GlassPanelView">-->
+<!--        &lt;!&ndash; 圆角半径属性 &ndash;&gt;-->
+<!--        <attr name="cornerRadius" format="dimension" />-->
+<!--        &lt;!&ndash; 单个角的圆角半径属性 &ndash;&gt;-->
+<!--        <attr name="topLeftRadius" format="dimension" />-->
+<!--        <attr name="topRightRadius" format="dimension" />-->
+<!--        <attr name="bottomLeftRadius" format="dimension" />-->
+<!--        <attr name="bottomRightRadius" format="dimension" />-->
+<!--        &lt;!&ndash; 内发光属性 &ndash;&gt;-->
+<!--        <attr name="glowColor" format="color"/>-->
+<!--        <attr name="glowRadius" format="dimension"/>-->
+<!--        &lt;!&ndash; 描边属性 &ndash;&gt;-->
+<!--        <attr name="strokeWidth" format="dimension"/>-->
+<!--        <attr name="strokeColor" format="color"/>-->
+<!--        &lt;!&ndash; 背景属性 &ndash;&gt;-->
+<!--        <attr name="backgroundAlpha" format="float"/>-->
+<!--    </declare-styleable>-->
 </resources>

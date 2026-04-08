@@ -9,7 +9,7 @@
     android:focusable="false"
     android:focusableInTouchMode="false"
     app:glowColor="@color/white_0_10"
-    app:glowRadius="@dimen/dp0"
+    app:glowRadius="@dimen/dp50"
     app:glowStrokeColor="@color/white_0_10"
     app:glowStrokeWidth="1px"
     app:innerShadowColor="@color/white_0_05"

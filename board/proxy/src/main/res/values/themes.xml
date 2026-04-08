@@ -5,6 +5,7 @@
 <!--        <item name="android:windowIsTranslucent">true</item>-->
         <item name="android:windowShowWallpaper">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <style name="Theme.Board" parent="Base.Theme.Board" />

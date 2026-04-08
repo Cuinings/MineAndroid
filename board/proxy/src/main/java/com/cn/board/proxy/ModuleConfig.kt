@@ -3,6 +3,7 @@ package com.cn.board.proxy
 import com.cn.board.contacts.ContactsActivity
 import com.cn.board.meet.MeetingControlActivity
 import com.cn.board.meet.home.HomeActivity
+import com.cn.board.meet.home.blur.BlurActivity
 import com.cn.board.wallpaper.WallpaperSettingsActivity
 
 object ModuleConfig {

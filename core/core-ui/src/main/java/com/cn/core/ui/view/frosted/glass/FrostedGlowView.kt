@@ -27,6 +27,7 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.sqrt
 import androidx.core.graphics.withSave
+import kotlin.math.abs
 
 /**
  * 毛玻璃发光视图
@@ -384,7 +385,7 @@ class FrostedGlowView @JvmOverloads constructor(
         animator?.addUpdateListener {
             val newProgress = it.animatedValue as Float
             // 进一步调整阈值，减少重绘次数，降低CPU占用
-            if (Math.abs(newProgress - progress) > 0.02f) {
+            if (abs(newProgress - progress) > 0.02f) {
                 progress = newProgress
                 // 只刷新边框区域
                 val borderExtra = (borderWidth * 2).toInt()
@@ -421,7 +422,7 @@ class FrostedGlowView @JvmOverloads constructor(
         refreshAnimator?.addUpdateListener {
             val newProgress = it.animatedValue as Float
             // 进一步调整阈值，减少重绘次数，降低CPU占用
-            if (Math.abs(newProgress - refreshProgress) > 0.05f) {
+            if (abs(newProgress - refreshProgress) > 0.05f) {
                 refreshProgress = newProgress
                 // 只刷新内部区域
                 val borderExtra = borderWidth
@@ -441,7 +442,7 @@ class FrostedGlowView @JvmOverloads constructor(
                     refreshProgress = 0f
                     setupRefreshAnimation()
                 }
-                postDelayed(refreshRunnable, 100) // 增加延迟，避免动画过于频繁
+                postDelayed(refreshRunnable, 0) // 增加延迟，避免动画过于频繁
             }
             override fun onAnimationCancel(animation: Animator) {}
             override fun onAnimationRepeat(animation: Animator) {}
@@ -790,7 +791,8 @@ class FrostedGlowView @JvmOverloads constructor(
             // 2. 重新计算路径长度
             pathMeasure.setPath(borderPath, false)
             cachedTotalLength = pathMeasure.length
-            cachedGlowLength = cachedTotalLength / 5f // 光效长度 = 周长的五分之一，使光效更紧凑
+            // 确保光效长度不超过路径总长度的四分之一，保证只显示一段光源
+            cachedGlowLength = min(cachedTotalLength / 4f, 200f) // 限制最大光效长度为200像素
             cachedPathWidth = width
             cachedPathHeight = height
             borderPathDirty = false
@@ -809,13 +811,25 @@ class FrostedGlowView @JvmOverloads constructor(
         lightPaint.strokeWidth = borderWidth
         lightPaint.pathEffect = null
 
-        // 5. 绘制光效，处理边界情况以确保平滑循环
+        // 5. 绘制光效，确保只显示一段光源
+        // 当光效跨越路径终点时，只绘制一段连续的光源
         if (end <= cachedTotalLength) {
+            // 光效在路径范围内，直接绘制
             drawSegment(canvas, pathMeasure, start.toFloat(), end)
         } else {
-            // 当光效跨越路径终点时，绘制两段光效以确保视觉连续性
-            drawSegment(canvas, pathMeasure, start.toFloat(), cachedTotalLength)
-            drawSegment(canvas, pathMeasure, 0f, end - cachedTotalLength)
+            // 光效跨越路径终点，计算实际需要绘制的长度
+            // 确保光效长度不超过路径总长度
+            val actualEnd = start + cachedGlowLength
+            if (actualEnd <= cachedTotalLength) {
+                drawSegment(canvas, pathMeasure, start.toFloat(), actualEnd)
+            } else {
+                // 重新计算起点，确保光效在路径范围内
+                val adjustedStart = (start - cachedTotalLength) % cachedTotalLength
+                val adjustedEnd = adjustedStart + cachedGlowLength
+                if (adjustedEnd <= cachedTotalLength) {
+                    drawSegment(canvas, pathMeasure, adjustedStart, adjustedEnd)
+                }
+            }
         }
 
         // 6. 清除 shader，避免影响其他绘制

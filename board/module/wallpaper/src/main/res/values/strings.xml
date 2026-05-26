@@ -6,5 +6,4 @@
     <string name="setting_wallpaper_path_hint">输入壁纸文件路径</string>
     <string name="setting_save">保存</string>
     <string name="setting_cancel">取消</string>
-    <string name="toast_wallpaper_updated">壁纸已更新</string>
 </resources>

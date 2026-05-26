@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.cn.core.ui.view.frosted.glass.FrostedGlowView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
@@ -8,18 +8,25 @@
     android:elevation="@dimen/dp40"
     android:focusable="false"
     android:focusableInTouchMode="false"
+    android:animateLayoutChanges="true">
+    <!--
+    app:blurEnabled="true"
+    app:glowEnabled="true"
+    app:strokeEnabled="true"
+    app:cornerRadius="@dimen/dp10"
     app:glowColor="@color/white_0_10"
     app:glowRadius="@dimen/dp50"
     app:glowStrokeColor="@color/white_0_10"
     app:glowStrokeWidth="1px"
     app:innerShadowColor="@color/white_0_05"
-    app:innerShadowThickness="1px"
-    android:animateLayoutChanges="true">
+    app:innerShadowThickness="1px"-->
 
     <TextView
         android:id="@+id/home_fragment_app_list_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:text="应用列表"
         android:textSize="@dimen/sp10"
         android:layout_marginTop="@dimen/dp18"
@@ -37,8 +44,8 @@
         android:layout_marginEnd="@dimen/dp18"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:clickable="true"
-        android:focusable="true" />
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
 
     <com.cn.board.meet.home.AppList
         android:id="@+id/home_fragment_app_list"
@@ -78,4 +85,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-</com.cn.core.ui.view.frosted.glass.FrostedGlowView>
+</androidx.constraintlayout.widget.ConstraintLayout>

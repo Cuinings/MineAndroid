@@ -9,10 +9,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.cn.core.task.TaskManager
+import com.cn.core.task.TaskManager.createSerialQueue
+import com.cn.core.task.TaskPriority
 import com.cn.core.utils.Debounce.debounce
 import com.cn.core.utils.isNetworkAvailable
 import com.cn.core.utils.networkAvailable
 import com.cn.other.test.spinner.Spinner
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.security.Permissions
@@ -42,6 +46,49 @@ class MainActivity : AppCompatActivity() {
         networkText = findViewById<TextView>(R.id.networkResult)
         debounce(10_000, { spinner.id }, lifecycleScope)
         IDefaultNetworkCallback(this@MainActivity, lifecycleScope)
+
+
+
+//        TaskManager.apply {
+//            createSerialQueue(
+//                name = "HomeActivity",
+//                dispatcher = Dispatchers.IO
+//            )
+//        }.let {
+//            it.submitSerial(
+//                priority = TaskPriority.LOW,
+//                block = { Log.d(MainActivity::class.simpleName, "onCreate: task -1") }
+//            )
+//            it.submitSerial(
+//                priority = TaskPriority.LOW,
+//                block = { Log.d(MainActivity::class.simpleName, "onCreate: task 0") }
+//            )
+//            it.submitSerial(
+//                priority = TaskPriority.NORMAL,
+//                block = { Log.d(MainActivity::class.simpleName, "onCreate: task 1") }
+//            )
+//            it.submitSerial(
+//                queueName = "normal",
+//                priority = TaskPriority.NORMAL,
+//                block = { Log.d(MainActivity::class.simpleName, "onCreate: task 2") }
+//            )
+//            it.submitSerial(
+//                priority = TaskPriority.HIGH,
+//                block = { Log.d(MainActivity::class.simpleName, "onCreate: task 3") }
+//            )
+//            it.submitSerial(
+//                priority = TaskPriority.HIGH,
+//                block = { Log.d(MainActivity::class.simpleName, "onCreate: task 4") }
+//            )
+//            it.submitSerial(
+//                priority = TaskPriority.IMMEDIATE,
+//                block = { Log.d(MainActivity::class.simpleName, "onCreate: task 5") }
+//            )
+//            it.submitSerial(
+//                priority = TaskPriority.IMMEDIATE,
+//                block = { Log.d(MainActivity::class.simpleName, "onCreate: task 6") }
+//            )
+//        }
     }
 
     fun finishActivity(view: View) {

@@ -2,7 +2,7 @@
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 3    package="com.cn.board.database" >
 4
-5    <uses-sdk android:minSdkVersion="24" />
+5    <uses-sdk android:minSdkVersion="21" />
 6
 7    <application>
 7-->C:\Users\Work\AndroidStudioProjects\MineAndroid\board\module\database\src\main\AndroidManifest.xml:4:5-11:19

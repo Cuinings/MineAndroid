@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.cn.board.proxy"
-        minSdk = 24
+        minSdk = 21
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -57,7 +57,7 @@ dependencies {
     implementation(project(":board:module:meet"))
     implementation(project(":board:module:contacts"))
     implementation(project(":board:module:wallpaper"))
-    implementation(libs.core.ui)
+    implementation(project(":core:core-ui"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

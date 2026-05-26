@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="11">
+    <bytecodeTargetLevel target="21">
       <module name="build-logic.convention" target="17" />
       <module name="build-logic.convention.main" target="17" />
       <module name="build-logic.convention.test" target="17" />
       <module name="MineAndroid.Board" target="21" />
+      <module name="MineAndroid.board.contacts" target="21" />
+      <module name="MineAndroid.board.database" target="21" />
       <module name="MineAndroid.Board.Home" target="21" />
+      <module name="MineAndroid.board.home" target="21" />
+      <module name="MineAndroid.board.home_compose" target="21" />
+      <module name="MineAndroid.board.meet" target="21" />
       <module name="MineAndroid.board.meet.home" target="21" />
       <module name="MineAndroid.core.core-andlinker" target="21" />
       <module name="MineAndroid.core.remote" target="21" />
+      <module name="MineAndroid.demo.blur" target="21" />
       <module name="MineAndroid.launcher" target="21" />
       <module name="MineAndroid.Library.Andlinker" target="21" />
       <module name="MineAndroid.Library.Common.Activity" target="21" />
@@ -102,5 +108,12 @@
       <module name="MineAndroid.TP.Launcher.Model" target="21" />
       <module name="MineAndroid.TP.Launcher.Repository" target="21" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="MineAndroid.core.core-remote.msg-subscriber-processor" options="-proc:none" />
+      <module name="MineAndroid.core.core-remote.msg-subscriber-processor.main" options="-proc:none" />
+      <module name="MineAndroid.core.core-remote.msg-subscriber-processor.test" options="-proc:none" />
+    </option>
   </component>
 </project>

@@ -36,14 +36,18 @@ dependencyResolutionManagement {
 
 rootProject.name = "MineAndroid"
 
-include(":demo:app-test")
-include(":demo:app_test_resources")
-include(":demo:other-test")
+//include(":demo:app-test")
+//include(":demo:task-demo")
+//include(":demo:toSetting")
+//include(":demo:other-test")
+//include(":demo:app_test_resources")
+
 include(":board:proxy")
-include(":board:home")
-include(":board:meet")
-include(":board:contacts")
-include(":board:database")
+include(":board:module:home")
+include(":board:module:meet")
+include(":board:module:contacts")
+include(":board:module:database")
+include(":board:module:wallpaper")
 
 include(":core:core-ui")
 include(":core:core-task")
@@ -54,4 +58,3 @@ include(":core:core-remote:msg-router-client")
 include(":core:core-remote:msg-router-service")
 include(":core:core-remote:msg-subscriber-annotation")
 include(":core:core-remote:msg-subscriber-processor")
-include(":board:home_compose")

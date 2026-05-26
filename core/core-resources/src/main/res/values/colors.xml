@@ -1,9 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--文字色-->
+    <!--#FFFFFF|100%白|焦点文字颜色-->
+    <color name="common_color_text_step_focus">#FFFFFF</color>
+    <!--#FFFFFF|100%白|一级-->
+    <color name="common_color_text_step_a">#FFFFFF</color>
+    <!--#99FFFFFF|80%白|二级-->
+    <color name="common_color_text_step_b">#CCFFFFFF</color>
+    <!--#99FFFFFF|60%白|三级-->
+    <color name="common_color_text_step_c">#99FFFFFF</color>
+    <!--#99FFFFFF|40%白|四级-->
+    <color name="common_color_text_step_d">#66FFFFFF</color>
+
+    <!--描边-->
+    <!--normal_view_group|15%白-->
+    <color name="common_color_stroke_normal_view_group">#26FFFFFF</color>
+    <!--normal_view|30%白-->
+    <color name="common_color_stroke_normal_view">#4CFFFFFF</color>
+    <!--normal_transparent|0%白-->
+    <color name="common_color_stroke_normal_transparent">#00FFFFFF</color>
+    <!--focused|50%白-->
+    <color name="common_color_stroke_focused">#7FFFFFFF</color>
+    <!--disabled|5%白-->
+    <color name="common_color_stroke_disabled">#0DFFFFFF</color>
+    <!--激活状态描边色值-->
+    <color name="common_color_stroke_active">#FF1A9AEB</color>
+
+    <!--内发光-->
+    <color name="common_color_glow_normal">#0DFFFFFF</color>
+    <color name="common_color_glow_focused">#4CFFFFFF</color>
+
+
+    <color name="common_color_seekbar_thumb_1">#18F7F5</color>
+    <color name="common_color_seekbar_thumb_2">#0DFFFFFF</color>
+    <color name="common_color_seekbar_progress_1">#6618F7F5</color>
+    <color name="common_color_seekbar_progress_2">#0DFFFFFF</color>
+    <color name="common_color_icon_path_light">#18F7F5</color>
+    <color name="common_color_icon_path_normal">#FFFFFF</color>
     <!--light-->
     <color name="white">#FFFFFF</color>
     <color name="white_0_05">#0DFFFFFF</color>
     <color name="white_0_10">#1AFFFFFF</color>
+    <color name="black_0_05">#0D000000</color>
+    <color name="black_0_10">#1A000000</color>
     <color name="black">#000000</color>
     <color name="light">#1A9AEB</color>
     <color name="light_6">#FF1A9AEB</color>

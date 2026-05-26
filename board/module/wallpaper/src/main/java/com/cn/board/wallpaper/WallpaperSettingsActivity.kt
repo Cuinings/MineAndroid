@@ -46,21 +46,17 @@ class WallpaperSettingsActivity : AppCompatActivity() {
         saveButton.setOnClickListener {
             BoardWallpaperService.wallpaperPath = pathEditText.text.toString().trim()
             // 方法1：通过 Intent 调用系统设置
-            val intent = Intent(WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER)
-
             // 指定你的 WallpaperService
+            val intent = Intent(WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER)
             intent.putExtra(
                 WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
                 ComponentName(this, BoardWallpaperService::class.java)
             )
-
             // 可选：传递额外参数
-            val params = Bundle()
-            params.putString("theme", "dark")
-            intent.putExtras(params)
-
+//            val params = Bundle()
+//            params.putString("theme", "dark")
+//            intent.putExtras(params)
             startActivity(intent)
-            Toast.makeText(this, R.string.toast_wallpaper_updated, Toast.LENGTH_SHORT).show()
             finish()
         }
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ConcentricRoundedRectView">
+        <attr name="outerRadius" format="dimension" />
+        <attr name="innerRadius" format="dimension" />
+        <attr name="gap" format="dimension" />
+        <attr name="startColor" format="color" />
+        <attr name="endColor" format="color" />
+    </declare-styleable>
+</resources>

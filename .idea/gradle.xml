@@ -24,10 +24,12 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/board" />
-            <option value="$PROJECT_DIR$/board/contacts" />
-            <option value="$PROJECT_DIR$/board/database" />
-            <option value="$PROJECT_DIR$/board/home" />
-            <option value="$PROJECT_DIR$/board/meet" />
+            <option value="$PROJECT_DIR$/board/module" />
+            <option value="$PROJECT_DIR$/board/module/contacts" />
+            <option value="$PROJECT_DIR$/board/module/database" />
+            <option value="$PROJECT_DIR$/board/module/home" />
+            <option value="$PROJECT_DIR$/board/module/meet" />
+            <option value="$PROJECT_DIR$/board/module/wallpaper" />
             <option value="$PROJECT_DIR$/board/proxy" />
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/build-logic/conventions" />
@@ -40,12 +42,9 @@
             <option value="$PROJECT_DIR$/core/core-remote/msg-subscriber-annotation" />
             <option value="$PROJECT_DIR$/core/core-remote/msg-subscriber-processor" />
             <option value="$PROJECT_DIR$/core/core-resources" />
+            <option value="$PROJECT_DIR$/core/core-task" />
             <option value="$PROJECT_DIR$/core/core-ui" />
             <option value="$PROJECT_DIR$/core/core-utils" />
-            <option value="$PROJECT_DIR$/demo" />
-            <option value="$PROJECT_DIR$/demo/app-test" />
-            <option value="$PROJECT_DIR$/demo/app_test_resources" />
-            <option value="$PROJECT_DIR$/demo/other-test" />
           </set>
         </option>
       </GradleProjectSettings>

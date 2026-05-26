@@ -8,6 +8,8 @@
     </style>
 
     <style name="Theme.MineAndroid.Normal" parent="Base.Theme.MineAndroid">
+        <!-- 允许窗口半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <!-- 壁纸主题 - 用于显示壁纸 -->

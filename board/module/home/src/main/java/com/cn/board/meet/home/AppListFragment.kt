@@ -1,5 +1,7 @@
 package com.cn.board.meet.home
 
+import android.app.Activity
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -24,6 +26,11 @@ class AppListFragment : BasicVmVBFragment<AppListViewModel, FragmentAppListBindi
         observeState()
         observeEffect()
         viewModel.processIntent(AppListViewModel.AppListIntent.LoadApps(requireContext()))
+//        binding.container.startSurfaceBlurDetection(context as Activity)
+    }
+
+    fun updateBackground(drawable: BitmapDrawable) {
+//        binding.container.bgDrawable = drawable
     }
     
     private fun setupClickListener() {

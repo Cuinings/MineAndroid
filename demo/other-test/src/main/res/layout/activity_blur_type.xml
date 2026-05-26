@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_dialog_blur_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="模糊Dialog的背景"
+        android:textAllCaps="false"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/btn_dialog_blur_behind"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="模糊Dialog后方屏幕"
+        android:textAllCaps="false"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/btn_dialog_blur_background_and_behind"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="同时模糊Dialog的背景和后方屏幕"
+        android:textAllCaps="false"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/btn_activity_blur_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="模糊Activity的背景"
+        android:textAllCaps="false"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/btn_activity_blur_behind"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="模糊Activity后方屏幕"
+        android:textAllCaps="false"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/btn_activity_blur_background_and_behind"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="同时模糊Activity的背景和后方屏幕"
+        android:textAllCaps="false"
+        android:textSize="24sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="#FFF"
+        android:gravity="center"
+        android:text="高斯模糊效果测试"
+        android:textSize="46sp" />
+</LinearLayout>

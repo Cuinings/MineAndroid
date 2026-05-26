@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace = "com.cn.app.test"
-    compileSdk = 35
+//    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.cn.app.test"
-        minSdk = 24
-        targetSdk = 35
+//        minSdk = 21
+//        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -25,13 +25,13 @@ android {
             )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
+//    compileOptions {
+//        sourceCompatibility = JavaVersion.VERSION_17
+//        targetCompatibility = JavaVersion.VERSION_17
+//    }
+//    kotlinOptions {
+//        jvmTarget = "17"
+//    }
 
     // 配置动态功能模块
     dynamicFeatures += listOf(":demo:app_test_resources")

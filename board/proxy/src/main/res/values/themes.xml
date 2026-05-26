@@ -11,7 +11,7 @@
     <style name="Theme.Board" parent="Base.Theme.Board" />
     <style name="Theme.Board.Blur" parent="Base.Theme.Board">
         <item name="android:windowBlurBehindEnabled" tools:ignore="NewApi">true</item>
-        <item name="android:windowBackgroundBlurRadius" tools:ignore="NewApi">@dimen/dp10</item>
-        <item name="android:windowBlurBehindRadius" tools:ignore="NewApi">@dimen/dp10</item>
+        <item name="android:windowBackgroundBlurRadius" tools:ignore="NewApi">@dimen/dp5</item>
+        <item name="android:windowBlurBehindRadius" tools:ignore="NewApi">@dimen/dp5</item>
     </style>
 </resources>

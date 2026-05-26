@@ -5,9 +5,9 @@ androidTools = "31.9.2"
 agp = "8.6.0"
 
 # Android SDK 版本
-compileSdk = "34"
+compileSdk = "35"
 minSdk = "21"
-targetSdk = "34"
+targetSdk = "35"
 
 # JVM 版本
 jvmTarget = "17"
@@ -151,9 +151,15 @@ android-svg = { group = "com.caverock", name = "androidsvg", version = "1.4" }
 
 # 本地库依赖
 # core模块本地maven依赖
-core-resources = { group = "com.cn.core", name = "core-resources", version = "1.0.0" }
-core-ui = { group = "com.cn.core", name = "core-ui", version = "1.0.0" }
-core-utils = { group = "com.cn.core", name = "core-utils", version = "1.0.0" }
+core-ui = { group = "com.cn.core", name = "ui", version = "1.0.0" }
+core-task = { group = "com.cn.core", name = "queue-task", version = "1.0.0" }
+core-utils = { group = "com.cn.core", name = "utils", version = "1.0.0" }
+core-resources = { group = "com.cn.core", name = "resources", version = "1.0.0" }
+core-andlinker = { group = "com.cn.core", name = "andlinker", version = "1.0.0" }
+core-msg-router-client = { group = "com.cn.core", name = "msg-router-client", version = "1.0.0" }
+core-msg-router-server = { group = "com.cn.core", name = "msg-router-server", version = "1.0.0" }
+core-msg-subscriber-annotation = { group = "com.cn.core", name = "msg-subscriber-annotation", version = "1.0.0" }
+core-msg-subscriber-processor = { group = "com.cn.core", name = "msg-subscriber-processor", version = "1.0.0" }
 
 # build-logic 依赖
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }

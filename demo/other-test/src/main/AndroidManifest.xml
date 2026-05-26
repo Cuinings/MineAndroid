@@ -20,13 +20,17 @@
             android:exported="true">
         </activity>
         <activity
-            android:name=".blur.BlurActivity"
-            android:exported="true"
-            android:theme="@style/Theme.MineAndroid.Wallpaper">
+            android:name=".blur.BlurTypeActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".blur.BlurActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MineAndroid.Wallpaper">
         </activity>
     </application>
     <uses-permission android:name="android.permission.CAMERA" />

@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.cn.other.test"
-        minSdk = 24
+        minSdk = 21
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -45,10 +45,11 @@ android {
 dependencies {
 
     api(project(":core:core-ui"))
+    api(project(":core:core-task"))
     api(project(":core:core-utils"))
     api(project(":core:core-resources"))
 
-    implementation("no.danielzeller.blurbehindlib:blurbehindlib:1.0.0")
+//    implementation("no.danielzeller.blurbehindlib:blurbehindlib:1.0.0")
 
     debugImplementation(libs.leakcanary.android)
 

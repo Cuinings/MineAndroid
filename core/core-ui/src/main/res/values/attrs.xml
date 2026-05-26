@@ -10,22 +10,69 @@
 <!--        <attr name="bottomRightRadius" format="dimension" />-->
 <!--    </declare-styleable>-->
 
-    <declare-styleable name="FrostedGlowView">
-        <!-- 圆角半径属性 -->
+    <!--<declare-styleable name="FrostedGlowView">
+        &lt;!&ndash; 圆角半径属性 &ndash;&gt;
         <attr name="cornerRadius" format="dimension" />
-        <!-- 单个角的圆角半径属性 -->
+        &lt;!&ndash; 单个角的圆角半径属性 &ndash;&gt;
         <attr name="topLeftRadius" format="dimension" />
         <attr name="topRightRadius" format="dimension" />
         <attr name="bottomLeftRadius" format="dimension" />
         <attr name="bottomRightRadius" format="dimension" />
-        <!-- 内发光属性 -->
+        &lt;!&ndash; 内发光属性 &ndash;&gt;
         <attr name="glowColor" format="color"/>
         <attr name="glowRadius" format="dimension"/>
         <attr name="glowStrokeWidth" format="dimension"/>
         <attr name="glowStrokeColor" format="color"/>
         <attr name="innerShadowThickness" format="dimension"/>
         <attr name="innerShadowColor" format="color"/>
-    </declare-styleable>
+        &lt;!&ndash; 蒙层属性 &ndash;&gt;
+        <attr name="overlayEnabled" format="boolean"/>
+        <attr name="overlayColor" format="color"/>
+    </declare-styleable>-->
+
+    <!-- FrostedGlassView: 合并模糊 + 装饰效果的毛玻璃视图 -->
+    <!--<declare-styleable name="FrostedGlassView">
+        &lt;!&ndash; 模糊开关 &ndash;&gt;
+        <attr name="blurEnabled" format="boolean"/>
+        &lt;!&ndash;内发光（四边+四角）开关&ndash;&gt;
+        <attr name="glowEnabled" format="boolean"/>
+        &lt;!&ndash;流光边框 + 静态边框开关&ndash;&gt;
+        <attr name="borderEnabled" format="boolean"/>
+        &lt;!&ndash;刷新效果动画开关&ndash;&gt;
+        <attr name="refreshEffectEnabled" format="boolean"/>
+        &lt;!&ndash;内描边开关&ndash;&gt;
+        <attr name="strokeEnabled" format="boolean"/>
+        &lt;!&ndash;阴影开关&ndash;&gt;
+        <attr name="shadowEnabled" format="boolean"/>
+        &lt;!&ndash;蒙层覆盖开关&ndash;&gt;
+        <attr name="overlayEnabled" format="boolean"/>
+        &lt;!&ndash;SurfaceView检测开关，关闭时始终使用屏幕截图模式&ndash;&gt;
+        <attr name="surfaceViewDetectionEnabled" format="boolean"/>
+        &lt;!&ndash; 圆角半径属性 &ndash;&gt;
+        <attr name="cornerRadius" format="dimension" />
+        &lt;!&ndash; 单个角的圆角半径属性 &ndash;&gt;
+        <attr name="topLeftRadius" format="dimension" />
+        <attr name="topRightRadius" format="dimension" />
+        <attr name="bottomLeftRadius" format="dimension" />
+        <attr name="bottomRightRadius" format="dimension" />
+        &lt;!&ndash; 内发光属性 &ndash;&gt;
+        <attr name="glowColor" format="color"/>
+        <attr name="glowRadius" format="dimension"/>
+        <attr name="glowStrokeWidth" format="dimension"/>
+        <attr name="glowStrokeColor" format="color"/>
+        <attr name="innerShadowThickness" format="dimension"/>
+        <attr name="innerShadowColor" format="color"/>
+        &lt;!&ndash; 蒙层属性 &ndash;&gt;
+        <attr name="overlayColor" format="color"/>
+        &lt;!&ndash; 是否使用elevation自定义阴影（替代系统elevation），默认true &ndash;&gt;
+        <attr name="useElevationShadow" format="boolean"/>
+        &lt;!&ndash; elevation→模糊半径映射比例，默认0.25 &ndash;&gt;
+        <attr name="elevationBlurRatio" format="float"/>
+        &lt;!&ndash; elevation→垂直偏移映射比例，默认0.25 &ndash;&gt;
+        <attr name="elevationOffsetYRatio" format="float"/>
+        &lt;!&ndash; 阴影透明度系数(0~1)，默认0.18，越大阴影越浓 &ndash;&gt;
+        <attr name="elevationAlphaFactor" format="float"/>
+    </declare-styleable>-->
     <declare-styleable name="MicrophoneView">
         <attr name="scaleValue" format="float"/>
 
@@ -73,7 +120,7 @@
         <attr name="gradientRingEndColor" format="color"/>
     </declare-styleable>
 
-    <declare-styleable name="InnerGlowView">
+    <!--<declare-styleable name="InnerGlowView">
         <attr name="innerGlowColor" format="color"/>
         <attr name="innerGlowRadius" format="dimension"/>
         <attr name="innerGlowCornerRadius" format="dimension"/>
@@ -84,7 +131,7 @@
         <attr name="innerGlowBlurEnabled" format="boolean"/>
         <attr name="innerGlowBlurRadius" format="dimension"/>
         <attr name="innerGlowLiveBlurEnabled" format="boolean"/>
-    </declare-styleable>
+    </declare-styleable>-->
 
     <declare-styleable name="WaterDropRefractionView">
         <attr name="dropColor" format="color"/>
@@ -94,6 +141,107 @@
         <attr name="waveAmplitude" format="dimension"/>
         <attr name="waveSpeed" format="float"/>
     </declare-styleable>
+
+    <declare-styleable name="MediaSurfaceView">
+        <!-- 缩放类型：0=center, 1=fitCenter, 2=centerCrop, 3=fitXY -->
+        <attr name="mediaScaleType" format="enum">
+            <enum name="center" value="0"/>
+            <enum name="fitCenter" value="1"/>
+            <enum name="centerCrop" value="2"/>
+            <enum name="fitXY" value="3"/>
+        </attr>
+        <!-- 是否循环播放视频 -->
+        <attr name="mediaLoop" format="boolean"/>
+        <!-- 是否静音 -->
+        <attr name="mediaMute" format="boolean"/>
+        <!-- 是否自动播放 -->
+        <attr name="mediaAutoPlay" format="boolean"/>
+    </declare-styleable>
+
+    <!--<declare-styleable name="StatefulStrokeGlowView">
+        &lt;!&ndash; 统一圆角半径 &ndash;&gt;
+        <attr name="cornerRadius" format="dimension" />
+        &lt;!&ndash; 各角独立圆角 &ndash;&gt;
+        <attr name="cornerRadiusTL" format="dimension" />
+        <attr name="cornerRadiusTR" format="dimension" />
+        <attr name="cornerRadiusBL" format="dimension" />
+        <attr name="cornerRadiusBR" format="dimension" />
+        &lt;!&ndash; 描边宽度 &ndash;&gt;
+        <attr name="strokeWidth" format="dimension" />
+        &lt;!&ndash; 描边多状态颜色 &ndash;&gt;
+        <attr name="strokeColorNormal" format="color" />
+        <attr name="strokeColorFocused" format="color" />
+        <attr name="strokeColorPressed" format="color" />
+        <attr name="strokeColorDisabled" format="color" />
+        &lt;!&ndash; 内发光开关 &ndash;&gt;
+        <attr name="glowEnabled" format="boolean" />
+        &lt;!&ndash; 描边开关 &ndash;&gt;
+        <attr name="strokeEnabled" format="boolean" />
+        &lt;!&ndash; 内发光半径（向中心延展的距离） &ndash;&gt;
+        <attr name="glowRadius" format="dimension" />
+        &lt;!&ndash; 内发光多状态颜色 &ndash;&gt;
+        <attr name="glowColorNormal" format="color" />
+        <attr name="glowColorFocused" format="color" />
+        <attr name="glowColorPressed" format="color" />
+        <attr name="glowColorDisabled" format="color" />
+        &lt;!&ndash; 外阴影开关 &ndash;&gt;
+        <attr name="shadowEnabled" format="boolean" />
+        &lt;!&ndash; 外阴影使用 elevation 方式（不需要 LAYER_TYPE_SOFTWARE） &ndash;&gt;
+        <attr name="shadowUseElevation" format="boolean" />
+        &lt;!&ndash; 外阴影半径 &ndash;&gt;
+        <attr name="shadowRadius" format="dimension" />
+        &lt;!&ndash; 外阴影偏移 &ndash;&gt;
+        <attr name="shadowDx" format="dimension" />
+        <attr name="shadowDy" format="dimension" />
+        &lt;!&ndash; 外阴影多状态颜色 &ndash;&gt;
+        <attr name="shadowColorNormal" format="color" />
+        <attr name="shadowColorFocused" format="color" />
+        <attr name="shadowColorPressed" format="color" />
+        <attr name="shadowColorDisabled" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="AnimatedStatefulStrokeGlowView">
+        &lt;!&ndash; 流光动画开关 &ndash;&gt;
+        <attr name="flowEnabled" format="boolean" />
+        &lt;!&ndash; 刷新效果开关 &ndash;&gt;
+        <attr name="refreshEffectEnabled" format="boolean" />
+        &lt;!&ndash; 流光颜色（亮白色） &ndash;&gt;
+        <attr name="flowColor" format="color" />
+        &lt;!&ndash; 刷新扫描颜色 &ndash;&gt;
+        <attr name="refreshColor" format="color" />
+        &lt;!&ndash; 静态边框颜色（无焦点时显示的淡边框） &ndash;&gt;
+        <attr name="staticBorderColor" format="color" />
+        &lt;!&ndash; 流光循环一圈时长(ms) &ndash;&gt;
+        <attr name="flowDuration" format="integer" />
+        &lt;!&ndash; 流光段落占路径总长比例(0.1~0.5) &ndash;&gt;
+        <attr name="flowSegmentRatio" format="float" />
+    </declare-styleable>-->
+
+    <declare-styleable name="GlowingDotImageView">
+        <!-- 圆点颜色 -->
+        <attr name="dotColor" format="color" />
+        <!-- 圆点半径 -->
+        <attr name="dotRadius" format="dimension" />
+        <!-- 光晕颜色 -->
+        <attr name="glowColor" format="color" />
+        <!-- 光晕半径 -->
+        <attr name="glowRadius" format="dimension" />
+        <!-- 圆点X坐标 -->
+        <attr name="dotX" format="dimension" />
+        <!-- 圆点Y坐标 -->
+        <attr name="dotY" format="dimension" />
+    </declare-styleable>
+
+    <!--<declare-styleable name="BlurredStatefulStrokeGlowView">
+        &lt;!&ndash; 模糊效果开关 &ndash;&gt;
+        <attr name="blurEnabled" format="boolean" />
+        &lt;!&ndash; SurfaceView检测开关 &ndash;&gt;
+        <attr name="surfaceViewDetectionEnabled" format="boolean" />
+        &lt;!&ndash; 模糊半径 &ndash;&gt;
+        <attr name="blurRadius" format="dimension" />
+        &lt;!&ndash; 模糊区域圆角半径 &ndash;&gt;
+        <attr name="blurCornerRadius" format="dimension" />
+    </declare-styleable>-->
 
 <!--    <declare-styleable name="GlassPanelView">-->
 <!--        &lt;!&ndash; 圆角半径属性 &ndash;&gt;-->
@@ -112,4 +260,186 @@
 <!--        &lt;!&ndash; 背景属性 &ndash;&gt;-->
 <!--        <attr name="backgroundAlpha" format="float"/>-->
 <!--    </declare-styleable>-->
+
+    <declare-styleable name="StatefulGlowView">
+        <!-- 圆角 -->
+        <attr name="sgv_cornerRadius" format="dimension" />
+        <attr name="sgv_cornerRadiusTL" format="dimension" />
+        <attr name="sgv_cornerRadiusTR" format="dimension" />
+        <attr name="sgv_cornerRadiusBL" format="dimension" />
+        <attr name="sgv_cornerRadiusBR" format="dimension" />
+        <!-- 背景颜色 -->
+        <attr name="sgv_overlayEnabled" format="boolean" />
+        <attr name="sgv_overlayColorNormal" format="color" />
+        <attr name="sgv_overlayColorPressed" format="color" />
+        <attr name="sgv_overlayColorFocused" format="color" />
+        <attr name="sgv_overlayColorSelected" format="color" />
+        <attr name="sgv_overlayColorDisabled" format="color" />
+
+        <attr name="sgv_strokeEnabled" format="boolean" />
+        <!-- 描边宽度 -->
+        <attr name="sgv_strokeWidthNormal" format="dimension" />
+        <attr name="sgv_strokeWidthPressed" format="dimension" />
+        <attr name="sgv_strokeWidthFocused" format="dimension" />
+        <attr name="sgv_strokeWidthSelected" format="dimension" />
+        <attr name="sgv_strokeWidthDisabled" format="dimension" />
+        <!-- 描边颜色 -->
+        <attr name="sgv_strokeColorNormal" format="color" />
+        <attr name="sgv_strokeColorPressed" format="color" />
+        <attr name="sgv_strokeColorFocused" format="color" />
+        <attr name="sgv_strokeColorSelected" format="color" />
+        <attr name="sgv_strokeColorDisabled" format="color" />
+
+        <attr name="sgv_glowEnabled" format="boolean" />
+        <!-- 内发光半径 -->
+        <attr name="sgv_glowRadiusNormal" format="dimension" />
+        <attr name="sgv_glowRadiusPressed" format="dimension" />
+        <attr name="sgv_glowRadiusFocused" format="dimension" />
+        <attr name="sgv_glowRadiusSelected" format="dimension" />
+        <attr name="sgv_glowRadiusDisabled" format="dimension" />
+        <!-- 内发光颜色 -->
+        <attr name="sgv_glowColorNormal" format="color" />
+        <attr name="sgv_glowColorPressed" format="color" />
+        <attr name="sgv_glowColorFocused" format="color" />
+        <attr name="sgv_glowColorSelected" format="color" />
+        <attr name="sgv_glowColorDisabled" format="color" />
+        <!-- 顶部高光 -->
+        <attr name="sgv_topHighlightEnabled" format="boolean" />
+        <attr name="sgv_topHighlightColor" format="color" />
+    </declare-styleable>
+
+    <!-- AnimatedStatefulGlowView: 带流光效果的状态化发光视图 -->
+    <declare-styleable name="AnimatedStatefulGlowView">
+        <!-- 流光开关 -->
+        <attr name="asgv_flowEnabled" format="boolean" />
+        <!-- 流光颜色（亮白色） -->
+        <attr name="asgv_flowColor" format="color" />
+        <!-- 流光一圈时长(ms) -->
+        <attr name="asgv_flowDuration" format="integer" />
+        <!-- 流光段占路径总长的比例 [0.05~0.6] -->
+        <attr name="asgv_flowSegmentRatio" format="float" />
+        <!-- 刷新效果开关 -->
+        <attr name="asgv_refreshEffectEnabled" format="boolean" />
+        <!-- 刷新扫描颜色 -->
+        <attr name="asgv_refreshColor" format="color" />
+    </declare-styleable>
+
+    <!-- FrostedAnimatedGlowView: 毛玻璃发光视图 (继承 AnimatedStatefulGlowView + 背景模糊) -->
+    <declare-styleable name="FrostedAnimatedGlowView">
+        <!-- 模糊开关 -->
+        <attr name="fagv_blurEnabled" format="boolean" />
+        <!-- 模糊半径 [1,25] px -->
+        <attr name="fagv_blurRadius" format="float" />
+        <!-- 毛玻璃蒙层颜色（半透明，模拟磨砂质感） -->
+        <attr name="fagv_overlayColor" format="color" />
+        <!-- 蒙层开关 -->
+        <attr name="fagv_overlayEnabled" format="boolean" />
+        <!-- 降采样比率 (API<31时使用, 0.2~1.0) -->
+        <attr name="fagv_downsampleRatio" format="float" />
+        <attr name="fagv_blurScaleFactor" format="float"/>
+        <attr name="fagv_blurredDrawable" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="AnimatedScalableConstraintLayout">
+        <!-- 统一圆角半径 -->
+        <attr name="cornerRadius" format="dimension" />
+        <!-- 各角独立圆角 -->
+        <attr name="cornerRadiusTL" format="dimension" />
+        <attr name="cornerRadiusTR" format="dimension" />
+        <attr name="cornerRadiusBL" format="dimension" />
+        <attr name="cornerRadiusBR" format="dimension" />
+        <!-- 描边宽度 -->
+        <attr name="strokeWidth" format="dimension" />
+        <!-- 描边多状态颜色 -->
+        <attr name="strokeColorNormal" format="color" />
+        <attr name="strokeColorFocused" format="color" />
+        <attr name="strokeColorPressed" format="color" />
+        <attr name="strokeColorDisabled" format="color" />
+        <!-- 填充多状态颜色 -->
+        <attr name="fillColorNormal" format="color" />
+        <attr name="fillColorFocused" format="color" />
+        <attr name="fillColorPressed" format="color" />
+        <attr name="fillColorDisabled" format="color" />
+        <!-- 内发光开关 -->
+        <attr name="glowEnabled" format="boolean" />
+        <!-- 描边开关 -->
+        <attr name="strokeEnabled" format="boolean" />
+        <!-- 内阴影开关 -->
+        <attr name="innerShadowEnabled" format="boolean" />
+        <!-- 内发光半径（向中心延展的距离） -->
+        <attr name="ascl_glowRadius" format="dimension" />
+        <!-- 内发光多状态颜色 -->
+        <attr name="glowColorNormal" format="color" />
+        <attr name="glowColorFocused" format="color" />
+        <attr name="glowColorPressed" format="color" />
+        <attr name="glowColorDisabled" format="color" />
+        <!-- 外阴影开关 -->
+        <attr name="shadowEnabled" format="boolean" />
+        <!-- 外阴影使用 elevation 方式（不需要 LAYER_TYPE_SOFTWARE） -->
+        <attr name="shadowUseElevation" format="boolean" />
+        <!-- 外阴影半径 -->
+        <attr name="shadowRadius" format="dimension" />
+        <!-- 外阴影偏移 -->
+        <attr name="shadowDx" format="dimension" />
+        <attr name="shadowDy" format="dimension" />
+        <!-- 外阴影多状态颜色 -->
+        <attr name="shadowColorNormal" format="color" />
+        <attr name="shadowColorFocused" format="color" />
+        <attr name="shadowColorPressed" format="color" />
+        <attr name="shadowColorDisabled" format="color" />
+        <!-- 内阴影多状态颜色 -->
+        <attr name="innerShadowColorNormal" format="color" />
+        <attr name="innerShadowColorFocused" format="color" />
+        <attr name="innerShadowColorPressed" format="color" />
+        <attr name="innerShadowColorDisabled" format="color" />
+        <!-- 缩放比例 -->
+        <attr name="scaleNormal" format="float" />
+        <attr name="scaleFocused" format="float" />
+        <attr name="scalePressed" format="float" />
+        <attr name="scaleDisabled" format="float" />
+    </declare-styleable>
+
+    <!-- MeetingStatusView: 会议状态指示器 -->
+    <declare-styleable name="MeetingStatusView">
+        <!-- 背景颜色 -->
+        <attr name="msv_backgroundColor" format="color" />
+        <!-- 边框颜色 -->
+        <attr name="msv_strokeColor" format="color" />
+        <!-- 边框宽度 -->
+        <attr name="msv_strokeWidth" format="dimension" />
+        <!-- 是否启用描边 -->
+        <attr name="msv_strokeEnabled" format="boolean" />
+        <!-- 圆角半径（统一设置） -->
+        <attr name="msv_cornerRadius" format="dimension" />
+        <!-- 左上角圆角 -->
+        <attr name="msv_cornerRadiusTL" format="dimension" />
+        <!-- 右上角圆角 -->
+        <attr name="msv_cornerRadiusTR" format="dimension" />
+        <!-- 右下角圆角 -->
+        <attr name="msv_cornerRadiusBR" format="dimension" />
+        <!-- 左下角圆角 -->
+        <attr name="msv_cornerRadiusBL" format="dimension" />
+        <!-- 顶部高光是否启用 -->
+        <attr name="msv_topHighlightEnabled" format="boolean" />
+        <!-- 顶部高光颜色 -->
+        <attr name="msv_topHighlightColor" format="color" />
+        <!-- 顶部高光高度 -->
+        <attr name="msv_topHighlightHeight" format="dimension" />
+        <!-- 文本内容 -->
+        <attr name="msv_text" format="string" />
+        <!-- 文本颜色 -->
+        <attr name="msv_textColor" format="color" />
+        <!-- 文本大小 -->
+        <attr name="msv_textSize" format="dimension" />
+        <!-- 底部发光条颜色 -->
+        <attr name="msv_glowBarColor" format="color" />
+        <!-- 底部发光条高度 -->
+        <attr name="msv_glowBarHeight" format="dimension" />
+        <!-- 底部发光条圆角 -->
+        <attr name="msv_glowBarCornerRadius" format="dimension" />
+        <!-- 是否显示底部发光条 -->
+        <attr name="msv_glowBarEnabled" format="boolean" />
+        <!-- 是否启用触摸反馈 -->
+        <attr name="msv_touchFeedbackEnabled" format="boolean" />
+    </declare-styleable>
 </resources>

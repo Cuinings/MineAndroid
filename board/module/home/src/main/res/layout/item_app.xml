@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.cn.core.ui.view.frosted.glass.FrostedGlowView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="@dimen/dp60"
     android:layout_height="@dimen/dp56"
     android:gravity="center"
     android:focusable="true"
-    android:elevation="@dimen/dp40"
+    android:focusableInTouchMode="false"
+    android:elevation="@dimen/dp40">
+    <!--
     app:cornerRadius="@dimen/dp4"
+    app:blurEnabled="false"
+    app:glowEnabled="true"
+    app:borderEnabled="true"
+    app:refreshEffectEnabled="true"
+    app:strokeEnabled="true"
+    app:shadowEnabled="true"
     app:glowColor="@color/white_0_10"
     app:glowRadius="@dimen/dp10"
     app:glowStrokeColor="@color/white_0_10"
     app:glowStrokeWidth="1px"
     app:innerShadowColor="@color/white_0_05"
-    app:innerShadowThickness="1px"
-    android:focusableInTouchMode="true">
+    app:innerShadowThickness="1px"-->
 
     <ImageView
         android:id="@+id/app_icon"
@@ -61,4 +68,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-</com.cn.core.ui.view.frosted.glass.FrostedGlowView>
+</androidx.constraintlayout.widget.ConstraintLayout>

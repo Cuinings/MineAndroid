@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,15 +7,59 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-    <FrameLayout
+    <!-- 不可见视频 SurfaceView：alpha=0 对用户不可见，但 PixelCopy 仍可从其 Surface 截取视频帧用于模糊 -->
+    <!--<com.cn.core.ui.view.media.MediaSurfaceView
+        android:id="@+id/media_surface_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        app:mediaAutoPlay="true"
+        app:mediaLoop="true"
+        app:mediaMute="true" />-->
+
+    <!--<FrameLayout
         android:id="@+id/fragment_container"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/dp280"
         android:layout_height="@dimen/dp292"
         android:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />-->
+
+    <com.cn.core.ui.view.frosted.FrostedAnimatedGlowView
+        android:id="@+id/statefulGlowView"
+        android:layout_width="wrap_content"
+        android:minWidth="@dimen/dp280"
+        android:maxWidth="@dimen/dp476"
+        android:layout_height="@dimen/dp292"
+        android:focusable="true"
+        android:elevation="@dimen/dp10"
+        app:sgv_cornerRadius="@dimen/dp16"
+        app:fagv_blurEnabled="true"
+        app:fagv_blurRadius="25"
+        app:sgv_overlayColorNormal="#0DFFFFFF"
+        app:sgv_overlayColorPressed="#0DFFFFFF"
+        app:sgv_strokeWidthNormal="@dimen/dp4"
+        app:sgv_strokeWidthFocused="@dimen/dp1"
+        app:sgv_strokeColorNormal="#0DFFFFFF"
+        app:sgv_strokeColorFocused="#0DFFFFFF"
+        app:sgv_glowRadiusNormal="@dimen/dp20"
+        app:sgv_glowRadiusFocused="@dimen/dp25"
+        app:sgv_glowColorNormal="#0DFFFFFF"
+        app:sgv_glowColorFocused="#0DFFFFFF"
+        app:sgv_topHighlightEnabled="true"
+        app:sgv_topHighlightColor="#80FFFFFF"/>
+
+    <com.cn.board.meet.home.ConcentricRoundedRectView
+        android:layout_width="@dimen/dp100"
+        android:layout_height="@dimen/dp100"
+        android:layout_centerInParent="true"
+        app:outerRadius="@dimen/dp8"
+        app:innerRadius="@dimen/dp8"
+        app:gap="@dimen/dp30"
+        android:visibility="gone"/>
+
 
     <Button
         android:id="@+id/wallpaper_setting"
@@ -23,8 +67,22 @@
         android:layout_height="wrap_content"
         android:text="Wallpaper"
         android:textAllCaps="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"/>
+
+    <Button
+        android:id="@+id/wallpaper_crop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Crop"
+        android:textAllCaps="false"
+        android:layout_toEndOf="@+id/wallpaper_setting"
+        android:layout_alignParentBottom="true"/>
+
+    <com.cn.board.meet.home.InnerGlowSquareView
+        android:layout_width="@dimen/dp100"
+        android:layout_height="@dimen/dp100"
+        android:layout_centerInParent="true"/>
 
     <!--<com.cn.core.ui.view.frosted.glass.WaterDropRefractionView
         android:layout_width="@dimen/dp100"
@@ -33,4 +91,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>-->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

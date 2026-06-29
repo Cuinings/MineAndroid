@@ -81,6 +81,13 @@ object BlurMaskManager {
         }
     }
 
+    /** 标记壁纸 drawable 需重新加载（壁纸切换时调用，不碰镂空） */
+    fun markWallpaperDirty(activity: Activity) {
+        synchronized(lock) {
+            (masks[activity]?.drawable as? WallpaperMaskDrawable)?.markWallpaperDirty()
+        }
+    }
+
     /** 设置/更新 Window blurBehindRadius */
     @SuppressLint("NewApi")
     fun setWindowBlur(activity: Activity, radius: Int) {

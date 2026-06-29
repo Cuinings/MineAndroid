@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.compile.JavaCompile
+
 plugins {
     id("mineandroid.android.library")
     id("org.jetbrains.kotlin.plugin.compose")
@@ -5,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.cn.core.ui"
-    compileSdk = 35
+    compileSdk = 31
 
     defaultConfig {
         minSdk = 21
@@ -40,6 +42,8 @@ android {
 }
 
 dependencies {
+
+    compileOnly(files("libs/system.jar"))
 
     implementation(project(":core:core-resources"))
 

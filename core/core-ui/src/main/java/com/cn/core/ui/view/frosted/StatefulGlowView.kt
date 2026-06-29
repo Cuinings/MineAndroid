@@ -38,6 +38,7 @@ open class StatefulGlowView @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     // ======================== 圆角 ========================
+    @SuppressLint("UnnecessaryArrayInit")
     protected var radii = FloatArray(8) { 0f }
         private set
 
@@ -686,5 +687,14 @@ open class StatefulGlowView @JvmOverloads constructor(
         glowRadiusAnimator = null
     }
     override fun setBackground(background: Drawable?) {
+        // 禁止外部设置背景
+    }
+
+    /**
+     * 子类专用：绕过 [setBackground] 限制，直接设置 View 底层背景。
+     * 用于 BackgroundBlurDrawable 等需要实际渲染背景 drawable 的场景。
+     */
+    protected fun setBackgroundInternal(drawable: Drawable?) {
+        super.setBackground(drawable)
     }
 }

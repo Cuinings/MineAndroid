@@ -228,7 +228,7 @@ view.frameSkipCount = 1        // 帧跳过数
 | **自适应帧率** | 根据帧时间动态调整更新频率 |
 | **内存管理** | 监听内存压力，自动回收资源 |
 
-### 3.5非首页使用
+### 3.5 非首页使用
 
 继承blurEanble设置为false
 
@@ -244,6 +244,53 @@ WallpaperManager.getInstance(context).drawable?.toBitmap()?.let {
                 binding.activityContactContent.sourceBitmap = it
             }
 ```
+
+---
+
+## 5. Android 12 (API 31) 专项说明
+
+Android 12 是本方案的最优运行环境，模糊与截取均走 **GPU 硬件路径**，无需 RenderScript。
+
+| 能力 | Android 12 实现 |
+| --- | --- |
+| 模糊引擎 | `RenderNode` + `RenderEffect.createBlurEffect`（半径 0.1~25） |
+| 静态壁纸 | `WallpaperManager` Bitmap → RenderNode 裁剪 + GPU 模糊 |
+| 动态壁纸（Live 模式） | `SurfaceControl.captureLayersExcluding` 截取含壁纸的屏幕层 |
+| 帧率 | `Choreographer` VSYNC，自适应跳帧上限 2，目标 60fps |
+| Activity 背景 | `windowShowWallpaper` + 透明 `windowBackground` + `FLAG_SHOW_WALLPAPER` |
+
+### 5.1 推荐配置（Android 12 设备）
+
+```kotlin
+// Activity 继承 BasicActivity（自动 FLAG_SHOW_WALLPAPER）
+class MyActivity : BasicActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // theme: windowBackground=transparent, windowShowWallpaper=true
+    }
+}
+
+frostedView.apply {
+    blurEnabled = true
+    blurRadius = 25f          // RenderEffect 上限
+    adaptiveFrameRate = true
+    requestFocus()            // 默认显示顶部高光 + 流光
+
+    // 静态壁纸
+    sourceBitmap = WallpaperManager.getInstance(context).drawable?.toBitmap()
+    startRealtimeBlur()
+
+    // 或：系统/本应用动态壁纸（Android 12 推荐）
+    useWindowWallpaperCapture = true
+    startRealtimeBlur()
+}
+```
+
+### 5.2 Live 模式注意事项
+
+- 需先将本应用 `BoardWallpaperService` 设为系统动态壁纸，或系统自带动态壁纸
+- Android 12 使用 `ScreenLayerCapture`（`captureLayersExcluding`），比 `PixelCopy(Window)` 更可靠地包含壁纸层
+- 若截取黑屏：确认 Activity 主题为透明且已设 `FLAG_SHOW_WALLPAPER`
 
 ---
 

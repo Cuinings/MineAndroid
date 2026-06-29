@@ -324,20 +324,14 @@
         <attr name="asgv_refreshColor" format="color" />
     </declare-styleable>
 
-    <!-- FrostedAnimatedGlowView: 毛玻璃发光视图 (继承 AnimatedStatefulGlowView + 背景模糊) -->
+    <!-- FrostedAnimatedGlowView: 毛玻璃发光视图 (BackgroundBlurDrawable 反射方案) -->
     <declare-styleable name="FrostedAnimatedGlowView">
-        <!-- 模糊开关 -->
-        <attr name="fagv_blurEnabled" format="boolean" />
-        <!-- 模糊半径 [1,25] px -->
-        <attr name="fagv_blurRadius" format="float" />
-        <!-- 毛玻璃蒙层颜色（半透明，模拟磨砂质感） -->
-        <attr name="fagv_overlayColor" format="color" />
-        <!-- 蒙层开关 -->
-        <attr name="fagv_overlayEnabled" format="boolean" />
-        <!-- 降采样比率 (API<31时使用, 0.2~1.0) -->
-        <attr name="fagv_downsampleRatio" format="float" />
-        <attr name="fagv_blurScaleFactor" format="float"/>
-        <attr name="fagv_blurredDrawable" format="reference"/>
+        <!-- 模糊开关：启用即激活 BackgroundBlurDrawable + Window blurBehindRadius -->
+        <attr name="fagv_useBackgroundBlurMode" format="boolean"/>
+        <!-- 模糊半径 [0, 25] (Window blurBehindRadius) -->
+        <attr name="fagv_backgroundBlurRadius" format="integer"/>
+        <!-- 圆角半径 (BackgroundBlurDrawable.setCornerRadius) -->
+        <attr name="fagv_backgroundBlurCornerRadius" format="float"/>
     </declare-styleable>
 
     <declare-styleable name="AnimatedScalableConstraintLayout">
@@ -441,5 +435,81 @@
         <attr name="msv_glowBarEnabled" format="boolean" />
         <!-- 是否启用触摸反馈 -->
         <attr name="msv_touchFeedbackEnabled" format="boolean" />
+    </declare-styleable>
+
+    <!-- WallpaperBlurView V2: 壁纸毛玻璃视图 (Compositor Blur, Android 12+, 系统权限) -->
+    <declare-styleable name="WallpaperBlurView">
+        <!-- ========== 模糊 ========== -->
+        <!-- 模糊开关 -->
+        <attr name="wbv_blurEnabled" format="boolean" />
+        <!-- 模糊半径 [0,25] px (Compositor Blur 由 SurfaceFlinger GPU 执行) -->
+        <attr name="wbv_blurRadius" format="float" />
+
+        <!-- ========== 壁纸模式 ========== -->
+        <!-- 0=AUTO, 1=STATIC, 2=DYNAMIC (V2 Compositor Blur 自动适配) -->
+        <attr name="wbv_wallpaperMode" format="enum">
+            <enum name="auto" value="0" />
+            <enum name="static_wp" value="1" />
+            <enum name="dynamic_wp" value="2" />
+        </attr>
+
+        <!-- ========== 圆角 ========== -->
+        <attr name="wbv_cornerRadius" format="dimension" />
+        <attr name="wbv_cornerRadiusTL" format="dimension" />
+        <attr name="wbv_cornerRadiusTR" format="dimension" />
+        <attr name="wbv_cornerRadiusBR" format="dimension" />
+        <attr name="wbv_cornerRadiusBL" format="dimension" />
+
+        <!-- ========== 蒙层 ========== -->
+        <attr name="wbv_overlayEnabled" format="boolean" />
+        <attr name="wbv_overlayColorNormal" format="color" />
+        <attr name="wbv_overlayColorPressed" format="color" />
+        <attr name="wbv_overlayColorFocused" format="color" />
+        <attr name="wbv_overlayColorSelected" format="color" />
+        <attr name="wbv_overlayColorDisabled" format="color" />
+
+        <!-- ========== 描边 ========== -->
+        <attr name="wbv_strokeEnabled" format="boolean" />
+        <!-- 描边宽度（5状态） -->
+        <attr name="wbv_strokeWidthNormal" format="dimension" />
+        <attr name="wbv_strokeWidthPressed" format="dimension" />
+        <attr name="wbv_strokeWidthFocused" format="dimension" />
+        <attr name="wbv_strokeWidthSelected" format="dimension" />
+        <attr name="wbv_strokeWidthDisabled" format="dimension" />
+        <!-- 描边颜色（5状态） -->
+        <attr name="wbv_strokeColorNormal" format="color" />
+        <attr name="wbv_strokeColorPressed" format="color" />
+        <attr name="wbv_strokeColorFocused" format="color" />
+        <attr name="wbv_strokeColorSelected" format="color" />
+        <attr name="wbv_strokeColorDisabled" format="color" />
+
+        <!-- ========== 内发光 ========== -->
+        <attr name="wbv_glowEnabled" format="boolean" />
+        <!-- 内发光半径（5状态） -->
+        <attr name="wbv_glowRadiusNormal" format="dimension" />
+        <attr name="wbv_glowRadiusPressed" format="dimension" />
+        <attr name="wbv_glowRadiusFocused" format="dimension" />
+        <attr name="wbv_glowRadiusSelected" format="dimension" />
+        <attr name="wbv_glowRadiusDisabled" format="dimension" />
+        <!-- 内发光颜色（5状态） -->
+        <attr name="wbv_glowColorNormal" format="color" />
+        <attr name="wbv_glowColorPressed" format="color" />
+        <attr name="wbv_glowColorFocused" format="color" />
+        <attr name="wbv_glowColorSelected" format="color" />
+        <attr name="wbv_glowColorDisabled" format="color" />
+
+        <!-- ========== 顶部高光 ========== -->
+        <attr name="wbv_topHighlightEnabled" format="boolean" />
+        <attr name="wbv_topHighlightColor" format="color" />
+    </declare-styleable>
+
+    <!-- BlurView: 0延时内容模糊视图 (BackgroundBlurDrawable 反射方案, API 31+) -->
+    <declare-styleable name="BlurView">
+        <!-- 模糊开关：true 即启用系统 BackgroundBlurDrawable + Window blurBehindRadius -->
+        <attr name="bv_blurEnabled" format="boolean"/>
+        <!-- 模糊半径 [0, 25]，控制 SurfaceFlinger 模糊强度 -->
+        <attr name="bv_blurRadius" format="integer"/>
+        <!-- 外部预渲染 Drawable，设置后直接作为背景，跳过所有模糊处理 -->
+        <attr name="bv_blurredDrawable" format="reference"/>
     </declare-styleable>
 </resources>

@@ -1,5 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/recyclerView"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="#1A1A2E">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fragment 切换策略演示"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="选择一个策略查看效果差异"
+        android:textColor="#888888"
+        android:textSize="14sp"
+        android:layout_marginBottom="40dp" />
+
+    <Button
+        android:id="@+id/btn_strategy_a"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:text="策略 A: add + show/hide"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btn_strategy_b"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:text="策略 B: add + attach/detach"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btn_strategy_c"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:text="策略 C: replace"
+        android:textSize="16sp"
+        android:layout_marginBottom="40dp" />
+
+    <TextView
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:text="提示：操作各页面后再切换 Tab，对比状态保留差异。查看 logcat 过滤 FragmentDemo 观察生命周期。"
+        android:gravity="center"
+        android:textColor="#555555"
+        android:textSize="12sp" />
+
+</LinearLayout>

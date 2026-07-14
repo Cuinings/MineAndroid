@@ -38,9 +38,6 @@ MineAndroid/
 ├── .idea/                 # IDE 配置文件
 ├── .kotlin/               # Kotlin 编译缓存
 ├── .vscode/               # VS Code 配置
-├── Sample/                # 示例项目
-│   ├── remote_library_test_one/   # 远程库测试项目1
-│   └── remote_library_test_two/   # 远程库测试项目2
 ├── board/                 # 看板模块
 │   ├── contacts/          # 联系人功能
 │   ├── database/          # 数据库功能
@@ -60,10 +57,6 @@ MineAndroid/
 │       ├── msg-router-service/   # 消息路由服务
 │       ├── msg-subscriber-annotation/   # 消息订阅注解
 │       └── msg-subscriber-processor/    # 消息订阅处理器
-├── demo/                  # 演示模块
-│   ├── app-test/          # 应用测试
-│   ├── app_test_resources/    # 测试资源
-│   └── other-test/        # 其他测试
 ├── maven-repo/            # 本地 Maven 仓库
 ├── tools/                 # 工具文件
 ├── .gitignore             # Git 忽略文件

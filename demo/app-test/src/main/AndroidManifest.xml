@@ -30,6 +30,23 @@
             android:name=".MainActivity"
             android:exported="false"
             android:theme="@style/Theme.MineAndroid" />
+
+        <!-- Fragment 切换策略演示 -->
+        <activity
+            android:name=".strategy.StrategyA_ShowHideActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MineAndroid"
+            android:label="策略A - show/hide" />
+        <activity
+            android:name=".strategy.StrategyB_AttachDetachActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MineAndroid"
+            android:label="策略B - attach/detach" />
+        <activity
+            android:name=".strategy.StrategyC_ReplaceActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MineAndroid"
+            android:label="策略C - replace" />
     </application>
 
 </manifest>

@@ -36,11 +36,11 @@ dependencyResolutionManagement {
 
 rootProject.name = "MineAndroid"
 
-//include(":demo:app-test")
+include(":demo:app-test")
+include(":demo:app_test_resources")
 //include(":demo:task-demo")
 //include(":demo:toSetting")
 //include(":demo:other-test")
-//include(":demo:app_test_resources")
 
 include(":board:proxy")
 include(":board:module:home")

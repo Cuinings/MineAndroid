@@ -26,10 +26,10 @@
       </SelectionState>
       <SelectionState runConfigName="board.proxy">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2026-04-29T02:57:10.777578800Z">
+        <DropdownSelection timestamp="2026-06-03T06:40:53.846522400Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="Default" identifier="serial=10.67.116.10:5555;connection=8d931f5a" />
+              <DeviceId pluginId="Default" identifier="serial=10.67.116.21:5555;connection=2e379e2a" />
             </handle>
           </Target>
         </DropdownSelection>

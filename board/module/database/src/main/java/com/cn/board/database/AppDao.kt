@@ -2,6 +2,7 @@ package com.cn.board.database
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 
@@ -13,10 +14,10 @@ import androidx.room.Update
  */
 @Dao
 interface AppDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertApp(appInfo: AppInfo)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertApps(apps: List<AppInfo>)
 
     @Update

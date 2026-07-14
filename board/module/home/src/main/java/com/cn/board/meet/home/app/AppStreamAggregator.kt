@@ -60,7 +60,7 @@ class AppStreamAggregator {
 
     private val repository by lazy { AppRepository(context) }
 
-    val defaultAppList by lazy {
+    private val defaultAppList by lazy {
         ArrayList<AppInfo>().apply {
             for (index in 0 until 12) { ////默认 11 个app
                 add(
@@ -142,7 +142,7 @@ class AppStreamAggregator {
         }
     }
 
-    val filterAppPkg by lazy {
+    private val filterAppPkg by lazy {
         ArrayList<String>().apply {
             add(PACKAGE_DIAGNOSIS)
             add(PACKAGE_CONFERENCE)
@@ -161,16 +161,16 @@ class AppStreamAggregator {
             add(PACKAGE_CAST)
             add(PACKAGE_SYSTEM_UPGRADE)
             add(PACKAGE_WELCOME_SIGN)
-            add("com.yzzd.dm")
-//            add(PACKAGE_WPS)
             add("com.he.ardc")
         }
     } //需要过滤的app包名5r
 
     suspend fun init() {
+        Log.d(AppStreamAggregator::class.simpleName, "init")
         checkDefaultApp()
         checkByPackageInfo()
         repository.query().takeIf { it.isNotEmpty() }?.let { list ->
+            Log.d(AppStreamAggregator::class.simpleName, "init: ${list.size}")
             list.forEach { it: AppInfo ->
                 if (isAppInstalled(context, it.packageName)) {
                     if (it.clazz != APP_VOD) {
@@ -195,12 +195,12 @@ class AppStreamAggregator {
                                 }
                             }
                         }.let {
-                            Log.d(AppStreamAggregator::class.simpleName, "init: ${it.appInfo}")
+                            Log.d(AppStreamAggregator::class.simpleName, "init: $it")
                         }
                     }
                 }
             }
-        }
+        }?:Log.e(AppStreamAggregator::class.simpleName, "init empty")
     }
 
     private suspend fun checkDefaultApp() {

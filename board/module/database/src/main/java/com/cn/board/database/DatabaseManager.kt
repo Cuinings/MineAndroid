@@ -26,7 +26,7 @@ object DatabaseManager {
                 AppDatabase::class.java,
                 "board_database"
             )
-                .addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3)
+//                .addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3)
                 .fallbackToDestructiveMigration(true) // 添加破坏性迁移作为最后的保障
                 .build()
             appDao = db?.appDao()

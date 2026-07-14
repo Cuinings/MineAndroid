@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="str_soft_list">应用列表</string>
+    <string name="主页">主页应用管理</string>
+    <string name="str_osd_soft_manager">主页应用管理</string>
+    <string name="str_finish">完成</string>
+</resources>

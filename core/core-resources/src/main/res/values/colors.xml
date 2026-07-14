@@ -11,6 +11,7 @@
     <color name="common_color_text_step_c">#99FFFFFF</color>
     <!--#99FFFFFF|40%白|四级-->
     <color name="common_color_text_step_d">#66FFFFFF</color>
+    <color name="common_color_text_active">#1e94da</color>
 
     <!--描边-->
     <!--normal_view_group|15%白-->
@@ -64,6 +65,10 @@
     <color name="text_step_66">#66000000</color>
     <color name="text_step_99">#99000000</color>
     <color name="text_step_focus">#FFFFFF</color>
+
+
+    <color name="common_color_stroke_normal_step_a">#26FFFFFF</color>
+    <color name="common_color_top_light_normal_step_a">#7FFFFFFF</color>
 
 
 </resources>

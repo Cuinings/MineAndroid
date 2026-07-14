@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212">
+
+    <!-- 背景图片 -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@android:color/holo_blue_dark"
+        android:scaleType="centerCrop" />
+
+    <!-- 示例内容 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="背景内容"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
+    <!-- BlurredStatefulStrokeGlowView 示例 -->
+<!--    <com.cn.core.ui.view.frosted.glass.BlurredStatefulStrokeGlowView-->
+<!--        android:id="@+id/blurredStrokeGlowView"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="200dp"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:focusable="true"-->
+<!--        android:focusableInTouchMode="true"-->
+<!--        app:blurEnabled="true"-->
+<!--        app:surfaceViewDetectionEnabled="true"-->
+<!--        app:blurRadius="10dp"-->
+<!--        app:blurCornerRadius="16dp"-->
+<!--        app:glowEnabled="true"-->
+<!--        app:glowColor="#0DFFFFFF"-->
+<!--        app:glowRadius="30dp"-->
+<!--        app:strokeEnabled="true"-->
+<!--        app:strokeWidth="2dp"-->
+<!--        app:strokeColorNormal="#1AFFFFFF"-->
+<!--        app:cornerRadius="16dp" />-->
+
+    <!-- 内部内容 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Blurred View"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
+
+</RelativeLayout>

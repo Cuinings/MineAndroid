@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.compileOnly
+
 plugins {
     id("mineandroid.android.library")
     alias(libs.plugins.room)
@@ -43,7 +45,6 @@ room {
 }
 
 dependencies {
-
 
     implementation(project(":core:core-ui"))
     implementation(project(":core:core-utils"))

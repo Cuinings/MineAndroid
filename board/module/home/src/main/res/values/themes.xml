@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- 透明背景主题，壁纸通过系统窗口层显示在 Activity 下方 -->
+    <!-- Android 12+ 透明窗口：壁纸在下层，内容在上层 -->
     <style name="HomeTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowShowWallpaper">true</item>
+        <!-- Android 12 启动页背景透明，避免遮挡壁纸 -->
+        <item name="android:windowSplashScreenBackground">@android:color/transparent</item>
     </style>
 </resources>

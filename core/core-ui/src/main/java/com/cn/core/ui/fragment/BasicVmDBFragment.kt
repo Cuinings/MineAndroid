@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.cn.core.ui.viewmodel.BasicMviViewModel
+import com.cn.core.ui.viewmodel.BasicViewModel
 import com.cn.core.ui.viewmodel.UiEffect
 import com.cn.core.ui.viewmodel.UiIntent
 import com.cn.core.ui.viewmodel.UiState
@@ -16,7 +17,7 @@ import com.cn.core.ui.viewmodel.UiState
  * @Time: 2024/11/22 15:48
  * @Description:
  */
-abstract class BasicVmDBFragment<VM: BasicMviViewModel<UiState, UiIntent, UiEffect>, DB: ViewDataBinding>(
+abstract class BasicVmDBFragment<VM: BasicViewModel, DB: ViewDataBinding>(
     private val blockViewModel: (ViewModelProvider) -> VM,
     private val blockBinding: (LayoutInflater) -> DB
 ): BasicFragment() {

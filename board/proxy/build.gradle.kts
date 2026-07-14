@@ -14,10 +14,20 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        signingConfigs {
+            create("release") {
+                storeFile = file("../../../cuining.keystore")
+                storePassword = "kedacomtpnb"
+                keyAlias = "nexboard"
+                keyPassword = "kedacomtpnb"
+            }
+        }
     }
 
     buildFeatures {
         buildConfig = true
+        dataBinding = true
     }
 
     buildTypes {
@@ -32,6 +42,7 @@ android {
             buildConfigField("boolean", "ENABLE_CONTACTS", "false")
             buildConfigField("boolean", "ENABLE_WALLPAPER", "false")
             buildConfigField("String", "DEFAULT_HOME_MODULE", "\"home\"")
+            signingConfig = signingConfigs.getByName("release")
         }
         debug {
             buildConfigField("boolean", "ENABLE_HOME", "true")
@@ -39,6 +50,7 @@ android {
             buildConfigField("boolean", "ENABLE_CONTACTS", "false")
             buildConfigField("boolean", "ENABLE_WALLPAPER", "false")
             buildConfigField("String", "DEFAULT_HOME_MODULE", "\"home\"")
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {

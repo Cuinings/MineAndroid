@@ -13,6 +13,7 @@ import android.util.Log
 object DatabaseManager {
     private var db: AppDatabase? = null
     private var appDao: AppDao? = null
+    private var commonNodeDao: CommonNodeDao? = null
 
     /**
      * 初始化数据库
@@ -25,10 +26,11 @@ object DatabaseManager {
                 AppDatabase::class.java,
                 "board_database"
             )
-                .addMigrations(AppDatabase.MIGRATION_1_2)
+                .addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3)
                 .fallbackToDestructiveMigration(true) // 添加破坏性迁移作为最后的保障
                 .build()
             appDao = db?.appDao()
+            commonNodeDao = db?.commonNodeDao()
             Log.d("DatabaseManager", "数据库初始化完成")
         }
     }
@@ -48,6 +50,20 @@ object DatabaseManager {
     }
 
     /**
+     * 获取 CommonNodeDao 实例（自动初始化）
+     */
+    fun getCommonNodeDao(context: Context? = null): CommonNodeDao {
+        if (commonNodeDao == null) {
+            context?.let {
+                Log.d("DatabaseManager", "CommonNodeDao 未初始化，自动初始化数据库")
+                initDatabase(it)
+            }
+            check(commonNodeDao != null) { "Database not initialized. Call initDatabase() first or provide context." }
+        }
+        return commonNodeDao!!
+    }
+
+    /**
      * 关闭数据库连接
      */
     fun closeDatabase() {
@@ -55,6 +71,7 @@ object DatabaseManager {
         db?.close()
         db = null
         appDao = null
+        commonNodeDao = null
     }
 
     /**

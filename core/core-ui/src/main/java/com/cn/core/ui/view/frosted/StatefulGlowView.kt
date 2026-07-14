@@ -17,6 +17,7 @@ import android.util.AttributeSet
 import android.util.Log
 import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import androidx.core.graphics.drawable.toDrawable
 import androidx.core.graphics.toColorInt
@@ -51,6 +52,23 @@ open class StatefulGlowView @JvmOverloads constructor(
         @ColorInt var disabled: Int = Color.TRANSPARENT,
     )
 
+    /** 透传 StateColors 的 get 函数 */
+    private fun StateColors.get(state: State): Int = when (state) {
+        State.NORMAL -> normal
+        State.PRESSED -> pressed
+        State.FOCUSED -> focused
+        State.SELECTED -> selected
+        State.DISABLED -> disabled
+    }
+
+    /** 将 normal 颜色级联到所有未显式设置的状态（值为 TRANSPARENT 的视为未设置） */
+    private fun StateColors.fallbackFromNormal() {
+        if (pressed == Color.TRANSPARENT) pressed = normal
+        if (focused == Color.TRANSPARENT) focused = normal
+        if (selected == Color.TRANSPARENT) selected = normal
+        if (disabled == Color.TRANSPARENT) disabled = normal
+    }
+
     var overlayEnabled: Boolean? = null
         set(value) { value.takeIf { it != field }?.let {
             field = it
@@ -83,12 +101,20 @@ open class StatefulGlowView @JvmOverloads constructor(
             State.SELECTED -> selected
             State.DISABLED -> disabled
         }
+
+        /** 将 normal 值级联到所有未显式设置的状态（值为默认 0f 的视为未设置） */
+        fun fallbackFromNormal() {
+            if (pressed == 0f) pressed = normal
+            if (focused == 0f) focused = normal
+            if (selected == 0f) selected = normal
+            if (disabled == 0f) disabled = normal
+        }
     }
 
     override fun drawableStateChanged() {
         super.drawableStateChanged()
         val newState = when {
-            !isEnabled -> State.DISABLED
+            !selfEnabled -> State.DISABLED
             isPressed -> State.PRESSED
             isSelected -> State.SELECTED
             hasFocus() -> State.FOCUSED
@@ -104,7 +130,9 @@ open class StatefulGlowView @JvmOverloads constructor(
 
     val strokeColors by lazy {
         StateColors().apply {
-            this.focused = resources.getColor(R.color.common_color_stroke_focused, context.theme)
+            normal = resources.getColor(R.color.common_color_stroke_normal_view, context.theme)
+            focused = resources.getColor(R.color.common_color_stroke_focused, context.theme)
+            disabled = resources.getColor(R.color.common_color_stroke_disabled, context.theme)
         }
     }
 
@@ -121,7 +149,38 @@ open class StatefulGlowView @JvmOverloads constructor(
 
     val glowColors by lazy {
         StateColors().apply {
+            normal = resources.getColor(R.color.common_color_glow_normal, context.theme)
             focused = resources.getColor(R.color.common_color_glow_focused, context.theme)
+        }
+    }
+
+    /** 内发光 .9 图片 — 五态独立。null 表示该状态走程序化发光（或被当前统一 drawable 覆盖） */
+    data class StateDrawables(
+        var normal: Drawable? = null,
+        var pressed: Drawable? = null,
+        var focused: Drawable? = null,
+        var selected: Drawable? = null,
+        var disabled: Drawable? = null,
+    ) {
+        /** 将 normal drawable 级联到所有未显式设置的状态（值为 null 的视为未设置） */
+        fun fallbackFromNormal() {
+            if (pressed == null) pressed = normal
+            if (focused == null) focused = normal
+            if (selected == null) selected = normal
+            if (disabled == null) disabled = normal
+        }
+    }
+
+    /**
+     * 内发光 .9 图片，支持逐状态独立设置。
+     * - 可通过 [setGlowDrawable] 统一设置所有状态
+     * - 可通过 [setGlowDrawableForState] 覆盖单个状态
+     * - 某状态为 null 时该状态走程序化多层环形发光
+     * - 默认：focused 状态有 4 层同心描边 drawable（8dp 软渐变）
+     */
+    val glowDrawables by lazy {
+        StateDrawables().apply {
+            focused = ContextCompat.getDrawable(context, R.drawable.common_drawable_glow_focused)?.mutate()
         }
     }
 
@@ -142,6 +201,13 @@ open class StatefulGlowView @JvmOverloads constructor(
 
     // ======================== 状态机 ========================
     enum class State { NORMAL, PRESSED, FOCUSED, SELECTED, DISABLED }
+
+    /**
+     * 本 View 自身的 enabled 标志，不受父级 enabled 状态影响。
+     * Android 的 [View.isEnabled] 会递归检查祖先链，父级临时禁用会导致误判 DISABLED。
+     */
+    private var selfEnabled = true
+
     private var currentState:State = State.NORMAL
         set(value) { value.takeIf { it != field }?.let {
             field = it
@@ -238,11 +304,42 @@ open class StatefulGlowView @JvmOverloads constructor(
                     glowColors.focused = getColor(R.styleable.StatefulGlowView_sgv_glowColorFocused, glowColors.focused)
                     glowColors.selected = getColor(R.styleable.StatefulGlowView_sgv_glowColorSelected, glowColors.selected)
                     glowColors.disabled = getColor(R.styleable.StatefulGlowView_sgv_glowColorDisabled, glowColors.disabled)
+
+                    // .9 图片内发光（优先级高于程序化发光）
+                    // 1) 统一 drawable（所有状态共用）
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_glowDrawable)) {
+                        val universal = getDrawable(R.styleable.StatefulGlowView_sgv_glowDrawable)
+                        glowDrawables.normal = universal
+                        glowDrawables.pressed = universal
+                        glowDrawables.focused = universal
+                        glowDrawables.selected = universal
+                        glowDrawables.disabled = universal
+                        universal?.mutate()
+                    }
+                    // 2) per-state 覆盖
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_glowDrawableNormal))
+                        glowDrawables.normal = getDrawable(R.styleable.StatefulGlowView_sgv_glowDrawableNormal)?.mutate()
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_glowDrawablePressed))
+                        glowDrawables.pressed = getDrawable(R.styleable.StatefulGlowView_sgv_glowDrawablePressed)?.mutate()
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_glowDrawableFocused))
+                        glowDrawables.focused = getDrawable(R.styleable.StatefulGlowView_sgv_glowDrawableFocused)?.mutate()
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_glowDrawableSelected))
+                        glowDrawables.selected = getDrawable(R.styleable.StatefulGlowView_sgv_glowDrawableSelected)?.mutate()
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_glowDrawableDisabled))
+                        glowDrawables.disabled = getDrawable(R.styleable.StatefulGlowView_sgv_glowDrawableDisabled)?.mutate()
                 }
 
                 // 顶部高光
                 topHighlightEnabled = getBoolean(R.styleable.StatefulGlowView_sgv_topHighlightEnabled, false)
                 topHighlightColor = getColor(R.styleable.StatefulGlowView_sgv_topHighlightColor, topHighlightColor)
+
+                // ── 级联：normal 显式设置 → 其他未设置状态自动继承 ──
+                if (hasValue(R.styleable.StatefulGlowView_sgv_strokeWidthNormal)) strokeWidths.fallbackFromNormal()
+                if (hasValue(R.styleable.StatefulGlowView_sgv_strokeColorNormal)) strokeColors.fallbackFromNormal()
+                if (hasValue(R.styleable.StatefulGlowView_sgv_glowRadiusNormal)) glowRadii.fallbackFromNormal()
+                if (hasValue(R.styleable.StatefulGlowView_sgv_glowColorNormal)) glowColors.fallbackFromNormal()
+                if (hasValue(R.styleable.StatefulGlowView_sgv_glowDrawableNormal)) glowDrawables.fallbackFromNormal()
+                if (hasValue(R.styleable.StatefulGlowView_sgv_overlayColorNormal)) overlayColor.fallbackFromNormal()
             }
         }
 
@@ -329,6 +426,45 @@ open class StatefulGlowView @JvmOverloads constructor(
 
     fun getGlowRadiusForState(state: State): Float = glowRadii.get(state)
 
+    /**
+     * 统一设置所有状态的内发光 .9 图片（覆盖各状态已有值）。
+     * 传入 null 清除所有状态 drawable，恢复程序化发光路径。
+     */
+    fun setGlowDrawable(drawable: Drawable?) {
+        val d = drawable?.mutate()
+        glowDrawables.normal = d
+        glowDrawables.pressed = d
+        glowDrawables.focused = d
+        glowDrawables.selected = d
+        glowDrawables.disabled = d
+        invalidate()
+    }
+
+    /**
+     * 设置指定状态的内发光 .9 图片，覆盖统一 drawable。
+     * 传入 null 清除该状态 drawable（该状态回退到程序化发光）。
+     */
+    fun setGlowDrawableForState(drawable: Drawable?, state: State) {
+        val d = drawable?.mutate()
+        when (state) {
+            State.NORMAL -> glowDrawables.normal = d
+            State.PRESSED -> glowDrawables.pressed = d
+            State.FOCUSED -> glowDrawables.focused = d
+            State.SELECTED -> glowDrawables.selected = d
+            State.DISABLED -> glowDrawables.disabled = d
+        }
+        invalidate()
+    }
+
+    /** 获取指定状态的内发光 .9 图片 */
+    fun getGlowDrawableForState(state: State): Drawable? = when (state) {
+        State.NORMAL -> glowDrawables.normal
+        State.PRESSED -> glowDrawables.pressed
+        State.FOCUSED -> glowDrawables.focused
+        State.SELECTED -> glowDrawables.selected
+        State.DISABLED -> glowDrawables.disabled
+    }
+
     /** 获取当前动画中的发光半径（供子类使用） */
     protected fun getCurrentGlowRadius(): Float {
         return if (glowRadiusAnimator?.isRunning == true) {
@@ -362,14 +498,6 @@ open class StatefulGlowView @JvmOverloads constructor(
         strokePaint.color = currentStrokeColor
         strokePaint.strokeWidth = currentStrokeWidth
         invalidate()
-    }
-
-    private fun StateColors.get(state: State): Int = when (state) {
-        State.NORMAL -> normal
-        State.PRESSED -> pressed
-        State.FOCUSED -> focused
-        State.SELECTED -> selected
-        State.DISABLED -> disabled
     }
 
     private fun animateStateChange(newState: State) {
@@ -574,6 +702,32 @@ open class StatefulGlowView @JvmOverloads constructor(
      */
     protected open fun drawInnerGlow(canvas: Canvas, w: Float, h: Float/*, glowRadius: Float*/) {
         if (!glowEnabled) return
+
+        // ── .9 图片路径（优先级最高）──
+        val drawable = when (currentState) {
+            State.NORMAL -> glowDrawables.normal
+            State.PRESSED -> glowDrawables.pressed
+            State.FOCUSED -> glowDrawables.focused
+            State.SELECTED -> glowDrawables.selected
+            State.DISABLED -> glowDrawables.disabled
+        }
+        if (drawable != null) {
+            val wi = w.toInt()
+            val hi = h.toInt()
+            drawable.setBounds(0, 0, wi, hi)
+
+            // 用当前状态发光颜色作为 tint
+            val gc = glowColors.get(currentState)
+            if (gc != Color.TRANSPARENT) {
+                drawable.setTint(gc)
+                drawable.setTintMode(android.graphics.PorterDuff.Mode.SRC_IN)
+            }
+
+            drawable.draw(canvas)
+            return
+        }
+
+        // ── 程序化多层环形路径 ──
         val glowRadius = getCurrentGlowRadius()
         if (glowRadius <= 0) return
         val gc = glowColors.get(currentState)
@@ -645,36 +799,21 @@ open class StatefulGlowView @JvmOverloads constructor(
     }
 
     override fun setPressed(pressed: Boolean) {
-        val newState = if (!isEnabled) State.DISABLED else if (pressed) State.PRESSED else State.NORMAL
-        if (newState != currentState && newState != targetState) {
-            animateStateChange(newState)
-        }
-        super.setPressed(pressed)
+        super.setPressed(pressed)  // 触发 drawableStateChanged → 统一状态机入口
     }
 
     override fun onFocusChanged(gainFocus: Boolean, direction: Int, previouslyFocusedRect: Rect?) {
-        val newState = if (!isEnabled) State.DISABLED else if (gainFocus) State.FOCUSED else State.NORMAL
-        if (newState != currentState && newState != targetState) {
-            animateStateChange(newState)
-        }
-        super.onFocusChanged(gainFocus, direction, previouslyFocusedRect)
+        super.onFocusChanged(gainFocus, direction, previouslyFocusedRect)  // 触发 drawableStateChanged
     }
 
 
     override fun setSelected(selected: Boolean) {
-        super.setSelected(selected)
-        val newState = if (selected) State.SELECTED else State.NORMAL
-        if (newState != currentState && newState != targetState) {
-            animateStateChange(newState)
-        }
+        super.setSelected(selected)  // 触发 drawableStateChanged
     }
 
     override fun setEnabled(enabled: Boolean) {
-        val newState = if (enabled) State.NORMAL else State.DISABLED
-        if (newState != currentState && newState != targetState) {
-            animateStateChange(newState)
-        }
-        super.setEnabled(enabled)
+        selfEnabled = enabled  // 必须在 super 前更新，确保 drawableStateChanged 读到正确值
+        super.setEnabled(enabled)  // 触发 drawableStateChanged → 统一状态机入口
     }
 
     override fun onDetachedFromWindow() {
@@ -685,9 +824,10 @@ open class StatefulGlowView @JvmOverloads constructor(
         colorAnimator = null
         strokeAnimator = null
         glowRadiusAnimator = null
-    }
-    override fun setBackground(background: Drawable?) {
-        // 禁止外部设置背景
+
+        // Snap visual state to endpoint：动画中断时 paint 值可能停在插值中途，
+        // 重 attach 后 drawableStateChanged 判同状态不触发新动画 → 视觉残留
+        applyStateInstantly(currentState)
     }
 
     /**

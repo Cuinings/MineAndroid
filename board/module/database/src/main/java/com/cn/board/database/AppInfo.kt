@@ -1,5 +1,6 @@
 package com.cn.board.database
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
@@ -14,20 +15,28 @@ import androidx.room.PrimaryKey
 @Entity(
     tableName = "app_info",
     indices = [
+        Index(value = ["clazz"], unique = true),
         Index(value = ["packageName"], unique = true),
-        Index(value = ["lastUsedTime"], unique = false),
-        Index(value = ["isSystemApp"], unique = false),
-        Index(value = ["usageCount"], unique = false),
-        Index(value = ["sortOrder"], unique = false),
-        Index(value = ["appFlag"], unique = false)
+        Index(value = ["versionCode"], unique = true),
+        Index(value = ["versionName"], unique = true),
+        Index(value = ["appType"], unique = true),
+        Index(value = ["name"], unique = true),
+        Index(value = ["main"], unique = true),
+        Index(value = ["mainIndex"], unique = true),
+        Index(value = ["offlineMain"], unique = true),
+        Index(value = ["offlineMainIndex"], unique = true),
     ]
 )
 data class AppInfo(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val isSystemApp: Boolean = false,
-    val packageName: String = "",
-    val lastUsedTime: Long = 0,
-    val usageCount: Int = 0,
-    val sortOrder: Int = 0,
-    val appFlag: Int = 0
+    var clazz: String = "",
+    var packageName: String = "",
+    var versionCode: String = "",
+    var versionName: String = "",
+    var appType: EmAppType = EmAppType.Third,
+    var name: String? = null,
+    var main: Int = 0,//0默认、1首页显示
+    @ColumnInfo(defaultValue = "0") var mainIndex: Int = -1,
+    var offlineMain: Int = 0,
+    @ColumnInfo(defaultValue = "0") var offlineMainIndex: Int = -1,
 )

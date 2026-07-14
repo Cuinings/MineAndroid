@@ -29,13 +29,14 @@ import kotlin.math.sqrt
  *
  * ## 流光原理
  * 1. 使用 PathMeasure 获取描边圆角矩形路径的总长度
- * 2. 通过 ValueAnimator 驱动 progress ∈ [0, 1) 持续循环
- * 3. 根据 progress 在路径上截取一段弧长作为"发光段"
+ * 2. 通过 ValueAnimator 驱动 progress ∈ [0, 1) 持续循环（INFINITE + RESTART + LinearInterpolator）
+ * 3. 根据 progress 在路径上截取一段弧长作为"发光段"，沿 Path.Direction.CW 顺时针滚动
  * 4. 发光段使用 LinearGradient（透明→亮色→透明）绘制，形成拖尾效果
- * 5. 当段跨越路径终点时自动拆分为两段绘制（保证无缝衔接）
+ * 5. 当段跨越路径终点时自动拆分为两段绘制（保证无缝衔接、不间断）
  *
  * ## 显示条件
- * - 仅在焦点状态 (isFocused) 时显示流光效果
+ * - 仅由 [flowEnabled] 控制（与焦点解耦）：开启即显示，关闭即淡出
+ * - 流光宽度紧贴描边宽度，沿描边中心顺时针滚动，不溢出描边
  */
 @SuppressLint("Recycle", "ClickableViewAccessibility")
 open class AnimatedStatefulGlowView @JvmOverloads constructor(
@@ -57,12 +58,12 @@ open class AnimatedStatefulGlowView @JvmOverloads constructor(
 
     // ==================== 公开属性 ====================
 
-    /** 流光是否启用（设置后自动启动/停止） */
+    /** 流光是否启用（设置后自动启动/停止）。仅由此开关控制，与焦点解耦。 */
     var flowEnabled: Boolean = true
         set(value) {
             if (field == value) return
             field = value
-            if (value && isAttachedToWindow && isFocused) {
+            if (value && isAttachedToWindow) {
                 startFlow()
             } else if (!value) {
                 stopFlow()
@@ -164,7 +165,7 @@ open class AnimatedStatefulGlowView @JvmOverloads constructor(
 
     /**
      * 完全接管 dispatchDraw：背景 → 内发光 → 描边 → **流光** → restore → children
-     * 流光位于描边上方、clipPath 裁剪范围内，仅焦点时显示
+     * 流光位于描边上方、clipPath 裁剪范围内，仅由 flowEnabled 控制显示
      */
     override fun dispatchDraw(canvas: Canvas) {
         super.dispatchDraw(canvas)
@@ -198,13 +199,16 @@ open class AnimatedStatefulGlowView @JvmOverloads constructor(
      *
      * 核心算法：
      * 1. 用与焦点描边相同的圆角矩形路径 + PathMeasure 测量总长度
-     * 2. 根据 progress 计算当前段的起止位置
+     * 2. 根据 progress 计算当前段的起止位置（沿 CW 方向顺时针推进）
      * 3. 若段未跨越路径终点 → 直接 getSegment 绘制
-     * 4. 若段跨越终点 → 拆为两段绘制（保证无缝衔接）
+     * 4. 若段跨越终点 → 拆为两段绘制（保证无缝衔接、不间断）
      * 5. 每段使用起点→终点的 LinearGradient 实现透明→亮→透明渐变
+     *
+     * 显示条件：仅由 [flowEnabled] 控制（已附着窗口 + alpha > 0 时绘制），与焦点解耦。
+     * 流光宽度紧贴描边宽度，沿描边中心滚动。
      */
     protected fun drawFlowEffect(canvas: Canvas) {
-        if (flowEnabled && isFocused && isAttachedToWindow && flowAlpha >= 0.01f) {
+        if (flowEnabled && isAttachedToWindow && flowAlpha >= 0.01f) {
             val w = width.toFloat()
             val h = height.toFloat()
             if (w <= 0 || h <= 0 || flowAlpha < 0.01f) return
@@ -212,10 +216,10 @@ open class AnimatedStatefulGlowView @JvmOverloads constructor(
             ensureFlowPath(w, h)
             if (cachedTotalLength <= 0) return
 
-            // 始终使用焦点状态描边宽度作为线宽基准
+            // 始终使用焦点状态描边宽度作为线宽基准，紧贴描边中心（不溢出）
             flowPaint.alpha = (255 * flowAlpha).toInt().coerceIn(0, 255)
             val focusedStrokeWidth = getStrokeWidthForState(State.FOCUSED)
-            flowPaint.strokeWidth = focusedStrokeWidth.coerceAtLeast(1f) * 1.4f
+            flowPaint.strokeWidth = focusedStrokeWidth.coerceAtLeast(1f)
             flowPaint.pathEffect = null
 
             // 计算当前段在路径上的起止距离
@@ -235,16 +239,17 @@ open class AnimatedStatefulGlowView @JvmOverloads constructor(
         }
     }
 
-    /** 确保流光路径已构建且最新（始终使用焦点状态的描边宽度） */
+    /** 确保流光路径已构建且最新（始终使用焦点状态的描边宽度，保证流光紧贴描边中心） */
     private fun ensureFlowPath(w: Float, h: Float) {
         if (!pathDirty && cachedWidth == w && cachedHeight == h) return
 
-        // 流光仅在焦点时显示，始终用焦点描边构建路径
+        // 流光与焦点解耦，但始终用焦点描边宽度构建路径，保证宽度稳定
         val focusedStrokeWidth = getStrokeWidthForState(State.FOCUSED)
         val halfStroke = focusedStrokeWidth / 2f
         val margin = halfStroke.coerceAtLeast(0.5f)
 
         flowPath.reset()
+        // Path.Direction.CW —— 顺时针方向，progress 递增即沿描边顺时针滚动
         flowPath.addRoundRect(
             margin, margin,
             w - margin, h - margin,
@@ -344,18 +349,18 @@ open class AnimatedStatefulGlowView @JvmOverloads constructor(
 
     override fun onFocusChanged(gainFocus: Boolean, direction: Int, previouslyFocusedRect: Rect?) {
         super.onFocusChanged(gainFocus, direction, previouslyFocusedRect)
+        // 流光仅由 flowEnabled 控制，不响应焦点变化
+        // 刷新扫描效果仍由焦点驱动（子类可覆盖 gainFlowOnFocus 调整）
         if (gainFlowOnFocus()) {
             if (gainFocus) {
-                startFlow()
-                startRefreshAnimation()
+                if (refreshEffectEnabled) startRefreshAnimation()
             } else {
-                stopFlow()
                 stopRefreshAnimation()
             }
         }
     }
 
-    /** 是否在获取焦点时自动启停流光 */
+    /** 是否在获取焦点时自动启停刷新扫描效果（流光已改为仅由 flowEnabled 控制） */
     protected open fun gainFlowOnFocus(): Boolean = true
 
     /** 启动流光动画 */
@@ -496,13 +501,18 @@ open class AnimatedStatefulGlowView @JvmOverloads constructor(
 
     override fun setEnabled(enabled: Boolean) {
         super.setEnabled(enabled)
-        if (!enabled) stopFlow()
+        if (!enabled) {
+            stopFlow()
+        } else if (flowEnabled && isAttachedToWindow) {
+            // 重新启用时若流光开关已开，自动恢复
+            startFlow()
+        }
     }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        // 窗口附着后如果已启用+已聚焦，自动启动
-        if (flowEnabled && isFocused) startFlow()
+        // 流光仅由 flowEnabled 控制，附着窗口后若开关已开即启动
+        if (flowEnabled) startFlow()
         if (refreshEffectEnabled && isFocused) startRefreshAnimation()
     }
 

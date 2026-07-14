@@ -28,38 +28,13 @@ interface AppDao {
     @Query("DELETE FROM app_info")
     suspend fun deleteAllApps()
 
-    @Query("SELECT * FROM app_info ORDER BY sortOrder ASC")
-    suspend fun getAllApps(): List<AppInfo>
-
-    @Query("SELECT * FROM app_info WHERE isSystemApp = :isSystemApp ORDER BY sortOrder ASC")
-    suspend fun getAppsByType(isSystemApp: Boolean): List<AppInfo>
-
-//    @Query("SELECT * FROM app_info WHERE sortOrder LIKE :namePattern ORDER BY name ASC")
-//    suspend fun searchApps(namePattern: String): List<AppInfo>
-
-    @Query("SELECT * FROM app_info WHERE packageName LIKE :packageNamePattern ORDER BY sortOrder ASC")
-    suspend fun searchAppsByPackage(packageNamePattern: String): List<AppInfo>
-
-    @Query("SELECT * FROM app_info ORDER BY lastUsedTime DESC LIMIT :limit")
-    suspend fun getRecentApps(limit: Int): List<AppInfo>
-
-    @Query("SELECT * FROM app_info ORDER BY usageCount DESC LIMIT :limit")
-    suspend fun getMostUsedApps(limit: Int): List<AppInfo>
-
-    @Query("UPDATE app_info SET lastUsedTime = :lastUsedTime, usageCount = usageCount + 1 WHERE id = :id")
-    suspend fun updateAppUsage(id: Int, lastUsedTime: Long)
+    @Query("SELECT * FROM app_info")
+    suspend fun getAllApps(): MutableList<AppInfo>
 
     @Query("SELECT * FROM app_info WHERE id = :id")
-    suspend fun getAppById(id: Int): AppInfo?
+    suspend fun getAppById(id: Int): MutableList<AppInfo>
 
     @Query("SELECT * FROM app_info WHERE packageName = :packageName")
-    suspend fun getAppByPackageName(packageName: String): AppInfo?
-    
-    /**
-     * 更新应用排序顺序
-     * @param packageName 包名
-     * @param sortOrder 排序顺序
-     */
-    @Query("UPDATE app_info SET sortOrder = :sortOrder WHERE packageName = :packageName")
-    suspend fun updateAppSortOrder(packageName: String, sortOrder: Int)
+    suspend fun getAppByPackageName(packageName: String): MutableList<AppInfo>
+
 }

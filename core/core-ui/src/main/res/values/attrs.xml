@@ -158,6 +158,20 @@
         <attr name="mediaAutoPlay" format="boolean"/>
     </declare-styleable>
 
+    <declare-styleable name="LoopVideoView">
+        <!-- 视频路径（本地绝对路径） -->
+        <attr name="loopVideoPath" format="string"/>
+        <!-- 是否循环播放 -->
+        <attr name="loopVideoLooping" format="boolean"/>
+        <!-- 是否静音 -->
+        <attr name="loopVideoMute" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="SystemBlurOverlay">
+        <!-- 模糊半径 [0, 150]，0 表示停用模糊 -->
+        <attr name="sbo_blurRadius" format="integer"/>
+    </declare-styleable>
+
     <!--<declare-styleable name="StatefulStrokeGlowView">
         &lt;!&ndash; 统一圆角半径 &ndash;&gt;
         <attr name="cornerRadius" format="dimension" />
@@ -303,6 +317,14 @@
         <attr name="sgv_glowColorFocused" format="color" />
         <attr name="sgv_glowColorSelected" format="color" />
         <attr name="sgv_glowColorDisabled" format="color" />
+        <!-- 内发光 .9 图片 — 统一设置所有状态，可被 per-state 属性覆盖 -->
+        <attr name="sgv_glowDrawable" format="reference" />
+        <!-- 内发光 .9 图片 — 各状态独立设置（优先级高于 sgv_glowDrawable） -->
+        <attr name="sgv_glowDrawableNormal" format="reference" />
+        <attr name="sgv_glowDrawablePressed" format="reference" />
+        <attr name="sgv_glowDrawableFocused" format="reference" />
+        <attr name="sgv_glowDrawableSelected" format="reference" />
+        <attr name="sgv_glowDrawableDisabled" format="reference" />
         <!-- 顶部高光 -->
         <attr name="sgv_topHighlightEnabled" format="boolean" />
         <attr name="sgv_topHighlightColor" format="color" />
@@ -326,12 +348,14 @@
 
     <!-- FrostedAnimatedGlowView: 毛玻璃发光视图 (BackgroundBlurDrawable 反射方案) -->
     <declare-styleable name="FrostedAnimatedGlowView">
-        <!-- 模糊开关：启用即激活 BackgroundBlurDrawable + Window blurBehindRadius -->
-        <attr name="fagv_useBackgroundBlurMode" format="boolean"/>
-        <!-- 模糊半径 [0, 25] (Window blurBehindRadius) -->
-        <attr name="fagv_backgroundBlurRadius" format="integer"/>
-        <!-- 圆角半径 (BackgroundBlurDrawable.setCornerRadius) -->
-        <attr name="fagv_backgroundBlurCornerRadius" format="float"/>
+        <attr name="fagv_blurEnabled" format="boolean"/>
+        <attr name="fagv_blurRadius" format="integer"/>
+        <!-- 外部预渲染 Drawable，设置后直接作为背景，跳过所有模糊处理 -->
+        <attr name="fagv_blurredDrawable" format="reference"/>
+        <!-- 仅用背景模糊管道(Window.setBackgroundBlurRadius + BackgroundBlurDrawable region)，
+             不设 FLAG_BLUR_BEHIND，并主动清除外源 FLAG_BLUR_BEHIND 避免全屏泄漏。
+             适用：窗口无 WallpaperBlurView 蒙版遮挡的场景。默认 false。 -->
+        <attr name="fagv_backgroundBlurOnly" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="AnimatedScalableConstraintLayout">
@@ -503,13 +527,46 @@
         <attr name="wbv_topHighlightColor" format="color" />
     </declare-styleable>
 
-    <!-- BlurView: 0延时内容模糊视图 (BackgroundBlurDrawable 反射方案, API 31+) -->
-    <declare-styleable name="BlurView">
-        <!-- 模糊开关：true 即启用系统 BackgroundBlurDrawable + Window blurBehindRadius -->
-        <attr name="bv_blurEnabled" format="boolean"/>
-        <!-- 模糊半径 [0, 25]，控制 SurfaceFlinger 模糊强度 -->
-        <attr name="bv_blurRadius" format="integer"/>
-        <!-- 外部预渲染 Drawable，设置后直接作为背景，跳过所有模糊处理 -->
-        <attr name="bv_blurredDrawable" format="reference"/>
+    <!-- FocusScaleView: 焦点缩放视图，继承 FrostedAnimatedGlowView，焦点时容器缩放、子View反向补偿 -->
+    <declare-styleable name="FocusScaleView">
+        <!-- 焦点缩放比例，默认 1.05 -->
+        <attr name="fsv_focusScale" format="float"/>
+        <!-- 缩放动画时长(ms)，默认 200 -->
+        <attr name="fsv_scaleDuration" format="integer"/>
     </declare-styleable>
+
+    <!-- TextureBlurOverlayView: 覆盖在 TextureView 上方的自定义模糊视图 -->
+    <declare-styleable name="TextureBlurOverlayView">
+        <!-- 模糊半径 [0.1, 25] -->
+        <attr name="tbv_blurRadius" format="float"/>
+        <!-- 降采样比例 [0.05, 1.0] -->
+        <attr name="tbv_scaleFactor" format="float"/>
+        <!-- 圆角半径 -->
+        <attr name="tbv_cornerRadius" format="dimension"/>
+        <!-- 覆盖层颜色 -->
+        <attr name="tbv_overlayColor" format="color"/>
+        <!-- 是否自动刷新（适用于视频等动态 TextureView） -->
+        <attr name="tbv_autoRefresh" format="boolean"/>
+        <!-- 自动刷新间隔(ms) -->
+        <attr name="tbv_refreshInterval" format="integer"/>
+    </declare-styleable>
+
+
+
+    <!-- GLTextureBlurOverlay: 零延时 GL 模糊覆盖视图 -->
+    <declare-styleable name="GLTextureBlurOverlay">
+        <attr name="gltbv_blurRadius" format="integer"/>
+        <attr name="gltbv_overlayColor" format="color"/>
+    </declare-styleable>
+
+    <!-- FrostedVideoOverlay: TextureView 全屏视频覆盖模糊（路径C，Aggregator per-View 模糊） -->
+    <declare-styleable name="FrostedVideoOverlay">
+        <!-- 模糊半径 [0, 150] -->
+        <attr name="fvo_blurRadius" format="float"/>
+        <!-- 圆角半径 -->
+        <attr name="fvo_cornerRadius" format="dimension"/>
+        <!-- 前景覆盖色 -->
+        <attr name="fvo_overlayColor" format="color"/>
+    </declare-styleable>
+
 </resources>

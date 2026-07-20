@@ -1,16 +1,32 @@
+# IDE (IntelliJ / Android Studio)
 *.iml
+/.idea/
+!/.idea/codeStyles/
+!/.idea/inspectionProfiles/
+
+# Gradle
 .gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
 /build
 /captures
+
+# External native build
 .externalNativeBuild
 .cxx
-local.properties
 
+# Local configuration (SDK path, signing keys, etc.)
+local.properties
+/local.properties
+
+# Build outputs
+*.apk
+*.aab
+
+# Memory dump
+*.hprof
+
+# Kotlin compiled cache
+.kotlin/
+
+# OS files
+.DS_Store
+Thumbs.db

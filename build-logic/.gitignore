@@ -1,23 +1,7 @@
-# Gradle
-.gradle/
+# Module build output (root .gitignore only covers /build at root level)
 /build/
 
-# IDE
-.idea/
-*.iml
-*.ipr
-*.iws
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Build outputs
-*.jar
-*.war
-*.ear
-
-# Generated files
+# Generated & compiled files
 *.generated
 *.class
 *.log

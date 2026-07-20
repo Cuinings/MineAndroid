@@ -3,12 +3,14 @@ package com.cn.board.meet.home.app
 import android.content.Context
 import android.graphics.Rect
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.cn.board.database.AppInfo
+import com.cn.board.database.EmAppType
 import com.cn.board.meet.home.R
 import com.cn.board.meet.home.databinding.ItemAppBinding
 import com.cn.core.ui.view.recyclerview.adapter.BaseDragBinderAdapter
@@ -28,9 +30,22 @@ class AppAggregatorListLayout: RecyclerView {
         private const val MAX_UNINSTALL_WINDOW_DIS_DISTENCE = 10
     }
 
-    private val holders = HashMap<String, ItemAppBinding>()
+    private var bManager = false
 
-    var isManager = false
+    /** 拖拽结束、顺序变化后的回调，由上层（Fragment）负责持久化与同步数据源 */
+    interface OnOrderChangedListener {
+        fun onOrderChanged(order: List<SoftEntity>)
+    }
+
+    var onOrderChangedListener: OnOrderChangedListener? = null
+
+    /** 管理模式下点击应用条目的回调：由上层（Fragment）负责更新 main/offlineMain 标记并刷新数据源。
+     *  @param online 当前模式：true=在线（改 main 字段），false=离线（改 offlineMain 字段） */
+    interface OnItemSelectedListener {
+        fun onItemSelected(entity: SoftEntity, online: Boolean)
+    }
+
+    var onItemSelectedListener: OnItemSelectedListener? = null
 
     private val mAdapter = BaseDragBinderAdapter()
 
@@ -42,7 +57,7 @@ class AppAggregatorListLayout: RecyclerView {
         layoutManager = GridLayoutManager(context, 4)
         addItemDecoration(AppItemDecoration())
         adapter = mAdapter.apply {
-            addItemBinder(BinderSoft())
+            addItemBinder(ItemAppBinder(), SoftEntity.DIFF_CALLBACK)
             draggableModule.run {
                 isDragEnabled = true
                 setOnItemDragListener(dragListener)
@@ -50,12 +65,22 @@ class AppAggregatorListLayout: RecyclerView {
         }
     }
 
+    var online = true
+
     fun submit(list: MutableList<SoftEntity>) {
-        holders.clear()
-        mAdapter.setList(list)
+        mAdapter.setDiffNewData(list.onEach {
+            Log.d(AppAggregatorListLayout::class.simpleName, "submit: $it")
+        }.toMutableList())
     }
 
-    private inner class BinderSoft: QuickDataBindingItemBinder<AppInfo, ItemAppBinding>() {
+    fun enableManager(bManager: Boolean) {
+        this.bManager = bManager
+        repeat(mAdapter.data.size) {
+            getChildAt(it).findViewById<ImageView>(R.id.home_aggregator_app_choice).visibility = if (bManager) VISIBLE else GONE
+        }
+    }
+
+    private inner class ItemAppBinder: QuickDataBindingItemBinder<SoftEntity, ItemAppBinding>() {
 
         override fun onCreateDataBinding(
             layoutInflater: LayoutInflater,
@@ -65,24 +90,49 @@ class AppAggregatorListLayout: RecyclerView {
 
         override fun convert(
             holder: BinderDataBindingHolder<ItemAppBinding>,
-            data: AppInfo
+            data: SoftEntity
         ) {
-            holders[data.appType.name + data.packageName] = holder.dataBinding
+            val appInfo = data.appInfo
+            // 以「类型 + 包名」作为 key 记录 binding，供后续按 App 定位/更新视图
+            with(holder.dataBinding) {
+
+                homeAggregatorAppIcon.visibility = when(appInfo?.appType) {
+                    EmAppType.tp -> VISIBLE
+                    else -> INVISIBLE
+                }
+                homeAggregatorThirdAppIcon.visibility = when(appInfo?.appType) {
+                    EmAppType.Third -> VISIBLE
+                    else -> GONE
+                }
+                homeAggregatorAppName.text = appInfo?.name ?: ""
+                // bitmap 为聚合阶段异步加载的图标（第三方 App），有则显示；无则沿用布局默认图标
+                data.bitmap?.let { homeAggregatorAppIcon.setImageBitmap(it) }
+                val choice = if(online) data.appInfo?.main == 1 else data.appInfo?.offlineMain == 1
+                homeAggregatorAppChoice.setImageResource(
+                    if (choice) R.drawable.icon_app_choiced else R.drawable.icon_app_choice
+                )
+            }
         }
 
         override fun onClick(
             holder: BinderDataBindingHolder<ItemAppBinding>,
             view: View,
-            data: AppInfo,
+            data: SoftEntity,
             position: Int
         ) {
-            super.onClick(holder, view, data, position)
+            // 管理模式下点击 = 切换该应用是否作为「主页应用」：在线改 main，离线改 offlineMain。
+            // 具体标记更新与刷新数据源交给上层（Fragment）统一处理。
+            if (bManager) {
+                onItemSelectedListener?.onItemSelected(data, online)
+            } else {
+                super.onClick(holder, view, data, position)
+            }
         }
 
         override fun onChildClick(
             holder: BinderDataBindingHolder<ItemAppBinding>,
             view: View,
-            data: AppInfo,
+            data: SoftEntity,
             position: Int
         ) = with(holder.dataBinding) {
         }
@@ -90,7 +140,7 @@ class AppAggregatorListLayout: RecyclerView {
         override fun onLongClick(
             holder: BinderDataBindingHolder<ItemAppBinding>,
             view: View,
-            data: AppInfo,
+            data: SoftEntity,
             position: Int
         ): Boolean {
             return super.onLongClick(holder, view, data, position)
@@ -111,6 +161,15 @@ class AppAggregatorListLayout: RecyclerView {
         override fun onItemDragMoving(p0: ViewHolder?, p1: Int, p2: ViewHolder?, p3: Int) {}
 
         override fun onItemDragEnd(p0: ViewHolder?, p1: Int) {
+            // 拖拽过程中 onItemDragMoving 已把 mAdapter.data 交换为新顺序，
+            // 这里取出当前顺序并回调给上层持久化 + 同步 HomeModel.appListFlow
+            val order = mAdapter.data.filterIsInstance<SoftEntity>()
+            order.forEach {
+                Log.d(AppAggregatorListLayout::class.simpleName, "onItemDragEnd: $it")
+            }
+            if (order.isNotEmpty()) {
+                onOrderChangedListener?.onOrderChanged(order)
+            }
         }
 
         override fun onItemDragMovePos(viewHolder: ViewHolder, dX:Float, dY:Float, actionState:Int, isCurrentlyActive:Boolean) {

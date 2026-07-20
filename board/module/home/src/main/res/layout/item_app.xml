@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-    <com.cn.core.ui.view.frosted.FrostedAnimatedGlowView
+    <com.cn.core.ui.view.frosted.FocusScaleView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="@dimen/dp60"
@@ -9,7 +9,18 @@
         android:focusable="true"
         android:focusableInTouchMode="false"
         android:elevation="@dimen/dp40"
-        app:fagv_blurEnabled="false">
+        app:fsv_focusScale="1.1"
+        app:fsv_scaleDuration="300"
+        app:sgv_cornerRadius="@dimen/dp8"
+        app:fagv_blurEnabled="false"
+        app:sgv_glowEnabled="false"
+        app:asgv_refreshEffectEnabled="false"
+        app:asgv_flowEnabled="false"
+        app:sgv_strokeEnabled="true"
+        app:sgv_strokeWidthNormal="@dimen/dp0point5"
+        app:sgv_strokeWidthFocused="@dimen/dp0point5"
+        app:sgv_strokeColorNormal="@color/common_color_stroke_normal_step_a"
+        app:sgv_strokeColorFocused="@color/common_color_stroke_focused">
 
         <ImageView
             android:id="@+id/home_aggregator_app_icon"
@@ -44,5 +55,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
-    </com.cn.core.ui.view.frosted.FrostedAnimatedGlowView>
+        <ImageView
+            android:id="@+id/home_aggregator_app_choice"
+            android:layout_width="@dimen/dp12"
+            android:layout_height="@dimen/dp12"
+            android:layout_marginTop="@dimen/dp2"
+            android:layout_marginEnd="@dimen/dp2"
+            android:scaleType="centerInside"
+            android:visibility="gone"
+            android:focusable="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </com.cn.core.ui.view.frosted.FocusScaleView>
 </layout>

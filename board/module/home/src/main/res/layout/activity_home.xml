@@ -3,6 +3,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/home_activity_root"
         android:layout_width="match_parent"
@@ -15,6 +16,15 @@
             android:layout_height="match_parent"
             android:name="com.cn.board.meet.home.app.AppAggregatorFrag"
             android:tag="AppAggregatorFrag"/>
+
+        <Button
+            android:id="@+id/fabWallpaperSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_wallpaper_settings"
+            android:layout_margin="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -2,7 +2,7 @@
 # Android Gradle Plugin 版本
 tagp = "8.9.2"
 androidTools = "31.9.2"
-agp = "8.6.0"
+agp = "8.13.0"
 
 # Android SDK 版本
 compileSdk = "35"

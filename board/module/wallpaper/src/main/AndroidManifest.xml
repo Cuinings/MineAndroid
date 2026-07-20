@@ -4,6 +4,8 @@
     package="com.cn.board.wallpaper">
     <!-- 壁纸服务权限 -->
     <uses-permission android:name="android.permission.BIND_WALLPAPER" tools:ignore="ProtectedPermissions" />
+    <!-- 系统级挂载：编程式设置 Live Wallpaper 组件（signature|privileged，需 priv-app / 平台签名）-->
+    <uses-permission android:name="android.permission.SET_WALLPAPER_COMPONENT" tools:ignore="ProtectedPermissions" />
     <!-- 存储权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -12,14 +14,16 @@
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
     <!-- 如果需要网络功能 -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- 如果需要传感器 -->
-    <uses-permission android:name="android.permission.BODY_SENSORS" />
+    <!-- 系统级：设置 Surface 帧率 -->
+    <uses-permission android:name="android.permission.SET_SURFACE_FRAME_RATE" tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.ACCESS_SURFACE_FLINGER" tools:ignore="ProtectedPermissions" />
 
     <application>
         <service android:name=".BoardWallpaperService"
             android:enabled="true"
             android:exported="true"
             android:process=":wallpaper"
+            android:directBootAware="true"
             android:permission="android.permission.BIND_WALLPAPER">
             <intent-filter>
                 <action android:name="android.service.wallpaper.WallpaperService"/>

@@ -4,4 +4,5 @@
     <string name="主页">主页应用管理</string>
     <string name="str_osd_soft_manager">主页应用管理</string>
     <string name="str_finish">完成</string>
+    <string name="home_wallpaper_settings">壁纸设置</string>
 </resources>

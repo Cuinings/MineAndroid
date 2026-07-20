@@ -31,10 +31,10 @@ class AppRepository(private val context: Context) {
         appDao.getAppByPackageName(packageName)
 
     suspend fun queryByMain(main: Int): MutableList<AppInfo> =
-        appDao.getAllApps().filterTo(ArrayList()) { it.main == main }
+        appDao.getAppsByMain(main)
 
-    suspend fun queryOfflineMain(value: Int): MutableList<AppInfo> =
-        appDao.getAllApps().filterTo(ArrayList()) { it.offlineMain == value }
+    suspend fun queryOfflineMain(main: Int): MutableList<AppInfo> =
+        appDao.getAppsByOfflineMain(main)
 
     // ------------------------------------------------------------------
     // 插入
@@ -53,6 +53,9 @@ class AppRepository(private val context: Context) {
     suspend fun update(app: AppInfo?) = app?.let { appDao.updateApp(it) }
 
     suspend fun update(vararg app: AppInfo) = app.forEach { appDao.updateApp(it) }
+
+    /** 按主键 id 更新展示顺序 orderIndex（拖拽重排用） */
+    suspend fun updateOrderIndex(id: Int, value: Int) = appDao.updateOrderIndex(id, value)
 
     // ------------------------------------------------------------------
     // 删除

@@ -3,34 +3,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#FF1A1A1A">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="视频路径"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp" />
 
     <EditText
-        android:id="@+id/pathEditText"
+        android:id="@+id/videoPathEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/setting_wallpaper_path_hint"
+        android:hint="/storage/emulated/0/Download/video.mp4"
         android:inputType="textUri"
-        android:layout_marginBottom="16dp" />
+        android:text="/storage/emulated/0/Download/wallpaper_dy_1.mp4"
+        android:textColor="@android:color/white"
+        android:textColorHint="#99FFFFFF"
+        android:layout_marginTop="12dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="end">
+        android:gravity="end"
+        android:layout_marginTop="16dp">
 
         <Button
             android:id="@+id/cancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/setting_cancel"
+            android:text="取消"
             android:layout_marginEnd="8dp" />
 
         <Button
             android:id="@+id/saveButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/setting_save" />
+            android:text="保存" />
 
     </LinearLayout>
 

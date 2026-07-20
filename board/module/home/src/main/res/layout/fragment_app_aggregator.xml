@@ -20,7 +20,10 @@
             app:sgv_cornerRadius="@dimen/dp8"
             app:fagv_backgroundBlurOnly="true"
             app:fagv_blurEnabled="true"
-            app:fagv_blurRadius="45"
+            app:fagv_blurRadius="50"
+            app:sgv_glowEnabled="false"
+            app:asgv_refreshEffectEnabled="false"
+            app:asgv_flowEnabled="false"
             app:sgv_strokeEnabled="true"
             app:sgv_strokeWidthNormal="@dimen/dp0point5"
             app:sgv_strokeColorNormal="@color/common_color_stroke_normal_step_a"
@@ -42,27 +45,27 @@
                 android:focusable="false"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/llSoftMng"
-                app:layout_constraintBottom_toBottomOf="@id/llSoftMng"/>
+                app:layout_constraintTop_toTopOf="@id/main_activity_frag_app_manager_layout"
+                app:layout_constraintBottom_toBottomOf="@id/main_activity_frag_app_manager_layout"/>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvApps"
+                android:id="@+id/main_activity_frag_app_manager_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:layout_marginStart="@dimen/dp17"
                 android:includeFontPadding="false"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:text="@string/str_osd_soft_manager"
                 android:textSize="@dimen/sp10"
                 android:focusable="false"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/llSoftMng"
-                app:layout_constraintBottom_toBottomOf="@id/llSoftMng"/>
+                app:layout_constraintTop_toTopOf="@id/main_activity_frag_app_manager_layout"
+                app:layout_constraintBottom_toBottomOf="@id/main_activity_frag_app_manager_layout"/>
 
             <com.cn.core.ui.view.frosted.StatefulGlowView
-                android:id="@+id/llSoftMng"
+                android:id="@+id/main_activity_frag_app_manager_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp16"
                 android:layout_marginTop="@dimen/dp15"
@@ -77,13 +80,13 @@
                 app:sgv_strokeEnabled="true"
                 app:sgv_strokeWidthFocused="@dimen/dp1"
                 app:sgv_strokeColorFocused="@color/common_color_stroke_focused"
-                app:sgv_glowEnabled="true"
+                app:sgv_glowEnabled="false"
                 app:sgv_topHighlightColor="@color/common_color_top_light_normal_step_a"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvAppsRight"
+                    android:id="@+id/main_activity_frag_app_manager_right"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dp16"
                     android:gravity="center_vertical"
@@ -98,13 +101,13 @@
                     app:layout_constraintEnd_toEndOf="parent"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvFinish"
+                    android:id="@+id/main_activity_frag_app_manager_finish"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dp16"
                     android:gravity="center_vertical"
                     android:focusable="false"
                     android:duplicateParentState="true"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:text="@string/str_finish"
                     android:textSize="@dimen/sp7"
                     android:textColor="@color/selector_x1e94da_focus"
@@ -115,8 +118,8 @@
 
             </com.cn.core.ui.view.frosted.StatefulGlowView>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/mainSoftList"
+            <com.cn.board.meet.home.app.AppAggregatorMainListLayout
+                android:id="@+id/main_activity_frag_app_manager_edit_list_layout"
                 android:layout_width="@dimen/dp213"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/dp9"
@@ -129,14 +132,14 @@
                 tools:itemCount="6"
                 app:spanCount="3"
                 android:clipChildren="false"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/llSoftMng"/>
+                app:layout_constraintTop_toBottomOf="@id/main_activity_frag_app_manager_layout"/>
 
             <com.cn.board.meet.home.app.AppAggregatorListLayout
-                android:id="@+id/softList"
+                android:id="@+id/main_activity_frag_app_manager_list_layout"
                 android:layout_width="@dimen/dp284"
                 android:layout_height="@dimen/dp256"
                 android:paddingTop="@dimen/dp10"
@@ -154,7 +157,7 @@
                 tools:itemCount="16"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="4"
-                app:layout_constraintTop_toBottomOf="@id/llSoftMng"
+                app:layout_constraintTop_toBottomOf="@id/main_activity_frag_app_manager_layout"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
         </com.cn.core.ui.view.frosted.FrostedAnimatedGlowView>

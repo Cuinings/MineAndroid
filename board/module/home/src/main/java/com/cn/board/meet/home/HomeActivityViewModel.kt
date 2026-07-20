@@ -14,6 +14,7 @@ import com.cn.core.ui.viewmodel.UiState
 
 sealed class HomeActivityEffect: UiEffect {
     data class Toast(val msg: String): HomeActivityEffect()
+    object OpenWallpaperSettings : HomeActivityEffect()
 }
 sealed class HomeActivityState: UiState {
     object Init: HomeActivityState()
@@ -21,6 +22,7 @@ sealed class HomeActivityState: UiState {
 }
 sealed class HomeActivityIntent: UiIntent {
     object Refresh: HomeActivityIntent()
+    object OpenWallpaperSettings: HomeActivityIntent()
 }
 class HomeActivityViewModel: BasicMviViewModel<HomeActivityState, HomeActivityIntent, HomeActivityEffect>(HomeActivityState.Init) {
 
@@ -43,6 +45,9 @@ class HomeActivityViewModel: BasicMviViewModel<HomeActivityState, HomeActivityIn
                     }
                 }
                 sendEffect(HomeActivityEffect.Toast("refreshed"))
+            }
+            is HomeActivityIntent.OpenWallpaperSettings -> {
+                sendEffect(HomeActivityEffect.OpenWallpaperSettings)
             }
         }
     }

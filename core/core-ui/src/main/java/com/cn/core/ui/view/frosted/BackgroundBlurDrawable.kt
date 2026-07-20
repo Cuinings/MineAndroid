@@ -191,7 +191,29 @@ object BackgroundBlurDrawable {
     class FallbackBlurDrawable(private var blurRadius: Float) : Drawable() {
         companion object {
             private const val REFRESH_MS = 2000L
-            private const val MAX_FAILED_REFRESH_MS = 16000L // 指数退避上限
+            private const val MAX_FAILED_REFRESH_MS = 16000L
+            private const val SHARED_CAPTURE_TTL_MS = 2000L // 共享截图有效期
+
+            // 共享截图：同 Activity 的多个 FallbackBlurDrawable 复用同一张全屏截图
+            private var sharedCapture: Bitmap? = null
+            private var sharedCaptureTime = 0L
+            private var sharedCaptureW = 0; private var sharedCaptureH = 0
+
+            @Synchronized
+            private fun tryGetSharedCapture(w: Int, h: Int): Bitmap? {
+                val bmp = sharedCapture
+                if (bmp != null && !bmp.isRecycled && sharedCaptureW == w && sharedCaptureH == h
+                    && System.currentTimeMillis() - sharedCaptureTime < SHARED_CAPTURE_TTL_MS) {
+                    return bmp.copy(bmp.config ?: Bitmap.Config.ARGB_8888, false) // 返回副本，各 View 独立裁剪
+                }
+                return null
+            }
+
+            @Synchronized
+            private fun storeSharedCapture(bmp: Bitmap, w: Int, h: Int) {
+                sharedCapture?.recycle(); sharedCapture = bmp.copy(bmp.config ?: Bitmap.Config.ARGB_8888, false)
+                sharedCaptureTime = System.currentTimeMillis(); sharedCaptureW = w; sharedCaptureH = h
+            }
         }
 
         private val mRegionRect = android.graphics.Rect()
@@ -259,7 +281,12 @@ object BackgroundBlurDrawable {
         private fun doCapture() {
             val v = mView; if (v == null || !v.isAttachedToWindow) { mBusy = false; return }
             try {
-                val bmp = capture(v)
+                // 先查共享缓存（同屏其他 View 已截图）
+                var bmp = tryGetSharedCapture(mScreenW, mScreenH)
+                if (bmp == null) {
+                    bmp = capture(v)
+                    if (bmp != null) storeSharedCapture(bmp, mScreenW, mScreenH)
+                }
                 if (bmp == null) {
                     // 指数退避：失败后延迟翻倍，最多 MAX_FAILED_REFRESH_MS
                     mFailedRefreshMs = (mFailedRefreshMs * 2).coerceAtMost(MAX_FAILED_REFRESH_MS)
@@ -277,7 +304,7 @@ object BackgroundBlurDrawable {
             val node = mBlurNode ?: return
             // 复用 RenderEffect
             if (mRenderEffect == null || mCachedRadius != blurRadius) {
-                mRenderEffect = RenderEffect.createBlurEffect(blurRadius, blurRadius, Shader.TileMode.CLAMP)
+                mRenderEffect = FrostedAnimatedGlowView.getOrCreateBlurEffect(blurRadius)
                 mCachedRadius = blurRadius
             }
             node.setRenderEffect(mRenderEffect)

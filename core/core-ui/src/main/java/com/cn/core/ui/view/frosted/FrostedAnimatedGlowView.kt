@@ -2,9 +2,7 @@ package com.cn.core.ui.view.frosted
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.WallpaperManager
 import android.content.Context
-import android.content.ContextWrapper
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.ColorFilter
@@ -12,7 +10,6 @@ import android.graphics.Outline
 import android.graphics.Paint
 import android.graphics.PixelFormat
 import android.graphics.Rect
-import android.graphics.RectF
 import android.graphics.RenderEffect
 import android.graphics.RenderNode
 import android.graphics.Shader
@@ -26,9 +23,6 @@ import android.view.ViewOutlineProvider
 import android.view.ViewTreeObserver
 import android.view.WindowManager
 import androidx.core.content.withStyledAttributes
-import androidx.core.graphics.drawable.toBitmap
-import androidx.core.graphics.withClip
-import androidx.core.graphics.withSave
 import com.cn.core.ui.BuildConfig
 import com.cn.core.ui.R
 import kotlinx.coroutines.CoroutineScope
@@ -115,6 +109,35 @@ open class FrostedAnimatedGlowView @JvmOverloads constructor(
                     logW { "overlayRef init: ${e.message}" }
                 }
             }
+        }
+
+        // RenderEffect 全局缓存：相同 blurRadius 的 View 复用同一 GPU 对象，避免 N 份重复分配
+        private val blurEffectCache = java.util.WeakHashMap<Float, android.graphics.RenderEffect>()
+        fun getOrCreateBlurEffect(radius: Float): RenderEffect {
+            return blurEffectCache.getOrPut(radius) {
+                RenderEffect.createBlurEffect(radius, radius, Shader.TileMode.CLAMP)
+            }
+        }
+
+        // TextureView 帧缓存：同一 TextureView 的多 View 共享一次 bitmap 捕获
+        private val textureFrameCache = java.util.WeakHashMap<TextureView, Bitmap>()
+        private var textureFrameCacheTime = 0L
+        private const val TEXTURE_FRAME_CACHE_TTL_MS = 50L // 同一帧内复用（16ms vsync × 3）
+
+        @Synchronized
+        fun getCachedTextureFrame(tv: TextureView): Bitmap? {
+            val bmp = textureFrameCache[tv]
+            if (bmp != null && !bmp.isRecycled && System.currentTimeMillis() - textureFrameCacheTime < TEXTURE_FRAME_CACHE_TTL_MS) {
+                return bmp.copy(bmp.config ?: android.graphics.Bitmap.Config.ARGB_8888, false)
+            }
+            return null
+        }
+
+        @Synchronized
+        fun cacheTextureFrame(tv: TextureView, bmp: Bitmap) {
+            textureFrameCache[tv]?.recycle()
+            textureFrameCache[tv] = bmp.copy(bmp.config ?: android.graphics.Bitmap.Config.ARGB_8888, false)
+            textureFrameCacheTime = System.currentTimeMillis()
         }
 
         /**
@@ -334,7 +357,7 @@ open class FrostedAnimatedGlowView @JvmOverloads constructor(
         if (!forceFallback) {
             val act = cachedActivity
             val crossWindowOk = act?.let { BlurMaskManager.isCrossWindowBlurEnabled(it) } ?: false
-            val hasMask = false//act?.let { BlurMaskManager.hasMask(it) } ?: false
+            val hasMask = act?.let { BlurMaskManager.hasMask(it) } ?: false
             val windowFlags = try { act?.window?.attributes?.flags ?: 0 } catch (_: Exception) { 0 }
             val windowBlurR = try { act?.window?.attributes?.blurBehindRadius ?: 0 } catch (_: Exception) { 0 }
             val preSetBlurBehind = (windowFlags and WindowManager.LayoutParams.FLAG_BLUR_BEHIND) != 0 && windowBlurR > 0
@@ -344,7 +367,8 @@ open class FrostedAnimatedGlowView @JvmOverloads constructor(
             if (act != null && !crossWindowOk) {
                 logW { "activateBlur: SYSTEM skipped (OEM disabled cross-window blur) → FALLBACK" }
             } else {
-                val enablePipeline = if (backgroundBlurOnly) false else if (hasMask) (useHiddenBlurPipeline || preSetBlurBehind) else false
+                // 多 View 场景启用 Window pipeline：BlurMaskManager 共享一次 Window.setBackgroundBlurRadius
+                val enablePipeline = if (backgroundBlurOnly) false else if (hasMask) (useHiddenBlurPipeline || preSetBlurBehind) else !useHiddenBlurPipeline
                 selfSetBackgroundBlurRadius = enablePipeline
                 logD { "activateBlur: SYSTEM — enablePipeline=$enablePipeline, selfSetBgBlurR=$selfSetBackgroundBlurRadius" }
                 systemBlurDrawable = BackgroundBlurDrawable.tryCreateSystem(this, radius, enablePipeline)
@@ -364,7 +388,7 @@ open class FrostedAnimatedGlowView @JvmOverloads constructor(
         val d = systemBlurDrawable ?: return
         setLayerType(LAYER_TYPE_NONE, null); setBackgroundInternal(d); applyBlurCornerRadius(d); blurMode = BlurMode.SYSTEM
         val act = cachedActivity
-        val hasMask = false//act?.let { BlurMaskManager.hasMask(it) } ?: false
+        val hasMask = act?.let { BlurMaskManager.hasMask(it) } ?: false
         logD { "onSystemBlurReady: radius=$radius, bgBlurOnly=$backgroundBlurOnly, hasMask=$hasMask, selfSetBgBlurR=$selfSetBackgroundBlurRadius" }
         if (backgroundBlurOnly) {
             logD { "onSystemBlurReady: backgroundBlurOnly → clearExternalBlurBehind()" }
@@ -373,7 +397,8 @@ open class FrostedAnimatedGlowView @JvmOverloads constructor(
             logD { "onSystemBlurReady: hasMask=true → setupWindowBlur($radius)" }
             setupWindowBlur(radius)
         } else {
-            logD { "onSystemBlurReady: hasMask=false → skip setupWindowBlur (per-View only)" }
+            logD { "onSystemBlurReady: Window pipeline enabled (shared blur for all views)" }
+            setupWindowBlur(radius)
         }
         uninstallTracking()
     }
@@ -747,7 +772,13 @@ open class FrostedAnimatedGlowView @JvmOverloads constructor(
             isCapturing = true
             scope.launch(Dispatchers.Default) {
                 try {
-                    val bitmap = tv.bitmap ?: return@launch
+                    // 先从共享缓存获取（同 TextureView 的多 View 复用一次 bitmap 捕获）
+                    var bitmap = getCachedTextureFrame(tv)
+                    val fromCache = bitmap != null
+                    if (!fromCache) {
+                        bitmap = tv.bitmap ?: return@launch
+                        cacheTextureFrame(tv, bitmap)
+                    }
                     val targetW = (bitmap.width * scaleFactor).toInt().coerceAtLeast(1)
                     val targetH = (bitmap.height * scaleFactor).toInt().coerceAtLeast(1)
 
@@ -766,8 +797,9 @@ open class FrostedAnimatedGlowView @JvmOverloads constructor(
                         releaseScaledBitmap()
                         scaled = Bitmap.createScaledBitmap(bitmap, targetW, targetH, false)
                         scaledBitmap = scaled; scaledW = targetW; scaledH = targetH
+                        dirtyNode = true // 新 bitmap，RenderNode 必须重建
                     }
-                    // 回收原始帧 (仅当 != scaled 时)
+                    // 回收原始帧 (仅当 != scaled 且非缓存)
                     if (bitmap !== scaled) bitmap.recycle()
 
                     withContext(Dispatchers.Main) {
@@ -808,7 +840,7 @@ open class FrostedAnimatedGlowView @JvmOverloads constructor(
 
             // RenderEffect 缓存
             if (renderEffect == null || cachedRadius != blurRadius) {
-                renderEffect = RenderEffect.createBlurEffect(blurRadius, blurRadius, Shader.TileMode.CLAMP)
+                renderEffect = getOrCreateBlurEffect(blurRadius)
                 cachedRadius = blurRadius
                 dirtyNode = true
             }
@@ -903,7 +935,7 @@ open class FrostedAnimatedGlowView @JvmOverloads constructor(
         override fun setAlpha(a: Int) {}; override fun setColorFilter(cf: ColorFilter?) {}
         override fun getOpacity(): Int = PixelFormat.TRANSLUCENT
 
-        private fun getOrCreateEffect() = if (renderEffect == null && radius > 0f) { renderEffect = RenderEffect.createBlurEffect(radius, radius, Shader.TileMode.CLAMP); cachedRadius = radius; renderEffect } else renderEffect
+        private fun getOrCreateEffect() = if (renderEffect == null && radius > 0f) { renderEffect = getOrCreateBlurEffect(radius); cachedRadius = radius; renderEffect } else renderEffect
         private fun buildScaledBitmap() { val s = scale.coerceIn(0.01f, 1.0f); scaledBmp = Bitmap.createScaledBitmap(source, (source.width * s).toInt().coerceAtLeast(1), (source.height * s).toInt().coerceAtLeast(1), false) }
         private fun buildBlurNode() {
             val vw = width; val vh = height; if (vw <= 0 || vh <= 0 || cropRect.isEmpty) return

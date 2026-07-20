@@ -81,6 +81,16 @@ object BlurMaskManager {
         }
     }
 
+    /** 查询 Activity 是否已有 mask（任一 View 注册过） */
+    fun hasMask(activity: Activity): Boolean {
+        synchronized(lock) { return masks.containsKey(activity) }
+    }
+
+    /** 获取当前最大模糊半径 */
+    fun getMaxBlurRadius(activity: Activity): Int {
+        synchronized(lock) { return masks[activity]?.maxBlurRadius ?: 0 }
+    }
+
     /** 标记壁纸 drawable 需重新加载（壁纸切换时调用，不碰镂空） */
     fun markWallpaperDirty(activity: Activity) {
         synchronized(lock) {

@@ -1,30 +1,6 @@
 package com.cn.board.meet.home.app
 
-import android.app.ActivityManager
-import android.content.Context
 
-/**
- * 应用程序相关工具类
- */
-object AppUtil {
-
-    private val processList = ArrayList<String>()
-
-    fun initRunningProcess(context: Context, action: () -> Unit) {
-        (context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager).runningAppProcesses.forEach { runningAppProcessInfo ->
-            runningAppProcessInfo.processName.takeIf { it.contains("tp") }?.let { processName ->
-                processList.takeIf { !it.contains(processName) }?.add(processName)
-            }
-        }
-        action.invoke()
-    }
-
-    fun String.isProcessing(noProcessing: (String) -> Unit, processing: (String) -> Unit) {
-        if (!processList.contains(this)) noProcessing.invoke(this) else processing.invoke(this)
-    }
-
-
-}
 
 object ActivityClassName {
 

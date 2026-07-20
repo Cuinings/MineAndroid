@@ -21,12 +21,9 @@ object DatabaseManager {
     fun initDatabase(context: Context) {
         if (db == null) {
             Log.d("DatabaseManager", "开始初始化数据库")
-            db = Room.databaseBuilder(
-                context.applicationContext, // 使用 Application 上下文避免内存泄露
-                AppDatabase::class.java,
-                "board_database"
-            )
-//                .addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3)
+            // 使用 Application 上下文避免内存泄露
+            db = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "board_database")
+                .addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3)
                 .fallbackToDestructiveMigration(true) // 添加破坏性迁移作为最后的保障
                 .build()
             appDao = db?.appDao()

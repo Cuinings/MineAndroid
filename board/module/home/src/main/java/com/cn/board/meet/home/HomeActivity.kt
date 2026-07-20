@@ -1,7 +1,10 @@
 package com.cn.board.meet.home
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import com.cn.board.wallpaper.WallpaperSettingsActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -25,6 +28,9 @@ class HomeActivity : BasicVmDBActivity<HomeActivityViewModel, ActivityHomeBindin
     override fun onBindLayout() {
         // 视图已由 BasicVmDBActivity 绑定至 binding，此处做额外的数据/观察者绑定
         observeUi()
+        binding.fabWallpaperSettings.setOnClickListener {
+            dispatch(HomeActivityIntent.OpenWallpaperSettings)
+        }
     }
 
     /**
@@ -57,7 +63,14 @@ class HomeActivity : BasicVmDBActivity<HomeActivityViewModel, ActivityHomeBindin
 
     private fun renderEffect(effect: HomeActivityEffect) {
         // 一次性副作用：Toast / 导航 / 弹窗等
-        // 当前 HomeActivityEffect 尚无子类型，按需扩展后在此分支处理
+        when (effect) {
+            is HomeActivityEffect.Toast -> {
+                Toast.makeText(this, effect.msg, Toast.LENGTH_SHORT).show()
+            }
+            HomeActivityEffect.OpenWallpaperSettings -> {
+                startActivity(Intent(this, WallpaperSettingsActivity::class.java))
+            }
+        }
     }
 
     override fun useSystemWallpaper(): Boolean = true

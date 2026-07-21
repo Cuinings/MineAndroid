@@ -1,6 +1,7 @@
 package com.cn.core.ui.activity
 
 import android.content.Intent
+import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
@@ -8,6 +9,8 @@ import android.view.WindowManager
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.cn.core.ui.locale.LocaleHelper
+import com.cn.core.ui.locale.TranslationOverlay
 
 /**
  * @Author: CuiNing
@@ -25,8 +28,42 @@ abstract class BasicActivity: AppCompatActivity() {
             window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER)
         }
         super.onCreate(savedInstanceState)
-
     }
+
+    /**
+     * 拦截字符串查找：优先使用导入的翻译，找不到则回退到内置资源。
+     *
+     * 注意：Context.getString / Fragment.getString 是 final 方法，**不能**直接 override。
+     * 因此这里改为 override getResources()，返回一个拦截 getString / getText 的 Resources 子类。
+     * 所有通过 getResources().getString(...) 的调用（含 XML 布局解析、Fragment 的字符串获取）
+     * 都会走这条翻译路径。
+     */
+    @Suppress("DEPRECATION")
+    private val translatingResources: Resources by lazy {
+        val base = super.getResources()
+        object : Resources(base.assets, base.displayMetrics, base.configuration) {
+            private val langTag: String
+                get() = LocaleHelper.getCurrentLanguageTag(this@BasicActivity)
+
+            override fun getString(id: Int): String {
+                return TranslationOverlay.getString(base, id, langTag) ?: super.getString(id)
+            }
+
+            override fun getString(id: Int, vararg formatArgs: Any?): String {
+                return String.format(getString(id), *formatArgs)
+            }
+
+            override fun getText(id: Int): CharSequence {
+                return TranslationOverlay.getString(base, id, langTag) ?: super.getText(id)
+            }
+
+            override fun getText(id: Int, def: CharSequence?): CharSequence {
+                return TranslationOverlay.getString(base, id, langTag) ?: super.getText(id, def)
+            }
+        }
+    }
+
+    override fun getResources(): Resources = translatingResources
 
     private var resultLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()

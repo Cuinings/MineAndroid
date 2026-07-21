@@ -1,4 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">app-test</string>
-    <string name="app_test_resources_title">Test Resources</string>
+    <string name="app_test_resources_title">测试资源</string>
 </resources>

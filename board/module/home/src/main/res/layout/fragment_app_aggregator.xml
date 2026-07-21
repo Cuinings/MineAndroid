@@ -33,6 +33,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
+            <!-- 视频作为首子 View：BELOW_WINDOW（窗口内容之下），关闭卡片模糊后透出，
+                 标题/列表等窗口内容绘制在其上。层级由 SurfaceControlZOrder.sendBelowWindow 设置 -->
+            <com.cn.board.meet.home.HomeVideoSurfaceView
+                android:id="@+id/home_video_surface_view"
+                android:layout_width="@dimen/dp200"
+                android:layout_height="@dimen/dp200"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/main_activity_frag_app_manager_app_list_title"
                 android:layout_width="wrap_content"

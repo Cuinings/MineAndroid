@@ -48,6 +48,7 @@ include(":board:module:meet")
 include(":board:module:contacts")
 include(":board:module:database")
 include(":board:module:wallpaper")
+include(":board:module:file-server")
 
 include(":core:core-ui")
 include(":core:core-task")

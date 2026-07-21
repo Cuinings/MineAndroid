@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_wallpaper">Board Wallpaper</string>
-    <string name="wallpaper_description">Board动态壁纸</string>
-    <string name="setting_wallpaper_path">壁纸路径</string>
-    <string name="setting_wallpaper_path_hint">输入壁纸文件路径</string>
-    <string name="setting_type_video">视频壁纸</string>
-    <string name="setting_type_image">图片/轮播壁纸</string>
-    <string name="setting_type_gl">OpenGL 动态壁纸</string>
-    <string name="setting_wallpaper_path_hint_video">视频文件路径（如 /sdcard/Download/wallpaper.mp4）</string>
-    <string name="setting_wallpaper_path_hint_gl">可选图片或视频路径（留空走程序化动画；视频如 /sdcard/wallpaper.mp4 走 GL 解码）</string>
-    <string name="setting_wallpaper_paths_hint_image">图片路径，多张用逗号分隔（如 /sdcard/a.jpg,/sdcard/b.jpg）</string>
+    <string name="setting_cancel">取消</string>
     <string name="setting_carousel_interval_hint">轮播间隔（毫秒，如 5000；仅图片模式）</string>
     <string name="setting_save">保存</string>
-    <string name="setting_cancel">取消</string>
+    <string name="setting_type_gl">OpenGL 动态壁纸</string>
+    <string name="setting_type_image">图片/轮播壁纸</string>
+    <string name="setting_type_video">视频壁纸</string>
+    <string name="setting_wallpaper_path">壁纸路径</string>
+    <string name="setting_wallpaper_path_hint">输入壁纸文件路径</string>
+    <string name="setting_wallpaper_path_hint_gl">可选图片或视频路径（留空走程序化动画；视频如 /sdcard/wallpaper.mp4 走 GL 解码）</string>
+    <string name="setting_wallpaper_path_hint_video">视频文件路径（如 /sdcard/Download/wallpaper.mp4）</string>
+    <string name="setting_wallpaper_paths_hint_image">图片路径，多张用逗号分隔（如 /sdcard/a.jpg,/sdcard/b.jpg）</string>
+    <string name="wallpaper_description">Board动态壁纸</string>
 </resources>

@@ -7,9 +7,15 @@ plugins {
 
 android {
     namespace = "com.cn.board.meet.home"
+    // compileSdk 用 35 仅为构建期能引用 framework 中的 SurfaceControl.Transaction 部分公开接口；
+    // minSdk/targetSdk = 31（运行目标 Android 31，系统应用）。addView / getSurfaceControl /
+    // setRelativeLayer / show / View.getHostToken 等仍为 @hide，运行时由系统权限豁免、经反射调用。
+    // 注意：最终打包的 launcher app 的 minSdk 也必须 >= 31。
     compileSdk = 35
 
     defaultConfig {
+        // 升到 31：与 compileSdk 对齐，并直接支持 SurfaceControlViewHost 把卡片 UI
+        // 抬到 ABOVE_WINDOW 的视频之上（「毛玻璃模糊 + SurfaceView 视频清晰 + 上层 UI 可见」）。
         minSdk = 21
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

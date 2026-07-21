@@ -23,6 +23,9 @@ import android.view.ViewOutlineProvider
 import android.view.ViewTreeObserver
 import android.view.WindowManager
 import androidx.core.content.withStyledAttributes
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
 import com.cn.core.ui.BuildConfig
 import com.cn.core.ui.R
 import kotlinx.coroutines.CoroutineScope
@@ -226,6 +229,8 @@ open class FrostedAnimatedGlowView @JvmOverloads constructor(
     private var clearedExternalBlurRadius = 0
     private var safeBitmapCache: Bitmap? = null
     private var cachedActivity: Activity? = null
+    private var lifecycleObserver: LifecycleEventObserver? = null
+    private var blurWasActiveBeforeStop = false
     private val screenPosCache = IntArray(2)
     private var wallpaperCropDrawable: WallpaperCropDrawable? = null
 
@@ -237,6 +242,7 @@ open class FrostedAnimatedGlowView @JvmOverloads constructor(
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         cachedActivity = resolveActivity()
+        bindActivityLifecycle()
         when {
             blurredDrawable != null -> applyBlurredDrawable()
             blurredWallpaperBitmap != null -> applyWallpaperBitmap()
@@ -245,6 +251,7 @@ open class FrostedAnimatedGlowView @JvmOverloads constructor(
     }
 
     override fun onDetachedFromWindow() {
+        unbindActivityLifecycle()
         deactivateBlur()
         removeCallbacks(deferredActivator)
         cachedActivity = null
@@ -269,6 +276,40 @@ open class FrostedAnimatedGlowView @JvmOverloads constructor(
 
     private val deferredActivator = Runnable {
         if (isAttachedToWindow && blurEnabled && width > 0 && height > 0) activateBlur()
+    }
+
+    private fun bindActivityLifecycle() {
+        val act = cachedActivity ?: return  // 非 Activity 上下文自动跳过
+        val lifecycle = (act as? LifecycleOwner)?.lifecycle ?: return
+        if (lifecycleObserver != null) return
+        val obs = LifecycleEventObserver { _, event ->
+            when (event) {
+                Lifecycle.Event.ON_STOP -> {
+                    blurWasActiveBeforeStop = blurMode != BlurMode.NONE
+                    if (blurWasActiveBeforeStop) deactivateBlur()
+                }
+                Lifecycle.Event.ON_START -> {
+                    if (blurWasActiveBeforeStop && blurEnabled && blurMode == BlurMode.NONE) {
+                        activateBlur()
+                        blurWasActiveBeforeStop = false
+                    }
+                }
+                Lifecycle.Event.ON_DESTROY -> {
+                    lifecycleObserver = null
+                }
+                else -> {}
+            }
+        }
+        lifecycleObserver = obs
+        lifecycle.addObserver(obs)
+    }
+
+    private fun unbindActivityLifecycle() {
+        val obs = lifecycleObserver ?: return
+        val act = cachedActivity
+        try { (act as? LifecycleOwner)?.lifecycle?.removeObserver(obs) } catch (_: Exception) {}
+        lifecycleObserver = null
+        blurWasActiveBeforeStop = false
     }
 
     private fun applyBlurredDrawable() {

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
 import com.cn.core.ui.application.ApplicationContextExt.context
+import com.cn.core.ui.locale.LocaleHelper
 
 /**
  * @Author: CuiNing
@@ -22,8 +23,10 @@ abstract class BasicApplication: Application(), ViewModelStoreOwner {
     private val mAppViewModelStore: ViewModelStore = ViewModelStore()
 
     override fun attachBaseContext(base: Context?) {
-        super.attachBaseContext(base)
-        base?.let { context = it }
+        // 多语言适配：在 super 之前包装 Context，确保所有 Activity 使用正确的 Locale
+        val wrappedBase = base?.let { LocaleHelper.wrapContext(it) } ?: base
+        super.attachBaseContext(wrappedBase)
+        wrappedBase?.let { context = it }
     }
 
     @SuppressLint("NewApi")

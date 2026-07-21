@@ -2,6 +2,7 @@ package com.cn.core.ui.view.frosted
 
 import android.annotation.SuppressLint
 import android.util.Log
+import android.view.SurfaceControl
 import android.view.SurfaceView
 import android.view.View
 
@@ -81,8 +82,18 @@ object SurfaceControlZOrder {
     // ---- 内部工具 ----
 
     /** 取 SurfaceView 自身的 SurfaceControl(隐藏 API)。 */
-    private fun getSurfaceControl(sv: SurfaceView): Any? =
+    private fun getSurfaceControlInternal(sv: SurfaceView): Any? =
         try { mSCGetSurfaceControl?.invoke(sv) } catch (e: Exception) { logW { "getSurfaceControl: ${e.message}" }; null }
+
+    /**
+     * 公开取 SurfaceView 自身的 [SurfaceControl]（API 29+）。
+     * 用于上层把其它 surface 用 [setRelativeLayer] 排在这个视频 Surface 之上/之下。
+     */
+    @androidx.annotation.RequiresApi(android.os.Build.VERSION_CODES.Q)
+    fun getSurfaceControl(sv: SurfaceView): SurfaceControl? {
+        if (!ensureInit()) return null
+        return getSurfaceControlInternal(sv) as? SurfaceControl
+    }
 
     /** 取 SurfaceView 所在窗口的 SurfaceControl(隐藏 API: ViewRootImpl.getSurfaceControl)。 */
     private fun getWindowSurfaceControl(sv: SurfaceView): Any? {
@@ -110,7 +121,7 @@ object SurfaceControlZOrder {
     @JvmOverloads
     fun bringAboveWindow(sv: SurfaceView, layer: Int = Int.MAX_VALUE / 2): Boolean {
         if (!ensureInit()) return false
-        val mySc = getSurfaceControl(sv) ?: return false.also { logW { "bringAboveWindow: surfaceControl null" } }
+        val mySc = getSurfaceControlInternal(sv) ?: return false.also { logW { "bringAboveWindow: surfaceControl null" } }
         val windowSc = getWindowSurfaceControl(sv) ?: return false.also { logW { "bringAboveWindow: window SC null" } }
         val tx = newTransaction() ?: return false
         return try {
@@ -131,7 +142,7 @@ object SurfaceControlZOrder {
      */
     fun sendBelowWindow(sv: SurfaceView): Boolean {
         if (!ensureInit()) return false
-        val mySc = getSurfaceControl(sv) ?: return false.also { logW { "sendBelowWindow: surfaceControl null" } }
+        val mySc = getSurfaceControlInternal(sv) ?: return false.also { logW { "sendBelowWindow: surfaceControl null" } }
         val windowSc = getWindowSurfaceControl(sv) ?: return false.also { logW { "sendBelowWindow: window SC null" } }
         val tx = newTransaction() ?: return false
         return try {
@@ -160,7 +171,7 @@ object SurfaceControlZOrder {
      */
     fun setSurfaceLayer(sv: SurfaceView, layer: Int): Boolean {
         if (!ensureInit()) return false
-        val mySc = getSurfaceControl(sv) ?: return false
+        val mySc = getSurfaceControlInternal(sv) ?: return false
         val tx = newTransaction() ?: return false
         return try {
             mSetLayer!!.invoke(tx, mySc, layer)
@@ -180,7 +191,7 @@ object SurfaceControlZOrder {
      */
     fun reparent(sv: SurfaceView, parentSc: Any?, layer: Int): Boolean {
         if (!ensureInit()) return false
-        val mySc = getSurfaceControl(sv) ?: return false
+        val mySc = getSurfaceControlInternal(sv) ?: return false
         val tx = newTransaction() ?: return false
         return try {
             mReparent!!.invoke(tx, mySc, parentSc)
@@ -193,4 +204,15 @@ object SurfaceControlZOrder {
 
     /** 是否反射初始化成功(可用于降级判断)。 */
     fun isAvailable(): Boolean = ensureInit()
+
+    /**
+     * 取 SurfaceView 所在窗口的 [SurfaceControl]（公开为 [SurfaceControl] 类型，需 API 29+）。
+     * 用于将 UI 的 SurfaceControlViewHost 与视频 Surface 挂到同一父层，
+     * 再用 [SurfaceControl.Transaction.setRelativeLayer] 把 UI 排在视频之上。
+     */
+    @androidx.annotation.RequiresApi(android.os.Build.VERSION_CODES.Q)
+    fun getWindowSC(sv: SurfaceView): SurfaceControl? {
+        if (!ensureInit()) return null
+        return getWindowSurfaceControl(sv) as? SurfaceControl
+    }
 }

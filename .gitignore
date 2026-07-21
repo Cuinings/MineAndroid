@@ -1,12 +1,13 @@
-# IDE (IntelliJ / Android Studio)
+# IDE (IntelliJ / Android Studio / VS Code)
 *.iml
 /.idea/
 !/.idea/codeStyles/
 !/.idea/inspectionProfiles/
+.vscode/
 
 # Gradle
 .gradle
-/build
+**/build/
 /captures
 
 # External native build
@@ -30,3 +31,10 @@ local.properties
 # OS files
 .DS_Store
 Thumbs.db
+
+# Multilingual — only default values/strings.xml stays in Git.
+# Other languages are loaded at runtime via JSON import.
+**/src/main/res/values-en/
+**/src/main/res/values-ru/
+**/src/main/res/values-pt/
+**/src/main/res/values-zh-rCN/

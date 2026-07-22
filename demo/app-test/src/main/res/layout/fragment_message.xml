@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="#E8711A">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="消息"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_msg_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="0 条新消息"
+        android:textColor="#CCFFFFFF"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btn_simulate"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="模拟收到消息"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#CCFFFFFF"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+    <TextView
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="消息计数模拟业务状态"
+        android:gravity="center"
+        android:textColor="#66FFFFFF"
+        android:textSize="12sp" />
+
+</LinearLayout>

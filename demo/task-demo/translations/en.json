@@ -1,0 +1,19 @@
+{
+  "app_name": "Task Demo",
+  "scene_basic": "Basic Usage",
+  "scene_state": "State Callback",
+  "scene_progress": "Progress Report",
+  "scene_priority": "Priority Queue",
+  "scene_concurrent": "Concurrent Download",
+  "scene_lifecycle": "Lifecycle Management",
+  "start_task": "Start Task",
+  "cancel_task": "Cancel Task",
+  "cancel_all": "Cancel All",
+  "clear_log": "Clear Log",
+  "task_result": "Task Result: %s",
+  "task_error": "Task Error: %s",
+  "task_waiting": "Waiting...",
+  "task_running": "Running...",
+  "task_completed": "Completed",
+  "task_cancelled": "Cancelled"
+}

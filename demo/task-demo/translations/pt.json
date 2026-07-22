@@ -1,0 +1,19 @@
+{
+  "app_name": "Task Demo",
+  "scene_basic": "Uso básico",
+  "scene_state": "Retorno de estado",
+  "scene_progress": "Relatório de progresso",
+  "scene_priority": "Fila de prioridade",
+  "scene_concurrent": "Download simultâneo",
+  "scene_lifecycle": "Gerenciamento de ciclo de vida",
+  "start_task": "Iniciar tarefa",
+  "cancel_task": "Cancelar tarefa",
+  "cancel_all": "Cancelar tudo",
+  "clear_log": "Limpar registro",
+  "task_result": "Resultado da tarefa: %s",
+  "task_error": "Erro da tarefa: %s",
+  "task_waiting": "Aguardando...",
+  "task_running": "Executando...",
+  "task_completed": "Concluído",
+  "task_cancelled": "Cancelado"
+}

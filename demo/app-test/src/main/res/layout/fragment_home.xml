@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="#1A73E8">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="首页"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="点击: 0 次"
+        android:textColor="#CCFFFFFF"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/et_input"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:hint="输入点文字试试"
+        android:textColorHint="#88FFFFFF"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="切换 Tab 后回来，输入内容和点击计数应该保留"
+        android:gravity="center"
+        android:textColor="#66FFFFFF"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="(仅在 show/hide 策略中有效)"
+        android:textColor="#44FFFFFF"
+        android:textSize="11sp" />
+
+</LinearLayout>

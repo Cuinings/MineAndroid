@@ -1,0 +1,19 @@
+{
+  "app_name": "Task Demo",
+  "scene_basic": "基础用法",
+  "scene_state": "状态回调",
+  "scene_progress": "进度报告",
+  "scene_priority": "优先级队列",
+  "scene_concurrent": "并发下载",
+  "scene_lifecycle": "生命周期管理",
+  "start_task": "开始任务",
+  "cancel_task": "取消任务",
+  "cancel_all": "取消全部",
+  "clear_log": "清空日志",
+  "task_result": "任务结果: %s",
+  "task_error": "任务错误: %s",
+  "task_waiting": "等待中...",
+  "task_running": "执行中...",
+  "task_completed": "已完成",
+  "task_cancelled": "已取消"
+}

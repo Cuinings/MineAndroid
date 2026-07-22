@@ -1,0 +1,18 @@
+{
+  "srl_header_pulling": "Pull to refresh",
+  "srl_header_refreshing": "Refreshing...",
+  "srl_header_loading": "Loading...",
+  "srl_header_release": "Release to refresh",
+  "srl_header_finish": "Refresh complete",
+  "srl_header_failed": "Refresh failed",
+  "srl_header_last_update": "Last updated ",
+  "srl_header_update": "MM-dd HH:mm",
+  "srl_header_secondary": "Enter second floor",
+  "srl_footer_pulling": "Pull up to load",
+  "srl_footer_release": "Release to load",
+  "srl_footer_loading": "Loading...",
+  "srl_footer_refreshing": "Refreshing...",
+  "srl_footer_finish": "Load complete",
+  "srl_footer_failed": "Load failed",
+  "srl_footer_nothing": "No more data"
+}

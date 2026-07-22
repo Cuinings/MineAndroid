@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 默认内发光 drawable：4 层同心描边模拟从边缘向内的渐变衰减
+     配合 drawInnerGlow 中 SRC_IN tint 着色，自动适配 glowColors 颜色 -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Layer 1: 0-2dp，100% 白 → tint 后最亮 -->
+    <item>
+        <shape android:shape="rectangle">
+            <stroke android:width="2dp" android:color="#FFFFFFFF" />
+            <solid android:color="@android:color/transparent" />
+        </shape>
+    </item>
+    <!-- Layer 2: 2-4dp，~60% 白 -->
+    <item android:top="2dp" android:bottom="2dp" android:left="2dp" android:right="2dp">
+        <shape android:shape="rectangle">
+            <stroke android:width="2dp" android:color="#99FFFFFF" />
+            <solid android:color="@android:color/transparent" />
+        </shape>
+    </item>
+    <!-- Layer 3: 4-6dp，~35% 白 -->
+    <item android:top="4dp" android:bottom="4dp" android:left="4dp" android:right="4dp">
+        <shape android:shape="rectangle">
+            <stroke android:width="2dp" android:color="#59FFFFFF" />
+            <solid android:color="@android:color/transparent" />
+        </shape>
+    </item>
+    <!-- Layer 4: 6-8dp，~15% 白（截止，防过度侵入内容区） -->
+    <item android:top="6dp" android:bottom="6dp" android:left="6dp" android:right="6dp">
+        <shape android:shape="rectangle">
+            <stroke android:width="2dp" android:color="#26FFFFFF" />
+            <solid android:color="@android:color/transparent" />
+        </shape>
+    </item>
+</layer-list>

@@ -42,7 +42,7 @@ android {
 
 dependencies {
 
-    compileOnly(files("libs/system.jar"))
+//    compileOnly(files("libs/system.jar"))
 
     implementation(project(":core:core-resources"))
 

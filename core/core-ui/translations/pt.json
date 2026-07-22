@@ -1,0 +1,18 @@
+{
+  "srl_header_pulling": "Puxe para atualizar",
+  "srl_header_refreshing": "Atualizando...",
+  "srl_header_loading": "Carregando...",
+  "srl_header_release": "Solte para atualizar",
+  "srl_header_finish": "Atualização concluída",
+  "srl_header_failed": "Falha na atualização",
+  "srl_header_last_update": "Última atualização ",
+  "srl_header_update": "MM-dd HH:mm",
+  "srl_header_secondary": "Entrar no segundo andar",
+  "srl_footer_pulling": "Puxe para cima para carregar",
+  "srl_footer_release": "Solte para carregar",
+  "srl_footer_loading": "Carregando...",
+  "srl_footer_refreshing": "Atualizando...",
+  "srl_footer_finish": "Carregamento concluído",
+  "srl_footer_failed": "Falha no carregamento",
+  "srl_footer_nothing": "Sem mais dados"
+}

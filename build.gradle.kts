@@ -43,14 +43,14 @@ gradle.projectsEvaluated {
 
 
 // system.jar bootstrap classpath — @hide API 直接编译
-gradle.projectsEvaluated {
-    tasks.withType(JavaCompile::class.java).configureEach {
-        val newClasspath = mutableListOf<File>()
-        newClasspath.add(file("libs/system.jar"))
-        newClasspath.addAll(options.bootstrapClasspath?.files ?: emptyList())
-        options.bootstrapClasspath = files(newClasspath.toTypedArray())
-    }
-}
+//gradle.projectsEvaluated {
+//    tasks.withType(JavaCompile::class.java).configureEach {
+//        val newClasspath = mutableListOf<File>()
+//        newClasspath.add(file("libs/system.jar"))
+//        newClasspath.addAll(options.bootstrapClasspath?.files ?: emptyList())
+//        options.bootstrapClasspath = files(newClasspath.toTypedArray())
+//    }
+//}
 
 tasks {
     val clean by registering(Delete::class) {

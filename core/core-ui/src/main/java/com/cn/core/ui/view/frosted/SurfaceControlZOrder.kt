@@ -42,6 +42,8 @@ object SurfaceControlZOrder {
     // ---- 反射缓存 ----
     private var sInit = false
     private var sOk = false
+    private var sInitWindow = false
+    private var sOkWindow = false
     private var clsSC: Class<*>? = null          // android.view.SurfaceControl
     private var clsTx: Class<*>? = null          // android.view.SurfaceControl$Transaction
     private var ctorTx: java.lang.reflect.Constructor<*>? = null
@@ -49,6 +51,10 @@ object SurfaceControlZOrder {
     private var mSetLayer: java.lang.reflect.Method? = null
     private var mSetRelativeLayer: java.lang.reflect.Method? = null
     private var mApply: java.lang.reflect.Method? = null
+    // 以下为 SCVH overlay 收口到反射层所需的 Transaction 操作（SDK 35 部分仍为 @hide / 跨 ROM 签名不同）
+    private var mSetPosition: java.lang.reflect.Method? = null          // Transaction.setPosition(SC, float, float)
+    private var mSetBufferSize: java.lang.reflect.Method? = null        // Transaction.setBufferSize(SC, int, int)
+    private var mSetVisibility: java.lang.reflect.Method? = null        // Transaction.setVisibility(SC, boolean)
     private var mSCGetSurfaceControl: java.lang.reflect.Method? = null  // SurfaceView.getSurfaceControl()
     private var mViewGetVRI: java.lang.reflect.Method? = null          // View.getViewRootImpl()
     private var mVRIGetSurfaceControl: java.lang.reflect.Method? = null // ViewRootImpl.getSurfaceControl()
@@ -61,22 +67,53 @@ object SurfaceControlZOrder {
             clsSC = Class.forName("android.view.SurfaceControl")
             clsTx = Class.forName("android.view.SurfaceControl\$Transaction")
             ctorTx = clsTx!!.getDeclaredConstructor().apply { isAccessible = true }
-            mReparent = clsTx!!.getDeclaredMethod("reparent", clsSC, clsSC).apply { isAccessible = true }
             mSetLayer = clsTx!!.getDeclaredMethod("setLayer", clsSC, Int::class.javaPrimitiveType).apply { isAccessible = true }
             mSetRelativeLayer = clsTx!!.getDeclaredMethod("setRelativeLayer", clsSC, clsSC, Int::class.javaPrimitiveType).apply { isAccessible = true }
             mApply = clsTx!!.getDeclaredMethod("apply").apply { isAccessible = true }
+            mSetPosition = clsTx!!.getDeclaredMethod(
+                "setPosition", clsSC, Float::class.javaPrimitiveType, Float::class.javaPrimitiveType
+            ).apply { isAccessible = true }
+            mSetBufferSize = clsTx!!.getDeclaredMethod(
+                "setBufferSize", clsSC, Int::class.javaPrimitiveType, Int::class.javaPrimitiveType
+            ).apply { isAccessible = true }
+            mSetVisibility = clsTx!!.getDeclaredMethod(
+                "setVisibility", clsSC, Boolean::class.javaPrimitiveType
+            ).apply { isAccessible = true }
             mSCGetSurfaceControl = SurfaceView::class.java.getDeclaredMethod("getSurfaceControl").apply { isAccessible = true }
-            mViewGetVRI = View::class.java.getDeclaredMethod("getViewRootImpl").apply { isAccessible = true }
-            // ViewRootImpl.getSurfaceControl() 返回 SurfaceControl
-            val vriCls = Class.forName("android.view.ViewRootImpl")
-            mVRIGetSurfaceControl = vriCls.getDeclaredMethod("getSurfaceControl").apply { isAccessible = true }
             sOk = true
-            logD { "init OK" }
+            logD { "init OK (overlay positioning group)" }
         } catch (e: Exception) {
             logW { "init failed: ${e.message}" }
             sOk = false
         }
         return sOk
+    }
+
+    /**
+     * 窗口模糊组反射初始化：reparent / View.getViewRootImpl() / ViewRootImpl.getSurfaceControl()。
+     * 与 [ensureInit] (overlay 定位组) 解耦——定制 ROM 上本组任一方法签名对不上只会影响
+     * bringAboveWindow / sendBelowWindow / getWindowSC 等窗口模糊路径，
+     * 不会拖垮 SurfaceControlViewHost overlay 的定位（[createTransaction] 仍可用）。
+     */
+    @Synchronized
+    private fun ensureInitWindow(): Boolean {
+        if (sInitWindow) return sOkWindow
+        sInitWindow = true
+        try {
+            clsSC = Class.forName("android.view.SurfaceControl")
+            clsTx = Class.forName("android.view.SurfaceControl\$Transaction")
+            mReparent = clsTx!!.getDeclaredMethod("reparent", clsSC, clsSC).apply { isAccessible = true }
+            mViewGetVRI = View::class.java.getDeclaredMethod("getViewRootImpl").apply { isAccessible = true }
+            // ViewRootImpl.getSurfaceControl() 返回 SurfaceControl
+            val vriCls = Class.forName("android.view.ViewRootImpl")
+            mVRIGetSurfaceControl = vriCls.getDeclaredMethod("getSurfaceControl").apply { isAccessible = true }
+            sOkWindow = true
+            logD { "initWindow OK (window blur group)" }
+        } catch (e: Exception) {
+            logW { "initWindow failed: ${e.message}" }
+            sOkWindow = false
+        }
+        return sOkWindow
     }
 
     // ---- 内部工具 ----
@@ -97,6 +134,7 @@ object SurfaceControlZOrder {
 
     /** 取 SurfaceView 所在窗口的 SurfaceControl(隐藏 API: ViewRootImpl.getSurfaceControl)。 */
     private fun getWindowSurfaceControl(sv: SurfaceView): Any? {
+        if (!ensureInitWindow()) return null
         return try {
             val vri = mViewGetVRI?.invoke(sv) ?: return null
             mVRIGetSurfaceControl?.invoke(vri)
@@ -120,7 +158,7 @@ object SurfaceControlZOrder {
      */
     @JvmOverloads
     fun bringAboveWindow(sv: SurfaceView, layer: Int = Int.MAX_VALUE / 2): Boolean {
-        if (!ensureInit()) return false
+        if (!ensureInit() || !ensureInitWindow()) return false
         val mySc = getSurfaceControlInternal(sv) ?: return false.also { logW { "bringAboveWindow: surfaceControl null" } }
         val windowSc = getWindowSurfaceControl(sv) ?: return false.also { logW { "bringAboveWindow: window SC null" } }
         val tx = newTransaction() ?: return false
@@ -141,7 +179,7 @@ object SurfaceControlZOrder {
      * 用 setRelativeLayer 相对窗口 Surface 设为负值;若失败回退到 setLayer 负值。
      */
     fun sendBelowWindow(sv: SurfaceView): Boolean {
-        if (!ensureInit()) return false
+        if (!ensureInit() || !ensureInitWindow()) return false
         val mySc = getSurfaceControlInternal(sv) ?: return false.also { logW { "sendBelowWindow: surfaceControl null" } }
         val windowSc = getWindowSurfaceControl(sv) ?: return false.also { logW { "sendBelowWindow: window SC null" } }
         val tx = newTransaction() ?: return false
@@ -190,7 +228,7 @@ object SurfaceControlZOrder {
      * @param layer    相对父层的层级
      */
     fun reparent(sv: SurfaceView, parentSc: Any?, layer: Int): Boolean {
-        if (!ensureInit()) return false
+        if (!ensureInit() || !ensureInitWindow()) return false
         val mySc = getSurfaceControlInternal(sv) ?: return false
         val tx = newTransaction() ?: return false
         return try {
@@ -205,6 +243,52 @@ object SurfaceControlZOrder {
     /** 是否反射初始化成功(可用于降级判断)。 */
     fun isAvailable(): Boolean = ensureInit()
 
+    // ================================================================
+    //  通用反射操作（供 SurfaceControlViewHost overlay 等上层调用）
+    //  统一收口到本类的反射缓存，避免各模块重复写反射、并保留跨 ROM 降级。
+    //  所有方法均 try-catch 返回 Boolean，调用方据此走降级。
+    // ================================================================
+
+    /**
+     * 反射创建一个 [SurfaceControl.Transaction]（SDK 29+）。失败返回 null。
+     * 与普通公开构造不同：经由反射拿到真实 framework 的 Transaction 实例，
+     * 在系统/特权应用与严格 ROM 上都能稳定取到。
+     */
+    fun createTransaction(): Any? {
+        if (!ensureInit()) return null
+        return try { ctorTx?.newInstance() } catch (e: Exception) { logW { "createTransaction: ${e.message}" }; null }
+    }
+
+    /** 反射调用 Transaction.apply()。 */
+    fun apply(tx: Any?): Boolean = try {
+        mApply?.invoke(tx); true
+    } catch (e: Exception) { logW { "apply: ${e.message}" }; false }
+
+    /** 反射调用 Transaction.setPosition(SC, x, y)。 */
+    fun setPosition(tx: Any?, sc: SurfaceControl?, x: Float, y: Float): Boolean = try {
+        mSetPosition?.invoke(tx, sc, x, y); true
+    } catch (e: Exception) { logW { "setPosition: ${e.message}" }; false }
+
+    /** 反射调用 Transaction.setBufferSize(SC, w, h)。 */
+    fun setBufferSize(tx: Any?, sc: SurfaceControl?, w: Int, h: Int): Boolean = try {
+        mSetBufferSize?.invoke(tx, sc, w, h); true
+    } catch (e: Exception) { logW { "setBufferSize: ${e.message}" }; false }
+
+    /** 反射调用 Transaction.setVisibility(SC, visible)。 */
+    fun setVisibility(tx: Any?, sc: SurfaceControl?, visible: Boolean): Boolean = try {
+        mSetVisibility?.invoke(tx, sc, visible); true
+    } catch (e: Exception) { logW { "setVisibility: ${e.message}" }; false }
+
+    /** 反射调用 Transaction.setRelativeLayer(SC, relTo, layer)。 */
+    fun setRelativeLayer(tx: Any?, sc: SurfaceControl?, relTo: SurfaceControl?, layer: Int): Boolean = try {
+        mSetRelativeLayer?.invoke(tx, sc, relTo, layer); true
+    } catch (e: Exception) { logW { "setRelativeLayer: ${e.message}" }; false }
+
+    /** 反射调用 Transaction.setLayer(SC, layer)（相对当前父层的绝对层级）。 */
+    fun setLayer(tx: Any?, sc: SurfaceControl?, layer: Int): Boolean = try {
+        mSetLayer?.invoke(tx, sc, layer); true
+    } catch (e: Exception) { logW { "setLayer: ${e.message}" }; false }
+
     /**
      * 取 SurfaceView 所在窗口的 [SurfaceControl]（公开为 [SurfaceControl] 类型，需 API 29+）。
      * 用于将 UI 的 SurfaceControlViewHost 与视频 Surface 挂到同一父层，
@@ -212,7 +296,30 @@ object SurfaceControlZOrder {
      */
     @androidx.annotation.RequiresApi(android.os.Build.VERSION_CODES.Q)
     fun getWindowSC(sv: SurfaceView): SurfaceControl? {
-        if (!ensureInit()) return null
+        if (!ensureInit() || !ensureInitWindow()) return null
         return getWindowSurfaceControl(sv) as? SurfaceControl
+    }
+
+    // ================================================================
+    //  SurfacePackage -> SurfaceControl（反射）
+    //  SurfaceControlViewHost.SurfacePackage.getSurfaceControl() 在部分
+    //  compileSdk / ROM 上为 @hide 或不存在，用反射绕开编译依赖。
+    // ================================================================
+
+    /**
+     * 反射取 [SurfaceControlViewHost.SurfacePackage] 中的 [SurfaceControl]。
+     * 独立于 [ensureInit]——不依赖主 init 组，API 31+ 运行时可取到，
+     * 低版本返回 null，调用方自行降级。
+     */
+    fun getSurfaceControl(pkg: Any?): SurfaceControl? {
+        if (pkg == null) return null
+        return try {
+            val m = pkg.javaClass.getMethod("getSurfaceControl")
+            m.isAccessible = true
+            m.invoke(pkg) as? SurfaceControl
+        } catch (e: Exception) {
+            logW { "getSurfaceControl(pkg): ${e.message}" }
+            null
+        }
     }
 }

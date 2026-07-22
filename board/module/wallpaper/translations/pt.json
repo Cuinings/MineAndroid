@@ -1,0 +1,15 @@
+{
+  "app_wallpaper": "Board Wallpaper",
+  "wallpaper_description": "Papel de parede dinâmico Board",
+  "setting_wallpaper_path": "Caminho do papel de parede",
+  "setting_wallpaper_path_hint": "Insira o caminho do arquivo de papel de parede",
+  "setting_type_video": "Papel de parede de vídeo",
+  "setting_type_image": "Papel de parede de imagens/carrossel",
+  "setting_type_gl": "Papel de parede dinâmico OpenGL",
+  "setting_wallpaper_path_hint_video": "Caminho do arquivo de vídeo (ex: /sdcard/Download/wallpaper.mp4)",
+  "setting_wallpaper_path_hint_gl": "Caminho opcional de imagem ou vídeo (deixe em branco para animação procedural; vídeo ex: /sdcard/wallpaper.mp4 usa decodificação GL)",
+  "setting_wallpaper_paths_hint_image": "Caminhos das imagens, separados por vírgulas (ex: /sdcard/a.jpg,/sdcard/b.jpg)",
+  "setting_carousel_interval_hint": "Intervalo do carrossel (ms, ex: 5000; somente modo imagem)",
+  "setting_save": "Salvar",
+  "setting_cancel": "Cancelar"
+}

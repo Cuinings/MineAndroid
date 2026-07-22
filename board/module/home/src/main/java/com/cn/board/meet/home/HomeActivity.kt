@@ -31,6 +31,37 @@ class HomeActivity : BasicVmDBActivity<HomeActivityViewModel, ActivityHomeBindin
         binding.fabWallpaperSettings.setOnClickListener {
             dispatch(HomeActivityIntent.OpenWallpaperSettings)
         }
+        setupSwipePager()
+    }
+
+    /**
+     * 两个全屏 AppAggregatorFrag 之间的滑动切换（不使用 ViewPager / ViewPager2 / RecyclerView）。
+     * 切换状态同步到页面指示点。
+     */
+    private fun setupSwipePager() {
+        /*binding.homeSwipePager.onPageChangeListener = { index ->
+            binding.homePagerDot0.alpha = if (index == 0) 1f else 0.4f
+            binding.homePagerDot1.alpha = if (index == 1) 1f else 0.4f
+        }*/
+    }
+
+    /**
+     * 方向键（/遥控器）左右切换两个全屏页面，便于无触摸场景使用。
+     */
+    override fun onKeyDown(keyCode: Int, event: android.view.KeyEvent?): Boolean {
+        when (keyCode) {
+            android.view.KeyEvent.KEYCODE_DPAD_LEFT,
+            android.view.KeyEvent.KEYCODE_MEDIA_PREVIOUS -> {
+//                binding.homeSwipePager.prevPage()
+                return true
+            }
+            android.view.KeyEvent.KEYCODE_DPAD_RIGHT,
+            android.view.KeyEvent.KEYCODE_MEDIA_NEXT -> {
+//                binding.homeSwipePager.nextPage()
+                return true
+            }
+        }
+        return super.onKeyDown(keyCode, event)
     }
 
     /**

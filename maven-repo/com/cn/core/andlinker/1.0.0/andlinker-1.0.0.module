@@ -1,0 +1,97 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.cn.core",
+    "module": "andlinker",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.7"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.20"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "andlinker-1.0.0.aar",
+          "url": "andlinker-1.0.0.aar",
+          "size": 160442,
+          "sha512": "ee90bad04ad0290ac58fbd52b6dc47edaabae7fb40f9db33236bc1db83069c92e60e303b20b0c58a03afe8676436ed9034a140c7d709caff7112e4b00f222fc5",
+          "sha256": "6e5936f5ec6625449c132e325e8ada2d9977b2bfa2e101cf6255e6461c6ce3d9",
+          "sha1": "7a4f2499a500515e0050c50b4915f358fd0c39c2",
+          "md5": "56bf4141025dba480043edaa347533e8"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.core",
+          "module": "core-ktx",
+          "version": {
+            "requires": "1.15.0"
+          }
+        },
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.7.0"
+          }
+        },
+        {
+          "group": "com.google.android.material",
+          "module": "material",
+          "version": {
+            "requires": "1.12.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.20"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "andlinker-1.0.0.aar",
+          "url": "andlinker-1.0.0.aar",
+          "size": 160442,
+          "sha512": "ee90bad04ad0290ac58fbd52b6dc47edaabae7fb40f9db33236bc1db83069c92e60e303b20b0c58a03afe8676436ed9034a140c7d709caff7112e4b00f222fc5",
+          "sha256": "6e5936f5ec6625449c132e325e8ada2d9977b2bfa2e101cf6255e6461c6ce3d9",
+          "sha1": "7a4f2499a500515e0050c50b4915f358fd0c39c2",
+          "md5": "56bf4141025dba480043edaa347533e8"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="并发下载示例"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="演示并发任务队列，多个任务同时执行"
+        android:textColor="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+    <TextView
+        android:id="@+id/tvConcurrencyLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="最大并发数："
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDesc" />
+
+    <TextView
+        android:id="@+id/tvConcurrency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4"
+        android:textColor="@color/blue"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvConcurrencyLabel"
+        app:layout_constraintStart_toEndOf="@id/tvConcurrencyLabel" />
+
+    <TextView
+        android:id="@+id/tvActiveLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="正在执行："
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvConcurrencyLabel"
+        app:layout_constraintStart_toEndOf="@id/tvConcurrency" />
+
+    <TextView
+        android:id="@+id/tvActive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="@color/green"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvConcurrencyLabel"
+        app:layout_constraintStart_toEndOf="@id/tvActiveLabel" />
+
+    <TextView
+        android:id="@+id/tvPendingLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="等待中："
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvConcurrencyLabel"
+        app:layout_constraintStart_toEndOf="@id/tvActive" />
+
+    <TextView
+        android:id="@+id/tvPending"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="@color/orange"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvConcurrencyLabel"
+        app:layout_constraintStart_toEndOf="@id/tvPendingLabel" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnStartDownload"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="开始下载 10 个文件"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvConcurrencyLabel" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCancelAll"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="取消所有下载"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnStartDownload" />
+
+    <TextView
+        android:id="@+id/tvLogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="下载日志："
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnCancelAll" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/clear_log"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvLogTitle" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/light_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLogTitle">
+
+        <TextView
+            android:id="@+id/tvLog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:padding="8dp"
+            android:textSize="12sp" />
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

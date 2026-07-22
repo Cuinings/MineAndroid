@@ -1,0 +1,82 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.cn.core",
+    "module": "msg-subscriber-annotation",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.7"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.20"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "msg-subscriber-annotation-1.0.0.jar",
+          "url": "msg-subscriber-annotation-1.0.0.jar",
+          "size": 2727,
+          "sha512": "0bc98e72d4c4c2b20f1d71c279598eeda0fcaaa22320ed9110fec3faf4de21bf5cd6b37b36f85e83ef19b791699ddc7eba84614fd114a60dd5946f8639fd7069",
+          "sha256": "bdbd1cb807947a5c6750556154d913809708a4756516613631c73e1a9aa9c220",
+          "sha1": "93f301856bb6baf0c9f5224e374f31f91c693ea9",
+          "md5": "d4fc5ac6586767370bff7ffec3abd682"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.20"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "msg-subscriber-annotation-1.0.0.jar",
+          "url": "msg-subscriber-annotation-1.0.0.jar",
+          "size": 2727,
+          "sha512": "0bc98e72d4c4c2b20f1d71c279598eeda0fcaaa22320ed9110fec3faf4de21bf5cd6b37b36f85e83ef19b791699ddc7eba84614fd114a60dd5946f8639fd7069",
+          "sha256": "bdbd1cb807947a5c6750556154d913809708a4756516613631c73e1a9aa9c220",
+          "sha1": "93f301856bb6baf0c9f5224e374f31f91c693ea9",
+          "md5": "d4fc5ac6586767370bff7ffec3abd682"
+        }
+      ]
+    }
+  ]
+}

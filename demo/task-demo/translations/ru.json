@@ -1,0 +1,19 @@
+{
+  "app_name": "Task Demo",
+  "scene_basic": "Основное использование",
+  "scene_state": "Обратный вызов состояния",
+  "scene_progress": "Отчет о ходе выполнения",
+  "scene_priority": "Очередь приоритетов",
+  "scene_concurrent": "Параллельная загрузка",
+  "scene_lifecycle": "Управление жизненным циклом",
+  "start_task": "Начать задачу",
+  "cancel_task": "Отменить задачу",
+  "cancel_all": "Отменить все",
+  "clear_log": "Очистить журнал",
+  "task_result": "Результат задачи: %s",
+  "task_error": "Ошибка задачи: %s",
+  "task_waiting": "Ожидание...",
+  "task_running": "Выполнение...",
+  "task_completed": "Завершено",
+  "task_cancelled": "Отменено"
+}

@@ -1,0 +1,18 @@
+{
+  "srl_header_pulling": "Потяните для обновления",
+  "srl_header_refreshing": "Обновление...",
+  "srl_header_loading": "Загрузка...",
+  "srl_header_release": "Отпустите для обновления",
+  "srl_header_finish": "Обновление завершено",
+  "srl_header_failed": "Ошибка обновления",
+  "srl_header_last_update": "Последнее обновление ",
+  "srl_header_update": "MM-dd HH:mm",
+  "srl_header_secondary": "Войти на второй этаж",
+  "srl_footer_pulling": "Потяните вверх для загрузки",
+  "srl_footer_release": "Отпустите для загрузки",
+  "srl_footer_loading": "Загрузка...",
+  "srl_footer_refreshing": "Обновление...",
+  "srl_footer_finish": "Загрузка завершена",
+  "srl_footer_failed": "Ошибка загрузки",
+  "srl_footer_nothing": "Больше нет данных"
+}

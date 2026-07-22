@@ -1,0 +1,15 @@
+{
+  "app_wallpaper": "Board Wallpaper",
+  "wallpaper_description": "Board Live Wallpaper",
+  "setting_wallpaper_path": "Wallpaper Path",
+  "setting_wallpaper_path_hint": "Enter wallpaper file path",
+  "setting_type_video": "Video Wallpaper",
+  "setting_type_image": "Image/Carousel Wallpaper",
+  "setting_type_gl": "OpenGL Live Wallpaper",
+  "setting_wallpaper_path_hint_video": "Video file path (e.g. /sdcard/Download/wallpaper.mp4)",
+  "setting_wallpaper_path_hint_gl": "Optional image or video path (leave empty for procedural animation; video e.g. /sdcard/wallpaper.mp4 uses GL decoding)",
+  "setting_wallpaper_paths_hint_image": "Image paths, separated by commas (e.g. /sdcard/a.jpg,/sdcard/b.jpg)",
+  "setting_carousel_interval_hint": "Carousel interval (ms, e.g. 5000; image mode only)",
+  "setting_save": "Save",
+  "setting_cancel": "Cancel"
+}

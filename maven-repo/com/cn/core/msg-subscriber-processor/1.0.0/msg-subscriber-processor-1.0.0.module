@@ -1,0 +1,110 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.cn.core",
+    "module": "msg-subscriber-processor",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.7"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.20"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "msg-subscriber-processor-1.0.0.jar",
+          "url": "msg-subscriber-processor-1.0.0.jar",
+          "size": 19110,
+          "sha512": "0cb34484a4e96102eac845a6665246b95ed3de0ebc256a92f32fb951549999b4e688c526d5f09bc904e89d6b2d79de047cc50d4b5ee2ea170bf0d2808c658aa2",
+          "sha256": "6514574eeb66614ecd3b16d4129f51778c1cb39008f271a17e565f5bce556db0",
+          "sha1": "561ad983e9b19feded4779187a2530f93407fc3f",
+          "md5": "4e01433c67815d7746217750a3f54afd"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.cn.core",
+          "module": "msg-subscriber-annotation",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "com.squareup",
+          "module": "javapoet",
+          "version": {
+            "requires": "1.13.0"
+          }
+        },
+        {
+          "group": "com.squareup",
+          "module": "kotlinpoet",
+          "version": {
+            "requires": "2.0.0"
+          }
+        },
+        {
+          "group": "com.google.auto.service",
+          "module": "auto-service",
+          "version": {
+            "requires": "1.0-rc7"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.20"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "msg-subscriber-processor-1.0.0.jar",
+          "url": "msg-subscriber-processor-1.0.0.jar",
+          "size": 19110,
+          "sha512": "0cb34484a4e96102eac845a6665246b95ed3de0ebc256a92f32fb951549999b4e688c526d5f09bc904e89d6b2d79de047cc50d4b5ee2ea170bf0d2808c658aa2",
+          "sha256": "6514574eeb66614ecd3b16d4129f51778c1cb39008f271a17e565f5bce556db0",
+          "sha1": "561ad983e9b19feded4779187a2530f93407fc3f",
+          "md5": "4e01433c67815d7746217750a3f54afd"
+        }
+      ]
+    }
+  ]
+}

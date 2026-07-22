@@ -1,0 +1,15 @@
+{
+  "app_wallpaper": "Board Wallpaper",
+  "wallpaper_description": "Динамические обои Board",
+  "setting_wallpaper_path": "Путь к обоям",
+  "setting_wallpaper_path_hint": "Введите путь к файлу обоев",
+  "setting_type_video": "Видео обои",
+  "setting_type_image": "Изображения/Карусель обоев",
+  "setting_type_gl": "Динамические обои OpenGL",
+  "setting_wallpaper_path_hint_video": "Путь к видеофайлу (например, /sdcard/Download/wallpaper.mp4)",
+  "setting_wallpaper_path_hint_gl": "Путь к изображению или видео (оставьте пустым для процедурной анимации; видео, например, /sdcard/wallpaper.mp4 использует декодирование GL)",
+  "setting_wallpaper_paths_hint_image": "Пути к изображениям через запятую (например, /sdcard/a.jpg,/sdcard/b.jpg)",
+  "setting_carousel_interval_hint": "Интервал карусели (мс, например, 5000; только для режима изображений)",
+  "setting_save": "Сохранить",
+  "setting_cancel": "Отмена"
+}

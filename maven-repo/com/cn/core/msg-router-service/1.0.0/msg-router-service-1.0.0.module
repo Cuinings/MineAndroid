@@ -1,0 +1,118 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.cn.core",
+    "module": "msg-router-service",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.7"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.20"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "msg-router-service-1.0.0.aar",
+          "url": "msg-router-service-1.0.0.aar",
+          "size": 55387,
+          "sha512": "a4a6e139a6131a7e6e6a29fa462de58c6b0f5f7daa1e3494e75dafb76eed88698be9e6b18c190da591043bbd9b96d421387aba17e92dd24423eb8496fe51d8c8",
+          "sha256": "c758d2c1f93cba6a3a8c4cfc48a47df5a2e7bdadb7393c6e82b8ac8291a75188",
+          "sha1": "c4883cf20e3cc8e8a9545df876983792443d8ce3",
+          "md5": "48cdc158b8765158a15666dbf7c75318"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.cn.core",
+          "module": "andlinker",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "com.cn.core",
+          "module": "msg-router-client",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.startup",
+          "module": "startup-runtime",
+          "version": {
+            "requires": "1.1.1"
+          }
+        },
+        {
+          "group": "androidx.core",
+          "module": "core-ktx",
+          "version": {
+            "requires": "1.15.0"
+          }
+        },
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.7.0"
+          }
+        },
+        {
+          "group": "com.google.android.material",
+          "module": "material",
+          "version": {
+            "requires": "1.12.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.20"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "msg-router-service-1.0.0.aar",
+          "url": "msg-router-service-1.0.0.aar",
+          "size": 55387,
+          "sha512": "a4a6e139a6131a7e6e6a29fa462de58c6b0f5f7daa1e3494e75dafb76eed88698be9e6b18c190da591043bbd9b96d421387aba17e92dd24423eb8496fe51d8c8",
+          "sha256": "c758d2c1f93cba6a3a8c4cfc48a47df5a2e7bdadb7393c6e82b8ac8291a75188",
+          "sha1": "c4883cf20e3cc8e8a9545df876983792443d8ce3",
+          "md5": "48cdc158b8765158a15666dbf7c75318"
+        }
+      ]
+    }
+  ]
+}

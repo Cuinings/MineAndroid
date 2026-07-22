@@ -1,0 +1,120 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.cn.core",
+    "module": "task",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.7"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.20"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "task-1.0.0.aar",
+          "url": "task-1.0.0.aar",
+          "size": 120923,
+          "sha512": "a6c5450b56f5445d41d7aa41a9c94613894ba3c04919078a2d3f8c0a58fe8d3b9ab8e8e33e0a497e2977973870ea43faf54a2c848d42bf10fa91a57755baaff2",
+          "sha256": "b6c8220abf882df2dd717a0a17d99178072bb15c96390d9fa8915c413494c0bb",
+          "sha1": "5bc41980fae1127863e09f31165ae65aad877a0e",
+          "md5": "7cfa95d0380afb3c872a8370d45ccb0e"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.core",
+          "module": "core-ktx",
+          "version": {
+            "requires": "1.15.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.8.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.8.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.20"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "task-1.0.0.aar",
+          "url": "task-1.0.0.aar",
+          "size": 120923,
+          "sha512": "a6c5450b56f5445d41d7aa41a9c94613894ba3c04919078a2d3f8c0a58fe8d3b9ab8e8e33e0a497e2977973870ea43faf54a2c848d42bf10fa91a57755baaff2",
+          "sha256": "b6c8220abf882df2dd717a0a17d99178072bb15c96390d9fa8915c413494c0bb",
+          "sha1": "5bc41980fae1127863e09f31165ae65aad877a0e",
+          "md5": "7cfa95d0380afb3c872a8370d45ccb0e"
+        }
+      ]
+    },
+    {
+      "name": "releaseSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "files": [
+        {
+          "name": "task-1.0.0-sources.jar",
+          "url": "task-1.0.0-sources.jar",
+          "size": 51595,
+          "sha512": "ea47b80359323a27ac90f4644b643b8847eaa8636fb18e280d522cebf890bfcb9bf7eeadac93c133fedced7f0187974e205a4bc2778efac5dd4b6f2aad78426b",
+          "sha256": "9d89363ae345d2b1a90ed6f9054f92f47f8532aa6f775b9565ecd5723c4ecc6f",
+          "sha1": "dd6f7c39bcfc4369fecbab12495da0992b99d859",
+          "md5": "ad7512bec32179d77ad4f68e9e521c4d"
+        }
+      ]
+    }
+  ]
+}

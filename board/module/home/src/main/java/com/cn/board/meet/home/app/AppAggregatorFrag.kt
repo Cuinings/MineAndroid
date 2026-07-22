@@ -36,10 +36,8 @@ class AppAggregatorFrag: BasicVmDBFragment<AppAggregatorFragModel, FragmentAppAg
      */
     private var videoUiScvh: Any? = null
 
-    /** 跟随卡片布局变化（如管理模式切换导致尺寸变化）重定位 UI overlay。 */
-    private val overlayLayoutListener = ViewTreeObserver.OnGlobalLayoutListener {
-        (videoUiScvh as? HomeVideoUiOverlayHost)?.reposition()
-    }
+    /** 最近一次由 SwipeFragmentPager 告知的页容器水平平移量（px），用于同步窗口级 UI overlay。 */
+    private var pageTranslationX = 0f
 
     override fun onBindViewModel() {
     }
@@ -112,12 +110,12 @@ class AppAggregatorFrag: BasicVmDBFragment<AppAggregatorFragModel, FragmentAppAg
         val card = binding.mainActivityFragAppManagerConstraintLayout
         val video = binding.homeVideoSurfaceView
         videoUiScvh = HomeVideoUiOverlayHost(requireActivity(), card, video)
-        (videoUiScvh as? HomeVideoUiOverlayHost)?.setup()
+        // 把本页当前的水平平移量交给 overlay 宿主，避免离屏页浮层被定位到原点与当前页重叠
+        (videoUiScvh as? HomeVideoUiOverlayHost)?.setup(pageTranslationX)
     }
 
     override fun onDestroyView() {
-        // 先移除监听并释放 SCVH（此时 binding 仍有效）
-        runCatching { binding.mainActivityFragAppManagerConstraintLayout.viewTreeObserver?.removeOnGlobalLayoutListener(overlayLayoutListener) }
+        // 释放 SCVH（此时 binding 仍有效）；overlay 的布局监听在宿主内部统一移除
         (videoUiScvh as? HomeVideoUiOverlayHost)?.release()
         videoUiScvh = null
         super.onDestroyView()

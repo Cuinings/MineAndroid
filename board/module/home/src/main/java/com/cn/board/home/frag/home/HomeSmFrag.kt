@@ -99,9 +99,12 @@ class HomeSmFrag: BasicVmDBFragment<HomeSmFragViewModel, FragmentHomeBinding>(
             data: SoftEntity,
             payloads: List<Any>
         ) {
-            super.convert(holder, data, payloads)
-            payloads.forEach {
+            if (payloads.isEmpty()) {
+                super.convert(holder, data, payloads)
+                return
             }
+            // DiffUtil dispatched partial update: delegate to full convert
+            convert(holder, data)
         }
 
         override fun onCreateDataBinding(

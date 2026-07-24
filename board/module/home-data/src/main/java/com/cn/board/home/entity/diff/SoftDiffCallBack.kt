@@ -26,6 +26,7 @@ class SoftDiffCallBack: DiffUtil.ItemCallback<SoftEntity>() {
         if (oldItem.appInfo?.packageName != newItem.appInfo?.packageName) diff.putString("packageName", newItem.appInfo?.packageName?:"")
         if (oldItem.appInfo?.clazz != newItem.appInfo?.clazz) diff.putString("clazz", newItem.appInfo?.clazz?:"")
         if (oldItem.appInfo?.appType != newItem.appInfo?.appType) diff.putInt("appType", newItem.appInfo?.appType?.ordinal?:4)
+        if (oldItem.appInfo?.allowDelete != newItem.appInfo?.allowDelete) diff.putBoolean("allowDelete", newItem.appInfo?.allowDelete?:false)
         if (oldItem.isSelect != newItem.isSelect) diff.putBoolean("isSelect", newItem.isSelect)
         if (oldItem.isEdit != newItem.isEdit) diff.putBoolean("isEdit", newItem.isEdit)
         return if (diff.size() > 0) diff else super.getChangePayload(oldItem, newItem)

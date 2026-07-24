@@ -177,24 +177,34 @@ class SoftFrag: BasicVmDBFragment<SoftFragViewModel, FragmentSoftBinding>(
             data: SoftEntity,
             payloads: List<Any>
         ) = with(holder.dataBinding) {
-            if (payloads.isNotEmpty()) convert(holder, data)
-            else {
-                val payload = payloads.firstOrNull() as Bundle
-                when {
-                    payload.containsKey("packageName") || payload.containsKey("clazz") || payload.containsKey("appType") || payload.containsKey("isSelect")  -> {
-                        (data.appInfo?.let { VISIBLE }?:GONE).let {
-                            ivtpIcon.visibility = it
-                            ivThirdIcon.visibility = it
-                            tvSoftName.visibility = it
-                        }
-                        data.appInfo?.let {
-                            loadIcon(ivtpIcon, it.packageName, it.clazz, it.appType)
-                            ivThirdIcon.setImageBitmap(data.bitmap)
-                            loadTextByAppInfo(tvSoftName, it, false)
-                        }
-                        ivSelect.apply { setImageResource(R.drawable.icon_app_choiced_remove) }.visibility = if (data.appInfo?.appType != EmAppType.NONE) VISIBLE else GONE
-                    }
+            if (payloads.isEmpty()) {
+                convert(holder, data)
+                return@with
+            }
+            val payload = payloads.firstOrNull() as? Bundle
+            if (payload == null) {
+                convert(holder, data)
+                return@with
+            }
+            val needIconReload = payload.containsKey("packageName") || payload.containsKey("clazz") || payload.containsKey("appType")
+            val needSelectionRefresh = payload.containsKey("main") || payload.containsKey("offlineMain")
+                    || payload.containsKey("isSelect") || payload.containsKey("isEdit")
+                    || payload.containsKey("allowDelete")
+            if (needIconReload || needSelectionRefresh) {
+                (data.appInfo?.let { VISIBLE }?:GONE).let {
+                    ivtpIcon.visibility = it
+                    ivThirdIcon.visibility = it
+                    tvSoftName.visibility = it
                 }
+                data.appInfo?.let { info ->
+                    if (needIconReload) {
+                        loadIcon(ivtpIcon, info.packageName, info.clazz, info.appType)
+                        loadTextByAppInfo(tvSoftName, info, false)
+                    }
+                    ivThirdIcon.setImageBitmap(data.bitmap)
+                }
+                ivSelect.apply { setImageResource(R.drawable.icon_app_choiced_remove) }
+                    .visibility = if (data.appInfo?.appType != EmAppType.NONE) VISIBLE else GONE
             }
         }
 
@@ -271,14 +281,21 @@ class SoftFrag: BasicVmDBFragment<SoftFragViewModel, FragmentSoftBinding>(
             super.convert(holder, data, payloads)
             holder.run {
                 itemView.run {
-                    payloads.forEach {
-                        when (it as Int) {
-                            1 -> alpha = 0.2f
-                            2 -> alpha = 1.0f
-                            3 -> {
-                                dataBinding.ivSelect.visibility = if (data.isShowSelect) VISIBLE else GONE
-                                isSelected = data.appInfo?.main == 1 && data.isEdit || !data.isEdit
-
+                    payloads.forEach { payload ->
+                        when (payload) {
+                            is Bundle -> {
+                                // DiffUtil dispatched payload: do a targeted update
+                                convert(holder, data)
+                            }
+                            is Int -> {
+                                when (payload) {
+                                    1 -> alpha = 0.2f
+                                    2 -> alpha = 1.0f
+                                    3 -> {
+                                        dataBinding.ivSelect.visibility = if (data.isShowSelect) VISIBLE else GONE
+                                        isSelected = data.appInfo?.main == 1 && data.isEdit || !data.isEdit
+                                    }
+                                }
                             }
                         }
                     }

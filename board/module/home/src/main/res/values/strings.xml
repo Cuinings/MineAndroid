@@ -5,4 +5,24 @@
     <string name="str_osd_soft_manager">主页应用管理</string>
     <string name="str_soft_list">应用列表</string>
     <string name="str_app_manager">主页应用管理</string>
+    <string name="clock_format_24hours">HH:mm</string>
+    <string name="clock_format_date_no_year">MM月dd日</string>
+    <string name="clock_format_date">yyyy年MM月dd日</string>
+    <string name="clock_format_week">EEEE</string>
+    <string name="str_explorer">浏览器</string>
+    <string name="str_contact">通讯录</string>
+    <string name="str_for_screen">投屏</string>
+    <string name="str_diagnosis">一键诊断</string>
+    <string name="str_revert_home">主页</string>
+    <string name="str_revert_conf">返回会议</string>
+    <string name="join_meeting">加入会议</string>
+    <string name="create_meeting">发起会议</string>
+    <string name="str_stop_screen_share">停止共享</string>
+    <string name="str_screen_share">屏幕共享</string>
+    <string name="str_zhdd">指挥调度</string>
+    <string name="call">拨号</string>
+    <string name="str_vod">录播</string>
+    <string name="str_setting">设置</string>
+    <string name="str_soft_add">添加应用</string>
+
 </resources>

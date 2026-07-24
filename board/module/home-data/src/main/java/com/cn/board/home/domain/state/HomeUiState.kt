@@ -1,0 +1,2 @@
+// Moved to :board:module:home-data
+package com.cn.board.home.domain.state

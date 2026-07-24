@@ -8,24 +8,42 @@
         android:gravity="center"
         android:focusable="true"
         android:focusableInTouchMode="false"
-        android:elevation="@dimen/dp40"
-        app:fsv_focusScale="1.1"
-        app:fsv_scaleDuration="300"
+        android:defaultFocusHighlightEnabled="false"
+
         app:sgv_cornerRadius="@dimen/dp8"
-        app:fagv_blurEnabled="false"
-        app:sgv_glowEnabled="false"
-        app:asgv_refreshEffectEnabled="false"
-        app:asgv_flowEnabled="false"
+
+        app:sgv_overlayEnabled="true"
+        app:sgv_overlayColorNormal="@color/common_color_solid_normal"
+        app:sgv_overlayColorPressed="@color/common_color_solid_normal"
+        app:sgv_overlayColorFocused="@color/common_color_solid_normal"
+
         app:sgv_strokeEnabled="true"
         app:sgv_strokeWidthNormal="@dimen/dp0point5"
-        app:sgv_strokeWidthFocused="@dimen/dp0point5"
+        app:sgv_strokeWidthFocused="@dimen/dp1"
+        app:sgv_strokeWidthPressed="@dimen/dp0"
+        app:sgv_strokeWidthDisabled="@dimen/dp0"
+        app:sgv_strokeWidthSelected="@dimen/dp0"
         app:sgv_strokeColorNormal="@color/common_color_stroke_normal_step_a"
-        app:sgv_strokeColorFocused="@color/common_color_stroke_focused">
+        app:sgv_strokeColorFocused="@color/common_color_stroke_focused"
+
+        app:sgv_glowEnabled="true"
+        app:sgv_glowDrawableNormal="@drawable/icon_frost_osd_main"
+        app:sgv_topHighlightColor="@color/common_color_top_light_normal_step_a"
+
+        app:asgv_refreshEffectEnabled="true"
+        app:asgv_flowEnabled="false"
+        app:asgv_flowColor="@color/white"
+
+        app:fagv_blurEnabled="false"
+
+        app:fsv_focusScale="1.11"
+        app:fsv_scaleDuration="300">
 
         <ImageView
             android:id="@+id/home_aggregator_app_icon"
             android:layout_width="@dimen/dp24"
             android:layout_height="@dimen/dp24"
+            android:visibility="gone"
             android:src="@android:drawable/ic_menu_camera"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +54,7 @@
             android:id="@+id/home_aggregator_third_app_icon"
             android:layout_width="@dimen/dp24"
             android:layout_height="@dimen/dp24"
+            android:visibility="gone"
             android:src="@android:drawable/ic_menu_camera"
             app:layout_constraintStart_toStartOf="@id/home_aggregator_app_icon"
             app:layout_constraintEnd_toEndOf="@id/home_aggregator_app_icon"

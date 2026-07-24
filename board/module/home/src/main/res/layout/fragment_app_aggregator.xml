@@ -9,7 +9,7 @@
         android:focusable="false"
         android:animateLayoutChanges="true">
 
-        <com.cn.core.ui.view.frosted.FrostedAnimatedGlowView
+        <!--<com.cn.core.ui.view.frosted.FrostedAnimatedGlowView
             android:id="@+id/main_activity_frag_app_manager_constraintLayout"
             android:layout_width="wrap_content"
             android:minWidth="@dimen/dp280"
@@ -33,12 +33,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <!-- 视频作为首子 View：BELOW_WINDOW（窗口内容之下），关闭卡片模糊后透出，
-                 标题/列表等窗口内容绘制在其上。层级由 SurfaceControlZOrder.sendBelowWindow 设置 -->
-            <com.cn.board.meet.home.HomeVideoSurfaceView
+            &lt;!&ndash; 视频作为首子 View：BELOW_WINDOW（窗口内容之下），关闭卡片模糊后透出，
+                 标题/列表等窗口内容绘制在其上。层级由 SurfaceControlZOrder.sendBelowWindow 设置 &ndash;&gt;
+            <com.cn.core.ui.view.HomeVideoSurfaceView
                 android:id="@+id/home_video_surface_view"
                 android:layout_width="@dimen/dp200"
                 android:layout_height="@dimen/dp200"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -129,7 +130,7 @@
 
             </com.cn.core.ui.view.frosted.StatefulGlowView>
 
-            <com.cn.board.meet.home.app.AppAggregatorMainListLayout
+            <com.cn.board.home.frag.app.AppAggregatorMainListLayout
                 android:id="@+id/main_activity_frag_app_manager_edit_list_layout"
                 android:layout_width="@dimen/dp213"
                 android:layout_height="wrap_content"
@@ -149,7 +150,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/main_activity_frag_app_manager_layout"/>
 
-            <com.cn.board.meet.home.app.AppAggregatorListLayout
+            <com.cn.board.home.frag.app.AppAggregatorListLayout
                 android:id="@+id/main_activity_frag_app_manager_list_layout"
                 android:layout_width="@dimen/dp284"
                 android:layout_height="@dimen/dp256"
@@ -171,14 +172,14 @@
                 app:layout_constraintTop_toBottomOf="@id/main_activity_frag_app_manager_layout"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-        </com.cn.core.ui.view.frosted.FrostedAnimatedGlowView>
+        </com.cn.core.ui.view.frosted.FrostedAnimatedGlowView>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     
     <data>
-        <variable
-            name="click"
-            type="com.cn.board.meet.home.app.AppAggregatorFrag.AAppAggregatorFragClick" />
+<!--        <variable-->
+<!--            name="click"-->
+<!--            type="com.cn.board.home.frag.app.AppAggregatorFrag.AAppAggregatorFragClick" />-->
     </data>
 
 </layout>

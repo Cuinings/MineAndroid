@@ -315,7 +315,7 @@ open class FrostedAnimatedGlowView @JvmOverloads constructor(
     private fun applyBlurredDrawable() {
         val d = blurredDrawable
         if (d != null) { deactivateBlur(); recycleSafeBitmap(); setLayerType(LAYER_TYPE_NONE, null); setBackgroundInternal(downscaleIfTooLarge(d)); blurMode = BlurMode.NONE }
-        else { setBackgroundInternal(null); recycleSafeBitmap(); blurMode = BlurMode.NONE; if (blurEnabled) activateBlur() }
+        else { setBackgroundInternal(normalBackground); recycleSafeBitmap(); blurMode = BlurMode.NONE; if (blurEnabled) activateBlur() }
     }
 
     private fun downscaleIfTooLarge(d: Drawable): Drawable {
@@ -335,7 +335,7 @@ open class FrostedAnimatedGlowView @JvmOverloads constructor(
         if (bmp != null && !bmp.isRecycled) {
             deactivateBlur(); val d = WallpaperCropDrawable(bmp, blurScaleFactor); wallpaperCropDrawable = d
             setLayerType(LAYER_TYPE_NONE, null); setBackgroundInternal(d); blurMode = BlurMode.WALLPAPER; updateWallpaperRegion()
-        } else { setBackgroundInternal(null); blurMode = BlurMode.NONE; if (blurEnabled) activateBlur() }
+        } else { setBackgroundInternal(normalBackground); blurMode = BlurMode.NONE; if (blurEnabled) activateBlur() }
     }
 
     // ==================== 位置追踪 ====================
@@ -488,14 +488,14 @@ open class FrostedAnimatedGlowView @JvmOverloads constructor(
         logD { "deactivateBlur: mode=$blurMode, selfSetWindowBlur=$selfSetWindowBlur, selfSetBgBlurR=$selfSetBackgroundBlurRadius, bgBlurOnly=$backgroundBlurOnly" }
         when (blurMode) {
             BlurMode.OVERLAY -> if (textureCaptureDrawable != null) deactivateTextureOverlay() else deactivateOverlay()
-            BlurMode.SYSTEM -> { setBackgroundInternal(null); systemBlurDrawable = null
+            BlurMode.SYSTEM -> { setBackgroundInternal(normalBackground); systemBlurDrawable = null
                 if (backgroundBlurOnly) { logD { "deactivateBlur: restoreExternalBlurBehind()" }; restoreExternalBlurBehind() }
                 else if (selfSetWindowBlur) { logD { "deactivateBlur: setupWindowBlur(0)" }; setupWindowBlur(0) }
                 if (selfSetBackgroundBlurRadius) { logD { "deactivateBlur: clearWindowBackgroundBlurRadius" }; BackgroundBlurDrawable.clearWindowBackgroundBlurRadius(cachedActivity?.window); selfSetBackgroundBlurRadius = false }
                 setLayerType(LAYER_TYPE_HARDWARE, null) }
-            BlurMode.FALLBACK -> { setBackgroundInternal(null); fallbackDrawable?.detach(); fallbackDrawable = null; uninstallTracking() }
-            BlurMode.BITMAP -> { setBackgroundInternal(null); sourceBitmapDrawable?.detach(); sourceBitmapDrawable = null }
-            BlurMode.WALLPAPER -> { setBackgroundInternal(null); wallpaperCropDrawable = null }
+            BlurMode.FALLBACK -> { setBackgroundInternal(normalBackground); fallbackDrawable?.detach(); fallbackDrawable = null; uninstallTracking() }
+            BlurMode.BITMAP -> { setBackgroundInternal(normalBackground); sourceBitmapDrawable?.detach(); sourceBitmapDrawable = null }
+            BlurMode.WALLPAPER -> { setBackgroundInternal(normalBackground); wallpaperCropDrawable = null }
             BlurMode.NONE -> {}
         }; blurMode = BlurMode.NONE
     }
@@ -665,7 +665,7 @@ open class FrostedAnimatedGlowView @JvmOverloads constructor(
         uninstallTracking()
         textureCaptureDrawable?.detach()
         textureCaptureDrawable = null
-        setBackgroundInternal(null)
+        setBackgroundInternal(normalBackground)
         setLayerType(LAYER_TYPE_HARDWARE, null)
     }
 

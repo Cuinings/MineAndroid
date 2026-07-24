@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <com.cn.core.ui.view.frosted.AnimatedStatefulGlowView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="@dimen/dp60"
+        android:layout_height="@dimen/dp56"
+        android:focusable="true"
+        app:sgv_overlayEnabled="true"
+        app:sgv_overlayColorNormal="#0DFFFFFF"
+        app:sgv_overlayColorFocused="#19FFFFFF"
+        app:sgv_cornerRadius="@dimen/dp8"
+        app:sgv_strokeEnabled="true"
+        app:sgv_strokeWidthNormal="@dimen/dp0point5"
+        app:sgv_strokeWidthFocused="@dimen/dp1"
+        app:sgv_strokeColorNormal="@color/common_color_stroke_normal"
+        app:sgv_strokeColorFocused="@color/common_color_stroke_focused"
+        app:sgv_glowEnabled="true"
+        app:sgv_glowRadiusNormal="@dimen/dp1"
+        app:sgv_glowColorNormal="@color/common_color_glow_normal"
+        app:sgv_glowRadiusFocused="@dimen/dp2"
+        app:sgv_glowColorFocused="@color/common_color_glow_focused"
+        app:sgv_topHighlightColor="@color/white"
+        app:asgv_flowEnabled="false"
+        app:asgv_flowColor="@color/white"
+        android:id="@+id/editMainApp">
+
+        <ImageView
+            android:id="@+id/ivtpIcon"
+            android:layout_width="@dimen/dp24"
+            android:layout_height="@dimen/dp24"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:focusable="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:id="@+id/ivThirdIcon"
+            android:layout_width="@dimen/dp16"
+            android:layout_height="@dimen/dp16"
+            android:layout_centerHorizontal="true"
+            android:scaleType="fitXY"
+            android:focusable="false"
+            app:layout_constraintStart_toStartOf="@id/ivtpIcon"
+            app:layout_constraintEnd_toEndOf="@id/ivtpIcon"
+            app:layout_constraintTop_toTopOf="@id/ivtpIcon"
+            app:layout_constraintBottom_toBottomOf="@id/ivtpIcon"/>
+
+        <TextView
+            android:id="@+id/tvSoftName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp3"
+            android:layout_marginEnd="@dimen/dp3"
+            android:layout_marginTop="@dimen/dp38"
+            android:includeFontPadding="false"
+            android:textSize="@dimen/sp7"
+            android:textColor="@color/white"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:focusable="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:id="@+id/ivSelect"
+            android:layout_width="@dimen/sp12"
+            android:layout_height="@dimen/sp12"
+            android:layout_marginTop="@dimen/dp2"
+            android:layout_marginEnd="@dimen/dp2"
+            android:scaleType="centerInside"
+            android:visibility="gone"
+            android:focusable="false"
+            android:src="@drawable/icon_app_choiced_remove"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </com.cn.core.ui.view.frosted.AnimatedStatefulGlowView>
+
+</layout>

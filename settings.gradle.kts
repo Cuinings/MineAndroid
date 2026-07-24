@@ -19,6 +19,9 @@ pluginManagement {
         mavenLocal().apply { url = uri("$rootDir\\maven-repo") }
     }
 }
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.10.0"
+}
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -44,9 +47,12 @@ include(":demo:app_test_resources")
 
 include(":board:proxy")
 include(":board:module:home")
+include(":board:module:home-data")
+include(":board:module:home-domain")
+include(":board:module:home-presentation")
 include(":board:module:meet")
 include(":board:module:contacts")
-include(":board:module:database")
+//include(":board:module:database")
 include(":board:module:wallpaper")
 include(":board:module:file-server")
 

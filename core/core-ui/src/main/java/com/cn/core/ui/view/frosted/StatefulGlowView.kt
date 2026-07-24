@@ -13,6 +13,7 @@ import android.graphics.Rect
 import android.graphics.RectF
 import android.graphics.Shader
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.StateListDrawable
 import android.util.AttributeSet
 import android.util.Log
 import androidx.annotation.ColorInt
@@ -61,13 +62,6 @@ open class StatefulGlowView @JvmOverloads constructor(
         State.DISABLED -> disabled
     }
 
-    /** 将 normal 颜色级联到所有未显式设置的状态（值为 TRANSPARENT 的视为未设置） */
-    private fun StateColors.fallbackFromNormal() {
-        if (pressed == Color.TRANSPARENT) pressed = normal
-        if (focused == Color.TRANSPARENT) focused = normal
-        if (selected == Color.TRANSPARENT) selected = normal
-        if (disabled == Color.TRANSPARENT) disabled = normal
-    }
 
     var overlayEnabled: Boolean? = null
         set(value) { value.takeIf { it != field }?.let {
@@ -102,13 +96,6 @@ open class StatefulGlowView @JvmOverloads constructor(
             State.DISABLED -> disabled
         }
 
-        /** 将 normal 值级联到所有未显式设置的状态（值为默认 0f 的视为未设置） */
-        fun fallbackFromNormal() {
-            if (pressed == 0f) pressed = normal
-            if (focused == 0f) focused = normal
-            if (selected == 0f) selected = normal
-            if (disabled == 0f) disabled = normal
-        }
     }
 
     override fun drawableStateChanged() {
@@ -162,13 +149,6 @@ open class StatefulGlowView @JvmOverloads constructor(
         var selected: Drawable? = null,
         var disabled: Drawable? = null,
     ) {
-        /** 将 normal drawable 级联到所有未显式设置的状态（值为 null 的视为未设置） */
-        fun fallbackFromNormal() {
-            if (pressed == null) pressed = normal
-            if (focused == null) focused = normal
-            if (selected == null) selected = normal
-            if (disabled == null) disabled = normal
-        }
     }
 
     /**
@@ -248,10 +228,19 @@ open class StatefulGlowView @JvmOverloads constructor(
         style = Paint.Style.STROKE
     }
 
+    protected val normalBackground = StateListDrawable().apply {
+        addState(intArrayOf(android.R.attr.state_pressed), Color.TRANSPARENT.toDrawable())
+        addState(intArrayOf(android.R.attr.state_focused), Color.TRANSPARENT.toDrawable())
+        addState(intArrayOf(android.R.attr.state_selected), Color.TRANSPARENT.toDrawable())
+        addState(intArrayOf(), Color.TRANSPARENT.toDrawable())
+    }
+
     init {
         setLayerType(LAYER_TYPE_HARDWARE, null)
         // 系统背景设为透明，避免覆盖自定义绘制并支持 elevation 阴影
-        super.setBackground(Color.TRANSPARENT.toDrawable())
+
+        defaultFocusHighlightEnabled = false
+        super.setBackground(normalBackground)
 
         setWillNotDraw(false)
 
@@ -268,42 +257,85 @@ open class StatefulGlowView @JvmOverloads constructor(
                     setCornerRadii(tl, tr, br, bl)
                 }
 
+                // ── 蒙层 ──
                 overlayEnabled = getBoolean(R.styleable.StatefulGlowView_sgv_overlayEnabled, false)
                 if (overlayEnabled == true) {
-                    overlayColor.normal = getColor(R.styleable.StatefulGlowView_sgv_overlayColorNormal, overlayColor.normal)
-                    overlayColor.pressed = getColor(R.styleable.StatefulGlowView_sgv_overlayColorPressed, overlayColor.pressed)
-                    overlayColor.focused = getColor(R.styleable.StatefulGlowView_sgv_overlayColorFocused, overlayColor.focused)
-                    overlayColor.selected = getColor(R.styleable.StatefulGlowView_sgv_overlayColorSelected, overlayColor.selected)
-                    overlayColor.disabled = getColor(R.styleable.StatefulGlowView_sgv_overlayColorDisabled, overlayColor.disabled)
+                    val ovNormalSet = hasValue(R.styleable.StatefulGlowView_sgv_overlayColorNormal)
+                    if (ovNormalSet) overlayColor.normal = getColor(R.styleable.StatefulGlowView_sgv_overlayColorNormal, overlayColor.normal)
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_overlayColorPressed)) overlayColor.pressed = getColor(R.styleable.StatefulGlowView_sgv_overlayColorPressed, overlayColor.pressed)
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_overlayColorFocused)) overlayColor.focused = getColor(R.styleable.StatefulGlowView_sgv_overlayColorFocused, overlayColor.focused)
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_overlayColorSelected)) overlayColor.selected = getColor(R.styleable.StatefulGlowView_sgv_overlayColorSelected, overlayColor.selected)
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_overlayColorDisabled)) overlayColor.disabled = getColor(R.styleable.StatefulGlowView_sgv_overlayColorDisabled, overlayColor.disabled)
+                    if (ovNormalSet) {
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_overlayColorPressed)) overlayColor.pressed = overlayColor.normal
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_overlayColorFocused)) overlayColor.focused = overlayColor.normal
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_overlayColorSelected)) overlayColor.selected = overlayColor.normal
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_overlayColorDisabled)) overlayColor.disabled = overlayColor.normal
+                    }
                 }
+                // ── 描边 ──
                 strokeEnabled = getBoolean(R.styleable.StatefulGlowView_sgv_strokeEnabled, false)
                 if (strokeEnabled == true) {
-                    strokeWidths.normal = getDimension(R.styleable.StatefulGlowView_sgv_strokeWidthNormal, strokeWidths.normal)
-                    strokeWidths.pressed = getDimension(R.styleable.StatefulGlowView_sgv_strokeWidthPressed, strokeWidths.pressed)
-                    strokeWidths.focused = getDimension(R.styleable.StatefulGlowView_sgv_strokeWidthFocused, strokeWidths.focused)
-                    strokeWidths.selected = getDimension(R.styleable.StatefulGlowView_sgv_strokeWidthSelected, strokeWidths.selected)
-                    strokeWidths.disabled = getDimension(R.styleable.StatefulGlowView_sgv_strokeWidthDisabled, strokeWidths.disabled)
+                    // 描边宽度 — 逐态 hasValue 门控，避免 0dp 被误判为"未设置"
+                    val swNormalSet = hasValue(R.styleable.StatefulGlowView_sgv_strokeWidthNormal)
+                    if (swNormalSet) strokeWidths.normal = getDimension(R.styleable.StatefulGlowView_sgv_strokeWidthNormal, strokeWidths.normal)
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_strokeWidthPressed)) strokeWidths.pressed = getDimension(R.styleable.StatefulGlowView_sgv_strokeWidthPressed, strokeWidths.pressed)
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_strokeWidthFocused)) strokeWidths.focused = getDimension(R.styleable.StatefulGlowView_sgv_strokeWidthFocused, strokeWidths.focused)
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_strokeWidthSelected)) strokeWidths.selected = getDimension(R.styleable.StatefulGlowView_sgv_strokeWidthSelected, strokeWidths.selected)
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_strokeWidthDisabled)) strokeWidths.disabled = getDimension(R.styleable.StatefulGlowView_sgv_strokeWidthDisabled, strokeWidths.disabled)
+                    if (swNormalSet) {
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_strokeWidthPressed)) strokeWidths.pressed = strokeWidths.normal
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_strokeWidthFocused)) strokeWidths.focused = strokeWidths.normal
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_strokeWidthSelected)) strokeWidths.selected = strokeWidths.normal
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_strokeWidthDisabled)) strokeWidths.disabled = strokeWidths.normal
+                    }
 
-                    strokeColors.normal = getColor(R.styleable.StatefulGlowView_sgv_strokeColorNormal, strokeColors.normal)
-                    strokeColors.pressed = getColor(R.styleable.StatefulGlowView_sgv_strokeColorPressed, strokeColors.pressed)
-                    strokeColors.focused = getColor(R.styleable.StatefulGlowView_sgv_strokeColorFocused, strokeColors.focused)
-                    strokeColors.selected = getColor(R.styleable.StatefulGlowView_sgv_strokeColorSelected, strokeColors.selected)
-                    strokeColors.disabled = getColor(R.styleable.StatefulGlowView_sgv_strokeColorDisabled, strokeColors.disabled)
+                    // 描边颜色 — 逐态 hasValue 门控，避免 TRANSPARENT 被误判为"未设置"，
+                    // 同时保证 focused/disabled 的 lazy 默认值不再阻挡级联
+                    val scNormalSet = hasValue(R.styleable.StatefulGlowView_sgv_strokeColorNormal)
+                    if (scNormalSet) strokeColors.normal = getColor(R.styleable.StatefulGlowView_sgv_strokeColorNormal, strokeColors.normal)
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_strokeColorPressed)) strokeColors.pressed = getColor(R.styleable.StatefulGlowView_sgv_strokeColorPressed, strokeColors.pressed)
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_strokeColorFocused)) strokeColors.focused = getColor(R.styleable.StatefulGlowView_sgv_strokeColorFocused, strokeColors.focused)
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_strokeColorSelected)) strokeColors.selected = getColor(R.styleable.StatefulGlowView_sgv_strokeColorSelected, strokeColors.selected)
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_strokeColorDisabled)) strokeColors.disabled = getColor(R.styleable.StatefulGlowView_sgv_strokeColorDisabled, strokeColors.disabled)
+                    if (scNormalSet) {
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_strokeColorPressed)) strokeColors.pressed = strokeColors.normal
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_strokeColorFocused)) strokeColors.focused = strokeColors.normal
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_strokeColorSelected)) strokeColors.selected = strokeColors.normal
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_strokeColorDisabled)) strokeColors.disabled = strokeColors.normal
+                    }
                 }
 
+                // ── 内发光 ──
                 glowEnabled = getBoolean(R.styleable.StatefulGlowView_sgv_glowEnabled, glowEnabled)
                 if (glowEnabled) {
-                    glowRadii.normal = getDimension(R.styleable.StatefulGlowView_sgv_glowRadiusNormal, glowRadii.normal)
-                    glowRadii.pressed = getDimension(R.styleable.StatefulGlowView_sgv_glowRadiusPressed, glowRadii.pressed)
-                    glowRadii.focused = getDimension(R.styleable.StatefulGlowView_sgv_glowRadiusFocused, glowRadii.focused)
-                    glowRadii.selected = getDimension(R.styleable.StatefulGlowView_sgv_glowRadiusSelected, glowRadii.selected)
-                    glowRadii.disabled = getDimension(R.styleable.StatefulGlowView_sgv_glowRadiusDisabled, glowRadii.disabled)
+                    // 发光半径 — 逐态 hasValue 门控
+                    val grNormalSet = hasValue(R.styleable.StatefulGlowView_sgv_glowRadiusNormal)
+                    if (grNormalSet) glowRadii.normal = getDimension(R.styleable.StatefulGlowView_sgv_glowRadiusNormal, glowRadii.normal)
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_glowRadiusPressed)) glowRadii.pressed = getDimension(R.styleable.StatefulGlowView_sgv_glowRadiusPressed, glowRadii.pressed)
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_glowRadiusFocused)) glowRadii.focused = getDimension(R.styleable.StatefulGlowView_sgv_glowRadiusFocused, glowRadii.focused)
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_glowRadiusSelected)) glowRadii.selected = getDimension(R.styleable.StatefulGlowView_sgv_glowRadiusSelected, glowRadii.selected)
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_glowRadiusDisabled)) glowRadii.disabled = getDimension(R.styleable.StatefulGlowView_sgv_glowRadiusDisabled, glowRadii.disabled)
+                    if (grNormalSet) {
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_glowRadiusPressed)) glowRadii.pressed = glowRadii.normal
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_glowRadiusFocused)) glowRadii.focused = glowRadii.normal
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_glowRadiusSelected)) glowRadii.selected = glowRadii.normal
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_glowRadiusDisabled)) glowRadii.disabled = glowRadii.normal
+                    }
 
-                    glowColors.normal = getColor(R.styleable.StatefulGlowView_sgv_glowColorNormal, glowColors.normal)
-                    glowColors.pressed = getColor(R.styleable.StatefulGlowView_sgv_glowColorPressed, glowColors.pressed)
-                    glowColors.focused = getColor(R.styleable.StatefulGlowView_sgv_glowColorFocused, glowColors.focused)
-                    glowColors.selected = getColor(R.styleable.StatefulGlowView_sgv_glowColorSelected, glowColors.selected)
-                    glowColors.disabled = getColor(R.styleable.StatefulGlowView_sgv_glowColorDisabled, glowColors.disabled)
+                    // 发光颜色 — 逐态 hasValue 门控
+                    val gcNormalSet = hasValue(R.styleable.StatefulGlowView_sgv_glowColorNormal)
+                    if (gcNormalSet) glowColors.normal = getColor(R.styleable.StatefulGlowView_sgv_glowColorNormal, glowColors.normal)
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_glowColorPressed)) glowColors.pressed = getColor(R.styleable.StatefulGlowView_sgv_glowColorPressed, glowColors.pressed)
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_glowColorFocused)) glowColors.focused = getColor(R.styleable.StatefulGlowView_sgv_glowColorFocused, glowColors.focused)
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_glowColorSelected)) glowColors.selected = getColor(R.styleable.StatefulGlowView_sgv_glowColorSelected, glowColors.selected)
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_glowColorDisabled)) glowColors.disabled = getColor(R.styleable.StatefulGlowView_sgv_glowColorDisabled, glowColors.disabled)
+                    if (gcNormalSet) {
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_glowColorPressed)) glowColors.pressed = glowColors.normal
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_glowColorFocused)) glowColors.focused = glowColors.normal
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_glowColorSelected)) glowColors.selected = glowColors.normal
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_glowColorDisabled)) glowColors.disabled = glowColors.normal
+                    }
 
                     // .9 图片内发光（优先级高于程序化发光）
                     // 1) 统一 drawable（所有状态共用）
@@ -317,29 +349,25 @@ open class StatefulGlowView @JvmOverloads constructor(
                         universal?.mutate()
                     }
                     // 2) per-state 覆盖
-                    if (hasValue(R.styleable.StatefulGlowView_sgv_glowDrawableNormal))
-                        glowDrawables.normal = getDrawable(R.styleable.StatefulGlowView_sgv_glowDrawableNormal)?.mutate()
-                    if (hasValue(R.styleable.StatefulGlowView_sgv_glowDrawablePressed))
-                        glowDrawables.pressed = getDrawable(R.styleable.StatefulGlowView_sgv_glowDrawablePressed)?.mutate()
-                    if (hasValue(R.styleable.StatefulGlowView_sgv_glowDrawableFocused))
-                        glowDrawables.focused = getDrawable(R.styleable.StatefulGlowView_sgv_glowDrawableFocused)?.mutate()
-                    if (hasValue(R.styleable.StatefulGlowView_sgv_glowDrawableSelected))
-                        glowDrawables.selected = getDrawable(R.styleable.StatefulGlowView_sgv_glowDrawableSelected)?.mutate()
-                    if (hasValue(R.styleable.StatefulGlowView_sgv_glowDrawableDisabled))
-                        glowDrawables.disabled = getDrawable(R.styleable.StatefulGlowView_sgv_glowDrawableDisabled)?.mutate()
+                    val gdNormalSet = hasValue(R.styleable.StatefulGlowView_sgv_glowDrawableNormal)
+                    if (gdNormalSet) glowDrawables.normal = getDrawable(R.styleable.StatefulGlowView_sgv_glowDrawableNormal)?.mutate()
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_glowDrawablePressed)) glowDrawables.pressed = getDrawable(R.styleable.StatefulGlowView_sgv_glowDrawablePressed)?.mutate()
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_glowDrawableFocused)) glowDrawables.focused = getDrawable(R.styleable.StatefulGlowView_sgv_glowDrawableFocused)?.mutate()
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_glowDrawableSelected)) glowDrawables.selected = getDrawable(R.styleable.StatefulGlowView_sgv_glowDrawableSelected)?.mutate()
+                    if (hasValue(R.styleable.StatefulGlowView_sgv_glowDrawableDisabled)) glowDrawables.disabled = getDrawable(R.styleable.StatefulGlowView_sgv_glowDrawableDisabled)?.mutate()
+                    // 3) 级联：normal 显式设置 → 其他未在 XML 出现的状态自动继承
+                    if (gdNormalSet) {
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_glowDrawablePressed)) glowDrawables.pressed = glowDrawables.normal
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_glowDrawableFocused)) glowDrawables.focused = glowDrawables.normal
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_glowDrawableSelected)) glowDrawables.selected = glowDrawables.normal
+                        if (!hasValue(R.styleable.StatefulGlowView_sgv_glowDrawableDisabled)) glowDrawables.disabled = glowDrawables.normal
+                    }
                 }
 
                 // 顶部高光
                 topHighlightEnabled = getBoolean(R.styleable.StatefulGlowView_sgv_topHighlightEnabled, false)
                 topHighlightColor = getColor(R.styleable.StatefulGlowView_sgv_topHighlightColor, topHighlightColor)
 
-                // ── 级联：normal 显式设置 → 其他未设置状态自动继承 ──
-                if (hasValue(R.styleable.StatefulGlowView_sgv_strokeWidthNormal)) strokeWidths.fallbackFromNormal()
-                if (hasValue(R.styleable.StatefulGlowView_sgv_strokeColorNormal)) strokeColors.fallbackFromNormal()
-                if (hasValue(R.styleable.StatefulGlowView_sgv_glowRadiusNormal)) glowRadii.fallbackFromNormal()
-                if (hasValue(R.styleable.StatefulGlowView_sgv_glowColorNormal)) glowColors.fallbackFromNormal()
-                if (hasValue(R.styleable.StatefulGlowView_sgv_glowDrawableNormal)) glowDrawables.fallbackFromNormal()
-                if (hasValue(R.styleable.StatefulGlowView_sgv_overlayColorNormal)) overlayColor.fallbackFromNormal()
             }
         }
 

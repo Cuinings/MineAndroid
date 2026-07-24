@@ -21,6 +21,7 @@
     <!--normal_transparent|0%白-->
     <color name="common_color_stroke_normal_transparent">#00FFFFFF</color>
     <!--focused|50%白-->
+    <color name="common_color_stroke_normal">#04FFFFFF</color>
     <color name="common_color_stroke_focused">#7FFFFFFF</color>
     <!--disabled|5%白-->
     <color name="common_color_stroke_disabled">#0DFFFFFF</color>
@@ -67,6 +68,7 @@
     <color name="text_step_focus">#FFFFFF</color>
 
 
+    <color name="common_color_solid_normal">#0DFFFFFF</color>
     <color name="common_color_stroke_normal_step_a">#26FFFFFF</color>
     <color name="common_color_top_light_normal_step_a">#7FFFFFFF</color>
 

@@ -25,7 +25,7 @@
             android:exported="false"
             tools:node="merge">
             <meta-data
-                android:name="com.cn.board.meet.home.HomeModelInitializer"
+                android:name="com.cn.board.home.ModuleHomeModelInitializer"
                 android:value="androidx.startup" />
         </provider>
         

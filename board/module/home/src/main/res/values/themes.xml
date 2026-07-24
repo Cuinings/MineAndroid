@@ -9,6 +9,8 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowShowWallpaper">true</item>
+        <!-- API 26+ 关闭系统默认焦点高亮框（避免与 sgv_* 自定义焦点样式重叠产生"内置框"） -->
+        <item name="android:defaultFocusHighlightEnabled">false</item>
         <!-- Android 12 启动页背景透明，避免遮挡壁纸 -->
         <item name="android:windowSplashScreenBackground">@android:color/transparent</item>
     </style>

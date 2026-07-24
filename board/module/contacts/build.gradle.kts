@@ -23,7 +23,6 @@ android {
 
 dependencies {
     // 依赖database模块
-    implementation(project(":board:module:database"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

@@ -13,5 +13,6 @@
         <item name="android:windowBlurBehindEnabled" tools:ignore="NewApi">true</item>
         <item name="android:windowBackgroundBlurRadius" tools:ignore="NewApi">@dimen/dp5</item>
         <item name="android:windowBlurBehindRadius" tools:ignore="NewApi">@dimen/dp5</item>
+        <item name="android:defaultFocusHighlightEnabled">false</item>
     </style>
 </resources>
